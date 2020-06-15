@@ -9,10 +9,11 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 ## Pré-requisitos
 - Lógica de programação;
 - Banco de dados;
-- Conhecimentos sobre REST;
+- Conhecimentos sobre REST, HTTP e API's;
 - Conhecimentos sobre Git.
 
 ## Orientações e Sugestões
+- Código bem documentado, legível e limpo;
 - Fazer uma API simples e objetiva.
 - Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio.
 - Documentar os endpoints.
@@ -20,7 +21,7 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 
 ## Diferenciais
 - Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x) ou [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation);
-- Utilizar o Docker para containizar a aplicação;
+- Utilizar o [Docker](https://www.docker.com/get-started) para conteinerização da aplicação;
 - Criar testes.
 
 ## Desafio
@@ -29,4 +30,5 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 
 ## Conclusão
 Crie um Fork e submeta um Pull Request ao Github com o seu desafio. Após isso envie um e-mail para [letsrock@owinteractive.com](mailto:letsrock@owinteractive.com), com o assunto [DESAFIO BACK-END] com o link para o seu desafio, sua apresentação e currículo anexado em formato PDF.
-Obrigado por participar e muita boa sorte =)
+Caso tenha alguma sugestão sobre o teste ela é bem vinda, fique a vontade para envia-la junto ao e-mail.
+Obrigado por participar e muita boa sorte 😀.
