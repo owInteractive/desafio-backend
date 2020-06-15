@@ -14,7 +14,7 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 
 ## Orientações e Sugestões
 - Fazer uma API simples e objetiva.
-- Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será descondirado o desafio.
+- Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio.
 - Documentar os endpoints.
 - Caso seja usado Postman, Imsominia, Swagger e etc.Para montar o exemplos da API adicionar ao repósitorio o arquivo gerado pelo programa e especificar qual programa foi usado.
 
