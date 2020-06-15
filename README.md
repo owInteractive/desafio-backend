@@ -29,7 +29,7 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 ### Etapa 1 - Cadastrar XYZ
 
 ### Etapa 5 - Bônus
-
+- Utilizar cache para otimizar as consultas e buscas.
 
 ## Conclusão
 Crie um Fork e submeta um Pull Request ao Github com o seu desafio. Após isso envie um e-mail para [letsrock@owinteractive.com](mailto:letsrock@owinteractive.com), com o assunto [DESAFIO BACK-END] com o link para o seu desafio, sua apresentação e currículo anexado em formato PDF.
