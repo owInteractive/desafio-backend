@@ -1,11 +1,15 @@
-![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.png "OW Interactive")
+![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.jpeg "OW Interactive")
 
 # Desafio Back-End - OW Interactive 20/21
 
 ## Sobre a OW Interactive
 Fazemos parte do universo digital, focada em criar e desenvolver experiências interativas, integrando planejamento, criatividade e tecnologia. Conheça mais sobre nós em: [OW Interactive - Quem somos](http://www.owinteractive.com/quem-somos/).
 
-## Vagas
+## Sobre a Vaga
+Esse desafio é destinado todos os níveis e não é exigido que você consiga realizar esse desafio por completo.
+
+Sua avaliação será dada pelas etapas que conseguir entregar.
+
 Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owinteractive.com/vagas/).
 
 ## Pré-requisitos
