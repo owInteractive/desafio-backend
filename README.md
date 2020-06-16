@@ -1,3 +1,5 @@
+![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.png "OW Interactive")
+
 # Desafio Back-End - OW Interactive 20/21
 
 ## Sobre a OW Interactive
@@ -15,16 +17,17 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 ## Requisitos Obrigatórios
 - Utilizar a linguagem [PHP](https://www.php.net/) ou [NodeJS](https://nodejs.org)
 - Código bem documentado, legível e limpo;
-- Fazer uma API simples e objetiva em REST;
+- Fazer uma API simples e objetiva em REST, com o retorno em JSON;
 - Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio;
 - Caso seja usado [Postman](https://www.php.net/), [Insomnia](https://insomnia.rest/), [Swagger](https://swagger.io/) e etc.Para montar o exemplos da API adicionar ao repósitorio o arquivo gerado pelo programa e especificar qual o arquivo e programa devem ser usados;
+- Em qualquer caso de erro ou  não encontrada a API deve retorna uma resposta condizente com o problema apresentado, por exemplo um retorno 500 ou 404;
 
 ## Diferenciais
 - Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x) ou [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation);
 - Utilizar o [Docker](https://www.docker.com/get-started) para conteinerização da aplicação;
 - Pensar em desempenho e escalabilidade, quando for uma quantidade muito grande de dados como o sistema se comportaria;
-- Documentar os endpoints;
 - Criar testes.
+- Utilizar apenas as ferramentas do framework caso use um, evitando criar dependência de outros pacotes ou bibliotecas.
 
 ## Desafio
 
@@ -64,12 +67,16 @@ Nessa etapa serão itens onde veremos como você pensou e como chegou ao resulta
 
 ### Etapa 4 -Itens Não Obrigatórios
 - Criar validações com base na Request;
-- Utilizar cache para otimizar as consultas e buscas.
-- Criar Seeders ou Inicializadores de dados para o usuários e suas movimentações.
+- Utilizar cache para otimizar as consultas e buscas;
+- Criar Seeders ou Inicializadores de dados para o usuários e suas movimentações;
+- Criar os métodos baseados em algum método de autênticação.
+- Documentação dos endpoint`s;
 
 ## Conclusão
-Crie um Fork e submeta um Pull Request ao Github com o seu desafio. Após isso envie um e-mail para [letsrock@owinteractive.com](mailto:letsrock@owinteractive.com), com o assunto [DESAFIO BACK-END] com o link para o seu desafio, sua apresentação e currículo anexado em formato PDF.
+Crie um Fork e submeta uma Pull Request ao Github com o seu desafio. Após isso envie um e-mail para [letsrock@owinteractive.com](mailto:letsrock@owinteractive.com), com o assunto [DESAFIO BACK-END] com o link para o seu desafio, sua apresentação e currículo anexado em formato PDF.
 
 Caso tenha alguma sugestão sobre o teste ela é bem vinda, fique a vontade para envia-la junto ao e-mail.
 
-Obrigado por participar e muita boa sorte 😀.
+E fique a vontade para usar os programas e ferramentas que se sentir bem, lembrando que aqui somos team [VS Code](https://code.visualstudio.com/) rs.
+
+Obrigado por participar e boa sorte 😀
