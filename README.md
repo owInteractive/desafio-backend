@@ -8,7 +8,7 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 
 ## Pré-requisitos
 - Lógica de programação;
-- Banco de dados;
+- Conhecimentos sobre Banco de dados;
 - Conhecimentos sobre REST, HTTP e API's;
 - Conhecimentos sobre Git.
 
@@ -17,19 +17,20 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 - Código bem documentado, legível e limpo;
 - Fazer uma API simples e objetiva em REST;
 - Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio;
-- Documentar os endpoints;
 - Caso seja usado [Postman](https://www.php.net/), [Insomnia](https://insomnia.rest/), [Swagger](https://swagger.io/) e etc.Para montar o exemplos da API adicionar ao repósitorio o arquivo gerado pelo programa e especificar qual o arquivo e programa devem ser usados;
-- Caso tenha algum arquivo (CSV, XLS, JSON, XML e etc), que seja necessário para o desenvolvimento ele estará disponível no repositório.
 
 ## Diferenciais
 - Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x) ou [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation);
 - Utilizar o [Docker](https://www.docker.com/get-started) para conteinerização da aplicação;
 - Pensar em desempenho e escalabilidade, quando for uma quantidade muito grande de dados como o sistema se comportaria;
+- Documentar os endpoints;
 - Criar testes.
 
 ## Desafio
 
 ### Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
+Nessa etapa daremos algumas premissas pré-definidas que devem ser seguidas.
+
 - Criar um endpoint onde é cadastrado um usuário.
   - Esses usuários devem ter obrigátoriamente os seguintes dados modelados, caso você ache necessário outros campos fique a vontade.
     - **name** | string (Nome)
@@ -45,18 +46,26 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 Nessa etapa você precisará criar a modelagem e lógica para implementar as seguintes funcionalidades.
 
 - Criar um endpoint ou endpoint`s onde é possível associar uma operação de débito, crédito ou estorno para o usuário;
-- Criar um endpoint onde seja possível visualizar toda a movimentação do usuários mais as suas informações pessoais;
+- Criar um endpoint onde seja possível visualizar toda a movimentação (páginada) do usuários mais as suas informações pessoais;
 - Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário.
+- Criar um endpoint onde é retornado um arquivo no formato (csv) com 3 tipos de filtros para as movimentações:
+  - Últimos 30 dias;
+  - Passando o mês e ano por exemplo: 06/20;
+  - Todo as movimentações.
 
 ### Etapa 3 - Nova Funcionalidades
+Nessa etapa serão itens onde veremos como você pensou e como chegou ao resultado final.
+
 - Adicionar dentro do usuário um campo para saldo inicial, e criar um endpoint para alterar esse valor;
 - Criar um endpoint com a soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário;
 - No endpoint que exclui um usuário, adicionar a funcionalidade que agora não será mais possível excluir um usuário que tenha qualquer tipo de movimentação ou saldo;
-- No endpoint que cadastra usuário, adicionar a funcionalidade que apenas maiores de 18 anos podem criar uma conta.
+- No endpoint que cadastra usuário, adicionar a funcionalidade que apenas maiores de 18 anos podem criar uma conta;
+- No endpoint que exporta o arquivo CSV criar um cabeçalho com os dados do cliente e o seu saldo atual.
 
 ### Etapa 4 -Itens Não Obrigatórios
 - Criar validações com base na Request;
 - Utilizar cache para otimizar as consultas e buscas.
+- Criar Seeders ou Inicializadores de dados para o usuários e suas movimentações.
 
 ## Conclusão
 Crie um Fork e submeta um Pull Request ao Github com o seu desafio. Após isso envie um e-mail para [letsrock@owinteractive.com](mailto:letsrock@owinteractive.com), com o assunto [DESAFIO BACK-END] com o link para o seu desafio, sua apresentação e currículo anexado em formato PDF.
