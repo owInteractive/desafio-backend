@@ -1,4 +1,4 @@
-![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.jpg =200x200)
+![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.jpg "OW Interactive")
 
 # Desafio Back-End - OW Interactive 20/21
 
