@@ -29,14 +29,15 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 
 ## Desafio
 
-### Etapa 1 - Cadastrar Usuários
+### Etapa 1 - Cadastrar Usuários / Endpoint dos usuários
 - Criar um endpoint onde é cadastrado um usuário (Sem autenticação).
- - Esses usuários devem ter obrigátoriamente os seguintes dados modelados.
+ - Esses usuários devem ter obrigátoriamente os seguintes dados modelados, caso você ache necessário outros campos fique a vontade.
   - name | string (Nome)
   - email | string (E-mail)
   - birthday | date (Data de aniversário)
   - created_at | datetime (Criado Em)
   - updated_at | datetime (Atualizado Em)
+- Criar um endpoint para listagem desses usuários
 
 ### Etapa 5 - Bônus
 - Utilizar cache para otimizar as consultas e buscas.
