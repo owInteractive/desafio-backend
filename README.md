@@ -12,14 +12,14 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 - Conhecimentos sobre REST, HTTP e API's;
 - Conhecimentos sobre Git.
 
-## Orientações e Sugestões
+## Requisitos Obrigatórios
+- Utilizar a linguagem [PHP](https://www.php.net/) ou [NodeJS](https://nodejs.org)
 - Código bem documentado, legível e limpo;
-- Fazer uma API simples e objetiva;
+- Fazer uma API simples e objetiva em REST;
 - Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio;
 - Documentar os endpoints;
-- Caso seja usado Postman, Imsominia, Swagger e etc.Para montar o exemplos da API adicionar ao repósitorio o arquivo gerado pelo programa e especificar qual programa foi usado;
-- Os arquivos (CSV, XLS, JSON, XML) etc, que são necessários para o desenvolvimento estão disponíveis no repositório.
-
+- Caso seja usado [Postman](https://www.php.net/), [Insomnia](https://insomnia.rest/), [Swagger](https://swagger.io/) e etc.Para montar o exemplos da API adicionar ao repósitorio o arquivo gerado pelo programa e especificar qual o arquivo e programa devem ser usados;
+- Caso tenha algum arquivo (CSV, XLS, JSON, XML e etc), que seja necessário para o desenvolvimento ele estará disponível no repositório.
 
 ## Diferenciais
 - Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x) ou [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation);
@@ -29,35 +29,38 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 
 ## Desafio
 
-### Etapa 1 - Cadastrar Usuários / Endpoint dos usuários
-- Criar um endpoint onde é cadastrado um usuário (Sem autenticação).
- - Esses usuários devem ter obrigátoriamente os seguintes dados modelados, caso você ache necessário outros campos fique a vontade.
-  - name | string (Nome)
-  - email | string (E-mail)
-  - birthday | date (Data de aniversário)
-  - created_at | datetime (Criado Em)
-  - updated_at | datetime (Atualizado Em)
+### Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
+- Criar um endpoint onde é cadastrado um usuário.
+  - Esses usuários devem ter obrigátoriamente os seguintes dados modelados, caso você ache necessário outros campos fique a vontade.
+    - **name** | string (Nome)
+    - **email** | string (E-mail)
+    - **birthday** | date (Data de aniversário)
+    - **created_at** | datetime (Criado Em)
+    - **updated_at** | datetime (Atualizado Em)
 - Criar um endpoint para listagem desses usuários, ordernados por ordem de cadastro;
 - Criar um endpoint para listar um único usuário através do seu id;
 - Criar um endpoint para excluir um usuário através do seu id.
 
-### Etapa 2 - Cadastrar Movimentações / Endpoint de movimentações
+### Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
 Nessa etapa você precisará criar a modelagem e lógica para implementar as seguintes funcionalidades.
+
 - Criar um endpoint ou endpoint`s onde é possível associar uma operação de débito, crédito ou estorno para o usuário;
 - Criar um endpoint onde seja possível visualizar toda a movimentação do usuários mais as suas informações pessoais;
 - Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário.
 
-### Etapa 3
+### Etapa 3 - Nova Funcionalidades
 - Adicionar dentro do usuário um campo para saldo inicial, e criar um endpoint para alterar esse valor;
 - Criar um endpoint com a soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário;
 - No endpoint que exclui um usuário, adicionar a funcionalidade que agora não será mais possível excluir um usuário que tenha qualquer tipo de movimentação ou saldo;
 - No endpoint que cadastra usuário, adicionar a funcionalidade que apenas maiores de 18 anos podem criar uma conta.
 
-### Etapa 4
+### Etapa 4 -Itens Não Obrigatórios
 - Criar validações com base na Request;
 - Utilizar cache para otimizar as consultas e buscas.
 
 ## Conclusão
 Crie um Fork e submeta um Pull Request ao Github com o seu desafio. Após isso envie um e-mail para [letsrock@owinteractive.com](mailto:letsrock@owinteractive.com), com o assunto [DESAFIO BACK-END] com o link para o seu desafio, sua apresentação e currículo anexado em formato PDF.
+
 Caso tenha alguma sugestão sobre o teste ela é bem vinda, fique a vontade para envia-la junto ao e-mail.
+
 Obrigado por participar e muita boa sorte 😀.
