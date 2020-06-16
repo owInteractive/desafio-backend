@@ -20,7 +20,7 @@ Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o des
 - Lógica de programação;
 - Conhecimentos sobre Banco de dados;
 - Conhecimentos sobre REST, HTTP e API's;
-- Conhecimentos sobre Git.
+- Conhecimentos sobre Git;
 
 ## Requisitos Obrigatórios
 - Utilizar a linguagem [PHP](https://www.php.net/) ou [NodeJS](https://nodejs.org)
@@ -34,13 +34,13 @@ Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o des
 - Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x) ou [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation);
 - Utilizar o [Docker](https://www.docker.com/get-started) para conteinerização da aplicação;
 - Pensar em desempenho e escalabilidade, quando for uma quantidade muito grande de dados como o sistema se comportaria;
-- Criar testes.
-- Utilizar apenas as ferramentas do framework caso use um, evitando criar dependência de outros pacotes ou bibliotecas.
+- Criar testes;
+- Utilizar apenas as ferramentas do framework caso use um, evitando criar dependência de outros pacotes ou bibliotecas;
 
 ## Desafio
 
 ### Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
-Nessa etapa daremos algumas premissas pré-definidas que devem ser seguidas.
+Nessa etapa daremos algumas premissas que devem ser seguidas.
 
 - Criar um endpoint onde é cadastrado um usuário.
   - Esses usuários devem ter obrigátoriamente os seguintes dados modelados, caso você ache necessário outros campos fique a vontade.
@@ -54,15 +54,15 @@ Nessa etapa daremos algumas premissas pré-definidas que devem ser seguidas.
 - Criar um endpoint para excluir um usuário através do seu id.
 
 ### Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
-Nessa etapa você precisará criar a modelagem e lógica para implementar as seguintes funcionalidades.
+Nessa etapa você precisará criar a modelagem e lógica para implementar as funcionalidades abaixo:
 
 - Criar um endpoint ou endpoint`s onde é possível associar uma operação de débito, crédito ou estorno para o usuário;
 - Criar um endpoint onde seja possível visualizar toda a movimentação (páginada) do usuários mais as suas informações pessoais;
-- Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário.
+- Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário;
 - Criar um endpoint onde é retornado um arquivo no formato (csv) com 3 tipos de filtros para as movimentações:
   - Últimos 30 dias;
   - Passando o mês e ano por exemplo: 06/20;
-  - Todo as movimentações.
+  - Todo as movimentações;
 
 ### Etapa 3 - Nova Funcionalidades
 Nessa etapa serão itens onde veremos como você pensou e como chegou ao resultado final.
@@ -71,7 +71,7 @@ Nessa etapa serão itens onde veremos como você pensou e como chegou ao resulta
 - Criar um endpoint com a soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário;
 - No endpoint que exclui um usuário, adicionar a funcionalidade que agora não será mais possível excluir um usuário que tenha qualquer tipo de movimentação ou saldo;
 - No endpoint que cadastra usuário, adicionar a funcionalidade que apenas maiores de 18 anos podem criar uma conta;
-- No endpoint que exporta o arquivo CSV criar um cabeçalho com os dados do cliente e o seu saldo atual.
+- No endpoint que exporta o arquivo CSV criar um cabeçalho com os dados do cliente e o seu saldo atual;
 
 ### Etapa 4 -Itens Não Obrigatórios
 - Criar validações com base na Request;
