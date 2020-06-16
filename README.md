@@ -14,19 +14,29 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
 
 ## Orientações e Sugestões
 - Código bem documentado, legível e limpo;
-- Fazer uma API simples e objetiva.
-- Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio.
-- Documentar os endpoints.
-- Caso seja usado Postman, Imsominia, Swagger e etc.Para montar o exemplos da API adicionar ao repósitorio o arquivo gerado pelo programa e especificar qual programa foi usado.
+- Fazer uma API simples e objetiva;
+- Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio;
+- Documentar os endpoints;
+- Caso seja usado Postman, Imsominia, Swagger e etc.Para montar o exemplos da API adicionar ao repósitorio o arquivo gerado pelo programa e especificar qual programa foi usado;
+- Os arquivos (CSV, XLS, JSON, XML) etc, que são necessários para o desenvolvimento estão disponíveis no repositório.
+
 
 ## Diferenciais
 - Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x) ou [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation);
 - Utilizar o [Docker](https://www.docker.com/get-started) para conteinerização da aplicação;
+- Pensar em desempenho e escalabilidade, quando for uma quantidade muito grande de dados como o sistema se comportaria;
 - Criar testes.
 
 ## Desafio
 
-### Etapa 1 - Cadastrar XYZ
+### Etapa 1 - Cadastrar Usuários
+- Criar um endpoint onde é cadastrado um usuário (Sem autenticação).
+ - Esses usuários devem ter obrigátoriamente os seguintes dados modelados.
+  - name | string (Nome)
+  - email | string (E-mail)
+  - birthday | date (Data de aniversário)
+  - created_at | datetime (Criado Em)
+  - updated_at | datetime (Atualizado Em)
 
 ### Etapa 5 - Bônus
 - Utilizar cache para otimizar as consultas e buscas.
