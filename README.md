@@ -37,9 +37,24 @@ Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owint
   - birthday | date (Data de aniversário)
   - created_at | datetime (Criado Em)
   - updated_at | datetime (Atualizado Em)
-- Criar um endpoint para listagem desses usuários
+- Criar um endpoint para listagem desses usuários, ordernados por ordem de cadastro;
+- Criar um endpoint para listar um único usuário através do seu id;
+- Criar um endpoint para excluir um usuário através do seu id.
 
-### Etapa 5 - Bônus
+### Etapa 2 - Cadastrar Movimentações / Endpoint de movimentações
+Nessa etapa você precisará criar a modelagem e lógica para implementar as seguintes funcionalidades.
+- Criar um endpoint ou endpoint`s onde é possível associar uma operação de débito, crédito ou estorno para o usuário;
+- Criar um endpoint onde seja possível visualizar toda a movimentação do usuários mais as suas informações pessoais;
+- Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário.
+
+### Etapa 3
+- Adicionar dentro do usuário um campo para saldo inicial, e criar um endpoint para alterar esse valor;
+- Criar um endpoint com a soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário;
+- No endpoint que exclui um usuário, adicionar a funcionalidade que agora não será mais possível excluir um usuário que tenha qualquer tipo de movimentação ou saldo;
+- No endpoint que cadastra usuário, adicionar a funcionalidade que apenas maiores de 18 anos podem criar uma conta.
+
+### Etapa 4
+- Criar validações com base na Request;
 - Utilizar cache para otimizar as consultas e buscas.
 
 ## Conclusão
