@@ -3,7 +3,9 @@
 # Desafio Back-End - OW Interactive 20/21
 
 ## Sobre a OW Interactive
-Fazemos parte do universo digital, focada em criar e desenvolver experiências interativas, integrando planejamento, criatividade e tecnologia. Conheça mais sobre nós em: [OW Interactive - Quem somos](http://www.owinteractive.com/quem-somos/).
+Fazemos parte do universo digital, focada em criar e desenvolver experiências interativas, integrando planejamento, criatividade e tecnologia.
+
+Conheça mais sobre nós em: [OW Interactive - Quem somos](http://www.owinteractive.com/quem-somos/).
 
 ## Sobre a Vaga
 Esse desafio é destinado todos os níveis e não é exigido que você consiga realizar esse desafio por completo.
@@ -11,6 +13,8 @@ Esse desafio é destinado todos os níveis e não é exigido que você consiga r
 Sua avaliação será dada pelas etapas que conseguir entregar.
 
 Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owinteractive.com/vagas/).
+
+Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o desafio e aplicar para alguma vaga de backend.
 
 ## Pré-requisitos
 - Lógica de programação;
@@ -84,3 +88,5 @@ Caso tenha alguma sugestão sobre o teste ela é bem vinda, fique a vontade para
 E fique a vontade para usar os programas e ferramentas que se sentir bem, lembrando que aqui somos team [VS Code](https://code.visualstudio.com/) rs.
 
 Obrigado por participar e boa sorte 😀
+
+![Cachorro programando](https://github.com/owInteractive/desafio-backend/raw/master/media/dog.webp "Cachorro programando")
