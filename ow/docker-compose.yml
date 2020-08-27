@@ -1,0 +1,25 @@
+version: '2'
+services:
+  app-ow:
+    container_name: app-ow
+    image: wyveo/nginx-php-fpm:latest
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/usr/share/nginx
+    networks:
+      - app-network
+  mysql-ow:
+    container_name: mysql-ow
+    image: mysql:5.7.22
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: base_ow
+    networks:
+     - app-network
+networks:
+  app-network:
+   driver: bridge
