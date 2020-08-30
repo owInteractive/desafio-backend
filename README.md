@@ -14,7 +14,7 @@
 - Após o download, acesso o projeto
 	- cd desafio-backend/ow
 
-- Agora você precisa ajustar seu arquivo que se conctará ao banco .env
+- Agora você precisa ajustar seu arquivo de conexāo com o banco (.env)
 	- cp .env.example .env
 
 - Abra o arquivo **.env** e altere o valor da váriavel DB_DATABASE para **base_ow**, ou o nome que escolheu para sua base e salve o arquivo
@@ -36,7 +36,7 @@
 - Agora iremos subir a aplicação. Após a execução do comando abaixo, você deverá acessar seu nevegador e na URL digitar http://127.0.0.1:8000/
 	- php artisan serve
 
-- Agora com nossa aplicação funcionando iremos execuar a limpeza de cache e o autoload de nossa aplicação
+- Agora com nossa aplicação funcionando, iremos executar a limpeza de cache e o autoload de nossa aplicação
 	- php artisan cache:clear
 	- composer dump-autoload
 
@@ -68,6 +68,6 @@ GET|HEAD    | api/report/{param}/{user}                | App\Http\Controllers\Op
 	- Lembrando que para acessar os métodos, os mesmos precisam de autenticação, desta forma é necessário:
 		- Efetuar um login no sistema (Ex.: email: admin@admin.com / password: admin)
 		- O token gerado no acesso deverá ser inserido em *Headers*
-			- No campo **KEY** = Authorization e no campo **VALUE** = Bearer *token gerado*
+			- No campo **KEY** = Authorization e no campo **VALUE** = Bearer + *token gerado*
 
 - Documentação das rotas [neste link](https://documenter.getpostman.com/view/12479411/TVCcXV7d/)
