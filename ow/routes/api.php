@@ -54,8 +54,8 @@ Route::middleware('auth:api')->group(function(){
 });
 
 /* Reports via GET*/
-Route::get("{param}", "OperationsController@reportGet");
-Route::get("{param}/{user}", "OperationsController@reportGet");
+Route::get("report/{param}", "OperationsController@reportGet");
+Route::get("report/{param}/{user}", "OperationsController@reportGet");
 
 Route::any('', function () {
     return response()->json(['message' => 'Rota nāo localizada'], 401);
