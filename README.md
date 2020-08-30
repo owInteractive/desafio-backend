@@ -47,16 +47,16 @@ Method      | URI                                      | Action
 POST		| api/auth/login                           | App\Http\Controllers\AuthenticationController@login 
 POST        | api/auth/logout                          | App\Http\Controllers\AuthenticationController@logout 
 POST        | api/auth/register                        | App\Http\Controllers\AuthenticationController@register
-GET|HEAD    | api/operations                           | App\Http\Controllers\OperationsController@index
-GET|HEAD    | api/operations/amount/{user}             | App\Http\Controllers\OperationsController@amountUser
-GET|HEAD    | api/operations/status/{status}           | App\Http\Controllers\OperationsController@showStatus
-GET|HEAD    | api/operations/transaction/{transaction} | App\Http\Controllers\OperationsController@showTransaction
-GET|HEAD    | api/operations/user/{user}               | App\Http\Controllers\OperationsController@showUser
-GET|HEAD    | api/operations/{operation}               | App\Http\Controllers\OperationsController@show
+GET HEAD    | api/operations                           | App\Http\Controllers\OperationsController@index
+GET HEAD    | api/operations/amount/{user}             | App\Http\Controllers\OperationsController@amountUser
+GET HEAD    | api/operations/status/{status}           | App\Http\Controllers\OperationsController@showStatus
+GET HEAD    | api/operations/transaction/{transaction} | App\Http\Controllers\OperationsController@showTransaction
+GET HEAD    | api/operations/user/{user}               | App\Http\Controllers\OperationsController@showUser
+GET HEAD    | api/operations/{operation}               | App\Http\Controllers\OperationsController@show
 DELETE      | api/operations/{operation}/{user}        | App\Http\Controllers\OperationsController@eliminate
 POST        | api/report                               | App\Http\Controllers\OperationsController@reportPost
-GET|HEAD    | api/report/{param}                       | App\Http\Controllers\OperationsController@reportGet
-GET|HEAD    | api/report/{param}/{user}                | App\Http\Controllers\OperationsController@reportGet
+GET HEAD    | api/report/{param}                       | App\Http\Controllers\OperationsController@reportGet
+GET HEAD    | api/report/{param}/{user}                | App\Http\Controllers\OperationsController@reportGet
 
 
 - Testes no Postman
