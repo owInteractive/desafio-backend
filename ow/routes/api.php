@@ -32,7 +32,7 @@ Route::middleware('auth:api')->group(function(){
 	Route::prefix('users')->group(function(){
 		Route::get("", "UsersController@index");
 		Route::get("{user}", "UsersController@show");
-		Route::delete("user}", "UsersController@eliminate");
+		Route::delete("{user}", "UsersController@eliminate");
 		Route::patch("{user}", "UsersController@updateBalance");
 	});
 
@@ -47,13 +47,15 @@ Route::middleware('auth:api')->group(function(){
 		Route::get("amount/{user}", "OperationsController@amountUser");
 	});
 
-	/* Reports */
+	/* Report via POST */
 	Route::prefix('report')->group(function(){ 
-		Route::get("{param}", "OperationsController@reportGet");
-		Route::get("{param}/{user}", "OperationsController@reportGet");
 		Route::post("", "OperationsController@reportPost");
 	});
 });
+
+/* Reports via GET*/
+Route::get("{param}", "OperationsController@reportGet");
+Route::get("{param}/{user}", "OperationsController@reportGet");
 
 Route::any('', function () {
     return response()->json(['message' => 'Rota nāo localizada'], 401);

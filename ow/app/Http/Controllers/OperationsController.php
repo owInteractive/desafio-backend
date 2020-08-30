@@ -133,7 +133,7 @@ class OperationsController extends Controller
         {
             $month      = substr($param, 0,2);
             $year       = substr($param, 2,2);
-            $value      = 2;
+            $param      = 2;
         }
 
         switch($param){
