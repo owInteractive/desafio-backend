@@ -71,3 +71,5 @@ GET HEAD    | api/report/{param}/{user}                | App\Http\Controllers\Op
 			- No campo **KEY** = Authorization e no campo **VALUE** = Bearer + *token gerado*
 
 - Documentação das rotas [neste link](https://documenter.getpostman.com/view/12479411/TVCcXV7d/)
+
+	- Caso utilize o **Postman** para relizar os testes, você pode baixar este [arquivo json](https://drive.google.com/file/d/1PXNiROjPJHbqGmqhIu_t1CHX1sMqR6YT/view?usp=sharing) e upar na ferramenta e obter todos os rotas ja configuradas.
