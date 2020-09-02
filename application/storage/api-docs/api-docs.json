@@ -683,9 +683,9 @@
                 "scheme": "https",
                 "flows": {
                     "password": {
-                        "authorizationUrl": "http://localhost:7777//oauth/authorize",
-                        "tokenUrl": "http://localhost:7777//oauth/token",
-                        "refreshUrl": "http://localhost:7777//token/refresh",
+                        "authorizationUrl": "http://localhost:7777/oauth/authorize",
+                        "tokenUrl": "http://localhost:7777/oauth/token",
+                        "refreshUrl": "http://localhost:7777/token/refresh",
                         "scopes": []
                     }
                 }

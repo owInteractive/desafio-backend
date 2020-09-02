@@ -65,6 +65,6 @@ class TransactionService
         $transactions = $this->transactionRepository->export($data);
         Excel::store(new TransactionsExport($transactions), $name, 'public');
 
-        return Config::get('app.url')."storage/".$name;
+        return Config::get('app.url')."/storage/".$name;
     }
 }
