@@ -34,7 +34,7 @@ Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o des
 - Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x) ou [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation);
 - Utilizar o [Docker](https://www.docker.com/get-started) para conteinerização da aplicação;
 - Pensar em desempenho e escalabilidade, quando for uma quantidade muito grande de dados como o sistema se comportaria;
-- Criar testes;
+- Criar testes (Apenas um exemplo, algo bem simples como validação do login ou consumo de um endpoint com ou sem autenticação, no README adicionar qual o comando utilizado para rodar o teste); 
 - Utilizar apenas as ferramentas do framework caso use um, evitando criar dependência de outros pacotes ou bibliotecas;
 
 ## Desafio
