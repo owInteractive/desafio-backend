@@ -19,7 +19,7 @@ Client ID: 2<br>
 Client secret: jOeJSSRmuCfElqP7jrM8SaIMz2SS466ZCuDSsHnf<br>
 - Salve a ultima "Client secret", nesse caso é "jOeJSSRmuCfElqP7jrM8SaIMz2SS466ZCuDSsHnf", porém quando rodar o seu comando será outra key.
 - php artisan l5-swagger:generate
-- #####Chegou a hora do test! Rode o comando: composer test (espero que passe, aqui deu certo viu? rs)
+- Chegou a hora do test! Rode o comando: composer test (espero que passe, aqui deu certo viu? rs)
 
 - Após essa sequência de comandos, será criado um usuário padrão caso não queria criar um.
 <br>Usuário: yves.cl@live.com<br>
@@ -37,6 +37,6 @@ client_secret: jOeJSSRmuCfElqP7jrM8SaIMz2SS466ZCuDSsHnf (client secret que você
 
 - Caso nessa necessário o jSON do Swagger é este: http://localhost:7777/docs/api-docs.json
 
-####**Caso aconteça algum erro de permissão, entre novamente no container e utilize os comandos**
-    chown -R www-data:www-data bootstrap/cache
-    chown -R www-data:www-data storage
+**Caso aconteça algum erro de permissão, entre novamente no container e utilize os comandos**
+- chown -R www-data:www-data bootstrap/cache
+- chown -R www-data:www-data storage
