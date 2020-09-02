@@ -1,0 +1,39 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: "3.1"
+services:
+
+    redis:
+      image: redis:alpine
+      container_name: ow-interactive-redis
+
+    mariadb:
+      image: mariadb:10.4
+      container_name: ow-interactive-mariadb
+      working_dir: /application
+      volumes:
+        - ../:/application
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=owinteractive
+      ports:
+        - "7780:3306"
+
+    webserver:
+      image: nginx:alpine
+      container_name: ow-interactive-webserver
+      working_dir: /application
+      volumes:
+          - ../:/application
+          - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "7777:80"
+
+    php-fpm:
+      build: phpdocker/php-fpm
+      container_name: ow-interactive-php-fpm
+      working_dir: /application
+      volumes:
+        - ../:/application
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini

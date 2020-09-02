@@ -1,0 +1,698 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "OW Interactive API Documentation",
+        "description": "Manual this applications for APIs",
+        "contact": {
+            "email": "yves.cl@live.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:7777/api",
+            "description": "OW Interactive"
+        }
+    ],
+    "paths": {
+        "/transactions": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Função responsável buscar informações todas as transações dos usuários",
+                "description": "Retorna transações do usuário com paginação",
+                "operationId": "transactions.index",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page this pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Amount of data per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Função responsável por criar uma nova transação e retornar ao usuário",
+                "description": "Retorna mensagem sucesso ao cadastrar e a transação cadastrada",
+                "operationId": "transactions.store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreTransactionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/transactions/{id}": {
+            "delete": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Função responsável por deletar uma determinada transação",
+                "description": "Retorna uma mensagem informando que a transação foi deletada",
+                "operationId": "transactions.destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Transaction ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Transaction not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/transactions/export": {
+            "post": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Função responsável por criar um excel de exportação",
+                "description": "Retorna uma mensagem informando o link de download",
+                "operationId": "transactions.export",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExportTransactionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Função responsável buscar todos os usuários com ordernação por criação",
+                "description": "Retorna uma coleção de usuários",
+                "operationId": "users.index",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Função responsável por enviar os dados para validação e retornar mensagem ao usuário",
+                "description": "Retorna mensagem sucesso ao cadastrar e o usuário cadastrado",
+                "operationId": "users.store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Função responsável por buscar um determinado usuário",
+                "description": "Retorna os dados do determinado usuário",
+                "operationId": "users.show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Função responsável por deletar um determinado usuário",
+                "description": "Retorna uma mensagem informando que o usuário foi deletado",
+                "operationId": "users.destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/users/{id}/amount_initial": {
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Função responsável atualizar o valor inicial de um determinado usuário",
+                "description": "Retorna os dados atualizados do usuário",
+                "operationId": "users.amount_initial",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AmountInitialUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/users/{id}/balance": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Função responsável fazer o balanço de todas as transações do usuário.",
+                "description": "Retorna as operações, agrupado por seu tipo e seus valores somados com colletion de usuário",
+                "operationId": "users.balance",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AmountInitialUserRequest": {
+                "title": "Amount Inicial User Request",
+                "description": "Amount Inicial User body data",
+                "required": [
+                    "amount_initial"
+                ],
+                "properties": {
+                    "amount_initial": {
+                        "title": "Amount Initial",
+                        "description": "Amount Initial of the user",
+                        "type": "number",
+                        "format": "double",
+                        "example": "500.00"
+                    }
+                },
+                "type": "object"
+            },
+            "ExportTransactionRequest": {
+                "title": "Export Transaction Request",
+                "description": "Export Transaction body data",
+                "properties": {
+                    "type": {
+                        "title": "Type Filter",
+                        "description": "Choose only type filter",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": "2"
+                    },
+                    "period": {
+                        "title": "Period",
+                        "description": "Choose period for filter",
+                        "type": "string",
+                        "format": "date",
+                        "example": "08/2020"
+                    }
+                },
+                "type": "object"
+            },
+            "IndexTransactionRequest": {
+                "title": "Index Transaction Request",
+                "description": "Index Transaction Request Query String",
+                "properties": {
+                    "page": {
+                        "title": "Page",
+                        "description": "Page this pagination",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "per_page": {
+                        "title": "Per Page",
+                        "description": "Amount of data per page",
+                        "type": "integer",
+                        "example": "15"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreTransactionRequest": {
+                "title": "Store Transaction Request",
+                "description": "Store Transaction Request body data",
+                "required": [
+                    "value",
+                    "user_id",
+                    "transaction_type_id"
+                ],
+                "properties": {
+                    "value": {
+                        "title": "Value",
+                        "description": "Value of the new transaction",
+                        "type": "number",
+                        "format": "double",
+                        "example": "1000.00"
+                    },
+                    "user_id": {
+                        "title": "User ID",
+                        "description": "User of the new transaction",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "transaction_type_id": {
+                        "title": "Type Transaction",
+                        "description": "Type of the new transaction",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreUserRequest": {
+                "title": "Store User Request",
+                "description": "Store User Request body data",
+                "required": [
+                    "name",
+                    "email",
+                    "password",
+                    "birthday",
+                    "amount_initial"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the new user",
+                        "type": "string",
+                        "example": "Yves Clêuder"
+                    },
+                    "email": {
+                        "title": "E-mail",
+                        "description": "E-mail of the new user",
+                        "type": "string",
+                        "example": "yves.cl@live.com"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "description": "Password of the new user",
+                        "type": "string",
+                        "example": "123456"
+                    },
+                    "birthday": {
+                        "title": "Birthday",
+                        "description": "Birthday of the new user",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "amount_initial": {
+                        "title": "Amount Initial",
+                        "description": "Amount Initial of the new user",
+                        "type": "number",
+                        "format": "double",
+                        "example": "1000.00"
+                    }
+                },
+                "type": "object"
+            },
+            "Transaction": {
+                "title": "Transaction",
+                "description": "Transaction Model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "value": {
+                        "title": "Value",
+                        "description": "Value of the transaction",
+                        "type": "number",
+                        "format": "double",
+                        "example": "1000.00"
+                    },
+                    "user_id": {
+                        "title": "User ID",
+                        "description": "User of the transaction",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "transaction_type_id": {
+                        "title": "Type Transaction",
+                        "description": "Type of the transaction",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-09-01 14:00:00"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-09-01 14:00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionType": {
+                "title": "TransactionType",
+                "description": "TransactionType Model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "title": {
+                        "title": "Title",
+                        "description": "User of the transaction type",
+                        "type": "string",
+                        "example": "Crédito"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-09-01 14:00:00"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-09-01 14:00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "User Model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the user",
+                        "type": "string",
+                        "example": "Yves Clêuder"
+                    },
+                    "email": {
+                        "title": "E-mail",
+                        "description": "E-mail of the user",
+                        "type": "string",
+                        "example": "yves.cl@live.com"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "description": "Password of the user",
+                        "type": "string",
+                        "example": "123456"
+                    },
+                    "birthday": {
+                        "title": "Birthday",
+                        "description": "Birthday of the user",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "amount_initial": {
+                        "title": "Amount Initial",
+                        "description": "Amount Initial of the user",
+                        "type": "number",
+                        "format": "double",
+                        "example": "1000.00"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-09-01 14:00:00"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-09-01 14:00:00"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://localhost:7777//oauth/authorize",
+                        "tokenUrl": "http://localhost:7777//oauth/token",
+                        "refreshUrl": "http://localhost:7777//token/refresh",
+                        "scopes": []
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
