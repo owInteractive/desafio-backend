@@ -3,14 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="edbebae8-b0f6-4693-81c9-5e63bc908395" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/.env.production" beforeDir="false" afterPath="$PROJECT_DIR$/application/.env.production" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/app/Observers/TransactionObserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/app/Observers/TransactionObserver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/app/Observers/UserObserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/app/Observers/UserObserver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/database/seeds/TransactionSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/database/seeds/TransactionSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/database/seeds/UserSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/database/seeds/UserSeeder.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/application/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -174,6 +177,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599067408366</updated>
       <workItem from="1599067409454" duration="2176000" />
+      <workItem from="1599070014006" duration="969000" />
     </task>
     <servers />
   </component>

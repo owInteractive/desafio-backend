@@ -11,7 +11,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::flushEventListeners();
         \App\Models\User::create(
             [
                 'name'           => 'Yves Clêuder',
