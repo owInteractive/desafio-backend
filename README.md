@@ -9,7 +9,7 @@
     - php artisan migrate --seed
     - php artisan storage:link
     - php artisan passport:install
-- Após o último comando do passport, você verá na tela escrito algo mais ou menos assim:
+- Após o último comando do passport, você verá na tela escrito algo como:
 <br>Encryption keys generated successfully.<br>
 Personal access client created successfully.<br>
 Client ID: 1<br>
