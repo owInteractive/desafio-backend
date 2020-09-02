@@ -35,7 +35,7 @@ client_id: 2<br>
 client_secret: jOeJSSRmuCfElqP7jrM8SaIMz2SS466ZCuDSsHnf (client secret que você salvou)<br>
 - Após isso, você ficará autenticado no sistema e poderá acessar as outras rotas.<br>
 
-- Caso nessa necessário o jSON do Swagger é este: http://localhost:7777/docs/api-docs.json
+- Caso seja necessário o jSON do Swagger é este: http://localhost:7777/docs/api-docs.json
 
 **Caso aconteça algum erro de permissão, entre novamente no container e utilize os comandos**
 - chown -R www-data:www-data bootstrap/cache
