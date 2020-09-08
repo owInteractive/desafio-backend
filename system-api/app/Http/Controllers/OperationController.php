@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Requests\OperationRequest;
 use App\Repositories\OperationRepository;
-use Illuminate\Http\Request;
 
 class OperationController extends Controller
 {
+    //todas as funções chamam a classe OperationsRepository
+
 
     /**
-     * Store a newly created resource in storage.
+     * Salva uma nova operação.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -21,7 +24,7 @@ class OperationController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostra as operações de um usuario.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -32,7 +35,7 @@ class OperationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove uma operação especifica.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -42,8 +45,15 @@ class OperationController extends Controller
         return OperationRepository::delete($user_id,$operation_id);
     }
 
+    //Retorna o Saldo total do Usuario
     public function totalOperations($id)
     {
         return OperationRepository::totalOperations($id);
+    }
+
+    //Exporta arquivo CSV
+    public function exportCSV($filter)
+    {
+        return OperationRepository::exportCVS($filter);
     }
 }

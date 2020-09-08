@@ -64,6 +64,11 @@ Route::get('totalOperations/{id}', [
     'uses' => 'OperationController@totalOperations'
 ]);
 
+Route::ger('exportCSV/{filter}/{user}',[
+    'as' => 'exportCSV',
+    'uses' => 'OperationController@exportCVS'
+]);
+
 // Route Fallback
 
 Route::fallback(function () {

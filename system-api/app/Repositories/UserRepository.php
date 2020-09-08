@@ -2,9 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\UserRequest;
 use Exception;
 use App\Models\User;
+use App\Models\Operation;
+use App\Http\Requests\UserRequest;
 
 class UserRepository
 {
@@ -76,8 +77,15 @@ class UserRepository
     {
         try {
             $user = User::find($id);
-            $user->delete();
-            return response()->json(['success'=>true],201);
+            $move = Operation::where('user_id',$id)->get();
+            if($user->opening_balance > 0){
+               return response()->json(['message' => 'Exite saldo para o cliente, impossível excluir'],400);
+            } else if($move > 0){
+               return response()->json(['message' => 'Exite Movimentação para o cliente, impossível excluir'],400);
+            } else {
+               $user->delete();
+               return response()->json(['success'=>true],201);
+            }
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage()],400);
         }

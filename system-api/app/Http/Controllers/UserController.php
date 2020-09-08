@@ -11,8 +11,12 @@ use App\Http\Requests\OpeningBalanceRequest;
 
 class UserController extends Controller
 {
+    //todas as funções chamam a classe UserRepository
+
+    
+    
     /**
-     * Display a listing of the resource.
+     *Mosta a listagem de usuario ordenado por data de criação
      *
      * @return \Illuminate\Http\Response
      */
@@ -21,14 +25,19 @@ class UserController extends Controller
         return UserRepository::listar();
     }
 
-
+    /**
+     * Salva um novo usuario.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function storeUser(UserRequest $request)
     {
         return UserRepository::store($request);
     }
 
     /**
-     * Display the specified resource.
+     * Mostra um usuario especifico.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -39,7 +48,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Atualiza um usuario.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -51,7 +60,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove o usuario.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
