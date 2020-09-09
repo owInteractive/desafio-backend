@@ -15,6 +15,119 @@
         }
     ],
     "paths": {
+        "/transactions": {
+            "get": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Get a listing of the Transactions.",
+                "description": "Get all Transactions",
+                "operationId": "transactions.index",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page this pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/transactions/store": {
+            "post": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Create a newly created Transaction in storage",
+                "description": "Create Transaction",
+                "operationId": "transactions.store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateTransactionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/transactions/destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Remove the specified Transaction from storage",
+                "description": "Delete Transaction",
+                "operationId": "transactions.destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Transaction ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Transaction not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
         "/users/register": {
             "post": {
                 "tags": [
@@ -54,6 +167,17 @@
                 "summary": "Get a listing of the Users.",
                 "description": "Get all Users",
                 "operationId": "users.index",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page this pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
@@ -95,6 +219,57 @@
                     "200": {
                         "description": "Successful operation"
                     },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update the specified User in storage",
+                "description": "Update User",
+                "operationId": "App\\Http\\Controllers\\API\\UserController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
                     "401": {
                         "description": "Unauthenticated"
                     },
@@ -132,6 +307,9 @@
                     "200": {
                         "description": "Successful operation"
                     },
+                    "404": {
+                        "description": "User not found"
+                    },
                     "401": {
                         "description": "Unauthenticated"
                     },
@@ -149,16 +327,104 @@
     },
     "components": {
         "schemas": {
+            "CreateTransactionRequest": {
+                "title": "Create Transaction Request",
+                "description": "Create Transaction Request body data",
+                "required": [
+                    "user_id",
+                    "transaction_type_id",
+                    "value"
+                ],
+                "properties": {
+                    "value": {
+                        "title": "Value",
+                        "description": "Value of the new transaction",
+                        "type": "number",
+                        "format": "double",
+                        "example": "1000.00"
+                    },
+                    "user_id": {
+                        "title": "User ID",
+                        "description": "User of the new transaction",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "transaction_type_id": {
+                        "title": "Type Transaction",
+                        "description": "Type of the new transaction",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
             "CreateUserRequest": {
                 "title": "Create User Request",
-                "description": "Store User Request body data",
+                "description": "Create User Request body data",
                 "required": [
                     "name",
                     "email",
                     "password",
                     "birthday"
                 ],
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the new user",
+                        "example": "Example"
+                    },
+                    "email": {
+                        "title": "E-mail",
+                        "description": "E-mail of the new user",
+                        "example": "example@example.com"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "description": "Password of the new user",
+                        "example": "example"
+                    },
+                    "birthday": {
+                        "title": "Birthday",
+                        "description": "Birthday of the new user",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "value_initial": {
+                        "title": "Value Initial",
+                        "description": "Value Initial of the new user",
+                        "type": "number",
+                        "format": "decimal",
+                        "example": "100.00"
+                    }
+                },
                 "type": "object"
+            },
+            "UpdateUserRequest": {
+                "title": "Update User Request",
+                "description": "Update User Request body data",
+                "required": [
+                    "value_initial"
+                ],
+                "properties": {
+                    "value_initial": {
+                        "title": "Value Initial",
+                        "description": "Value Initial of the new user",
+                        "type": "number",
+                        "format": "decimal",
+                        "example": "100.00"
+                    }
+                },
+                "type": "object"
+            },
+            "Transaction": {
+                "title": "Transaction",
+                "description": "Transaction Model"
+            },
+            "TransactionType": {
+                "title": "TransactionType",
+                "description": "TransactionType Model"
             },
             "User": {
                 "title": "User",

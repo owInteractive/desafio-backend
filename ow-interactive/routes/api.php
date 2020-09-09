@@ -22,7 +22,15 @@ Route::namespace('API')->group(function () {
         {
             Route::get('/', 'UserController@index');
             Route::get('/{id}', 'UserController@show');
+            Route::patch('/{id}', 'UserController@update');
             Route::delete('/destroy/{id}', 'UserController@destroy');
+        });
+
+        Route::group(['prefix'=> 'transactions'], function()
+        {
+            Route::get('/', 'TransactionController@index');
+            Route::post('/store', 'TransactionController@store');
+            Route::delete('/destroy/{id}', 'TransactionController@destroy');
         });
     });
 });

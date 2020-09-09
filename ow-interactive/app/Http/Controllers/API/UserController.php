@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
@@ -65,6 +66,15 @@ class UserController extends AppBaseController
      *      },
      *      summary="Get a listing of the Users.",
      *      description="Get all Users",
+     *      @OA\Parameter(
+     *          name="page",
+     *          description="Page this pagination",
+     *          required=false,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -113,6 +123,10 @@ class UserController extends AppBaseController
      *          description="Successful operation",
      *       ),
      *      @OA\Response(
+     *          response=404,
+     *          description="User not found",
+     *      ),
+     *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
      *      ),
@@ -139,6 +153,60 @@ class UserController extends AppBaseController
     }
 
     /**
+     * @OA\Patch(
+     *      path="/users/{id}",
+     *      summary="Update the specified User in storage",
+     *      tags={"User"},
+     *      security={
+     *         {"passport": {}},
+     *      },
+     *      description="Update User",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="User ID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/UpdateUserRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="User not found",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal Server Error"
+     *      )
+     * )
+     */
+    public function update($id, UpdateUserRequest $request)
+    {
+        $input = $request->all();
+        /** @var User $user */
+        $user = $this->userRepository->find($id);
+
+        if (empty($user)) {
+            return $this->sendError('User not found');
+        }
+
+        $user = $this->userRepository->update($input, $id);
+        return $this->sendResponse($user->toArray(), 'User updated successfully');
+    }
+
+    /**
      * @OA\Delete(
      *      path="/users/destroy/{id}",
      *      operationId="users.destroy",
@@ -162,6 +230,10 @@ class UserController extends AppBaseController
      *          description="Successful operation",
      *       ),
      *      @OA\Response(
+     *          response=404,
+     *          description="User not found",
+     *      ),
+     *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
      *      ),
@@ -179,7 +251,12 @@ class UserController extends AppBaseController
             if (empty($user)) {
                 return $this->sendError('User not found');
             }
-
+            if ($user->id == auth()->id()) {
+                return $this->sendError('User cannot be deleted');
+            }
+            if ($user->hasValue()) {
+                return $this->sendError('The user cannot be deleted because there is an account balance', 500);
+            }
             $user->delete();
             return $this->sendSuccess('User deleted successfully');
         } catch (\Exception $e) {

@@ -26,6 +26,7 @@ class User extends Authenticatable
         'email',
         'password',
         'birthday',
+        'value_initial'
     ];
 
     /**
@@ -46,4 +47,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    /**
+     * checks whether the user can be deleted
+     * @return bool
+     */
+    public function hasValue()
+    {
+        if ($this->value_initial || $this->transactions->count()) {
+            return true;
+        }
+        return false;
+    }
 }
