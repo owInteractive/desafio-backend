@@ -56,6 +56,7 @@
 
 | Method | URI                                          | Action
 +--------+----------------------------------------------+-----------------------------------------+
+
 |GET     | api/exportCSV/{filter}/{user}                | OperationController@exportCVS 
 |POST    | api/operation                                | OperationController@storeOperation   
 |GET     | api/operation/{id}                           | OperationController@showOperation    
@@ -67,4 +68,5 @@
 |GET     | api/user/{id}                                | UserController@showUser              
 |DELETE  | api/user/{id}                                | UserController@destroyUser           
 |GET     | api/users                                    | UserController@listUsers
+
 +--------+----------------------------------------------+-----------------------------------------+
