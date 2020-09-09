@@ -13,8 +13,8 @@
 - Clone o projeto
 	- git clone https://github.com/wesleysilva059/desafio-backend.git
 
-- Após o download, acesso o projeto
-	- cd desafio-backend/ow
+- Após o download, acesse o projeto
+	- cd desafio-backend/system-api
 
 - Crie o arquivo de configuração (.env)
 	- cp .env.example .env
