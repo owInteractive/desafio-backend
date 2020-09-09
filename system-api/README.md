@@ -1,61 +1,70 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Desafio Back-End - OW Interactive 20/21
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Informações Gerais
 
-## About Laravel
+- Desenvolvido com PHP 7.4
+- Laravel Framework 7.3
+- MySQL 8.0;
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Instalando a Aplicação
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Crie uma base de dados com o nome de sua preferência.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Clone o projeto
+	- git clone https://github.com/wesleysilva059/desafio-backend.git
 
-## Learning Laravel
+- Após o download, acesso o projeto
+	- cd desafio-backend/ow
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Crie o arquivo de configuração (.env)
+	- cp .env.example .env
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Abra o arquivo **.env** e altere a váriavel DB_DATABASE para o nome que você escolheu
+	- DB_DATABASE=nome_do_banco
 
-## Laravel Sponsors
+- Instale as dependencias do projeto
+	- composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- Intale as tabelas e informações inicias, utilizando **migration** e **seeds**
+	- php artisan migrate
+	- php artisan db:seed
 
-### Premium Partners
+- Para a autenticação no sistema, utilizaremos a biblioteca **passport**
+	- php artisan passport:install
+	- php artisan key:generate
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+## Iniciando a aplicação
 
-## Contributing
+- Agora iremos subir a aplicação. Após a execução do comando abaixo, você deverá acessar seu nevegador e na URL digitar http://127.0.0.1:8000/
+	- php artisan serve
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Agora com nossa aplicação funcionando, iremos executar a limpeza de cache e o autoload de nossa aplicação
+	- php artisan cache:clear
+	- composer dump-autoload
 
-## Code of Conduct
+## Documentação das rotas da API
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- php artisan route:list
 
-## Security Vulnerabilities
+- O Sistema usado para testes das rotas foi o Insomnia e o arquivo Json das rotas se encontra neste repositorio ou pelo link https://github.com/wesleysilva059/desafio-backend/blob/master/Insomnia_2020-09-01.json
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+> Obs:
 
-## License
+- As informações 
+- Os posts e put de dados, foram feitos na tab `body`, na opção `x-www-form-urlencoded`;
+- A url usada foi a `http://127.0.0.1:8000` criada pelo comando `php artisan serve`.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+| Method | URI                                          | Action
++--------+----------------------------------------------+-----------------------------------------+
+|GET     | api/exportCSV/{filter}/{user}                | OperationController@exportCVS 
+|POST    | api/operation                                | OperationController@storeOperation   
+|GET     | api/operation/{id}                           | OperationController@showOperation    
+|DELETE  | api/operation/{user_id}/{operation_id}       | OperationController@destroyOperation 
+|GET     | api/operationReport/{param}                  | OperationController@operationReport  
+|GET     | api/totalOperations/{id}                     | OperationController@totalOperations  
+|PUT     | api/updateOpeningBalance/{id}                | UserController@updateOpeningBalance  
+|POST    | api/user                                     | UserController@storeUser             
+|GET     | api/user/{id}                                | UserController@showUser              
+|DELETE  | api/user/{id}                                | UserController@destroyUser           
+|GET     | api/users                                    | UserController@listUsers
++--------+----------------------------------------------+-----------------------------------------+

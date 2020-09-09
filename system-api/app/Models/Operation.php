@@ -12,6 +12,6 @@ class Operation extends Model
     ];
 
     public function operationType(){
-        return $this->hasOne(OperationType::class);
+        return $this->belongsTo(OperationType::class);
     }
 }

@@ -52,8 +52,8 @@ class OperationController extends Controller
     }
 
     //Exporta arquivo CSV
-    public function exportCSV($filter)
+    public function exportCSV($filter,$id=null)
     {
-        return OperationRepository::exportCVS($filter);
+        return OperationRepository::exportCVS($filter,$id);
     }
 }
