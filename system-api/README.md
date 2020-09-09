@@ -46,7 +46,7 @@
 
 - php artisan route:list
 
-- O Sistema usado para testes das rotas foi o Insomnia e o arquivo Json das rotas se encontra neste repositorio ou pelo link https://github.com/wesleysilva059/desafio-backend/blob/master/Insomnia_2020-09-01.json
+- O Sistema usado para testes das rotas foi o Insomnia e o arquivo Json das rotas se encontra neste repositorio ou pelo link https://github.com/wesleysilva059/desafio-backend/blob/master/Insomnia_2020-09-09.json
 
 > Obs:
 
