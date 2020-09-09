@@ -54,19 +54,18 @@
 - Os posts e put de dados, foram feitos na tab `body`, na opção `x-www-form-urlencoded`;
 - A url usada foi a `http://127.0.0.1:8000` criada pelo comando `php artisan serve`.
 
-| Method | URI                                          | Action
-+--------+----------------------------------------------+-----------------------------------------+
 
-|GET     | api/exportCSV/{filter}/{user}                | OperationController@exportCVS 
-|POST    | api/operation                                | OperationController@storeOperation   
-|GET     | api/operation/{id}                           | OperationController@showOperation    
-|DELETE  | api/operation/{user_id}/{operation_id}       | OperationController@destroyOperation 
-|GET     | api/operationReport/{param}                  | OperationController@operationReport  
-|GET     | api/totalOperations/{id}                     | OperationController@totalOperations  
-|PUT     | api/updateOpeningBalance/{id}                | UserController@updateOpeningBalance  
-|POST    | api/user                                     | UserController@storeUser             
-|GET     | api/user/{id}                                | UserController@showUser              
-|DELETE  | api/user/{id}                                | UserController@destroyUser           
-|GET     | api/users                                    | UserController@listUsers
-
-+--------+----------------------------------------------+-----------------------------------------+
+| Method | URI                                          | Action                                   |
+|--------|----------------------------------------------|------------------------------------------|
+|GET     | api/exportCSV/{filter}/{user}                | OperationController@exportCVS            |
+|POST    | api/operation                                | OperationController@storeOperation       |
+|GET     | api/operation/{id}                           | OperationController@showOperation        |
+|DELETE  | api/operation/{user_id}/{operation_id}       | OperationController@destroyOperation     |
+|GET     | api/operationReport/{param}                  | OperationController@operationReport      |
+|GET     | api/totalOperations/{id}                     | OperationController@totalOperations      |
+|PUT     | api/updateOpeningBalance/{id}                | UserController@updateOpeningBalance      |
+|POST    | api/user                                     | UserController@storeUser                 |
+|GET     | api/user/{id}                                | UserController@showUser                  |
+|DELETE  | api/user/{id}                                | UserController@destroyUser               |
+|GET     | api/users                                    | UserController@listUsers                 |
+ 
