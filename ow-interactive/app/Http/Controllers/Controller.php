@@ -14,11 +14,7 @@ class Controller extends BaseController
     /**
      * @OA\Info(
      *      version="1.0.0",
-     *      title="API Documentation",
-     *      description="Manual this applications for APIs",
-     *      @OA\Contact(
-     *          email="demartinezraul@gmail.com"
-     *      )
+     *      title="API Documentation"
      * )
      *
      * @OA\Server(

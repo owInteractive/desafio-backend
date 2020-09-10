@@ -48,4 +48,9 @@ class UserRepository extends BaseRepository
 
         return $model;
     }
+
+    public function balance(User $user)
+    {
+        return number_format($user->value_initial + $user->current_amount, 2,'.','');
+    }
 }

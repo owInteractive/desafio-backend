@@ -18,7 +18,7 @@ class CreateTransactionRequest extends FormRequest
      * @OA\Property(
      *      title="Value",
      *      description="Value of the new transaction",
-     *      format="double",
+     *      format="decimal",
      *      example="1000.00"
      * )
      *
@@ -30,7 +30,7 @@ class CreateTransactionRequest extends FormRequest
      * @OA\Property(
      *      title="User ID",
      *      description="User of the new transaction",
-     *      format="int64",
+     *      format="integer",
      *      example="1"
      * )
      *
@@ -42,7 +42,7 @@ class CreateTransactionRequest extends FormRequest
      * @OA\Property(
      *      title="Type Transaction",
      *      description="Type of the new transaction",
-     *      format="int64",
+     *      format="integer",
      *      example="1"
      * )
      *

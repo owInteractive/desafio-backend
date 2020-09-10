@@ -24,6 +24,7 @@ Route::namespace('API')->group(function () {
             Route::get('/{id}', 'UserController@show');
             Route::patch('/{id}', 'UserController@update');
             Route::delete('/destroy/{id}', 'UserController@destroy');
+            Route::get('/{id}/current-balance', 'UserController@currentBalance');
         });
 
         Route::group(['prefix'=> 'transactions'], function()
@@ -31,6 +32,7 @@ Route::namespace('API')->group(function () {
             Route::get('/', 'TransactionController@index');
             Route::post('/store', 'TransactionController@store');
             Route::delete('/destroy/{id}', 'TransactionController@destroy');
+            Route::post('/export', 'TransactionController@export');
         });
     });
 });

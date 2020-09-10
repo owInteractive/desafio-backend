@@ -26,7 +26,8 @@ class User extends Authenticatable
         'email',
         'password',
         'birthday',
-        'value_initial'
+        'value_initial',
+        'current_amount'
     ];
 
     /**

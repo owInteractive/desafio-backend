@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateTransactionRequest;
+use App\Http\Requests\ExportTransactionRequest;
 use App\Models\Transaction;
 use App\Repositories\TransactionRepository;
 use Response;
@@ -23,7 +24,7 @@ class TransactionController extends AppBaseController
      * @OA\Get(
      *      path="/transactions",
      *      operationId="transactions.index",
-     *      tags={"Transaction"},
+     *      tags={"Transactions"},
      *      security={
      *         {"passport": {}},
      *      },
@@ -69,7 +70,7 @@ class TransactionController extends AppBaseController
      * @OA\Post(
      *      path="/transactions/store",
      *      operationId="transactions.store",
-     *      tags={"Transaction"},
+     *      tags={"Transactions"},
      *      security={
      *         {"passport": {}},
      *      },
@@ -108,7 +109,7 @@ class TransactionController extends AppBaseController
      * @OA\Delete(
      *      path="/transactions/destroy/{id}",
      *      operationId="transactions.destroy",
-     *      tags={"Transaction"},
+     *      tags={"Transactions"},
      *      security={
      *         {"passport": {}},
      *      },
@@ -151,6 +152,46 @@ class TransactionController extends AppBaseController
             }
             $transaction->delete();
             return $this->sendSuccess('Transaction deleted successfully');
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 500);
+        }
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/transactions/export",
+     *      operationId="transactions.export",
+     *      tags={"Transactions"},
+     *      security={
+     *         {"passport": {}},
+     *      },
+     *      summary="Creating excel to export transactions",
+     *      description="Returns the download link",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/ExportTransactionRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal Server Error"
+     *      )
+     * )
+     *
+     * @param ExportTransactionRequest $request
+     */
+    public function export(ExportTransactionRequest $request)
+    {
+        try {
+            $spreadsheet = $this->transactionRepository->export($request->all());
+            return $this->sendResponse($spreadsheet, 'Successfully exported transactions');
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), 500);
         }

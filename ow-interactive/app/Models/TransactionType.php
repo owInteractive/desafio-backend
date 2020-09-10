@@ -12,13 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TransactionType extends Model
 {
-    const TRANSACTION_TYPE = [
-        1 => 'Crédito',
-        2 => 'Débito',
-        3 => 'Estorno',
-    ];
-
     protected $fillable = [
-        'title'
+        'name'
     ];
 }

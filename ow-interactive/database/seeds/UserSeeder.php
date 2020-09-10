@@ -13,19 +13,20 @@ class UserSeeder extends Seeder
     {
         \App\Models\User::create(
             [
-                'name'           => 'Admin',
-                'email'          => 'admin@admin.com',
-                'password'       => bcrypt('admin'),
-                'birthday'       => '1994-05-18'
+                'name' => 'Admin',
+                'email' => 'admin@admin.com',
+                'password' => bcrypt('admin'),
+                'birthday' => '1994-05-18',
+                'current_amount' => 2800
             ]
         );
 
         \App\Models\User::create(
             [
-                'name'           => 'User',
-                'email'          => 'user@user.com',
-                'password'       => bcrypt('user'),
-                'birthday'       => '1994-05-18'
+                'name' => 'User',
+                'email' => 'user@user.com',
+                'password' => bcrypt('user'),
+                'birthday' => '1994-05-18'
             ]
         );
     }

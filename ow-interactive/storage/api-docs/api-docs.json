@@ -2,10 +2,6 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API Documentation",
-        "description": "Manual this applications for APIs",
-        "contact": {
-            "email": "demartinezraul@gmail.com"
-        },
         "version": "1.0.0"
     },
     "servers": [
@@ -18,7 +14,7 @@
         "/transactions": {
             "get": {
                 "tags": [
-                    "Transaction"
+                    "Transactions"
                 ],
                 "summary": "Get a listing of the Transactions.",
                 "description": "Get all Transactions",
@@ -55,7 +51,7 @@
         "/transactions/store": {
             "post": {
                 "tags": [
-                    "Transaction"
+                    "Transactions"
                 ],
                 "summary": "Create a newly created Transaction in storage",
                 "description": "Create Transaction",
@@ -91,7 +87,7 @@
         "/transactions/destroy/{id}": {
             "delete": {
                 "tags": [
-                    "Transaction"
+                    "Transactions"
                 ],
                 "summary": "Remove the specified Transaction from storage",
                 "description": "Delete Transaction",
@@ -128,10 +124,46 @@
                 ]
             }
         },
+        "/transactions/export": {
+            "post": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Creating excel to export transactions",
+                "description": "Returns the download link",
+                "operationId": "transactions.export",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExportTransactionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
         "/users/register": {
             "post": {
                 "tags": [
-                    "User"
+                    "Users"
                 ],
                 "summary": "Store a newly created User in storage",
                 "description": "Store User",
@@ -162,7 +194,7 @@
         "/users": {
             "get": {
                 "tags": [
-                    "User"
+                    "Users"
                 ],
                 "summary": "Get a listing of the Users.",
                 "description": "Get all Users",
@@ -199,7 +231,7 @@
         "/users/{id}": {
             "get": {
                 "tags": [
-                    "User"
+                    "Users"
                 ],
                 "summary": "Display the specified User",
                 "description": "Get User",
@@ -237,7 +269,7 @@
             },
             "patch": {
                 "tags": [
-                    "User"
+                    "Users"
                 ],
                 "summary": "Update the specified User in storage",
                 "description": "Update User",
@@ -284,10 +316,50 @@
                 ]
             }
         },
+        "/users/{id}/current-balance": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Display the specified user's balance",
+                "description": "Get Current balance",
+                "operationId": "users.currentBalance",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
         "/users/destroy/{id}": {
             "delete": {
                 "tags": [
-                    "User"
+                    "Users"
                 ],
                 "summary": "Remove the specified User from storage",
                 "description": "Delete User",
@@ -340,21 +412,21 @@
                         "title": "Value",
                         "description": "Value of the new transaction",
                         "type": "number",
-                        "format": "double",
+                        "format": "decimal",
                         "example": "1000.00"
                     },
                     "user_id": {
                         "title": "User ID",
                         "description": "User of the new transaction",
                         "type": "integer",
-                        "format": "int64",
+                        "format": "integer",
                         "example": "1"
                     },
                     "transaction_type_id": {
                         "title": "Type Transaction",
                         "description": "Type of the new transaction",
                         "type": "integer",
-                        "format": "int64",
+                        "format": "integer",
                         "example": "1"
                     }
                 },
@@ -397,6 +469,25 @@
                         "type": "number",
                         "format": "decimal",
                         "example": "100.00"
+                    }
+                },
+                "type": "object"
+            },
+            "ExportTransactionRequest": {
+                "title": "Export Transaction Request",
+                "description": "Export Transaction body data",
+                "properties": {
+                    "filter_type": {
+                        "title": "Filter Type",
+                        "description": "\n               Choose only the type of filter.\n               (Filter type NULL = returns all transactions.)\n               (Filter type 1 = returns the last 30 days)\n               (Filter type 2 = returns the specific month and year)",
+                        "format": "integer",
+                        "example": "1"
+                    },
+                    "date_filter": {
+                        "title": "Date Filter",
+                        "description": "Choose period for filter",
+                        "format": "date",
+                        "example": "09/2020"
                     }
                 },
                 "type": "object"

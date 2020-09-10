@@ -24,7 +24,7 @@ class UserController extends AppBaseController
      * @OA\Post(
      *      path="/users/register",
      *      operationId="users.store",
-     *      tags={"User"},
+     *      tags={"Users"},
      *      summary="Store a newly created User in storage",
      *      description="Store User",
      *      @OA\RequestBody(
@@ -60,7 +60,7 @@ class UserController extends AppBaseController
      * @OA\Get(
      *      path="/users",
      *      operationId="users.index",
-     *      tags={"User"},
+     *      tags={"Users"},
      *      security={
      *         {"passport": {}},
      *      },
@@ -103,7 +103,7 @@ class UserController extends AppBaseController
      * @OA\Get(
      *      path="/users/{id}",
      *      operationId="users.show",
-     *      tags={"User"},
+     *      tags={"Users"},
      *      security={
      *         {"passport": {}},
      *      },
@@ -156,7 +156,7 @@ class UserController extends AppBaseController
      * @OA\Patch(
      *      path="/users/{id}",
      *      summary="Update the specified User in storage",
-     *      tags={"User"},
+     *      tags={"Users"},
      *      security={
      *         {"passport": {}},
      *      },
@@ -194,23 +194,80 @@ class UserController extends AppBaseController
      */
     public function update($id, UpdateUserRequest $request)
     {
-        $input = $request->all();
-        /** @var User $user */
-        $user = $this->userRepository->find($id);
+        try {
+            $input = $request->all();
+            /** @var User $user */
+            $user = $this->userRepository->find($id);
 
-        if (empty($user)) {
-            return $this->sendError('User not found');
+            if (empty($user)) {
+                return $this->sendError('User not found');
+            }
+
+            $user = $this->userRepository->update($input, $id);
+            return $this->sendResponse($user->toArray(), 'User updated successfully');
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 500);
         }
+    }
 
-        $user = $this->userRepository->update($input, $id);
-        return $this->sendResponse($user->toArray(), 'User updated successfully');
+
+    /**
+     * @OA\Get(
+     *      path="/users/{id}/current-balance",
+     *      operationId="users.currentBalance",
+     *      tags={"Users"},
+     *      security={
+     *         {"passport": {}},
+     *      },
+     *      summary="Display the specified user's balance",
+     *      description="Get Current balance",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="User ID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="User not found",
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal Server Error"
+     *      )
+     * )
+     */
+    public function currentBalance($id)
+    {
+        try {
+            /** @var User $user */
+            $user = $this->userRepository->find($id);
+            if (empty($user)) {
+                return $this->sendError('User not found');
+            }
+            $balance = $this->userRepository->balance($user);
+            return $this->sendResponse(['current_balance' => $balance], 'User balance successfully displayed');
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 500);
+        }
     }
 
     /**
      * @OA\Delete(
      *      path="/users/destroy/{id}",
      *      operationId="users.destroy",
-     *      tags={"User"},
+     *      tags={"Users"},
      *      security={
      *         {"passport": {}},
      *      },
