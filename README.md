@@ -27,7 +27,7 @@ Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o des
 - Código bem documentado, legível e limpo;
 - Fazer uma API simples e objetiva em REST, com o retorno em JSON;
 - Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio;
-- Deve ser usado [Postman](https://www.php.net/), [Insomnia](https://insomnia.rest/), [Swagger](https://swagger.io/) e etc.Para montar o exemplos da API e adicione ao repósitorio o arquivo gerado pelo programa e especificar qual o arquivo e programa devem ser usados;
+- Deve ser usado [Postman](https://www.php.net/), [Insomnia](https://insomnia.rest/), [Swagger](https://swagger.io/) e etc.Para montar o exemplos da API e adicione ao repósitorio o arquivo gerado pelo programa e especificar qual o arquivo e programa devem ser usados, caso não seja enviado será desconsiderado o desafio;
 - Em qualquer caso de erro ou  não encontrada a API deve retorna uma resposta condizente com o problema apresentado, por exemplo um retorno 500 ou 404;
 
 ## Diferenciais
