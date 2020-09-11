@@ -1,6 +1,10 @@
 # BACK-END
 
-<br />
+## Clone
+* Execute the following command to get the latest version of the project
+```
+$ git clone --recursive git@github.com:demartinezraul/desafio-backend.git ow-interactive
+```
 
 ## Setting up a development environment
 
