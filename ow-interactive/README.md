@@ -1,4 +1,4 @@
-# BACK-END
+# OW-INTERACTIVE API
 
 ## Clone
 * Execute the following command to get the latest version of the project
