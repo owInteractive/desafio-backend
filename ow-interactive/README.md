@@ -34,7 +34,7 @@ $ php artisan l5-swagger:generate
 ## Set permissions
 Execute the following commands to set the write permission on the cache folder:
 ```
-$ cd ow-interactive/ow-interactive
+$ cd ow-interactive
 $ sudo chmod -R 777 storage/
 ```
 ## Access the application on SWAGGER
