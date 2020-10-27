@@ -1,0 +1,4 @@
+id,name,email,birthday,created_at,update_at,saldo_atual
+2,Luiza,luiza@usp,1999-03-17,"2020-10-23 03:47:36","2020-10-23 03:47:36",10.00
+id,id_usuario,operacao,valor,created_at,update_at
+2,2,debito,10.00,"2020-10-24 16:27:59","2020-10-24 16:27:59"

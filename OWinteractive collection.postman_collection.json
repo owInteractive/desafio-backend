@@ -1,0 +1,586 @@
+{
+	"info": {
+		"_postman_id": "816062e4-8ab0-4841-95a0-e555f840fa20",
+		"name": "OWinteractive collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Listar usuarios",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "retornar_todos",
+							"description": "type:text",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Lista todos os usuarios do banco de dados.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request e Value:retornar_todos"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar um usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "retornar_um_usuario",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"description": "type:int",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Lista o usuario expecifico escolhido pelo id.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request and Value:retornar_todos\r\nKey:id and Value: inteiro que deseja obter as informações"
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "cadastrar_usuario",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "example",
+							"description": "typetext mysql",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "example@example.br",
+							"description": "typetext mysql",
+							"type": "text"
+						},
+						{
+							"key": "birthday",
+							"value": "year-month-day",
+							"description": "typedata mysql",
+							"type": "text"
+						},
+						{
+							"key": "created_at",
+							"value": "year-month-day hour:min:sec",
+							"description": "typedata-time mysql",
+							"type": "text"
+						},
+						{
+							"key": "updated_at",
+							"value": "year-month-day hour:min:sec",
+							"description": "type:data-time mysql",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Cadastra um usuário banco de dados.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request and Value:cadastrar_usuario\r\nKey:name and Value:nome no tipo text mysql\r\nKey:email and Value:email no tipo text mysql\r\nKey:birthday and Value:aniversário no tipo date mysql\r\nKey:created_at and Value:data e hora atuais em date-time mysql\r\nKey:updated_at and Value: data e hora atuais em date-time mysql"
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir um usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "excluir_um_usuario",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"description": "type:int",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Exclui o usuario expecifico escolhido pelo id.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request and Value:excluir_um_usuario\r\nKey:id and Value: inteiro que deseja excluir as informações"
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar operação",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "cadastrar_operacao",
+							"description": "type:text",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"description": "type:int",
+							"type": "text"
+						},
+						{
+							"key": "operacao",
+							"value": "debito",
+							"description": "type:text",
+							"type": "text"
+						},
+						{
+							"key": "valor",
+							"value": "10",
+							"description": "type:decimal(5,2)",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Cadastra uma operação no do banco de dados.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request e Value:cadastrar_operacao\r\nKey:id e Value:1\r\nKey:operacao e Value:debito\r\nKey:valor e Value:10.05\r\nEm key:id pode ser passado qualquer numero inteiro\r\nEm key:operação pode passar debito, credito ou extorno\r\nEm ky valor pode passar qualquer valor decimal(5,2)"
+			},
+			"response": []
+		},
+		{
+			"name": "Todas as transações",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "todas_transacoes",
+							"description": "type:text",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"description": "type:int",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Lista todos as transações do id informado.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request e Value:cadastrar_operacao\r\nKey:id e Value:1\r\nEm key:id pode ser passado qualquer numero inteiro\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Transacoes do usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "todas_transacoes",
+							"description": "type:text",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"description": "type:int",
+							"type": "text"
+						},
+						{
+							"key": "inicio",
+							"value": "0",
+							"description": "type:int",
+							"type": "text"
+						},
+						{
+							"key": "fim",
+							"value": "2",
+							"description": "type:int",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Lista todos os dados e retorna eles separados em um intervalo.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request e Value:cadastrar_operacao\r\nKey:id e Value:1\r\nKey:inicio e Value:0\r\nKey:fim e Value:2\r\nEm key:id pode ser passado qualquer numero inteiro\r\nEm key:inicio passar apartir de qual elemento retornara resultados\r\nEm key:fim passar a quantidade de retorno por pagina"
+			},
+			"response": []
+		},
+		{
+			"name": "Transacoes ultimos 30 dias",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "todas_transacoes",
+							"description": "type:text",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"description": "type:int",
+							"type": "text"
+						},
+						{
+							"key": "inicio",
+							"value": "0",
+							"description": "type:int",
+							"type": "text"
+						},
+						{
+							"key": "fim",
+							"value": "2",
+							"description": "type:int",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Lista todos os dados dos ultimos 30 dias e retorna eles separados em um intervalo.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request e Value:cadastrar_operacao\r\nKey:id e Value:1\r\nKey:inicio e Value:0\r\nKey:fim e Value:2\r\nEm key:id pode ser passado qualquer numero inteiro\r\nEm key:inicio passar apartir de qual elemento retornara resultados\r\nEm key:fim passar a quantidade de retorno por pagina"
+			},
+			"response": []
+		},
+		{
+			"name": "Transacao do mes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "transacao_do_mes",
+							"description": "type:text",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"description": "type:int",
+							"type": "text"
+						},
+						{
+							"key": "inicio",
+							"value": "0",
+							"description": "type:int",
+							"type": "text"
+						},
+						{
+							"key": "fim",
+							"value": "2",
+							"description": "type:int",
+							"type": "text"
+						},
+						{
+							"key": "mes",
+							"value": "2020-10",
+							"description": "type:int",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Lista todos os dados do mês escolhido e retorna eles separados em um intervalo.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request e Value:cadastrar_operacao\r\nKey:id e Value:1\r\nKey:inicio e Value:0\r\nKey:fim e Value:2\r\nKey:mes e Value:2020-10\r\nEm key:id pode ser passado qualquer numero inteiro\r\nEm key:inicio passar apartir de qual elemento retornara resultados\r\nEm key:fim passar a quantidade de retorno por pagina\r\nEm key:mes passar o 2020-mês que deseja observar"
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir transacao",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "excluir_transacao",
+							"description": "type:text",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"description": "type:int",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Exclui uma transações pelo id informado.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request e Value:excluir_transacao\r\nKey:id e Value:1\r\nEm key:id pode ser passado qualquer numero inteiro\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Alterar saldo inicial",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "alterar_saldo_inicial",
+							"description": "type:text",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"description": "type:int",
+							"type": "text"
+						},
+						{
+							"key": "novo_valor",
+							"value": "10",
+							"description": "type:int",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Altera o saldo inicial do usuario escolhido.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request e Value:alterar_saldo_inicial\r\nKey:id e Value:1\r\nKey:novo_valor e Value:10\r\nEm key:id pode ser passado qualquer numero inteiro\r\nEm key:pode ser passado qualquer valor decimal(5,2)"
+			},
+			"response": []
+		},
+		{
+			"name": "Saldo atual",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "saldo_atual",
+							"description": "type:text",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "1",
+							"description": "type:int",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Retorna o saldo atual somando todos os creditos, debitos e extorno.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request e Value:saldo_atual\r\nKey:id e Value:1\r\nEm key:id pode ser passado qualquer numero inteiro"
+			},
+			"response": []
+		},
+		{
+			"name": "gerar_csv",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "request",
+							"value": "gerar_csv",
+							"description": "type:text",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "2",
+							"description": "type:int",
+							"type": "text"
+						},
+						{
+							"key": "valores",
+							"value": "array depende dos valores de dentro da aplicação",
+							"description": "type:null",
+							"type": "text"
+						},
+						{
+							"key": "filtro",
+							"value": "todas",
+							"description": "type:text",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/OWInteractive/request.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"OWInteractive",
+						"request.php"
+					]
+				},
+				"description": "Gera um arquivo csv com os dados passados.\r\nDeve passar como paramento em body x-www-form-urlencoded\r\nKey:request e Value:gerar_csv\r\nKey:id e Value:1\r\nKey:respostaDaRequisicao e Value:informações do usuario escolhido\r\nKey:filtro e Value:30dias, todas ou 2020-10\r\nEm key:id pode ser passado qualquer numero inteiro\r\nEm key:respostaDaRequisicao deve passar um array com as informações de transação do usuario\r\nEm key:filtro deve ser 30dias, todas ou um mês expecifico 2020-10 como exemplo"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "http://localhost/OWInteractive/request.php",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
