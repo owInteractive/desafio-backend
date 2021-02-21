@@ -3,25 +3,27 @@ Teste backend ow-interactive
 
 ## Instalando dependencias e executando a api
 
-git clone https://github.com/matheuspdias/ow-backend.git
-### Entrando na pasta do projeto
+```
+git clone https://github.com/matheuspdias/desafio-backend.git
+Entrando na pasta do projeto
 $ cd ow-backend
-### Criando banco de dados
+Criando banco de dados
 $ No phpmyadmin crie um banco com o nome ow_interactive  
-### Instalando as dependências do projeto.
+Instalando as dependências do projeto.
 $ composer install --no-scripts
-### renomeie o arquivo env.example para .env
+renomeie o arquivo env.example para .env
 $ no arquivo .env use DB_DATABASE=ow_interactive
-### Execute as migrations para criar tabelas com o seguinte comando:
+Execute as migrations para criar tabelas com o seguinte comando:
 $ php artisan migrate
-### Gere uma nova chave para a aplicação laravel:
+Gere uma nova chave para a aplicação laravel:
 $ php artisan key:generate
-### Publicar configuração de JWT
+Publicar configuração de JWT
 $ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
-### Gerando o secret do jwt
+Gerando o secret do jwt
 $ php artisan jwt:secret
-### Inicie a API
+Inicie a API
 $ php artisan serve 
+```
 
 ## obs: utilize o insomnia para importar o arquivo rotas_backend.json que está na raiz do projeto para testar a api
 
