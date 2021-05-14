@@ -4,24 +4,27 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\UsersRequest;
+use App\Http\Requests\MovementRequest;
 
 use App\Models\User;
+use App\Models\Movement;
 
-class UsersController extends Controller
+class MovementController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource bt user_id
      *
      * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+     */ 
+    public function index(Request $request, $user_id)
+    { 
         try {
-            $data = User::orderBy('created_at')->get();
+            $user = User::findorFail($user_id);
+            $data = $user->movements()->paginate(10);            
 
             $response = [
                 'data' => $data,
+                'info_user'=> $user,
                 'success' => true
             ];
             $status = 200;
@@ -37,82 +40,49 @@ class UsersController extends Controller
         
         return response($response,$status); 
     }
-    
+
+    /**
+     * Display a listing of all resources.
+     *
+     * @return \Illuminate\Http\Response
+     */ 
+    public function index_all(Request $request)
+    {
+        try {
+            $data = Movement::paginate(10);
+
+            $response = [
+                'data' => $data, 
+                'success' => true
+            ];
+            $status = 200;
+
+        } catch (\Throwable $th) {
+
+            $response = [
+                'error'=>$th->getMessage(),
+                'success' => false
+            ];
+            $status = 500;
+        }
+        
+        return response($response,$status); 
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UsersRequest $request)
-    { 
-        try {
-            $data = $request->all();
-            $user = User::create($data);
-
-            $response = [
-                'data' => $user,
-                'success' => true
-            ];
-            $status = 200;
-
-        } catch (\Throwable $th) {
-
-            $response = [
-                'error'=>$th->getMessage(),
-                'success' => false
-            ];
-            $status = 500;
-        }
-        
-        return response($response,$status); 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        try { 
-            $user = User::findorFail($id); 
-
-            $response = [
-                'data' => $user,
-                'success' => true
-            ];
-            $status = 200;
-
-        } catch (\Throwable $th) {
-
-            $response = [
-                'error'=>$th->getMessage(),
-                'success' => false
-            ];
-            $status = 500;
-        }
-        
-        return response($response,$status); 
-    }
-    
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UsersRequest $request, $id)
+    public function store(MovementRequest $request)
     {
         try {
             $data = $request->all();
-            $user = User::findorFail($id); 
-            $user->update($data);
+            $movement = Movement::create($data);
 
             $response = [
-                'data' => $user,
+                'data' => $movement,
                 'success' => true
             ];
             $status = 200;
@@ -128,7 +98,7 @@ class UsersController extends Controller
         
         return response($response,$status); 
     }
-
+ 
     /**
      * Remove the specified resource from storage.
      *
@@ -138,8 +108,8 @@ class UsersController extends Controller
     public function destroy($id)
     {
         try { 
-            $user = User::findorFail($id);            
-            $user->delete();
+            $movement = Movement::findorFail($id);            
+            $movement->delete();
 
             $response = [
                 'success' => true

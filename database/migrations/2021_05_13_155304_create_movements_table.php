@@ -15,10 +15,10 @@ class CreateMovementsTable extends Migration
     {
         Schema::create('movements', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id'); 
+            $table->foreign('user_id')->references('id')->on('users'); 
             $table->enum('operation', ['credit', 'debit', 'reversal']);
             $table->float('value', 8, 2);
-             
-            'user_id',
             $table->timestamps();
         });
     }

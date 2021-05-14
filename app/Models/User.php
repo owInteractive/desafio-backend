@@ -18,7 +18,9 @@ class User extends Model
         'email',
         'birthday',
     ];  
-
-    //hasmany to movement
-
+ 
+    public function movements()
+    {
+        return $this->hasMany(Movement::class,'user_id');
+    }
 }
