@@ -16,8 +16,8 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => 'Isaac Newton', 'email' => 'isaac@gmail', 'birthday'=>'2000-01-01','opening_balance'=>'0'],
-            ['name' => 'Aristóteles', 'email' => 'ari@gmail', 'birthday'=>'2000-01-01','opening_balance'=>'0']
+            ['name' => 'Isaac Newton', 'email' => 'isaac@gmail', 'birthday'=>'2000-01-01','opening_balance'=>'0','password'=>bcrypt('123456')],
+            ['name' => 'Aristóteles', 'email' => 'ari@gmail', 'birthday'=>'2000-01-01','opening_balance'=>'0','password'=>bcrypt('123456')]
         ];
 
         DB::table('users')->insert($data); 

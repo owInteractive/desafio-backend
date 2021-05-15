@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
 
-class UsersRequest extends FormRequest
+class SigUpRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,25 +21,14 @@ class UsersRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(Request $request)
+    public function rules()
     {
-        switch(true) {
-            case $request->isMethod('post'):
-                return [
-                    'name'=>'required',
-                    'email'=>'required|email|unique:users',
-                    'birthday'=>'required|date_format:Y-m-d|after:1899-12-31|before:-18 years'
-                ];
-            break;
-            case $request->isMethod('put'): 
-                return [
-                    'name'=>'required',
-                    'email'=>'required|email|unique:users,email,'.$request->user()->id.',id',
-                    'birthday'=>'required|date_format:Y-m-d|after:1899-12-31|before:-18 years'
-                ];
-            break;
-        }
-        
+        return [
+            'name'=>'required',
+            'password'=>'required',
+            'email'=>'required|email|unique:users',
+            'birthday'=>'required|date_format:Y-m-d|after:1899-12-31|before:-18 years'
+        ];
     }
 
     /**
@@ -52,6 +40,7 @@ class UsersRequest extends FormRequest
     {
         return [
             'name.required'=>'O campo <name> do usuário é obrigatório',
+            'password.required'=>'O campo <password> do usuário é obrigatório',
             'email.required'=>'O campo <email> do usuário é obrigatório',
             'email.email'=>'O campo <email> do usuário está em formato inválido',
             'email.unique'=>'O campo <email> está em uso por outro usuário cadastrado',

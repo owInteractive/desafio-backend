@@ -37,36 +37,6 @@ class UsersController extends Controller
         
         return response($response,$status); 
     }
-    
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(UsersRequest $request)
-    { 
-        try {
-            $data = $request->all();
-            $user = User::create($data);
-
-            $response = [
-                'data' => $user,
-                'success' => true
-            ];
-            $status = 200;
-
-        } catch (\Throwable $th) {
-
-            $response = [
-                'error'=>$th->getMessage(),
-                'success' => false
-            ];
-            $status = 500;
-        }
-        
-        return response($response,$status); 
-    }
 
     /**
      * Display the specified resource.
@@ -95,74 +65,5 @@ class UsersController extends Controller
         }
         
         return response($response,$status); 
-    }
-    
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UsersRequest $request, $id)
-    {
-        try {
-            $data = $request->all();
-            $user = User::findorFail($id); 
-            $user->update($data);
-
-            $response = [
-                'data' => $user,
-                'success' => true
-            ];
-            $status = 200;
-
-        } catch (\Throwable $th) {
-
-            $response = [
-                'error'=>$th->getMessage(),
-                'success' => false
-            ];
-            $status = 500;
-        }
-        
-        return response($response,$status); 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        try { 
-            $user = User::findorFail($id);     
-            
-            /*
-             * Check if user has movements
-             */
-            if($user->movements()->count()){
-                throw new \Exception("Este usuário possui movimentações e não pode ser deletado");
-            }
-
-            $user->delete();
-
-            $response = [
-                'success' => true
-            ];
-            $status = 200;
-
-        } catch (\Throwable $th) {
-
-            $response = [
-                'error'=>$th->getMessage(),
-                'success' => false
-            ];
-            $status = 500;
-        }
-        
-        return response($response,$status);
-    }
+    }  
 }
