@@ -138,7 +138,15 @@ class UsersController extends Controller
     public function destroy($id)
     {
         try { 
-            $user = User::findorFail($id);            
+            $user = User::findorFail($id);     
+            
+            /*
+             * Check if user has movements
+             */
+            if($user->movements()->count()){
+                throw new \Exception("Este usuário possui movimentações e não pode ser deletado");
+            }
+
             $user->delete();
 
             $response = [

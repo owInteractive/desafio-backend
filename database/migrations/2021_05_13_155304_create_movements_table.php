@@ -18,7 +18,7 @@ class CreateMovementsTable extends Migration
             $table->unsignedBigInteger('user_id'); 
             $table->foreign('user_id')->references('id')->on('users'); 
             $table->enum('operation', ['credit', 'debit', 'reversal']);
-            $table->float('value', 8, 2);
+            $table->bigInteger('value');
             $table->timestamps();
         });
     }

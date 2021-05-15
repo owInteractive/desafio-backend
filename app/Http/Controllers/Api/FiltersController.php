@@ -5,16 +5,21 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\FiltersRequest;
+
 use App\Exports\MovementsExport;
 
 class FiltersController extends Controller
 {
-    /*Método para exportar usuários*/
-    public function export(Request $request, $perPage = 10, $page = 1)
+    /**
+     * Store file xlsx containing a filtered collection
+     * @return \Illuminate\Support\Collection
+     */ 
+    public function export(FiltersRequest $request)
     {  
         try {
-            $file_name = 'movements.xlsx';
-            Excel::store(new MovementsExport($perPage,$page),$file_name,'movements_uploads'); 
+            $file_name = time().'movements.csv';
+            Excel::store(new MovementsExport($request),$file_name,'movements_uploads'); 
 
             $response = [
                 'file_url' => url('/')."/uploads/".$file_name, 

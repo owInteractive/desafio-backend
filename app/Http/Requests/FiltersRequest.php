@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MovementRequest extends FormRequest
+class FiltersRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,9 @@ class MovementRequest extends FormRequest
      */
     public function rules()
     {
-        return [ 
-            'operation'=>"required|in:credit,debit,reversal",
-            'value'=>"required|regex:/^\d*(\.\d{2})?$/",
+        return [
+            'type'=>"required|in:last_30_days,by_date,all",
+            'date'=>'required_if:type,by_date|date_format:m/Y|after:12/1899',
             'user_id'=>"required|exists:users,id",
         ];
     }
@@ -38,10 +38,11 @@ class MovementRequest extends FormRequest
     public function messages()
     {
         return [
-            'operation.required'=>'O campo <operation> da movimentação é obrigatório',
-            'operation.in'=>'O campo <operation> é inválido. Formatos aceitos: credit,debit,reversal',
-            'value.required'=>'O campo <value> da movimentação é obrigatório', 
-            'value.regex'=>'O campo <value> é inválido. Precisa ser um <value> decimal, separado por ponto', 
+            'type.required'=>"Defina o tipo do filtro pela propriedade <type>",
+            'type.in'=>"O campo <type> é inválido, formatos aceitos <last_30_days> (Últimos 30 dias), <by_date> (por mês e ano) , <all> todas movimentações",
+            'date.required_if'=>'Para o filtro <by_date> o campo <date> é obrigatório',
+            'date.date_format'=>'O campo <date> está em formato inválido, formato aceito m / Y',
+            'date.after'=>'O campo <date> precisa ser superior ao ano 1900',
             'user_id.required'=>'O campo <user_id> da movimentação é obrigatório', 
             'user_id.exists'=>'O campo <user_id> não existe na base de dados', 
         ];

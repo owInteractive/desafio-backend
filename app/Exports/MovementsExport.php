@@ -2,22 +2,28 @@
 
 namespace App\Exports;
 
-use Maatwebsite\Excel\Concerns\FromCollection;
-use App\Models\Movement;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class MovementsExport implements FromCollection
+use App\Models\Movement;
+use App\Models\User;
+
+class MovementsExport implements FromView
 {
     /**
     * @return \Illuminate\Support\Collection
     */ 
-    public function __construct(int $perPage, int $page)
+    public function __construct($request)
     {
-        $this->perPage = $perPage;
-        $this->page = $page;
+        $this->request = $request; 
     }
 
-    public function collection()
+    public function view(): View
     { 
-        return Movement::orderBy('id', 'DESC')->limit($this->perPage)->offset(($this->page - 1) * $this->perPage)->get();
+        $user = User::findorFail($this->request->user_id);
+        return view('exports', [
+            'movements' => Movement::filter($this->request),
+            'user'=>$user
+        ]); 
     }
 }

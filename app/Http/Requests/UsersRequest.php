@@ -29,14 +29,14 @@ class UsersRequest extends FormRequest
                 return [
                     'name'=>'required',
                     'email'=>'required|email|unique:users',
-                    'birthday'=>'required|date_format:Y-m-d|after:1899-12-31'
+                    'birthday'=>'required|date_format:Y-m-d|after:1899-12-31|before:-18 years'
                 ];
             break;
             case $request->isMethod('put'): 
                 return [
                     'name'=>'required',
                     'email'=>"required|email|unique:users,email,$request->user,id",
-                    'birthday'=>'required|date_format:Y-m-d|after:1899-12-31'
+                    'birthday'=>'required|date_format:Y-m-d|after:1899-12-31|before:-18 years'
                 ];
             break;
         }
@@ -51,13 +51,14 @@ class UsersRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required'=>'O campo name do usuário é obrigatório',
-            'email.required'=>'O campo email do usuário é obrigatório',
-            'email.email'=>'O campo email do usuário esta em formato inválido',
-            'email.unique'=>'O campo email esta em uso por outro usuário cadastrado',
-            'birthday.required'=>'O campo birthday do usuário é obrigatório',
-            'birthday.date_format'=>'O campo birthday esta em formato inválido, formato aceito Y-m-d',
-            'birthday.after'=>'O campo birthday precisa ser superior ao ano 1900',
+            'name.required'=>'O campo <name> do usuário é obrigatório',
+            'email.required'=>'O campo <email> do usuário é obrigatório',
+            'email.email'=>'O campo <email> do usuário está em formato inválido',
+            'email.unique'=>'O campo <email> está em uso por outro usuário cadastrado',
+            'birthday.required'=>'O campo <birthday> do usuário é obrigatório',
+            'birthday.date_format'=>'O campo <birthday> está em formato inválido, formato aceito Y-m-d',
+            'birthday.after'=>'O campo <birthday> precisa ser superior ao ano 1900',
+            'birthday.before'=>'Somente é possivel cadastrar usuários maiores de 18 anos',
         ];
     }
 }
