@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class MovementRequest extends FormRequest
 {
@@ -21,13 +22,20 @@ class MovementRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        return [ 
-            'operation'=>"required|in:credit,debit,reversal",
-            'value'=>"required|regex:/^\d*(\.\d{2})?$/",
-            'user_id'=>"required|exists:users,id",
-        ];
+        if(!empty($request->user())){
+            return [ 
+                'operation'=>"required|in:credit,debit,reversal",
+                'value'=>"required|regex:/^\d*(\.\d{2})?$/"
+            ];
+        }else{
+            return [ 
+                'operation'=>"required|in:credit,debit,reversal",
+                'value'=>"required|regex:/^\d*(\.\d{2})?$/",
+                'user_id'=>"required|exists:users,id",
+            ];
+        }
     }
 
     /**

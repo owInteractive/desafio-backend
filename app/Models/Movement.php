@@ -33,9 +33,10 @@ class Movement extends Model
         return number_format($this->value,2,",",".");
     }
 
-    public static function filter($request){
-        $movements = new Movement;     
-
+    public static function filter($request,$user_id){
+        $movements = new Movement();     
+        $movements = $movements->where('user_id',$user_id);
+        
         switch ($request->type) {
             case 'last_30_days':
                 return $movements->last30Days()->get(); 
@@ -46,7 +47,7 @@ class Movement extends Model
                 break; 
             case 'all':
             default:
-                return $movements->all(); 
+                return $movements->orderBy('created_at')->get(); 
                 break;
         }
     }

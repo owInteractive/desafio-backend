@@ -6,8 +6,10 @@ use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\MovementController;
 use App\Http\Controllers\Api\FiltersController;
 use App\Http\Controllers\Api\BalanceController;
-use App\Http\Controllers\Auth\UsersController as UsersAuthController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\UsersController as UsersAuthController;
+use App\Http\Controllers\Auth\BalanceController as BalanceAuthController;
+use App\Http\Controllers\Auth\MovementsController as MovementsAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,11 +36,11 @@ Route::group(['middleware' => ['json.response'], 'prefix' => 'v1'], function () 
         Route::delete('{id}', [MovementController::class,'destroy'])->name('destroy');
     });
     
-    Route::post('filters', [FiltersController::class,'export'])->name('movements.filters');
+    Route::post('filters', [FiltersController::class,'export'])->name('filters');
     
     Route::group(['prefix'=>'balance','as'=>'balance.'], function(){
-        Route::get('/{user_id}', [BalanceController::class,'index'])->name('balance.index');
-        Route::put('/', [BalanceController::class,'update'])->name('balance.update'); 
+        Route::get('/{user_id}', [BalanceController::class,'index'])->name('index');
+        Route::put('/', [BalanceController::class,'update'])->name('update'); 
     });
  
     /* AUTH ROUTES */
@@ -53,6 +55,19 @@ Route::group(['middleware' => ['json.response'], 'prefix' => 'v1'], function () 
         Route::delete('profile', [UsersAuthController::class,'destroy'])->name('profile.destroy');
 
         Route::delete('signout', [LoginController::class,'destroy'])->name('signout'); 
+
+        Route::group(['prefix'=>'movements-auth','as'=>'movements.auth.'], function(){
+            Route::get('/', [MovementsAuthController::class,'index'])->name('index');
+            Route::post('/', [MovementsAuthController::class,'store'])->name('store');
+            Route::delete('{id}', [MovementsAuthController::class,'destroy'])->name('destroy');
+        });
+
+        Route::post('filters-auth', [FiltersController::class,'export'])->name('filters.auth');
+
+        Route::group(['prefix'=>'balance-auth','as'=>'balance.auth.'], function(){
+            Route::get('/', [BalanceAuthController::class,'index'])->name('index');
+            Route::put('/', [BalanceAuthController::class,'update'])->name('update'); 
+        }); 
     }); 
      
 });

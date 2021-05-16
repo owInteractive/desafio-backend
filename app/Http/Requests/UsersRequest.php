@@ -29,15 +29,24 @@ class UsersRequest extends FormRequest
                 return [
                     'name'=>'required',
                     'email'=>'required|email|unique:users',
-                    'birthday'=>'required|date_format:Y-m-d|after:1899-12-31|before:-18 years'
+                    'birthday'=>'required|date_format:Y-m-d|after:1899-12-31|before:-18 years',
+                    'password' => 'required',
                 ];
             break;
-            case $request->isMethod('put'): 
-                return [
-                    'name'=>'required',
-                    'email'=>'required|email|unique:users,email,'.$request->user()->id.',id',
-                    'birthday'=>'required|date_format:Y-m-d|after:1899-12-31|before:-18 years'
-                ];
+            case $request->isMethod('put'):  
+                if(!empty($request->user())){
+                    return [
+                        'name'=>'required',
+                        'email'=>'required|email|unique:users,email,'.$request->user()->id.',id',
+                        'birthday'=>'required|date_format:Y-m-d|after:1899-12-31|before:-18 years'
+                    ];
+                }else{
+                    return [
+                        'name'=>'required',
+                        'email'=>'required|email|unique:users,email,'.$request->user.',id',
+                        'birthday'=>'required|date_format:Y-m-d|after:1899-12-31|before:-18 years'
+                    ];
+                } 
             break;
         }
         
@@ -59,6 +68,7 @@ class UsersRequest extends FormRequest
             'birthday.date_format'=>'O campo <birthday> está em formato inválido, formato aceito Y-m-d',
             'birthday.after'=>'O campo <birthday> precisa ser superior ao ano 1900',
             'birthday.before'=>'Somente é possivel cadastrar usuários maiores de 18 anos',
+            'password.required'=>'O campo <password> do usuário é obrigatório',
         ];
     }
 }

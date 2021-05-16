@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class BalanceRequest extends FormRequest
 {
@@ -21,12 +22,19 @@ class BalanceRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        return [
-            'value'=>"required|regex:/^\d*(\.\d{2})?$/", 
-            'user_id'=>"required|exists:users,id",
-        ];
+        if(!empty($request->user())){
+            return [
+                'value'=>"required|regex:/^\d*(\.\d{2})?$/",
+            ];
+        }else{
+            return [
+                'value'=>"required|regex:/^\d*(\.\d{2})?$/", 
+                'user_id'=>"required|exists:users,id",
+            ];
+        }
+        
     }
 
     /**

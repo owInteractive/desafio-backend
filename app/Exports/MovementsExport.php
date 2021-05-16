@@ -20,9 +20,14 @@ class MovementsExport implements FromView
 
     public function view(): View
     { 
-        $user = User::findorFail($this->request->user_id);
+        if(!empty($this->request->user())){
+            $user = $this->request->user();
+        }else{
+            $user = User::findorFail($this->request->user_id);
+        } 
+
         return view('exports', [
-            'movements' => Movement::filter($this->request),
+            'movements' => Movement::filter($this->request,$user->id),
             'user'=>$user
         ]); 
     }

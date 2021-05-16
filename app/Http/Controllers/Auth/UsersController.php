@@ -12,6 +12,12 @@ use Auth;
 
 class UsersController extends Controller
 {
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(SigUpRequest $request) { 
         try {
             $dados = $request->all();
@@ -41,7 +47,12 @@ class UsersController extends Controller
         return response($response,$status); 
 	}
 
-    //Retornar dados o user logado
+    /**
+     * Return auth user data 
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
 	public function profile(Request $request){
         try {
             $user = Auth::user();  
@@ -74,7 +85,7 @@ class UsersController extends Controller
             $user = $request->user();
 
             if(!empty($request->password)){
-                $user->password = bcrypt($request['password']); 
+                $data['password'] = bcrypt($request['password']); 
             }
 
             $user->update($data);
@@ -133,5 +144,4 @@ class UsersController extends Controller
         
         return response($response,$status);
     } 
-
 }

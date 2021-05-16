@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class FiltersRequest extends FormRequest
 {
@@ -21,13 +22,20 @@ class FiltersRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        return [
-            'type'=>"required|in:last_30_days,by_date,all",
-            'date'=>'required_if:type,by_date|date_format:m/Y|after:12/1899',
-            'user_id'=>"required|exists:users,id",
-        ];
+        if(!empty($request->user())){
+            return [
+                'type'=>"required|in:last_30_days,by_date,all",
+                'date'=>'required_if:type,by_date|date_format:m/Y|after:12/1899'
+            ];
+        }else{
+            return [
+                'type'=>"required|in:last_30_days,by_date,all",
+                'date'=>'required_if:type,by_date|date_format:m/Y|after:12/1899',
+                'user_id'=>"required|exists:users,id",
+            ];
+        } 
     }
 
     /**
