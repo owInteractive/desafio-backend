@@ -24,10 +24,7 @@ Phpmyadmin (Recomendado para criar e acessar banco de dados de forma visual no n
 ## Como instalar o projeto 
 
 <ul>
-    <li>Clone este repositório, e coloque a pasta do projeto na pasta pública do servidor PHP.                 
-        C:\wamp64\www\* caso utilizar o WampServer         
-        C:\xampp\htdocs\* caso utilizar o Xamp Server
-    </li>
+    <li>Clone este repositório, e coloque a pasta do projeto na pasta pública do servidor PHP. 'C:\wamp64\www\*' caso utilizar o WampServer, 'C:\xampp\htdocs\*' caso utilizar o Xamp Server</li>
     <li>Crie um banco de dados Mysql para o projeto</li>
     <li>Acesse a pasta do projeto através de algum terminal de comandos, e crie um arquivo .env para a aplicação pelo comando: </li>
 </ul>
