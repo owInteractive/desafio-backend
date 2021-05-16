@@ -1,62 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Desafio Backend OW Interactive
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+    Neste repositório contém os arquivos do desafio-backend da <b>OW Interactive</b>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+    Para desenvolver a API Rest, foi utilizado o [Laravel Framework](https://laravel.com/) e no processo de autenticação o [Laravel Passport](https://laravel.com/docs/8.x/passport#introduction) 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    Seguem abaixo os requisitos, procedimentos para instalar do projeto, e observações gerais:
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Requisitos de Ambiente
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<ul>
+    <li>PHP >= 7.3</li>
+    <li>MySql >= 5.7</li>
+    <li>Phpmyadmin <small>(Recomendado para criar e acessar banco de dados de forma visual no navegador)</small></li>
+    <li>[WampServer](https://www.wampserver.com/en/) <small>(Recomendado pois este faz a instalação do servidor Apache PHP, Mysql, Phpmyadmin)</small></li>
+    <li>[Composer](https://getcomposer.org/)</li>
+    <li>[Insomnia](https://insomnia.rest/download) <small>(Recomendado para testar a aplicação REST)<small></li>
+</ul>
 
-## Laravel Sponsors
+## Como instalar o projeto 
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+<ul>
+    <li>Clone este repositório, e coloque a pasta do projeto na pasta pública do servidor PHP. <br>C:\wamp64\www\* caso utilizar o WampServer ou <br>C:\xampp\htdocs\* caso utilizar o Xamp Server</li>
+    <li>Crie um banco de dados para o projeto</li>
+    <li>Acesse a pasta do projeto através de algum terminal de comandos, e crie um arquivo .env para a aplicação pelo comando: </li>
+    ```
+    cp .env.example .env
+    ```
+    <li>Configure os campos do arquivo .env de acordo com algum editor de texto: </li>
+    ```
+    APP_URL=http://localhost/desafio-backend/public/ (Url completa do projeto em seu ambiente)
+    DB_HOST=127.0.0.1 (com o host banco de dados)
+    DB_PORT=3306 (com a porta do host do banco de dados)
+    DB_DATABASE=desafio_backend (com o nome do banco de dados)
+    DB_USERNAME=root (com o nome do usuário com acesso ao banco de dados) 
+    DB_PASSWORD= (com a senha do usuário com acesso ao banco de dados) 
+    ```
+    <li>Instale as  dependências do LARAVEL pelo comando: </li>
+    ```
+    composer install
+    ```
+    <li>Gere a chave da aplicação pelo comando: </li>
+    ```
+    php artisan key:generate
+    ```
+    <li>Gere as tabelas do banco de dados executando também as seeders com dados iniciais da aplicação, pelo comando: </li>
+    ```
+    php artisan migrate -seed
+    ```
+    <li>Gere as chave do Passport para a autenticação da aplicação funcionar pelo comando: </li>
+    ```
+    php artisan passport:install
+    ```
+</ul> 
 
-### Premium Partners
+## Como testar o projeto pelas rotas da Api Rest 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+<ul>
+    <li>Na raiz desse projeto, existe o arquivo <Insomnia_Importer.json> para você importar no programa Insomnia<li>
+    <li>Após importado, conferir a variáveil no Insomnia <base_url_api>, para ele fazer as requisições na URL correta de acordo ao seu ambiente:</li>
+    <img src="/public/assets/1.PNG">
+    <li>Agora você pode testar todas as rotas de acordo à cada etapa do desafio, seguindo as pastas e cada requisição disponível</li>
+    <img src="/public/assets/2.PNG">
+<ul>
 
-## Contributing
+## Observações
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    Para diferenciar rotas públicas e privadas com a autenticação da etapa 4.4 do desafio, foram criadas duas pastas dos mesmos recursos. 
+    
 
-## Code of Conduct
+    <img src="/public/assets/3.PNG">
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+    Por exemplo, criei as pastas 'Users - Public' e 'User - Auth'
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+    Ambas possuem requisições para CRUD de usuários, porém a pasta 'public' somente faz consulta de dados, cadastra, etc, sem levar em consideração o usuário que faz a requisição. Na pasta 'Auth', é criado todo o processo de autenticação baseado em OAuth2 do Laravel Passport. Ou seja, nesta pasta existem rotas para fazer cadastro (signup), login (signin), logout (signout), editar os dados da conta (somente para quando este usuário estiver logado), etc;
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+    Assim como para os demais recursos, como Movements(Movimentações), Balance(Saldo Inicial), possuem diferenças para consumi-las se forem autenticadas ou não, trazendo dados daquele determinado usuário.
+
+
+
+    <b> Não </b> faz necessário configurar o header das requisições autenticadas no Insomnia, pois no arquivo de importação disponibilizado, o token do usuário é recuperado após fazer o login e enviado em toda requisição autenticada.
+
+
+## Códigos de status HTTP esperados 
+<ul>
+    <li>200 - Sucesso</li>
+    <li>404 - Request não localizado</li>
+    <li>422 - Corpo do Request não esta em conformidade esperada</li>
+    <li>500 - Erro interno da aplicação ou servidor</li>
+</ul>
+
