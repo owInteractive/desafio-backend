@@ -1,92 +1,114 @@
-![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.jpg "OW Interactive")
+# Desafio Backend OW Interactive
 
-# Desafio Back-End - OW Interactive 20/21
+Neste repositório contém os arquivos do desafio-backend da <b>OW Interactive</b>
 
-## Sobre a OW Interactive
-Fazemos parte do universo digital, focada em criar e desenvolver experiências interativas, integrando planejamento, criatividade e tecnologia.
+Para desenvolver a API Rest, foi utilizado o [Laravel Framework](https://laravel.com/) e no processo de autenticação o [Laravel Passport](https://laravel.com/docs/8.x/passport#introduction)
 
-Conheça mais sobre nós em: [OW Interactive - Quem somos](http://www.owinteractive.com/quem-somos/).
+Seguem abaixo os requisitos e procedimentos para instalar do projeto, e observações gerais:
 
-## Sobre a Vaga
-Esse desafio é destinado todos os níveis e não é exigido que você consiga realizar esse desafio por completo.
 
-Sua avaliação será dada pelas etapas que conseguir entregar.
+## Requisitos de Ambiente
 
-Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owinteractive.com/vagas/).
+PHP >= 7.3
 
-Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o desafio e aplicar para alguma vaga de backend.
+MySql >= 5.7
 
-## Pré-requisitos
-- Lógica de programação;
-- Conhecimentos sobre Banco de dados;
-- Conhecimentos sobre REST, HTTP e API's;
-- Conhecimentos sobre Git;
+Phpmyadmin (Recomendado para criar e acessar banco de dados de forma visual no navegador)
+    
+[WampServer](https://www.wampserver.com/en/) (Recomendado pois este faz a instalação do servidor Apache PHP, Mysql, Phpmyadmin)
 
-## Requisitos Obrigatórios
-- Utilizar a linguagem [PHP](https://www.php.net/) ou [NodeJS](https://nodejs.org)
-- Código bem documentado, legível e limpo;
-- Fazer uma API simples e objetiva em REST, com o retorno em JSON;
-- Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio;
-- Deve ser usado [Postman](https://www.php.net/), [Insomnia](https://insomnia.rest/), [Swagger](https://swagger.io/) e etc.Para montar o exemplos da API e adicione ao repósitorio o arquivo gerado pelo programa e especificar qual o arquivo e programa devem ser usados, caso não seja enviado será desconsiderado o desafio;
-- Em qualquer caso de erro ou  não encontrada a API deve retorna uma resposta condizente com o problema apresentado, por exemplo um retorno 500 ou 404;
+[Composer](https://getcomposer.org/)
+    
+[Insomnia](https://insomnia.rest/download) (Recomendado como client para testar a aplicação Rest)
 
-## Diferenciais
-- Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x) ou [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation);
-- Utilizar o [Docker](https://www.docker.com/get-started) para conteinerização da aplicação;
-- Pensar em desempenho e escalabilidade, quando for uma quantidade muito grande de dados como o sistema se comportaria;
-- Criar testes (Apenas um exemplo, algo bem simples como validação do login ou consumo de um endpoint com ou sem autenticação, no README adicionar qual o comando utilizado para rodar o teste); 
-- Utilizar apenas as ferramentas do framework caso use um, evitando criar dependência de outros pacotes ou bibliotecas;
+## Como instalar o projeto 
 
-## Desafio
+<ul>
+    <li>Clone este repositório, e coloque a pasta do projeto na pasta pública do servidor PHP. 'C:\wamp64\www\*' caso utilizar o WampServer, 'C:\xampp\htdocs\*' caso utilizar o Xamp Server</li>
+    <li>Crie um banco de dados Mysql para o projeto</li>
+    <li>Acesse a pasta do projeto através de algum terminal de comandos, e crie um arquivo .env para a aplicação pelo comando: </li>
+</ul>
 
-### Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
-Nessa etapa daremos algumas premissas que devem ser seguidas.
+    cp .env.example .env     
+<ul>
+    <li>Configure os campos do arquivo .env de acordo com algum editor de texto: </li>
+</ul>
 
-- Criar um endpoint onde é cadastrado um usuário.
-  - Esses usuários devem ter obrigátoriamente os seguintes dados modelados, caso você ache necessário outros campos fique a vontade.
-    - **name** | string (Nome)
-    - **email** | string (E-mail)
-    - **birthday** | date (Data de aniversário)
-    - **created_at** | datetime (Criado Em)
-    - **updated_at** | datetime (Atualizado Em)
-- Criar um endpoint para listagem desses usuários, ordernados por ordem de cadastro;
-- Criar um endpoint para listar um único usuário através do seu id;
-- Criar um endpoint para excluir um usuário através do seu id.
+    APP_URL=http://localhost/desafio-backend/public/ (Url completa do projeto em seu ambiente)
+    DB_HOST=127.0.0.1 (com o host banco de dados)
+    DB_PORT=3306 (com a porta do host do banco de dados)
+    DB_DATABASE=desafio_backend (com o nome do banco de dados)
+    DB_USERNAME=root (com o nome do usuário com acesso ao banco de dados) 
+    DB_PASSWORD= (com a senha do usuário com acesso ao banco de dados) 
+ <ul>
+    <li>Instale as  dependências do LARAVEL pelo comando: </li>
+ </ul> 
+ 
+    composer install    
+    
+<ul>
+    <li>Gere a chave da aplicação pelo comando: </li>
+</ul>
+    
+    php artisan key:generate
 
-### Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
-Nessa etapa você precisará criar a modelagem e lógica para implementar as funcionalidades abaixo:
+<ul>  
+    <li>Gere as tabelas do banco de dados executando também as seeders com dados iniciais da aplicação, pelo comando: </li>
+</ul>    
+    
+    php artisan migrate --seed
+      
+<ul>   
+    <li>Gere as chave do Passport para a autenticação da aplicação funcionar pelo comando: </li>
+</ul>  
 
-- Criar um endpoint ou endpoint`s onde é possível associar uma operação de débito, crédito ou estorno para o usuário;
-- Criar um endpoint onde seja possível visualizar toda a movimentação (páginada) do usuários mais as suas informações pessoais;
-- Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário;
-- Criar um endpoint onde é retornado um arquivo no formato (csv) com 3 tipos de filtros para as movimentações:
-  - Últimos 30 dias;
-  - Passando o mês e ano por exemplo: 06/20;
-  - Todo as movimentações;
+    php artisan passport:install
 
-### Etapa 3 - Nova Funcionalidades
-Nessa etapa serão itens onde veremos como você pensou e como chegou ao resultado final.
+## Como testar o projeto pelas rotas da Api Rest 
 
-- Adicionar dentro do usuário um campo para saldo inicial, e criar um endpoint para alterar esse valor;
-- Criar um endpoint com a soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário;
-- No endpoint que exclui um usuário, adicionar a funcionalidade que agora não será mais possível excluir um usuário que tenha qualquer tipo de movimentação ou saldo;
-- No endpoint que cadastra usuário, adicionar a funcionalidade que apenas maiores de 18 anos podem criar uma conta;
-- No endpoint que exporta o arquivo CSV criar um cabeçalho com os dados do cliente e o seu saldo atual;
+<ul>
+    <li>Na raiz desse projeto, existe o arquivo 'Insomnia_Importer.json' para você importar no programa Insomnia</li>
+    <li>Após importado, conferir a variável no Insomnia 'base_url_api', para ele fazer as requisições na URL correta de acordo ao seu ambiente:</li>
+    <img src="/public/assets/1.PNG">
+    <li>Agora você pode testar todas as rotas de acordo à cada etapa do desafio, seguindo as pastas e cada requisição disponível</li>
+    <img src="/public/assets/2.PNG">
+</ul>
 
-### Etapa 4 -Itens Não Obrigatórios
-- Criar validações com base na Request;
-- Utilizar cache para otimizar as consultas e buscas;
-- Criar Seeders ou Inicializadores de dados para o usuários e suas movimentações;
-- Criar os métodos baseados em algum método de autênticação.
-- Documentação dos endpoint`s;
+## Observações
 
-## Conclusão
-Crie um Fork e submeta uma Pull Request ao Github com o seu desafio. Após isso envie um e-mail para [letsrock@owinteractive.com](mailto:letsrock@owinteractive.com), com o assunto [DESAFIO BACK-END] com o link para o seu desafio, sua apresentação e currículo anexado em formato PDF.
+### Observação 1
 
-Caso tenha alguma sugestão sobre o teste ela é bem vinda, fique a vontade para envia-la junto ao e-mail.
+Para diferenciar rotas públicas e privadas com a autenticação da etapa 4.4 do desafio, foram criadas duas pastas para os mesmos recursos.    
 
-E fique a vontade para usar os programas e ferramentas que se sentir bem, lembrando que aqui somos team [VS Code](https://code.visualstudio.com/) rs.
+Por exemplo, criei as pastas 'Users - Public' e 'User - Auth'
 
-Obrigado por participar e boa sorte 😀
+Ambas possuem requisições para CRUD de usuários, porém a pasta 'public' somente faz consulta de dados, cadastra, etc, sem levar em consideração o usuário que faz a requisição. Na pasta 'Auth', é criado todo o processo de autenticação baseado em OAuth2 do Laravel Passport. Ou seja, nesta pasta existem rotas para fazer cadastro (signup), login (signin), logout (signout), editar os dados da conta (somente para quando este usuário estiver logado), etc
 
-![Cachorro programando](https://github.com/owInteractive/desafio-backend/raw/master/media/dog.webp "Cachorro programando")
+Assim como para os demais recursos, como Movements(Movimentações), Balance(Saldo Inicial), possuem diferenças para consumi-las se forem autenticadas ou não, trazendo dados daquele determinado usuário.
+
+<b>Não</b> faz necessário configurar o header das requisições autenticadas no Insomnia, pois no arquivo de importação disponibilizado, o token do usuário é recuperado após fazer o login e enviado em toda requisição autenticada.
+
+<img src="/public/assets/3.PNG">
+
+### Observação 2
+
+Para visualizar a geração do arquivo .csv solicitado na etapa 2.4
+
+Primeiro acesse a rota através do método POST em 'filters' ou 'filters-auth'
+
+O retorno do arquivo virá na propriedade $.file_url
+
+<img src="/public/assets/4.PNG">
+
+Depois, vá no diretório 'public/uploads' do projeto:
+
+<img src="/public/assets/5.PNG">
+
+## Códigos de status HTTP esperados 
+<ul>
+    <li>200 - Sucesso</li>
+    <li>404 - Request não localizado</li>
+    <li>422 - Corpo do Request não esta em conformidade esperada</li>
+    <li>500 - Erro interno da aplicação ou servidor</li>
+</ul>
+
