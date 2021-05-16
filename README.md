@@ -56,7 +56,7 @@ Phpmyadmin (Recomendado para criar e acessar banco de dados de forma visual no n
     <li>Gere as tabelas do banco de dados executando também as seeders com dados iniciais da aplicação, pelo comando: </li>
 </ul>    
     
-    php artisan migrate -seed
+    php artisan migrate --seed
       
 <ul>   
     <li>Gere as chave do Passport para a autenticação da aplicação funcionar pelo comando: </li>
