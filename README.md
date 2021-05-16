@@ -4,7 +4,7 @@ Neste repositório contém os arquivos do desafio-backend da <b>OW Interactive</
 
 Para desenvolver a API Rest, foi utilizado o [Laravel Framework](https://laravel.com/) e no processo de autenticação o [Laravel Passport](https://laravel.com/docs/8.x/passport#introduction)
 
-Seguem abaixo os requisitos, procedimentos para instalar do projeto, e observações gerais:
+Seguem abaixo os requisitos e procedimentos para instalar do projeto, e observações gerais:
 
 
 ## Requisitos de Ambiente
