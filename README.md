@@ -76,6 +76,8 @@ Phpmyadmin (Recomendado para criar e acessar banco de dados de forma visual no n
 
 ## Observações
 
+### Observação 1
+
 Para diferenciar rotas públicas e privadas com a autenticação da etapa 4.4 do desafio, foram criadas duas pastas para os mesmos recursos.    
 
 Por exemplo, criei as pastas 'Users - Public' e 'User - Auth'
@@ -88,6 +90,19 @@ Assim como para os demais recursos, como Movements(Movimentações), Balance(Sal
 
 <img src="/public/assets/3.PNG">
 
+### Observação 2
+
+Para visualizar a geração do arquivo .csv solicitado na etapa 2.4
+
+Primeiro acesse a rota através do método POST em 'filters' ou 'filters-auth'
+
+O retorno do arquivo virá na propriedade $.file_url
+
+<img src="/public/assets/4.PNG">
+
+Depois, vá no diretório 'public/uploads' do projeto:
+
+<img src="/public/assets/5.PNG">
 
 ## Códigos de status HTTP esperados 
 <ul>
