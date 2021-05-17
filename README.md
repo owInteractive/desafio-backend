@@ -1,3 +1,52 @@
+obs. Testado em Windows 10
+## 1. Instalação
+  1.1 baixar e instalar o Composer em (https://getcomposer.org/download/).   
+  1.2 clonar o projeto em (https://github.com/roxreis/desafio-backend.git).  
+  1.3 Abrir terminal e rodar o comando __"composer install"__.  
+  1.4 Deixar o servidor interno do Laravel online, rodar o comando __"php artisan serve"__.
+
+
+## 2. Testar API
+
+abs. testado via Insomnia (https://insomnia.rest/download).  
+  __Headers -> (KEY → Content-Type) VALUE ->(application/json)__    
+  __Body(raw)__    
+
+  2.1 __INSERIR USUARIO__  
+    2.1.1 rota: (http://localhost:8000/api/cadastra-usuario).  
+
+    {
+      "name": "user1",
+      "email": "user1@user.com.br",
+      "birthday": "10/12/2010"
+    }
+
+    {
+      "name": "user2",
+      "email": "user2@user.com.br",
+      "birthday": "12/07/1980"
+    }
+
+    {
+      "name": "user3",
+      "email": "user3@user.com.br",
+      "birthday": "12/09/1999"
+    }
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 ![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.jpg "OW Interactive")
 
 # Desafio Back-End - OW Interactive 20/21

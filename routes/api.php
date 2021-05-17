@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('cadastra-usuario', [UserController::class, 'store']);
+Route::get('listar-usuarios', [UserController::class, 'index']);
+Route::get('listar-usuario/{id}', [UserController::class, 'show']);
+Route::delete('excluir-usuario/{id}', [UserController::class, 'destroy']);
