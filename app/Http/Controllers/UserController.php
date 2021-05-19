@@ -53,8 +53,15 @@ class UserController extends Controller
      */
     public function show($id)
     {   
-        return User::findOrFail($id);
-        
+        $userId = User::find($id);
+        if(is_null($userId)) {
+            return response()->json([
+                'message'   => 'Usuário não econtrado',
+            ], 400);
+        } else {
+            return $userId;
+        }
+                
     }
 
     /**
@@ -88,6 +95,16 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return User::findOrFail($id)->delete();
+        $userId = User::find($id);
+        if(is_null($userId)) {
+            return response()->json([
+                'message'   => 'Usuário não econtrado',
+            ], 400);
+        } else {
+            $userId->delete();
+            return response()->json([
+                'message'   => 'Usuário deletado com sucesso',
+            ], 200);
+        }
     }
 }

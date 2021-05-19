@@ -3,17 +3,19 @@ obs. Testado em Windows 10
   1.1 baixar e instalar o Composer em (https://getcomposer.org/download/).   
   1.2 clonar o projeto em (https://github.com/roxreis/desafio-backend.git).  
   1.3 Abrir terminal e rodar o comando __"composer install"__.  
-  1.4 Deixar o servidor interno do Laravel online, rodar o comando __"php artisan serve"__.
+  1.4 Após configurar o banco de dados por meio do arquivo __.env__, rodar o comando __"php artisan migrate"__ para criar as tabelas usadas no projeto
+  1.5 Deixar o servidor interno do Laravel online, rodar o comando __"php artisan serve"__.
 
 
-## 2. Testar API
+
+## 2. Cadastrar Usuários / Endpoint Dos Usuários
 
 abs. testado via Insomnia (https://insomnia.rest/download).  
   __Headers -> (KEY → Content-Type) VALUE ->(application/json)__    
   __Body(raw)__    
 
-  2.1 __INSERIR USUARIO__  
-    2.1.1 rota: (http://localhost:8000/api/cadastra-usuario).  
+  2.1 __CADASTRAR USUARIO__  
+    2.1.1 rota POST : (http://localhost:8000/api/cadastra-usuario).  
 
     {
       "name": "user1",
@@ -33,8 +35,54 @@ abs. testado via Insomnia (https://insomnia.rest/download).
       "birthday": "12/09/1999"
     }
 
+  2.2 __ORDENAR USUARIO__  
+  2.2.1 rota GET : (http://localhost:8000/api/listar-usuarios).    
 
+  2.3 __LISTAR USUARIO POR ID__  
+  2.3.1 rota GET : (http://localhost:8000/api/listar-usuario/{id}).    
+
+  2.4 __EXCLUIR USUARIO__  
+  2.4.1 rota DELETE : (http://localhost:8000/api/excluir-usuario/{id}).
+
+
+  ## 3. Cadastrar Movimentações / Endpoint De Movimentações  
+  3.1 __CRIAR UMA CONTA__ (vincular uma conta a um usuário existente).  
+    3.1.1 rota POST: (http://localhost:8000/api/criar-conta)
+
+    {
+      "user_id": 1
+    }
+
+    {
+      "user_id": 2
+    }  
  
+  3.2 __CREDITO__    
+    3.2.1 rota POST: (http://localhost:8000/api/credito) 
+    
+    {
+      "account_id": 1,
+      "valor": 10000
+    } 
+    
+    {
+      "account_id": 3,
+      "valor": 100000
+    }  
+
+  3.3 __DEBITO__    
+    3.3.1 rota POST: (http://localhost:8000/api/debito) 
+  
+  {
+    "account_id": 1,
+    "valor": 10000
+  } 
+  
+  {
+    "account_id": 3,
+    "valor": 100000
+  }    
+
 
 
 
