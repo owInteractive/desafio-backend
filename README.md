@@ -312,7 +312,13 @@ Response Example
   "success": true<br>
 }<br>
 
-  &nbsp;&nbsp;&nbsp;<h5>Exporta csv com todas as transacoes - get {{ base_url }}exportTransaction</h5><br>
-  Esta rota retorna com um CSV com todas as transacoes com os seguintes cabeçalhos: id, amount, transaction_type, user_id, created_at, updated_at, user_name, user_birthday, user_email, user_balance
-
-
+  &nbsp;&nbsp;&nbsp;<h5>Exporta csv com todas as transacoes - GET {{ base_url }}exportTransaction</h5><br>
+  Esta rota retorna com um CSV com todas as transacoes com os seguintes cabeçalhos: id, amount, transaction_type, user_id, created_at, updated_at, user_name, user_birthday, user_email, user_balance<br/>
+  
+  Os seguintes filtros podem ser aplicados na url:<br/>
+  Para filtrar as transacoes pelos ultimos 30 dias :<br/>
+  {{ base_url }}exportTransaction?last30Days<br/>
+  
+  Para filtrar as transacoes de um mes especifico:<br/>
+  {{ base_url }}exportTransaction?monthAndYear=20-02
+  no formato YY-mm
