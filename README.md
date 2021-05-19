@@ -28,6 +28,8 @@ Para executar o docker pela primeira vez, execute os comandos:<br/>
 
 $ cd docker/<br/>
 
+$ sudo docker-compose up nginx mysql redis
+
 $ sudo docker-compose exec workspace bash<br/>
 
 $ composer install<br/>
@@ -50,6 +52,8 @@ Obg: caso tenha algum conflito de portas, altere a porta do container no .env de
 <h1>Documentação</h1>
 
 Insomnia: <a href="https://drive.google.com/file/d/1sStborD0dtRZS5yoMGkdGJOTwhXHy_kR/view?usp=sharing">link </a>
+
+Usuario Default: email: email@mail senha: password
 
 <h3>Autenticação</h3><br/>
 &nbsp;&nbsp;&nbsp;A autenticação é feita utilizando JWT, o token tem validade de 1 hora<br>
