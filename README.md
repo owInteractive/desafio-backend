@@ -49,7 +49,7 @@ Nessa etapa daremos algumas premissas que devem ser seguidas.
     - **birthday** | date (Data de aniversário)
     - **created_at** | datetime (Criado Em)
     - **updated_at** | datetime (Atualizado Em)
-- Criar um endpoint para listagem desses usuários, ordernados por ordem de cadastro;
+- Criar um endpoint para listagem desses usuários, ordernados por ordem de cadastro decrescente (mais novo para mais antigo);
 - Criar um endpoint para listar um único usuário através do seu id;
 - Criar um endpoint para excluir um usuário através do seu id.
 
