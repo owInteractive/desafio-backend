@@ -1,92 +1,318 @@
-![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.jpg "OW Interactive")
+<h1>Configuração</h1>
 
-# Desafio Back-End - OW Interactive 20/21
+Clone o repositório com o comando :<br/>
+$ git clone --recurse-submodules https://github.com/MatMr7/desafio-backend.git<br/><br/>
 
-## Sobre a OW Interactive
-Fazemos parte do universo digital, focada em criar e desenvolver experiências interativas, integrando planejamento, criatividade e tecnologia.
+Em seguida entre no repositório com o comando:<br/>
+$ cd desafio-backend/<br/><br/>
 
-Conheça mais sobre nós em: [OW Interactive - Quem somos](http://www.owinteractive.com/quem-somos/).
+Agora vamos configurar o .env, execute o comando:<br/>
+$ nano .env<br/><br/>
 
-## Sobre a Vaga
-Esse desafio é destinado todos os níveis e não é exigido que você consiga realizar esse desafio por completo.
+Copie o conteúdo do <a href ="https://drive.google.com/file/d/1BZzqdw4831Lx41Ve7bKfSBfFIJIiOaGi/view?usp=sharing">link</a>, cole no .env e salve.<br/>
+Caso prefira, mude o nome do .env-axample para .env<br/><br/>
 
-Sua avaliação será dada pelas etapas que conseguir entregar.
+Agora vamos configurar o .env do docker.<br/>
 
-Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owinteractive.com/vagas/).
+Execute o comando :<br/>
+$ nano /docker/.env<br/>
 
-Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o desafio e aplicar para alguma vaga de backend.
+Copie o conteúdo do <a href ="https://drive.google.com/file/d/1v-QpCxtuD93Um1R5VGw17huKL_ov8yy9/view?usp=sharing">link</a>, cole no .env e salve.<br/>
+Caso prefira, copie o .env-axample para .env<br/><br/>
 
-## Pré-requisitos
-- Lógica de programação;
-- Conhecimentos sobre Banco de dados;
-- Conhecimentos sobre REST, HTTP e API's;
-- Conhecimentos sobre Git;
+<h3>A configuração está completa :) </h3><br/>
 
-## Requisitos Obrigatórios
-- Utilizar a linguagem [PHP](https://www.php.net/) ou [NodeJS](https://nodejs.org)
-- Código bem documentado, legível e limpo;
-- Fazer uma API simples e objetiva em REST, com o retorno em JSON;
-- Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio;
-- Deve ser usado [Postman](https://www.php.net/), [Insomnia](https://insomnia.rest/), [Swagger](https://swagger.io/) e etc.Para montar o exemplos da API e adicione ao repósitorio o arquivo gerado pelo programa e especificar qual o arquivo e programa devem ser usados, caso não seja enviado será desconsiderado o desafio;
-- Em qualquer caso de erro ou  não encontrada a API deve retorna uma resposta condizente com o problema apresentado, por exemplo um retorno 500 ou 404;
+<h1>Docker</h1>
 
-## Diferenciais
-- Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x) ou [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation);
-- Utilizar o [Docker](https://www.docker.com/get-started) para conteinerização da aplicação;
-- Pensar em desempenho e escalabilidade, quando for uma quantidade muito grande de dados como o sistema se comportaria;
-- Criar testes (Apenas um exemplo, algo bem simples como validação do login ou consumo de um endpoint com ou sem autenticação, no README adicionar qual o comando utilizado para rodar o teste); 
-- Utilizar apenas as ferramentas do framework caso use um, evitando criar dependência de outros pacotes ou bibliotecas;
+Para executar o docker pela primeira vez, execute os comandos:<br/>
 
-## Desafio
+$ cd docker/<br/>
 
-### Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
-Nessa etapa daremos algumas premissas que devem ser seguidas.
+$ sudo docker-compose up nginx mysql redis
 
-- Criar um endpoint onde é cadastrado um usuário.
-  - Esses usuários devem ter obrigátoriamente os seguintes dados modelados, caso você ache necessário outros campos fique a vontade.
-    - **name** | string (Nome)
-    - **email** | string (E-mail)
-    - **birthday** | date (Data de aniversário)
-    - **created_at** | datetime (Criado Em)
-    - **updated_at** | datetime (Atualizado Em)
-- Criar um endpoint para listagem desses usuários, ordernados por ordem de cadastro;
-- Criar um endpoint para listar um único usuário através do seu id;
-- Criar um endpoint para excluir um usuário através do seu id.
+$ sudo docker-compose exec workspace bash<br/>
 
-### Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
-Nessa etapa você precisará criar a modelagem e lógica para implementar as funcionalidades abaixo:
+$ composer install<br/>
 
-- Criar um endpoint ou endpoint`s onde é possível associar uma operação de débito, crédito ou estorno para o usuário;
-- Criar um endpoint onde seja possível visualizar toda a movimentação (páginada) do usuários mais as suas informações pessoais;
-- Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário;
-- Criar um endpoint onde é retornado um arquivo no formato (csv) com 3 tipos de filtros para as movimentações:
-  - Últimos 30 dias;
-  - Passando o mês e ano por exemplo: 06/20;
-  - Todo as movimentações;
+$ php artisan migrate<br/>
 
-### Etapa 3 - Nova Funcionalidades
-Nessa etapa serão itens onde veremos como você pensou e como chegou ao resultado final.
+$ php artisan jwt:secret<br/>
 
-- Adicionar dentro do usuário um campo para saldo inicial, e criar um endpoint para alterar esse valor;
-- Criar um endpoint com a soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário;
-- No endpoint que exclui um usuário, adicionar a funcionalidade que agora não será mais possível excluir um usuário que tenha qualquer tipo de movimentação ou saldo;
-- No endpoint que cadastra usuário, adicionar a funcionalidade que apenas maiores de 18 anos podem criar uma conta;
-- No endpoint que exporta o arquivo CSV criar um cabeçalho com os dados do cliente e o seu saldo atual;
+$ php artisan db:seed<br/>
 
-### Etapa 4 -Itens Não Obrigatórios
-- Criar validações com base na Request;
-- Utilizar cache para otimizar as consultas e buscas;
-- Criar Seeders ou Inicializadores de dados para o usuários e suas movimentações;
-- Criar os métodos baseados em algum método de autênticação.
-- Documentação dos endpoint`s;
+$ exit<br/>
 
-## Conclusão
-Crie um Fork e submeta uma Pull Request ao Github com o seu desafio. Após isso envie um e-mail para [letsrock@owinteractive.com](mailto:letsrock@owinteractive.com), com o assunto [DESAFIO BACK-END] com o link para o seu desafio, sua apresentação e currículo anexado em formato PDF.
+Comando para iniciar api:<br/>
 
-Caso tenha alguma sugestão sobre o teste ela é bem vinda, fique a vontade para envia-la junto ao e-mail.
+$ sudo docker-compose up nginx mysql redis <br/>
 
-E fique a vontade para usar os programas e ferramentas que se sentir bem, lembrando que aqui somos team [VS Code](https://code.visualstudio.com/) rs.
+Obs: endereço da api: localhost:8888<br/>
+Obg: caso tenha algum conflito de portas, altere a porta do container no .env dentro da pasta do docker<br/>
 
-Obrigado por participar e boa sorte 😀
+<h1>Documentação</h1>
 
-![Cachorro programando](https://github.com/owInteractive/desafio-backend/raw/master/media/dog.webp "Cachorro programando")
+Insomnia: <a href="https://drive.google.com/file/d/1sStborD0dtRZS5yoMGkdGJOTwhXHy_kR/view?usp=sharing">link </a>
+
+Usuario Default: email: email@mail senha: password
+
+<h3>Autenticação</h3><br/>
+&nbsp;&nbsp;&nbsp;A autenticação é feita utilizando JWT, o token tem validade de 1 hora<br>
+&nbsp;&nbsp;&nbsp;As requisições deverão conter o seguinte Header - Authorization : "Bearer " + {{token}},
+
+&nbsp;&nbsp;&nbsp;<h5>Login - POST {{base_url}}login </h5><br>
+
+Request Fields:
+| Field  | Type   | Description         |
+|--------|--------|---------------------|
+| `email`    | text    | Este campo faz referência ao email do usuário que deseja recuperar sua senha|
+|`password`| text | Este campo faz referência a senha do usuário que deseja logar|
+
+<br>
+Request Example<br>
+
+{<br>
+    "email":"email@mail",<br>
+    "password":"password"<br>
+}
+<br>
+
+Response Example<br>
+{<br>
+  "success": true,<br>
+  "status": 200,<br>
+  "access_token":<br> "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODg4OFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMTM4NTY1NiwiZXhwIjoxNjIxMzg5MjU2LCJuYmYiOjE2MjEzODU2NTYsImp0aSI6IjZXZno2enVxMmR3MWhPM3kiLCJzdWIiOiI3OGVmMGZjNS0yODI1LTQzNzAtODlhMi1kMTE2MjE0MDEwZTEiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIiwiaWQiOiI3OGVmMGZjNS0yODI1LTQzNzAtODlhMi1kMTE2MjE0MDEwZTEifQ.awlUxP5nJI5rJI0kftGR5NVQfAZ15x5UleAAeNtLQFc",<br>
+  "token_type": "bearer",<br>
+  "expires_in": 60<br>
+}<br>
+
+&nbsp;&nbsp;&nbsp;<h5>Token refresh - GET {{ base_url }}refreshToken</h5><br>
+
+Response Example<br>
+{<br>
+  "success": true,<br>
+  "status": 200,<br>
+  "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODg4OFwvYXBpXC9yZWZyZXNoVG9rZW4iLCJpYXQiOjE2MjExMTUxNzUsImV4cCI6MTYyMTExODc4OCwibmJmIjoxNjIxMTE1MTg4LCJqdGkiOiIxMFl6RkQyTDRmOUhFQllXIiwic3ViIjoiNzQ2ODk3ZGQtNDc1Ni00NWMzLThjMDgtZmY1MDhjM2FmZTc4IiwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.lLJbfXkEMAcVbrIECE99XGN40TiACfHgvGogHxYTvhU",<br>
+  "token_type": "Bearer",<br>
+  "expires_in": 60<br>
+}<br>
+
+&nbsp;&nbsp;&nbsp;<h5>Logout - GET {{ base_url }}Logout</h5><br>
+
+Response Example<br>
+
+{<br>
+  "success": true,<br>
+  "status": 200<br>
+}<br>
+
+
+<h3>User</h3><br/>
+
+&nbsp;&nbsp;&nbsp;<h5>Cadastra usuário - POST {{ base_url }}user</h5><br>
+Request Fields:
+| Field  | Type   | Description         |
+|--------|--------|---------------------|
+| `name`    | text    | Este campo faz referência ao nome do novo usuário|
+|`email`| text | Este campo faz referência ao email do novo usuário|
+|`birthday`| Date (YYY-mm-dd) | Este campo faz referencia a data em que o usuário nasceu|
+|`balance`| number | Este campo faz referencia ao saldo do usuário (campo não obrigatório)| 
+|`password`|text | Este campo faz refência a senha do novo usuário|
+
+
+Request Example<br>
+
+
+{<br>
+	"name":"Chiquinha3",    <br>  
+	"email":"duda@mailap",<br>
+	"birthday":"2003-03-02",<br>
+	"balance":120,<br>
+	"password":"123"<br>
+}<br>
+
+Response Example<br>
+{<br>
+  "status": 200,<br>
+  "success": true,<br>
+  "data": {<br>
+    "name": "Chiquinha3",<br>
+    "email": "duda@maill",<br>
+    "birthday": "2003-03-02",<br>
+    "balance": 120,<br>
+    "id": "357a8f6f-afda-4e8d-93eb-50d41d1d1036",<br>
+    "updated_at": "2021-05-19T02:04:06.000000Z",<br>
+    "created_at": "2021-05-19T02:04:06.000000Z"<br>
+  }<br>
+}<br>
+
+&nbsp;&nbsp;&nbsp;<h5>Listar usuários - GET {{ base_url }}user</h5><br>
+
+
+Response Example<br>
+
+{<br>
+  "total_in_page": 2,<br>
+  "success": true,<br><br>
+  "status": 200,<br><br>
+  "data": [<br><br>
+    {<br><br>
+      "id": "c401f232-a266-40ff-8ecd-fc12e20ce153",<br><br>
+      "name": "matheus",<br><br>
+      "email": "matheus@mail",
+      "birthday": "2000-03-02",<br><br>
+      "created_at": "2021-05-18T01:03:58.000000Z",<br><br>
+      "updated_at": "2021-05-18T22:02:52.000000Z",<br><br>
+      "balance": 120<br><br>
+    },<br><br>
+    {<br><br>
+      "id": "943d5a7a-bee6-4050-bab2-af67990224d2",<br><br>
+      "name": "Chiquinha",<br><br>
+      "email": "chiquinha@email",<br><br>
+      "birthday": "2000-03-02",<br><br>
+      "created_at": "2021-05-18T15:42:13.000000Z",<br><br>
+      "updated_at": "2021-05-18T15:42:13.000000Z",<br><br>
+      "balance": 0<br><br>
+    }<br><br>
+  ],<br><br>
+  "links": {
+    "first": "http:\/\/localhost:8888\/api\/user?page=1",<br><br>
+    "last": "http:\/\/localhost:8888\/api\/user?page=48",<br><br>
+    "prev": null,<br>
+    "next": "http:\/\/localhost:8888\/api\/user?page=2"<br>
+  },<br>
+  "meta": {<br>
+    "current_page": 1,<br>
+    "from": 1,<br>
+    "last_page": 48,<br>
+    "path": "http:\/\/localhost:8888\/api\/user",<br>
+    "per_page": "2",
+    "to": 2,<br>
+    "total": 96<br>
+  }<br>
+  
+  
+  &nbsp;&nbsp;&nbsp;<h5>Recupera usuário pelo ID - GET {{ base_url }}user/{id}</h5><br>
+
+Response Example<br>
+{<br>
+  "status": 200,<br>
+  "success": true,<br>
+  "data": {<br>
+    "id": "c401f232-a266-40ff-8ecd-fc12e20ce153",<br>
+    "name": "matheus",<br>
+    "email": "matheus@mail",<br>
+    "birthday": "2000-03-02",<br>
+    "created_at": "2021-05-18T01:03:58.000000Z",<br>
+    "updated_at": "2021-05-18T22:02:52.000000Z",<br>
+    "balance": 120<br>
+  }<br>
+}<br>
+
+  &nbsp;&nbsp;&nbsp;<h5>Deleta usuário - DELETE {{ base_url }}user/{id}</h5><br>
+
+Response Example<br>
+
+{<br>
+  "status": 200,<br>
+  "success": true<br>
+}<br>
+
+  &nbsp;&nbsp;&nbsp;<h5>Atualiza saldo do usuário usuário - PUT {{ base_url }}updateUserBalance/{id}</h5><br>
+  Request Fields:
+| Field  | Type   | Description         |
+|--------|--------|---------------------|
+| `newBalance`    | number    | Este campo faz referência ao novo balance do usuário|
+
+Request Example<br>
+
+{<br>
+	"newBalance":120<br>
+}<br>
+
+Response Example<br>
+
+{<br>
+  "status": 200,<br>
+  "success": true,<br>
+  "data": {<br>
+    "id": "c401f232-a266-40ff-8ecd-fc12e20ce153",<br>
+    "name": "matheus",<br>
+    "email": "matheus@mail",<br>
+    "birthday": "2000-03-02",<br>
+    "created_at": "2021-05-18T01:03:58.000000Z",<br>
+    "updated_at": "2021-05-18T22:02:52.000000Z",<br>
+    "balance": 120<br>
+  }<br>
+}<br>
+
+  &nbsp;&nbsp;&nbsp;<h5>Retorna o valor do saldo do usuário - PUT {{ base_url }}sumUserTransactionsAndBalance/{id}</h5><br>
+  O saldo é calculado da seguinte forma: Saldo inicial + Valor total das transações do tipo credit + Valor total das transações do tipo reversal - Valor total das transações do tipo debit<br/>
+  
+  Response Example<br>
+
+  
+  {<br>
+  "status": 200,<br>
+  "success": true,
+  "data": 8438.38<br>
+}<br>
+
+<h3>Transaction</h3><br/>
+  &nbsp;&nbsp;&nbsp;<h5>Cadastra transacao - POST {{ base_url }}transaction</h5><br>
+ Request Fields:
+
+| Field  | Type   | Description         |
+|--------|--------------------------|---------------------|
+| `amount`    | number    | Este campo faz referência ao valor da transação|
+| `transaction_type`|enum (debit, credit, reversal) | Este campo faz referência ao tipo da transação|
+| `user_email` | text | Este campo faz referência ao email do usuário ao qual a transação se refere |
+
+Request Example<br>
+{<br>
+	"amount":100,<br>
+	"transaction_type":"reversal",<br>
+	"user_email":"matheus@mail"<br>
+}<br>
+
+Response Example<br>
+
+{<br>
+  "status": 200,<br>
+  "success": true,<br>
+  "data": {<br>
+    "amount": 100,
+    "transaction_type": "reversal",<br>
+    "user_id": "c401f232-a266-40ff-8ecd-fc12e20ce153",<br>
+    "id": "85da5d64-0ed8-4e7c-a5ff-750b2b3fc7f5",<br>
+    "updated_at": "2021-05-19T02:21:57.000000Z",<br>
+    "created_at": "2021-05-19T02:21:57.000000Z"<br>
+  }<br>
+}<br>
+
+  &nbsp;&nbsp;&nbsp;<h5>Lista transações - GET {{ base_url }}transaction</h5><br>
+
+Response Example<br>
+{<br>
+  "status": 200,<br>
+  "success": true,<br>
+  "data": {<br>
+    "id": "05350a2e-fc3e-40cd-82da-27e555177c92",<br>
+    "amount": 100.99,<br>
+    "transaction_type": "reversal",<br>
+    "user_id": "c401f232-a266-40ff-8ecd-fc12e20ce153",<br>
+    "created_at": "2021-05-18T13:36:55.000000Z",<br>
+    "updated_at": "2021-05-18T13:36:55.000000Z"<br>
+  }<br>
+}<br>
+
+  &nbsp;&nbsp;&nbsp;<h5>Deleta transação - DELETE {{ base_url }}transaction/{id}</h5><br>
+Response Example
+{<br>
+  "status": 200,<br>
+  "success": true<br>
+}<br>
+
+  &nbsp;&nbsp;&nbsp;<h5>Exporta csv com todas as transacoes - get {{ base_url }}exportTransaction</h5><br>
+  Esta rota retorna com um CSV com todas as transacoes com os seguintes cabeçalhos: id, amount, transaction_type, user_id, created_at, updated_at, user_name, user_birthday, user_email, user_balance
+
+
