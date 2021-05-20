@@ -10,8 +10,26 @@ class Reversal extends Model
     use HasFactory;
 
     protected $fillable = [
-        'valor',
+        'valor_estorno',
         'credit_id',
         'debit_id',
+        'account_id'
     ];
+
+
+    public function debito()
+    {
+        return $this->hasMany(Debit::class, 'debit_id');
+    }
+
+    public function credito()
+    {
+        return $this->hasMany(Credit::class, 'credit_id');
+    }
+
+    public function account()
+    {
+        return $this->hasMany(Account::class, 'account_id');
+    }
+
 }

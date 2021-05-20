@@ -16,7 +16,7 @@ class Debit extends JsonResource
     {
         return [
             'id' => $this->id,
-            'valor' => $this->valor,
+            'valor_debito' => $this->valor_debito,
             'account_id' => $this->account_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->upadted_at

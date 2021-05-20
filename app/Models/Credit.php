@@ -11,7 +11,10 @@ class Credit extends Model
 
 
     protected $fillable = [
-        'valor',
+        'valor_credito',
         'accoun_id'
     ];
+
+
+
 }

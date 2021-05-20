@@ -13,9 +13,9 @@ class CreditController extends Controller
     {   
 
         $credit = New Credit();
-        $credit->valor = $request->input('valor');
+        $credit->valor_credito = $request->input('valor');
         $credit->account_id = $request->input('account_id');
-        if($credit->valor <= 0.00) {
+        if($credit->valor_credito <= 0.00) {
             return response()->json([
                 'message'   => 'Valor não pode ser menor a igual a 0.00',
             ], 400);
@@ -23,18 +23,16 @@ class CreditController extends Controller
         
         /* Qaundo acontece uma movimentação de credito válida, é feito a busca da conta pelo ID e é
         incrementado o valor ao saldo da conta */
-        $accountFinds = Account::find($request->input('account_id'));
-        if (!is_null($accountFinds)) {
+
+        $account = Account::find($credit->account_id);
+        if (!is_null($account)) {
      
-            $accountFinds = Account::where('id', $request->input('account_id'))->get();
-            foreach ($accountFinds as $accountFind ) {
-                if ($accountFind->id == $request->input('account_id')) {
-    
-                    $accountFind->saldo = $request->input('valor');
-                    $accountFind->save();
-    
-                }  
-            } 
+            if ($account->id == $credit->account_id) {
+
+                $account->saldo += $credit->valor_credito;
+                $account->save();
+            }  
+            
         }else {
 
             return response()->json([
@@ -48,4 +46,6 @@ class CreditController extends Controller
         }   
 
     }
+
+    
 }

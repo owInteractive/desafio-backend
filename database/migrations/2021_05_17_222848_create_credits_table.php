@@ -15,7 +15,7 @@ class CreateCreditsTable extends Migration
     {
         Schema::create('credits', function (Blueprint $table) {
             $table->id();
-            $table->decimal('valor', 10, 2);
+            $table->decimal('valor_credito', 10, 2);
             $table->unsignedBigInteger('account_id');
             $table->foreign('account_id')->references('id')->on('accounts');
             $table->timestamps();

@@ -15,7 +15,7 @@ class CreateDebitsTable extends Migration
     {
         Schema::create('debits', function (Blueprint $table) {
             $table->id();
-            $table->decimal('valor', 10, 2);
+            $table->decimal('valor_debito', 10, 2);
             $table->unsignedBigInteger('account_id');
             $table->foreign('account_id')->references('id')->on('accounts');
             $table->timestamps();

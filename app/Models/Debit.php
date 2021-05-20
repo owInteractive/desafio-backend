@@ -10,7 +10,7 @@ class Debit extends Model
     use HasFactory;
 
     protected $fillable = [
-        'valor',
+        'valor_debito',
         'accoun_id'
     ];
 }

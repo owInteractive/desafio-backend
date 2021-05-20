@@ -18,11 +18,11 @@ class Account extends Model
     
     public function debito()
     {
-        return $this->hasMany(Debit::class);
+        return $this->hasMany(Debit::class, 'account_id');
     }
 
     public function credito()
     {
-        return $this->hasMany(Credit::class);
+        return $this->hasMany(Credit::class, 'account_id');
     }
 }

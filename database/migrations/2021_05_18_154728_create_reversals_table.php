@@ -15,11 +15,13 @@ class CreateReversalsTable extends Migration
     {
         Schema::create('reversals', function (Blueprint $table) {
             $table->id();
-            $table->decimal('valor', 10, 2);
+            $table->decimal('valor_estorno', 10, 2);
             $table->unsignedBigInteger('credit_id')->nullable();
             $table->foreign('credit_id')->references('id')->on('credits');
             $table->unsignedBigInteger('debit_id')->nullable();
             $table->foreign('debit_id')->references('id')->on('debits');
+            $table->unsignedBigInteger('account_id')->nullable();
+            $table->foreign('account_id')->references('id')->on('accounts');
             $table->timestamps();
         });
     }

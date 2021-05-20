@@ -81,7 +81,85 @@ abs. testado via Insomnia (https://insomnia.rest/download).
   {
     "account_id": 3,
     "valor": 100000
-  }    
+  }  
+
+  3.4 __ESTORNO DEBITO__  
+    3.4.1 rota POST: (http://localhost:8000/api/estorno-debito)  
+  
+  {
+    "debit_id": 1,
+    "valor": 10000
+  } 
+  
+  {
+    "debit_id": 3,
+    "valor": 100000
+  } 
+
+  3.5 __ESTORNO CREDITO__  
+    3.5.1 rota POST: (http://localhost:8000/api/estorno-credito)  
+  
+  {
+    "credit_id": 1,
+    "valor": 10000
+  } 
+  
+  {
+    "credit_id": 3,
+    "valor": 100000
+  }  
+
+  3.6 __MOVIMENTAÇÕES__
+    3.6.1 rota GET: (http://localhost:8000/api/movimentacoes) 
+  
+  3.7 __EXCLUIR MOVIMENTAÇÕES__  
+    3.7.1 rota POST (http://localhost:8000/api/excluir-movimentacao)  
+
+  Necessário informar o id da movimentação a ser excluída.
+
+  {
+    "nome_movimentação": "debito",
+    "id_movimentação": 2
+  } 
+
+  {
+    "nome_movimentação": "credito",
+    "id_movimentação": 1
+  } 
+
+    {
+    "nome_movimentação": "estorno",
+    "id_movimentação": 2
+  } 
+
+  3.8 __LISTAR MOVIMENTAÇÕES__  
+    3.8.1 rota GET: (http://localhost:8000/api/movimentacoes)  
+
+
+  3.9 __GERAR ARQUIVO CSV__  
+    necessário pacote pelo comando __Composer require maatwebsite/excel__
+
+    Incluir no arquivo "config/app":
+
+    'providers' => [
+      Maatwebsite\Excel\ExcelServiceProvider::class,
+ 
+    ],  
+
+    'aliases' => [ 
+      'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+    ],  
+
+    Publicar a mudança e gerar arquivo "config/excel.php", rodar comando: 
+    "php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider"  
+
+
+
+
+  
+
+
 
 
 

@@ -3,6 +3,8 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CreditController;
 use App\Http\Controllers\DebitController;
+use App\Http\Controllers\MoveDeleteController;
+use App\Http\Controllers\ReversalController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,5 +32,15 @@ Route::delete('excluir-usuario/{id}', [UserController::class, 'destroy']);
 
 //Rotas conta bancária
 Route::post('criar-conta', [AccountController::class, 'criarConta']);
+Route::get('movimentacoes', [AccountController::class, 'extrato']);
+Route::get('csv', [AccountController::class, 'esportaCsv']);
+
 Route::post('credito', [CreditController::class, 'credito']);
+
 Route::post('debito', [DebitController::class, 'debito']);
+
+Route::post('estorno-debito', [ReversalController::class, 'estornoDebito']);
+Route::post('estorno-credito', [ReversalController::class, 'estornoCredito']);
+
+Route::post('excluir-movimentacao', [MoveDeleteController::class, 'excluirMovimentacao']);
+
