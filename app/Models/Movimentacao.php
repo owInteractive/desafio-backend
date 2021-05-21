@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Credit extends Model
+class Movimentacao extends Model
 {
     use HasFactory;
 
+    public $table = "movimentacoes";
 
     protected $fillable = [
-        'valor_credito',
-        'accoun_id'
+       
+        'valor',
+        'user_id',
+        'nome_movimentacao'
+ 
     ];
-
-
 
 }

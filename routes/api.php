@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CreditController;
 use App\Http\Controllers\DebitController;
 use App\Http\Controllers\MoveDeleteController;
+use App\Http\Controllers\MovimentacoesController;
 use App\Http\Controllers\ReversalController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -31,19 +32,12 @@ Route::get('listar-usuarios', [UserController::class, 'index']);
 Route::get('listar-usuario/{id}', [UserController::class, 'show']);
 Route::delete('excluir-usuario/{id}', [UserController::class, 'destroy']);
 
-//Rotas conta bancária
-Route::post('criar-conta', [AccountController::class, 'criarConta']);
-Route::get('movimentacoes', [AccountController::class, 'extrato']);
-Route::get('soma-movimentacoes', [AccountController::class, 'somaMovimentacoes']);
-Route::get('csv', [AccountController::class, 'esportaCsv']);
-Route::get('csv30dias', [AccountController::class, 'esportaCsvUltimos30Dias']);
+//Rotas das Movimentações 
+Route::post('associar-movimentacao', [MovimentacoesController::class, 'associaMovimentacao']);
+Route::get('listar-movimentacoes', [MovimentacoesController::class, 'extrato']);
+Route::post('excluir-movimentacao', [MovimentacoesController::class, 'excluirMovimentacao']);
+Route::get('csv/{filtro}', [MovimentacoesController::class, 'esportaCsv']);
+Route::get('soma-movimentacoes', [MovimentacoesController::class, 'somaMovimentacoes']);
 
-Route::post('credito', [CreditController::class, 'credito']);
 
-Route::post('debito', [DebitController::class, 'debito']);
-
-Route::post('estorno-debito', [ReversalController::class, 'estornoDebito']);
-Route::post('estorno-credito', [ReversalController::class, 'estornoCredito']);
-
-Route::post('excluir-movimentacao', [MoveDeleteController::class, 'excluirMovimentacao']);
 

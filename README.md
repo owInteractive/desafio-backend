@@ -20,133 +20,86 @@ abs. testado via Insomnia (https://insomnia.rest/download).
     {
       "name": "user1",
       "email": "user1@user.com.br",
-      "birthday": "10/12/2010",
-      "saldo_inicial":50000
+      "birthday": "10/12/2010"
     }
 
     {
       "name": "user2",
       "email": "user2@user.com.br",
-      "birthday": "12/07/1980",
-      "saldo_inicial":50000
+      "birthday": "12/07/1980"
     }
 
     {
       "name": "user3",
       "email": "user3@user.com.br",
-      "birthday": "12/09/1999",
-      "saldo_inicial":50000
+      "birthday": "12/09/1999"
     }
 
-  2.2 __ORDENAR USUARIO__  
+  2.2 __LISTAR USUÁRIOS POR ORDER__  
   2.2.1 rota GET : (http://localhost:8000/api/listar-usuarios).    
 
-  2.3 __LISTAR USUARIO POR ID__  
+  2.3 __LISTAR USUÁRIO POR ID__  
   2.3.1 rota GET : (http://localhost:8000/api/listar-usuario/{id}).    
 
-  2.4 __EXCLUIR USUARIO__  
+  2.4 __EXCLUIR USUÁRIO__  
   2.4.1 rota DELETE : (http://localhost:8000/api/excluir-usuario/{id}).
 
 
-  ## 3. Cadastrar Movimentações / Endpoint De Movimentações  
-  3.1 __CRIAR UMA CONTA__ (vincular uma conta a um usuário existente).  
-    3.1.1 rota POST: (http://localhost:8000/api/criar-conta)
+  ## 3. Cadastrar Movimentações / Endpoint De Movimentações    
+  3.1 __ASSOCIAR UMA MOVIMENTAÇÃO A UM USUÁRIO__     
+    3.1.1 rota POST: (http://localhost:8000/api/movimentacoes)  
 
     {
-      "user_id": 1
-    }
-
-    {
-      "user_id": 2
-    }  
- 
-  3.2 __CREDITO__    
-    3.2.1 rota POST: (http://localhost:8000/api/credito) 
-    
-    {
-      "account_id": 1,
+      "id do usuário": 1,
+      "nome da movimentacao": "credito",
       "valor": 10000
-    } 
-    
+    }    
+
     {
-      "account_id": 3,
-      "valor": 100000
-    }  
+      "id do usuário": 2,
+      "nome da movimentacao": "debito",
+      "valor": 10000
+    }    
 
-  3.3 __DEBITO__    
-    3.3.1 rota POST: (http://localhost:8000/api/debito) 
-  
-  {
-    "account_id": 1,
-    "valor": 10000
-  } 
-  
-  {
-    "account_id": 3,
-    "valor": 100000
-  }  
+    {
+      "id do usuário": 3,
+      "nome da movimentacao": "estorno",
+      "valor": 10000
+    }    
 
-  3.4 __ESTORNO DEBITO__  
-    3.4.1 rota POST: (http://localhost:8000/api/estorno-debito)  
-  
-  {
-    "debit_id": 1,
-    "valor": 10000
-  } 
-  
-  {
-    "debit_id": 3,
-    "valor": 100000
-  } 
+  3.2 __LISTAR MOVIMENTAÇÕES__  
+    3.2.1 rota GET: (http://localhost:8000/api/movimentacoes)  
 
-  3.5 __ESTORNO CREDITO__  
-    3.5.1 rota POST: (http://localhost:8000/api/estorno-credito)  
-  
-  {
-    "credit_id": 1,
-    "valor": 10000
-  } 
-  
-  {
-    "credit_id": 3,
-    "valor": 100000
-  }  
-
-  3.6 __MOVIMENTAÇÕES__
-    3.6.1 rota GET: (http://localhost:8000/api/movimentacoes) 
-  
-  3.7 __EXCLUIR MOVIMENTAÇÕES__  
-    3.7.1 rota POST (http://localhost:8000/api/excluir-movimentacao)  
+  3.3 __EXCLUIR MOVIMENTAÇÕES__  
+    3.3.1 rota POST (http://localhost:8000/api/excluir-movimentacao)  
 
   Necessário informar o id da movimentação a ser excluída.
 
   {
-    "nome_movimentação": "debito",
-    "id_movimentação": 2
+    "nome da movimentação": "debito",
+    "id da movimentação": 2
   } 
 
   {
-    "nome_movimentação": "credito",
-    "id_movimentação": 1
+    "nome da movimentação": "credito",
+    "id da movimentação": 1
   } 
 
-    {
-    "nome_movimentação": "estorno",
-    "id_movimentação": 2
+  {
+    "nome da movimentação": "estorno",
+    "id da movimentação": 2
   } 
 
-  3.8 __LISTAR MOVIMENTAÇÕES__  
-    3.8.1 rota GET: (http://localhost:8000/api/movimentacoes)  
+  3.4 __GERAR ARQUIVO CSV__  
+    
+    3.4.1 rota GET (http://localhost:8000/api/csv/{filtro}) 
+    
+    se quiser ver todas as movimentações, colocar {filtro} = tudo   
+    se quiser ver as movimentações dos ultimos 30 dias, {filtro} = 30  
 
-
-  3.9 __GERAR ARQUIVO CSV__  
-    3.9.1 rota GET (http://localhost:8000/api/csv) 
-
-  3.10 __CSV FILTRO ULTIMOS 30 DIAS__
-    3.10.1 rota GET (http://localhost:8000/api/csv30dias)  
   
-  3.11 __ALTERA SALDO INICIAL__  
-    3.11.1 rota POST (http://localhost:8000/api/altera-saldo-inicial)  
+  3.5 __ALTERA SALDO INICIAL__  
+    3.5.1 rota POST (http://localhost:8000/api/altera-saldo-inicial)  
 
     informar o id do usuario e o valor  
 
@@ -160,20 +113,8 @@ abs. testado via Insomnia (https://insomnia.rest/download).
       "valor": 100
     }
 
- __SOMA MOVIMENTACOES__ 
-
-
-  
-
-
-
-
-
-
-
-
-
-
+ 3.6 __SOMA MOVIMENTACOES__ 
+  3.6.1 rota GET (http://localhost:8000/api/soma-movimentacoes)       
 
 
 

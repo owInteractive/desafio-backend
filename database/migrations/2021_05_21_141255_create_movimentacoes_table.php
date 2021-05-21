@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccountsTable extends Migration
+class CreateMovimentacoesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('movimentacoes', function (Blueprint $table) {
             $table->id();
-            $table->decimal('saldo', 10, 2)->nullable();
+            $table->decimal('valor', 10, 2);
             $table->foreignId('user_id')->constrained();
+            $table->enum('nome_movimentacao', ['credito', 'debito', 'estorno']);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('movimentacoes');
     }
 }

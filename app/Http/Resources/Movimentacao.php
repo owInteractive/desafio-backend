@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Reversal extends JsonResource
+class Movimentacao extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,9 @@ class Reversal extends JsonResource
     {
         return [
             'id' => $this->id,
-            'valor_estorno' => $this->valor_estorno,
-            'credit_id' => $this->credit_id,
-            'debit_id' => $this->debit_id,
-            'account_id' => $this->account_id,
+            'valor' => $this->valor,
+            'user_id' => $this->user_id,
+            'nome_movimentacao' => $this->nome_movimentacao,
             'created_at' => $this->created_at,
             'updated_at' => $this->upadted_at
           ];

@@ -18,8 +18,6 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->date('birthday');
-            $table->decimal('saldo_inicial', 10, 2);
-            $table->rememberToken();
             $table->timestamps();
         });
     }
