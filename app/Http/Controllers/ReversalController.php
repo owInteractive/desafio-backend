@@ -33,7 +33,7 @@ class ReversalController extends Controller
                 //verifica se o valor informado é menor ou igual a zero
                 if($reversal->valor_estorno <= 0.00) {
                     return response()->json([
-                        'message' => 'Valor não pode ser menor a igual a 0.00',
+                        'message' => 'Valor não pode ser menor ou igual a 0.00',
                     ], 400);
                 }
 

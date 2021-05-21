@@ -17,7 +17,7 @@ class DebitController extends Controller
         $debit->account_id = $request->input('account_id');
         if($debit->valor_debito <= 0.00) {
             return response()->json([
-                'message'   => 'Valor não pode ser menor a igual a 0.00',
+                'message'   => 'Valor não pode ser menor ou igual a 0.00',
             ], 400);
         }
 

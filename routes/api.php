@@ -26,6 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //Rotas de usuários
 Route::post('cadastra-usuario', [UserController::class, 'store']);
+Route::post('altera-saldo-inicial', [UserController::class, 'alteraSaldoInicial']);
 Route::get('listar-usuarios', [UserController::class, 'index']);
 Route::get('listar-usuario/{id}', [UserController::class, 'show']);
 Route::delete('excluir-usuario/{id}', [UserController::class, 'destroy']);
@@ -33,7 +34,9 @@ Route::delete('excluir-usuario/{id}', [UserController::class, 'destroy']);
 //Rotas conta bancária
 Route::post('criar-conta', [AccountController::class, 'criarConta']);
 Route::get('movimentacoes', [AccountController::class, 'extrato']);
+Route::get('soma-movimentacoes', [AccountController::class, 'somaMovimentacoes']);
 Route::get('csv', [AccountController::class, 'esportaCsv']);
+Route::get('csv30dias', [AccountController::class, 'esportaCsvUltimos30Dias']);
 
 Route::post('credito', [CreditController::class, 'credito']);
 

@@ -20,19 +20,22 @@ abs. testado via Insomnia (https://insomnia.rest/download).
     {
       "name": "user1",
       "email": "user1@user.com.br",
-      "birthday": "10/12/2010"
+      "birthday": "10/12/2010",
+      "saldo_inicial":50000
     }
 
     {
       "name": "user2",
       "email": "user2@user.com.br",
-      "birthday": "12/07/1980"
+      "birthday": "12/07/1980",
+      "saldo_inicial":50000
     }
 
     {
       "name": "user3",
       "email": "user3@user.com.br",
-      "birthday": "12/09/1999"
+      "birthday": "12/09/1999",
+      "saldo_inicial":50000
     }
 
   2.2 __ORDENAR USUARIO__  
@@ -137,24 +140,27 @@ abs. testado via Insomnia (https://insomnia.rest/download).
 
 
   3.9 __GERAR ARQUIVO CSV__  
-    necessário pacote pelo comando __Composer require maatwebsite/excel__
+    3.9.1 rota GET (http://localhost:8000/api/csv) 
 
-    Incluir no arquivo "config/app":
+  3.10 __CSV FILTRO ULTIMOS 30 DIAS__
+    3.10.1 rota GET (http://localhost:8000/api/csv30dias)  
+  
+  3.11 __ALTERA SALDO INICIAL__  
+    3.11.1 rota POST (http://localhost:8000/api/altera-saldo-inicial)  
 
-    'providers' => [
-      Maatwebsite\Excel\ExcelServiceProvider::class,
- 
-    ],  
+    informar o id do usuario e o valor  
 
-    'aliases' => [ 
-      'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+    {
+      "id": 1,
+      "valor": 0
+    }
+    
+    {
+      "id": 2,
+      "valor": 100
+    }
 
-    ],  
-
-    Publicar a mudança e gerar arquivo "config/excel.php", rodar comando: 
-    "php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider"  
-
-
+ __SOMA MOVIMENTACOES__ 
 
 
   

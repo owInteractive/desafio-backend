@@ -17,7 +17,7 @@ class CreditController extends Controller
         $credit->account_id = $request->input('account_id');
         if($credit->valor_credito <= 0.00) {
             return response()->json([
-                'message'   => 'Valor não pode ser menor a igual a 0.00',
+                'message'   => 'Valor não pode ser menor ou igual a 0.00',
             ], 400);
         }
         

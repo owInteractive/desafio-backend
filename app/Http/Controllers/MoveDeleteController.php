@@ -53,18 +53,6 @@ class MoveDeleteController extends Controller
             ], 400);
         }
 
-        //     return response()->json([
-        //         'message'   => 'Movimentação excluida com sucesso',
-        //     ], 200);
-
-           
-        // } else {
-        //     return response()->json([
-        //         'message'   => 'Não existe esta movimentação para este ID',
-        //     ], 400);
-        // }
-
-
     }
 
     public function excluirDebito($id)
