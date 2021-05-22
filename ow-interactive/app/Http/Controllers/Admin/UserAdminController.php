@@ -14,7 +14,7 @@ class UserAdminController extends Controller
     {
         try {
             $limit = $request->get('limit') ?? 20;
-            $data = User::paginate($limit);
+            $data = User::orderByDesc('id')->paginate($limit);
             return Response::success($data);
         } catch (\Throwable $th) {
             return Response::serverError();
