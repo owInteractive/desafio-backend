@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Helpers\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
@@ -16,9 +17,9 @@ class RegisterController extends Controller
             $user->fill($request->all());
             $user->password = Hash::make($user->password);
             $user->save();
-            return response()->json(["message" => "Erro ao criar usuário"], 201);
+            return Response::created(["message" => "Usuário criado com sucesso"]);
         } catch (\Throwable $th) {
-            return response()->json(["message" => "Erro ao criar usuário",], 400);
+            return Response::badRequest(["message" => "Erro ao criar usuário"]);
         }
     }
 }
