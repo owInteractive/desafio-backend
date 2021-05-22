@@ -15,6 +15,16 @@ class Response
         return self::response($data, 200);
     }
 
+    static function notFound($data)
+    {
+        return self::response($data, 404);
+    }
+
+    static function serverError()
+    {
+        return self::response(['message' => "Ocorreu um erro, tente novamente mais tarde."], 500);
+    }
+
     static function badRequest($data)
     {
         return self::response($data, 400);
