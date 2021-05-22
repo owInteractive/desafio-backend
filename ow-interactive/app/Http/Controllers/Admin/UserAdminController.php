@@ -32,4 +32,20 @@ class UserAdminController extends Controller
             return Response::serverError();
         }
     }
+
+    public function destroy($id)
+    {
+        try {
+            $user = User::findOrFail($id);
+
+            if ($user->delete()) {
+                return Response::success(['message' => "Usuário excluído com suceso."]);
+            }
+            return Response::badRequest(['message' => "Erro ao excluir usuário."]);
+        } catch (ModelNotFoundException $th) {
+            return Response::notFound(['message' => "Usuário $id não encontrado."]);
+        } catch (\Throwable $th) {
+            return Response::serverError();
+        }
+    }
 }
