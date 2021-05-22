@@ -11,9 +11,14 @@ class RegisterController extends Controller
 {
     public function handle(Request $request)
     {
-        $user = new User();
-        $user->fill($request->all());
-        $user->password = Hash::make($user->password);
-        $user->save();
+        try {
+            $user = new User();
+            $user->fill($request->all());
+            $user->password = Hash::make($user->password);
+            $user->save();
+            return response()->json(["message" => "Erro ao criar usuário"], 201);
+        } catch (\Throwable $th) {
+            return response()->json(["message" => "Erro ao criar usuário",], 400);
+        }
     }
 }
