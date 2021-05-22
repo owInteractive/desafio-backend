@@ -16,4 +16,10 @@ class UserAdminController extends Controller
 
         return Response::success($data);
     }
+
+    public function show($id)
+    {
+        $user = User::find($id);
+        return $user;
+    }
 }
