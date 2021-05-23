@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [RegisterController::class, 'handle']);
 Route::apiResource('moviments', MovimentController::class)->except(['show', 'update']);
 
+
+Route::group(['prefix' => 'reports'], function () {
+    Route::get('moviments', [MovimentController::class, 'report']);
+});
+
 Route::group(['prefix' => 'admin'], function () {
     Route::apiResource('users', UserAdminController::class)->except(['store', 'update']);
 });

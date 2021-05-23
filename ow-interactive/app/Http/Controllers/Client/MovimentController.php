@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Helpers\CSVHelper;
 use App\Helpers\Response;
 use App\Http\Controllers\Controller;
 use App\Models\Financial;
@@ -90,5 +91,44 @@ class MovimentController extends Controller
         } catch (\Throwable $th) {
             return Response::serverError();
         }
+    }
+
+    public function report(Request $request)
+    {
+
+        $type = $request->get('type') ?? 'last-month';
+        $period = $request->get('period');
+        $userId = $request->get('userId');
+
+        $moviments = Moviment::select(
+            'moviments.created_at',
+            'moviments.value',
+            'moviment_types.name as type'
+        )
+            ->join('financials', 'financials.id', 'moviments.financial_id')
+            ->join('moviment_types', 'moviment_types.id', 'moviments.moviment_type_id')
+            ->where('financials.user_id', $userId)
+            ->orderByDesc('moviments.id');
+
+        if ($type === 'last-month') {
+            $afterDate = date('Y-m-d', strtotime('-30 days'));
+            $moviments = $moviments->whereDate('moviments.created_at', '>=', $afterDate);
+        } else if ($type === 'period') {
+            if (!$period || strlen($period) !== 7 || strpos($period, '-') !== 4)
+                return Response::badRequest(["message" => "Para usar o filtro de período informa a data no formato YYYY-MM."]);
+
+            list($year, $month) = explode('-', $period);
+            $moviments = $moviments->whereYear('moviments.created_at', $year)
+                ->whereMonth('moviments.created_at', $month);
+        }
+
+        $moviments = $moviments->get()->toArray();
+        $columns = ['Data', 'Valor', 'Operação'];
+        $fileName = "movimentações-$userId";
+
+        $file = CSVHelper::generateStreamFile($moviments, $columns);
+        $headers = CSVHelper::getResponseHeader($fileName);
+
+        return response()->stream($file, 200, $headers);
     }
 }
