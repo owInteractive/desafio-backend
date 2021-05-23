@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Financial;
 use App\Models\Moviment;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,7 @@ class MovimentController extends Controller
                 ->findOrFail($userId);
 
             $moviments = Moviment::select(
+                'moviments.id',
                 'moviments.value',
                 'moviments.created_at',
                 'moviment_types.name as type'
@@ -70,6 +72,23 @@ class MovimentController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
             return Response::badRequest(["message" => "Erro ao registrar movimento."]);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $moviment = Moviment::findOrFail($id);
+
+            if ($moviment->delete()) {
+                return Response::success(['message' => "Movimentação excluída com suceso."]);
+            }
+
+            return Response::badRequest(['message' => "Erro ao excluir movimentação."]);
+        } catch (ModelNotFoundException $th) {
+            return Response::notFound(['message' => "Movimentação $id não encontrada."]);
+        } catch (\Throwable $th) {
+            return Response::serverError();
         }
     }
 }
