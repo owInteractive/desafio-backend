@@ -11,6 +11,7 @@ class Financial extends Model
 
     protected $fillable = [
         "user_id",
+        "opening_balance",
         "current_balance",
     ];
 

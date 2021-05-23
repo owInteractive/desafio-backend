@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Financial;
 use App\Models\Moviment;
 use App\Models\User;
+use App\Services\FinancialService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -130,5 +131,24 @@ class MovimentController extends Controller
         $headers = CSVHelper::getResponseHeader($fileName);
 
         return response()->stream($file, 200, $headers);
+    }
+
+    public function changeOpeningBalance(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $userId = $request->get('user_id');
+            $financial = Financial::where('user_id', $userId)->first();
+            $financial->opening_balance = $request->opening_balance;
+            FinancialService::recalcBalance($financial);
+            DB::commit();
+            return Response::success(['Saldo inicial alterado com sucesso.']);
+        } catch (ModelNotFoundException $th) {
+            DB::rollback();
+            return Response::notFound(['message' => "Usuário não encontado."]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return Response::serverError();
+        }
     }
 }
