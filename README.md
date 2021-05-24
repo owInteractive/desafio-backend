@@ -101,7 +101,8 @@ abs. testado via Insomnia (https://insomnia.rest/download).
   3.6.1 rota GET (http://localhost:8000/api/soma-movimentacoes)       
 
 
-
+3.7 __INSOMNIA TESTE__
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=desafio%20backend%20api&uri=https%3A%2F%2Fraw.githubusercontent.com%2Froxreis%2Fdesafio-backend%2Fmaster%2FInsomnia_2021-05-24.json)
 
 
 ![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.jpg "OW Interactive")
