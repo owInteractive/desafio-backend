@@ -54,82 +54,35 @@ class MovimentacoesController extends Controller
     {
            //pega os dados da tabela users junto com a tabela movimentações
             $statements = DB::table('users')
-            ->leftjoin('movimentacoes', 'movimentacoes.user_id', '=', 'users.id')
+            ->join('movimentacoes', 'movimentacoes.user_id', '=', 'users.id')
             ->get();
-  
+
             return response()->json($statements);               
     }
 
 
-    public function excluirMovimentacao(Request $request)
+    public function excluirMovimentacao(Int $id)
     {
-        $move = $request->input('nome da movimentação');
-        $id = $request->input('id da movimentação');
-        
-        //valida qual funcao de exclusão chamar pelo nome da movimentação informado
-        switch ($move) {
-            case 'credito':
-               $this->excluirCredito($id);
-                break;
-            case 'debito':
-                $this->excluirDebito($id);
-                break;
-            case 'estorno':
-                $this->excluirEstorno($id);
-                break;
+           //valida se não existe alguma movimentação informado pelo id
+            $move = Movimentacao::find($id);
+            if(is_null($move)) {
 
-        }
-        
+                return response()->json([
+                    'message'   => 'Movimentação não econtrada por esse id',
+                ], 400);
+
+            } else {
+
+                
+                // se existir, faz a exclusão
+                $move->delete();
+                return response()->json([
+                    'message'   => "Movimentação id $id deletada com sucesso",
+                ], 200);
+            }
+       
     }
 
-    public function excluirCredito($id)
-    {
-        //procura o id informado e retorna o id da conta cujo o debito foi vinculado
-        $credit = Movimentacao::find($id);
-        if (!is_null($credit)) {
-            
-           $credit->delete();
-
-        } else {
-            return response()->json([
-                'message'   => 'Não existe esta movimentação para este ID',
-            ], 400);
-        }
-
-    }
-
-    public function excluirDebito($id)
-    {
-        //procura o id informado e retorna o id da conta cujo o debito foi vinculado
-        $debit = Movimentacao::find($id);
-        if (!is_null($debit)) {
-
-            $debit->delete();
-
-        } else {
-            return response()->json([
-                'message'   => 'Não existe esta movimentação para este ID',
-            ], 400);
-
-        }
-    }
-    
-
-    public function excluirEstorno($id)
-    {
-        //procura o id informado e retorna o id da conta cujo o debito foi vinculado
-        $reversal = Movimentacao::find($id);
-        if (!is_null($reversal)) {
-   
-            $reversal->delete();
-
-      
-        } else {
-            return response()->json([
-                'message'   => 'Não existe esta movimentação para este ID',
-            ], 400);
-        } 
-    }
 
 
     public function esportaCsv($filtro)
@@ -141,7 +94,7 @@ class MovimentacoesController extends Controller
         if ($filtro == 30) {
 
             $tasks = DB::table('users')
-            ->leftjoin('movimentacoes', 'users.id', '=', 'movimentacoes.user_id')
+            ->join('movimentacoes', 'users.id', '=', 'movimentacoes.user_id')
             ->select('users.*', 'movimentacoes.nome_movimentacao', 'movimentacoes.user_id', 'movimentacoes.valor', 'movimentacoes.updated_at')
             ->where('movimentacoes.updated_at', '>', date('Y-m-d', strtotime('-1 month')))
             ->get();
@@ -150,7 +103,7 @@ class MovimentacoesController extends Controller
         } elseif ($filtro == 'tudo') {
 
             $tasks = DB::table('users')
-            ->leftjoin('movimentacoes', 'users.id', '=', 'movimentacoes.user_id')
+            ->join('movimentacoes', 'users.id', '=', 'movimentacoes.user_id')
             ->select('users.*', 'movimentacoes.nome_movimentacao', 'movimentacoes.user_id', 'movimentacoes.valor', 'movimentacoes.updated_at')
             ->get();
         }

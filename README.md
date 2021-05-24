@@ -35,7 +35,7 @@ abs. testado via Insomnia (https://insomnia.rest/download).
       "birthday": "12/09/1999"
     }
 
-  2.2 __LISTAR USUÁRIOS POR ORDER__  
+  2.2 __LISTAR USUÁRIOS POR ORDER DE CADASTRO__  
   2.2.1 rota GET : (http://localhost:8000/api/listar-usuarios).    
 
   2.3 __LISTAR USUÁRIO POR ID__  
@@ -47,7 +47,7 @@ abs. testado via Insomnia (https://insomnia.rest/download).
 
   ## 3. Cadastrar Movimentações / Endpoint De Movimentações    
   3.1 __ASSOCIAR UMA MOVIMENTAÇÃO A UM USUÁRIO__     
-    3.1.1 rota POST: (http://localhost:8000/api/movimentacoes)  
+    3.1.1 rota POST: (http://localhost:8000/api/associar-movimentacao)  
 
     {
       "id do usuário": 1,
@@ -68,28 +68,12 @@ abs. testado via Insomnia (https://insomnia.rest/download).
     }    
 
   3.2 __LISTAR MOVIMENTAÇÕES__  
-    3.2.1 rota GET: (http://localhost:8000/api/movimentacoes)  
+    3.2.1 rota GET: (http://localhost:8000/api/listar-movimentacoes)  
 
   3.3 __EXCLUIR MOVIMENTAÇÕES__  
-    3.3.1 rota POST (http://localhost:8000/api/excluir-movimentacao)  
+    3.3.1 rota DELETE (http://localhost:8000/api/excluir-movimentacao/{id})  
 
-  Necessário informar o id da movimentação a ser excluída.
-
-  {
-    "nome da movimentação": "debito",
-    "id da movimentação": 2
-  } 
-
-  {
-    "nome da movimentação": "credito",
-    "id da movimentação": 1
-  } 
-
-  {
-    "nome da movimentação": "estorno",
-    "id da movimentação": 2
-  } 
-
+  
   3.4 __GERAR ARQUIVO CSV__  
     
     3.4.1 rota GET (http://localhost:8000/api/csv/{filtro}) 

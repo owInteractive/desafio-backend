@@ -35,7 +35,7 @@ Route::delete('excluir-usuario/{id}', [UserController::class, 'destroy']);
 //Rotas das Movimentações 
 Route::post('associar-movimentacao', [MovimentacoesController::class, 'associaMovimentacao']);
 Route::get('listar-movimentacoes', [MovimentacoesController::class, 'extrato']);
-Route::post('excluir-movimentacao', [MovimentacoesController::class, 'excluirMovimentacao']);
+Route::delete('excluir-movimentacao/{id}', [MovimentacoesController::class, 'excluirMovimentacao']);
 Route::get('csv/{filtro}', [MovimentacoesController::class, 'esportaCsv']);
 Route::get('soma-movimentacoes', [MovimentacoesController::class, 'somaMovimentacoes']);
 
