@@ -12,14 +12,17 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::post('/register', [RegisterController::class, 'handle']);
-Route::post('change-opening-balance', [MovimentController::class, 'changeOpeningBalance']);
-Route::get('balance', [MovimentController::class, 'balance']);
-Route::apiResource('moviments', MovimentController::class)->except(['show', 'update']);
 
-Route::group(['prefix' => 'reports'], function () {
-    Route::get('moviments', [MovimentController::class, 'report']);
+Route::group(['prefix' => '/', 'middleware' => ['auth:api']], function () {
+    Route::post('change-opening-balance', [MovimentController::class, 'changeOpeningBalance']);
+    Route::get('balance', [MovimentController::class, 'balance']);
+    Route::apiResource('moviments', MovimentController::class)->except(['show', 'update']);
+
+    Route::group(['prefix' => 'reports'], function () {
+        Route::get('moviments', [MovimentController::class, 'report']);
+    });
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
     Route::apiResource('users', UserAdminController::class)->except(['store', 'update']);
 });
