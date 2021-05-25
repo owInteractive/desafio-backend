@@ -46,7 +46,6 @@ class UserAdminController extends Controller
         } catch (BadResponse $th) {
             return Response::badRequest(['message' => $th->getMessage()]);
         } catch (\Throwable $th) {
-            return $th;
             return Response::serverError();
         }
     }

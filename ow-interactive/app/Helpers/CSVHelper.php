@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-
 class CSVHelper
 {
     public static function generateStreamFile(array $rows, array $columns, array $headers = null)
