@@ -1,0 +1,525 @@
+_type: export
+__export_format: 4
+__export_date: 2021-05-25T14:20:22.580Z
+__export_source: insomnia.desktop.app:v2021.3.0
+resources:
+  - _id: req_f655c2e214c34eb6802310093310d4e7
+    parentId: fld_2f4453f7079542a08d88ac17d42900db
+    modified: 1621952188666
+    created: 1621691772391
+    url: "{{baseURL}}/admin/users/6"
+    name: Delete
+    description: ""
+    method: DELETE
+    body: {}
+    parameters:
+      - name: page
+        value: "1"
+        description: ""
+        id: pair_db218670c6bf47049110e361ca5c05fe
+      - name: limit
+        value: "2"
+        description: ""
+        id: pair_1254812ef4ff49bca4b0807075c7e302
+        disabled: false
+    headers:
+      - name: Accept
+        value: application/json
+        description: ""
+        id: pair_94ffa8cd88944c88ae7b167d32512f7f
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: 0
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_2f4453f7079542a08d88ac17d42900db
+    parentId: fld_b434cdbebd1a4fd099623cd57345bd18
+    modified: 1621952188659
+    created: 1621690206077
+    name: User
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: 0
+    _type: request_group
+  - _id: fld_b434cdbebd1a4fd099623cd57345bd18
+    parentId: wrk_c1ae02c6a2224df1b44f85c707e4af50
+    modified: 1621952188653
+    created: 1621690191773
+    name: Admin
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: 0
+    _type: request_group
+  - _id: wrk_c1ae02c6a2224df1b44f85c707e4af50
+    parentId: null
+    modified: 1621687635163
+    created: 1621687635163
+    name: Desafio Back-End - OW Interactive
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_53fa4f3eed274ffdb8fa6a9aebd009bc
+    parentId: fld_2f4453f7079542a08d88ac17d42900db
+    modified: 1621952188666
+    created: 1621690214205
+    url: "{{baseURL}}/admin/users"
+    name: List
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - name: page
+        value: "1"
+        description: ""
+        id: pair_db218670c6bf47049110e361ca5c05fe
+      - name: limit
+        value: "2"
+        description: ""
+        id: pair_1254812ef4ff49bca4b0807075c7e302
+        disabled: false
+    headers:
+      - name: Accept
+        value: application/json
+        description: ""
+        id: pair_94ffa8cd88944c88ae7b167d32512f7f
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: 100
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1d0e9f51998b4cd6b2ff6cec83c4c64e
+    parentId: fld_2f4453f7079542a08d88ac17d42900db
+    modified: 1621952188666
+    created: 1621690610195
+    url: "{{baseURL}}/admin/users/1"
+    name: Show
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - name: page
+        value: "1"
+        description: ""
+        id: pair_db218670c6bf47049110e361ca5c05fe
+      - name: limit
+        value: "2"
+        description: ""
+        id: pair_1254812ef4ff49bca4b0807075c7e302
+        disabled: false
+    headers:
+      - name: Accept
+        value: application/json
+        description: ""
+        id: pair_94ffa8cd88944c88ae7b167d32512f7f
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: 200
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_4c7e34e2249b46ceb19cb51c842ecabc
+    parentId: fld_2bc76cedfe404b59b97d96b1fcb9842a
+    modified: 1621952188660
+    created: 1621946338059
+    url: "{{baseURL}}/auth/login"
+    name: Login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "gabriel@test.com",
+        	"password": "test1234"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_b4b167a7ec1548e79b159d381b85614e
+      - name: Accept
+        value: application/json
+        description: ""
+        id: pair_c776ac1604eb44868163e80d29892a2a
+    authentication: {}
+    metaSortKey: 0
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_2bc76cedfe404b59b97d96b1fcb9842a
+    parentId: wrk_c1ae02c6a2224df1b44f85c707e4af50
+    modified: 1621952188653
+    created: 1621946325573
+    name: Auth
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: 100
+    _type: request_group
+  - _id: req_e29cba532dd046ba8a808c6a19fcdf0d
+    parentId: fld_2bc76cedfe404b59b97d96b1fcb9842a
+    modified: 1621952188660
+    created: 1621946409692
+    url: "{{baseURL}}/auth/logout"
+    name: Logout
+    description: ""
+    method: POST
+    body: {}
+    parameters: []
+    headers:
+      - name: Accept
+        value: application/json
+        description: ""
+        id: pair_c776ac1604eb44868163e80d29892a2a
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: 100
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e8b9810835334a1fa77e25e906914b97
+    parentId: fld_30fd870ed8ca4386b686a89f1aace272
+    modified: 1621952188660
+    created: 1621943487825
+    url: "{{baseURL}}/balance"
+    name: Balance
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - name: userId
+        value: "1"
+        description: ""
+        id: pair_239faa34cf7345d991496abff2aa3ed4
+    headers:
+      - name: Accept
+        value: application/json
+        description: ""
+        id: pair_94ffa8cd88944c88ae7b167d32512f7f
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: 0
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_30fd870ed8ca4386b686a89f1aace272
+    parentId: wrk_c1ae02c6a2224df1b44f85c707e4af50
+    modified: 1621952188653
+    created: 1621695367345
+    name: Moviment
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: 200
+    _type: request_group
+  - _id: req_7693f1f175164bf4b61a01a09b696bdd
+    parentId: fld_30fd870ed8ca4386b686a89f1aace272
+    modified: 1621952188660
+    created: 1621779398345
+    url: "{{baseURL}}/change-opening-balance"
+    name: Change Opening Balance
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"user_id": 1,
+        	"opening_balance": 0
+        }
+    parameters: []
+    headers:
+      - name: Accept
+        value: application/json
+        description: ""
+        id: pair_94ffa8cd88944c88ae7b167d32512f7f
+      - name: Content-Type
+        value: application/json
+        id: pair_8c453f6e612048b59fec4e2be9cdef2d
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: 100
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_cceebaa407fe469581b1aae7839c010c
+    parentId: fld_30fd870ed8ca4386b686a89f1aace272
+    modified: 1621952188661
+    created: 1621695367354
+    url: "{{baseURL}}/moviments"
+    name: Create
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"user_id": 1,
+        	"moviment_type_id": 3,
+        	"value": 30
+        }
+    parameters: []
+    headers:
+      - name: Accept
+        value: application/json
+        description: ""
+        id: pair_94ffa8cd88944c88ae7b167d32512f7f
+      - name: Content-Type
+        value: application/json
+        id: pair_8c453f6e612048b59fec4e2be9cdef2d
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: 200
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_d3341bf40c5a4caca2aa18c22ccff562
+    parentId: fld_30fd870ed8ca4386b686a89f1aace272
+    modified: 1621952188661
+    created: 1621695367356
+    url: "{{baseURL}}/moviments/26"
+    name: Delete
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - name: Accept
+        value: application/json
+        description: ""
+        id: pair_94ffa8cd88944c88ae7b167d32512f7f
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: 300
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_fa164e37c65d4d0aa458d8ebbc0df0de
+    parentId: fld_30fd870ed8ca4386b686a89f1aace272
+    modified: 1621952188661
+    created: 1621695367349
+    url: "{{baseURL}}/moviments"
+    name: List
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - name: page
+        value: "1"
+        description: ""
+        id: pair_db218670c6bf47049110e361ca5c05fe
+      - name: limit
+        value: "15"
+        description: ""
+        id: pair_1254812ef4ff49bca4b0807075c7e302
+        disabled: false
+    headers:
+      - name: Accept
+        value: application/json
+        description: ""
+        id: pair_94ffa8cd88944c88ae7b167d32512f7f
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: 400
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_77857ffc41eb498eb9fc642c9cd95684
+    parentId: fld_30fd870ed8ca4386b686a89f1aace272
+    modified: 1621952188661
+    created: 1621773489657
+    url: "{{baseURL}}/reports/moviments"
+    name: Report
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - name: userId
+        value: "1"
+        description: ""
+        id: pair_508e09923ac140eda102127431d17c4e
+      - name: type
+        value: all
+        description: ""
+        id: pair_aa211a12f7234393bc43d647356291c7
+        disabled: false
+      - name: period
+        value: 2021-05
+        description: ""
+        id: pair_e6d9298f54b547998ef617de1288e1a0
+        disabled: true
+    headers:
+      - name: Accept
+        value: application/json
+        description: ""
+        id: pair_576aa6db271b45ee99f1a0effc3ac148
+        disabled: false
+      - name: ""
+        value: ""
+        description: ""
+        id: pair_8bd9ade55f6b4634ab57269dba6d6542
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: 500
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_472a618110734e23a7ad259fa7bb3fde
+    parentId: fld_672f8c9b21b741499a5ec6d496528ae5
+    modified: 1621952188663
+    created: 1621687695465
+    url: "{{baseURL}}/register"
+    name: Register
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Gabriel",
+        	"email": "gabriel@test.com",
+        	"password": "test1234",
+        	"birthday": "2003-05-25"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_11b5d570769c480180ef54bd2368e3fc
+      - name: Accept
+        value: application/json
+        description: ""
+        id: pair_17c8f1fe7f9e4d67a923ad5c5fd5b07f
+    authentication:
+      type: bearer
+      token: "{{token}}"
+    metaSortKey: 0
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_672f8c9b21b741499a5ec6d496528ae5
+    parentId: wrk_c1ae02c6a2224df1b44f85c707e4af50
+    modified: 1621952188653
+    created: 1621687681522
+    name: Users
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: 300
+    _type: request_group
+  - _id: env_f575174db5a6f1ea025518fdfbe30902e44be4c4
+    parentId: wrk_c1ae02c6a2224df1b44f85c707e4af50
+    modified: 1621687635389
+    created: 1621687635389
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1621687635389
+    _type: environment
+  - _id: jar_f575174db5a6f1ea025518fdfbe30902e44be4c4
+    parentId: wrk_c1ae02c6a2224df1b44f85c707e4af50
+    modified: 1621687635395
+    created: 1621687635395
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_88a693da578b4f5bb6e60917d2b441d1
+    parentId: wrk_c1ae02c6a2224df1b44f85c707e4af50
+    modified: 1621687635166
+    created: 1621687635166
+    fileName: Desafio Back-End - OW Interactive
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_4a628d11e9bd4fdf9f0f515dd92f667a
+    parentId: env_f575174db5a6f1ea025518fdfbe30902e44be4c4
+    modified: 1621952162276
+    created: 1621687642777
+    name: Dev
+    data:
+      baseURL: http://localhost:8000/api
+      token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyMTk1MjE1MiwiZXhwIjoxNjIxOTU1NzUyLCJuYmYiOjE2MjE5NTIxNTIsImp0aSI6Im10UnJJSFpsUEM4UDZ3UVUiLCJzdWIiOjQsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.8rMNCRoX-ek_oCo_Oel7a2zTp_YmXu7EQN6cA3Y_r9o
+    dataPropertyOrder:
+      "&":
+        - baseURL
+        - token
+    color: "#05ffc1"
+    isPrivate: false
+    metaSortKey: 1621687642777
+    _type: environment
