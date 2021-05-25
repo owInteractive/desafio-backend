@@ -24,5 +24,5 @@ Route::group(['prefix' => '/', 'middleware' => ['auth:api']], function () {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
-    Route::apiResource('users', UserAdminController::class)->except(['store', 'update']);
+    Route::apiResource('users', UserAdminController::class)->except(['update']);
 });
