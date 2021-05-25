@@ -40,13 +40,6 @@ class MovimentService
 
         try {
             $financial = Financial::where('user_id', $userId)->first();
-
-            if (!$financial) {
-                $financial = new Financial();
-                $financial->user_id = $userId;
-                $financial->save();
-            }
-
             $financial->moviments()->create($request->all());
 
             $financial->current_balance = $request->get('moviment_type_id') === 1 ?

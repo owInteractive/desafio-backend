@@ -45,9 +45,8 @@ class MovimentController extends Controller
         try {
             $userId = Auth::user()->id;
 
-            if (MovimentService::destroy($id, $userId)) {
+            if (MovimentService::destroy($id, $userId))
                 return Response::success(['message' => "Movimentação excluída com suceso."]);
-            }
 
             return Response::badRequest(['message' => "Erro ao excluir movimentação."]);
         } catch (ModelNotFoundException $th) {
