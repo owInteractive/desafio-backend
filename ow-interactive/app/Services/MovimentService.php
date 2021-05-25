@@ -61,7 +61,7 @@ class MovimentService
     {
 
         try {
-            $moviment = Moviment::join('financials', 'financials.id', 'moviment.financial_id')
+            $moviment = Moviment::join('financials', 'financials.id', 'moviments.financial_id')
                 ->where('financials.user_id', $userId)
                 ->findOrFail($id);
 
