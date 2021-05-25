@@ -23,8 +23,11 @@ class RegisterRequest extends FormRequest
      */
     public function rules()
     {
+
+        $maxBirthDay = date('Y-m-d', strtotime('-18 years'));
+
         return [
-            "birthday" => "required|date",
+            "birthday" => "required|date|before_or_equal:$maxBirthDay",
             "email" => "required|email|unique:users,email",
             "name" => "required|min:2|max:255",
             "password" => "required|min:8|max:64",
@@ -36,6 +39,7 @@ class RegisterRequest extends FormRequest
         return [
             "birthday.required" => "data de nascimento é obrigatória",
             "birthday.date" => "data de nascimento informada não é válida",
+            "birthday.before_or_equal" => "para de registrar deve ser maior de 18 anos",
             "email.required" => "e-mail é obrigatório",
             "email.email" => "e-mail informado não é válido",
             "email.unique" => "e-mail informado já está em uso",

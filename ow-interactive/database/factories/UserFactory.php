@@ -22,8 +22,7 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $maxBirthYear = date('Y') - 18;
-        $maxBirthDay = date('d-m-Y', strtotime(date('d-m-') . "$maxBirthYear"));
+        $maxBirthDay = date('Y-m-d', strtotime('-18 years'));
 
         return [
             'name' => $this->faker->name(),
