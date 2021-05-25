@@ -151,4 +151,20 @@ class MovimentController extends Controller
             return Response::serverError();
         }
     }
+
+    public function balance(Request $request)
+    {
+        $userId = $request->get('userId');
+
+        try {
+            $financial = Financial::select('opening_balance', 'current_balance')
+                ->where('user_id', $userId)->first();
+
+            return Response::success($financial);
+        } catch (ModelNotFoundException $th) {
+            return Response::notFound(['message' => "Usuário $userId não encontrado."]);
+        } catch (\Throwable $th) {
+            return Response::serverError();
+        }
+    }
 }
