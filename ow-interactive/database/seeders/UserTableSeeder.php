@@ -23,6 +23,8 @@ class UserTableSeeder extends Seeder
 
             $moviments = \App\Models\Moviment::factory()->count(10)->make();
             $moviments->each(function ($moviment) use ($financial) {
+                $moviment->created_at = now();
+                $moviment->updated_at = now();
                 $moviment->financial_id = $financial->id;
             });
             $allMovimentsValue = $moviments->sum('value');
