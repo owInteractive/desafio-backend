@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             MovimentTypeSeeder::class,
+            UserAdminTableSeeder::class,
             UserTableSeeder::class
         ]);
     }
