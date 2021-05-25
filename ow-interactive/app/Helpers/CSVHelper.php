@@ -5,11 +5,18 @@ namespace App\Helpers;
 
 class CSVHelper
 {
-    public static function generateStreamFile(array $rows, array $columns)
+    public static function generateStreamFile(array $rows, array $columns, array $headers = null)
     {
 
-        return function () use ($rows, $columns) {
+        return function () use ($rows, $columns, $headers) {
             $file = fopen('php://output', 'w');
+
+            if ($headers) {
+                foreach ($headers as $row) {
+                    fputcsv($file, $row);
+                }
+            }
+
             fputcsv($file, $columns);
             foreach ($rows as $row) {
                 fputcsv($file, $row);

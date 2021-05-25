@@ -124,10 +124,16 @@ class MovimentController extends Controller
         }
 
         $moviments = $moviments->get()->toArray();
+        $user = User::with('financial')->find($userId);
         $columns = ['Data', 'Valor', 'Operação'];
         $fileName = "movimentações-$userId";
 
-        $file = CSVHelper::generateStreamFile($moviments, $columns);
+        $csvHeader = [
+            ['Nome', 'Data de nascimento', 'Saldo inicial', 'Saldo atual'],
+            [$user->name, $user->birthday, $user->financial->opening_balance, $user->financial->current_balance]
+        ];
+
+        $file = CSVHelper::generateStreamFile($moviments, $columns, $csvHeader);
         $headers = CSVHelper::getResponseHeader($fileName);
 
         return response()->stream($file, 200, $headers);
