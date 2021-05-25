@@ -30,6 +30,11 @@ class Response
         return self::response($data, 400);
     }
 
+    static function unauthorized($data = ['message' => 'Acesso não autorizado.'])
+    {
+        return self::response($data, 401);
+    }
+
     private static function response($data, $status)
     {
         return response()->json($data, $status);
