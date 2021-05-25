@@ -104,31 +104,22 @@ class MovimentController extends Controller
 
     public function changeOpeningBalance(Request $request)
     {
-        DB::beginTransaction();
         try {
             $userId = Auth::user()->id;
-            $financial = Financial::where('user_id', $userId)->first();
-            $financial->opening_balance = $request->opening_balance;
-            FinancialService::recalcBalance($financial);
-            DB::commit();
+            FinancialService::changeOpeningBalance($request, $userId);
             return Response::success(['Saldo inicial alterado com sucesso.']);
         } catch (ModelNotFoundException $th) {
-            DB::rollback();
             return Response::notFound(['message' => "Usuário não encontado."]);
         } catch (\Throwable $th) {
-            DB::rollback();
             return Response::serverError();
         }
     }
 
     public function balance()
     {
-        $userId = Auth::user()->id;
-
         try {
-            $financial = Financial::select('opening_balance', 'current_balance')
-                ->where('user_id', $userId)->first();
-
+            $userId = Auth::user()->id;
+            $financial = FinancialService::balance($userId);
             return Response::success($financial);
         } catch (ModelNotFoundException $th) {
             return Response::notFound(['message' => "Usuário $userId não encontrado."]);

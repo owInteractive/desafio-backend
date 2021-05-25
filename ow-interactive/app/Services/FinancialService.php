@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\Financial;
 use App\Models\Moviment;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 
 class FinancialService
 {
@@ -21,5 +23,27 @@ class FinancialService
         $financial->save();
 
         return $financial;
+    }
+
+    public static function balance($userId)
+    {
+        return Financial::select('opening_balance', 'current_balance')
+            ->where('user_id', $userId)->first();
+    }
+
+    public static function changeOpeningBalance($request, $userId)
+    {
+        DB::beginTransaction();
+
+        try {
+            $financial = Financial::where('user_id', $userId)->first();
+            $financial->opening_balance = $request->opening_balance;
+            self::recalcBalance($financial);
+            DB::commit();
+            return true;
+        } catch (ModelNotFoundException $th) {
+            DB::rollback();
+            throw $th;
+        }
     }
 }
