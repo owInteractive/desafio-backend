@@ -35,6 +35,11 @@ class Response
         return self::response($data, 401);
     }
 
+    static function forbidden($data = ['message' => 'Ação não permitida.'])
+    {
+        return self::response($data, 403);
+    }
+
     static function stream($makeFile, $headers = [])
     {
         return response()->stream($makeFile, 200, $headers);

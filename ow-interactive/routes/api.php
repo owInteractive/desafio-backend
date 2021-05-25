@@ -13,7 +13,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::post('/register', [RegisterController::class, 'handle']);
 
-Route::group(['prefix' => '/', 'middleware' => ['auth:api']], function () {
+Route::group(['prefix' => '/', 'middleware' => ['auth:api', 'is:client']], function () {
     Route::post('change-opening-balance', [MovimentController::class, 'changeOpeningBalance']);
     Route::get('balance', [MovimentController::class, 'balance']);
     Route::apiResource('moviments', MovimentController::class)->except(['show', 'update']);
@@ -23,6 +23,6 @@ Route::group(['prefix' => '/', 'middleware' => ['auth:api']], function () {
     });
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:api', 'is:admin']], function () {
     Route::apiResource('users', UserAdminController::class)->except(['update']);
 });
