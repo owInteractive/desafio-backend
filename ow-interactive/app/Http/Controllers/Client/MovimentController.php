@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Services\FinancialService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MovimentController extends Controller
@@ -19,7 +20,7 @@ class MovimentController extends Controller
     public function index(Request $request)
     {
         try {
-            $userId = $request->get('userId');
+            $userId = Auth::user()->id;
             $limit = $request->get('limit') ?? 20;
 
 
@@ -49,14 +50,15 @@ class MovimentController extends Controller
     public function store(Request $request)
     {
 
+        $userId = Auth::user()->id;
         DB::beginTransaction();
 
         try {
-            $financial = Financial::where('user_id', $request->get('user_id'))->first();
+            $financial = Financial::where('user_id', $userId)->first();
 
             if (!$financial) {
                 $financial = new Financial();
-                $financial->user_id = $request->get('user_id');
+                $financial->user_id = $userId;
                 $financial->save();
             }
 
@@ -99,7 +101,7 @@ class MovimentController extends Controller
 
         $type = $request->get('type') ?? 'last-month';
         $period = $request->get('period');
-        $userId = $request->get('userId');
+        $userId = Auth::user()->id;
 
         $moviments = Moviment::select(
             'moviments.created_at',
@@ -143,7 +145,7 @@ class MovimentController extends Controller
     {
         DB::beginTransaction();
         try {
-            $userId = $request->get('user_id');
+            $userId = Auth::user()->id;
             $financial = Financial::where('user_id', $userId)->first();
             $financial->opening_balance = $request->opening_balance;
             FinancialService::recalcBalance($financial);
@@ -158,9 +160,9 @@ class MovimentController extends Controller
         }
     }
 
-    public function balance(Request $request)
+    public function balance()
     {
-        $userId = $request->get('userId');
+        $userId = Auth::user()->id;
 
         try {
             $financial = Financial::select('opening_balance', 'current_balance')
