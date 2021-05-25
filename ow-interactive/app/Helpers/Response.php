@@ -35,6 +35,11 @@ class Response
         return self::response($data, 401);
     }
 
+    static function stream($makeFile, $headers = [])
+    {
+        return response()->stream($makeFile, 200, $headers);
+    }
+
     private static function response($data, $status)
     {
         return response()->json($data, $status);

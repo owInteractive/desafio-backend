@@ -16,6 +16,6 @@ class MovimentTypeSeeder extends Seeder
     {
         MovimentType::create(["name" => 'Débito']);
         MovimentType::create(["name" => 'Crédito']);
-        MovimentType::create(["name" => 'Extorno']);
+        MovimentType::create(["name" => 'Estorno']);
     }
 }
