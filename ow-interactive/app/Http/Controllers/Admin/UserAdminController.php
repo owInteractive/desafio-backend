@@ -36,7 +36,14 @@ class UserAdminController extends Controller
     public function destroy($id)
     {
         try {
-            $user = User::findOrFail($id);
+            $user = User::with(['financial' => function ($builder) {
+                $builder->withCount('moviments');
+            }])
+                ->findOrFail($id);
+
+            if ($user->financial->current_balance || $user->financial->moviments_count)
+                return  Response::badRequest(['message' => "Impossível excluir um usuário com movimentações ou saldo."]);
+
 
             if ($user->delete()) {
                 return Response::success(['message' => "Usuário excluído com suceso."]);
