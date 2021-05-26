@@ -61,5 +61,5 @@
 
 - [x] Adicionar docker
 - [x] Explicação de como rodar o projeto
-- [ ] Documentação da API
+- [x] Documentação da API
 - [ ] Adicionar gerenciamento de cache

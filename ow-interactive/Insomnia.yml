@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2021-05-25T14:20:22.580Z
+__export_date: 2021-05-26T11:56:51.199Z
 __export_source: insomnia.desktop.app:v2021.3.0
 resources:
   - _id: req_f655c2e214c34eb6802310093310d4e7
     parentId: fld_2f4453f7079542a08d88ac17d42900db
-    modified: 1621952188666
+    modified: 1622030179774
     created: 1621691772391
     url: "{{baseURL}}/admin/users/6"
     name: Delete
@@ -41,7 +41,7 @@ resources:
     _type: request
   - _id: fld_2f4453f7079542a08d88ac17d42900db
     parentId: fld_b434cdbebd1a4fd099623cd57345bd18
-    modified: 1621952188659
+    modified: 1622030179767
     created: 1621690206077
     name: User
     description: ""
@@ -51,7 +51,7 @@ resources:
     _type: request_group
   - _id: fld_b434cdbebd1a4fd099623cd57345bd18
     parentId: wrk_c1ae02c6a2224df1b44f85c707e4af50
-    modified: 1621952188653
+    modified: 1622030179763
     created: 1621690191773
     name: Admin
     description: ""
@@ -69,7 +69,7 @@ resources:
     _type: workspace
   - _id: req_53fa4f3eed274ffdb8fa6a9aebd009bc
     parentId: fld_2f4453f7079542a08d88ac17d42900db
-    modified: 1621952188666
+    modified: 1622030179774
     created: 1621690214205
     url: "{{baseURL}}/admin/users"
     name: List
@@ -105,7 +105,7 @@ resources:
     _type: request
   - _id: req_1d0e9f51998b4cd6b2ff6cec83c4c64e
     parentId: fld_2f4453f7079542a08d88ac17d42900db
-    modified: 1621952188666
+    modified: 1622030179774
     created: 1621690610195
     url: "{{baseURL}}/admin/users/1"
     name: Show
@@ -141,7 +141,7 @@ resources:
     _type: request
   - _id: req_4c7e34e2249b46ceb19cb51c842ecabc
     parentId: fld_2bc76cedfe404b59b97d96b1fcb9842a
-    modified: 1621952188660
+    modified: 1622030179768
     created: 1621946338059
     url: "{{baseURL}}/auth/login"
     name: Login
@@ -175,7 +175,7 @@ resources:
     _type: request
   - _id: fld_2bc76cedfe404b59b97d96b1fcb9842a
     parentId: wrk_c1ae02c6a2224df1b44f85c707e4af50
-    modified: 1621952188653
+    modified: 1622030179763
     created: 1621946325573
     name: Auth
     description: ""
@@ -185,7 +185,7 @@ resources:
     _type: request_group
   - _id: req_e29cba532dd046ba8a808c6a19fcdf0d
     parentId: fld_2bc76cedfe404b59b97d96b1fcb9842a
-    modified: 1621952188660
+    modified: 1622030179768
     created: 1621946409692
     url: "{{baseURL}}/auth/logout"
     name: Logout
@@ -212,7 +212,7 @@ resources:
     _type: request
   - _id: req_e8b9810835334a1fa77e25e906914b97
     parentId: fld_30fd870ed8ca4386b686a89f1aace272
-    modified: 1621952188660
+    modified: 1622030179768
     created: 1621943487825
     url: "{{baseURL}}/balance"
     name: Balance
@@ -243,7 +243,7 @@ resources:
     _type: request
   - _id: fld_30fd870ed8ca4386b686a89f1aace272
     parentId: wrk_c1ae02c6a2224df1b44f85c707e4af50
-    modified: 1621952188653
+    modified: 1622030179763
     created: 1621695367345
     name: Moviment
     description: ""
@@ -253,7 +253,7 @@ resources:
     _type: request_group
   - _id: req_7693f1f175164bf4b61a01a09b696bdd
     parentId: fld_30fd870ed8ca4386b686a89f1aace272
-    modified: 1621952188660
+    modified: 1622030179769
     created: 1621779398345
     url: "{{baseURL}}/change-opening-balance"
     name: Change Opening Balance
@@ -264,7 +264,7 @@ resources:
       text: |-
         {
         	"user_id": 1,
-        	"opening_balance": 0
+        	"opening_balance": 40
         }
     parameters: []
     headers:
@@ -289,7 +289,7 @@ resources:
     _type: request
   - _id: req_cceebaa407fe469581b1aae7839c010c
     parentId: fld_30fd870ed8ca4386b686a89f1aace272
-    modified: 1621952188661
+    modified: 1622030179769
     created: 1621695367354
     url: "{{baseURL}}/moviments"
     name: Create
@@ -326,9 +326,9 @@ resources:
     _type: request
   - _id: req_d3341bf40c5a4caca2aa18c22ccff562
     parentId: fld_30fd870ed8ca4386b686a89f1aace272
-    modified: 1621952188661
+    modified: 1622030179769
     created: 1621695367356
-    url: "{{baseURL}}/moviments/26"
+    url: "{{baseURL}}/moviments/21"
     name: Delete
     description: ""
     method: DELETE
@@ -353,7 +353,7 @@ resources:
     _type: request
   - _id: req_fa164e37c65d4d0aa458d8ebbc0df0de
     parentId: fld_30fd870ed8ca4386b686a89f1aace272
-    modified: 1621952188661
+    modified: 1622030179769
     created: 1621695367349
     url: "{{baseURL}}/moviments"
     name: List
@@ -389,7 +389,7 @@ resources:
     _type: request
   - _id: req_77857ffc41eb498eb9fc642c9cd95684
     parentId: fld_30fd870ed8ca4386b686a89f1aace272
-    modified: 1621952188661
+    modified: 1622030179769
     created: 1621773489657
     url: "{{baseURL}}/reports/moviments"
     name: Report
@@ -435,7 +435,7 @@ resources:
     _type: request
   - _id: req_472a618110734e23a7ad259fa7bb3fde
     parentId: fld_672f8c9b21b741499a5ec6d496528ae5
-    modified: 1621952188663
+    modified: 1622030179769
     created: 1621687695465
     url: "{{baseURL}}/register"
     name: Register
@@ -473,7 +473,7 @@ resources:
     _type: request
   - _id: fld_672f8c9b21b741499a5ec6d496528ae5
     parentId: wrk_c1ae02c6a2224df1b44f85c707e4af50
-    modified: 1621952188653
+    modified: 1622030179763
     created: 1621687681522
     name: Users
     description: ""
@@ -509,12 +509,12 @@ resources:
     _type: api_spec
   - _id: env_4a628d11e9bd4fdf9f0f515dd92f667a
     parentId: env_f575174db5a6f1ea025518fdfbe30902e44be4c4
-    modified: 1621952162276
+    modified: 1622030119468
     created: 1621687642777
     name: Dev
     data:
       baseURL: http://localhost:8000/api
-      token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyMTk1MjE1MiwiZXhwIjoxNjIxOTU1NzUyLCJuYmYiOjE2MjE5NTIxNTIsImp0aSI6Im10UnJJSFpsUEM4UDZ3UVUiLCJzdWIiOjQsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.8rMNCRoX-ek_oCo_Oel7a2zTp_YmXu7EQN6cA3Y_r9o
+      token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTYyMjAzMDEwNiwiZXhwIjoxNjIyMDMzNzA2LCJuYmYiOjE2MjIwMzAxMDYsImp0aSI6Ikg4Y05INkJkOFZsUXVHMkgiLCJzdWIiOjQsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.jR7E73YXvHbTk6AeC1X5X41IUrkwxOnSCcCdfowYgeU
     dataPropertyOrder:
       "&":
         - baseURL
