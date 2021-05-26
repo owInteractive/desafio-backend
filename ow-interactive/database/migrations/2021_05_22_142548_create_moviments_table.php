@@ -15,8 +15,8 @@ class CreateMovimentsTable extends Migration
     {
         Schema::create('moviments', function (Blueprint $table) {
             $table->id();
-            $table->integer('financial_id')->unsigned();
-            $table->integer('moviment_type_id')->unsigned();
+            $table->bigInteger('financial_id')->unsigned();
+            $table->bigInteger('moviment_type_id')->unsigned();
             $table->double('value', 12, 2);
 
             $table->timestamps();
