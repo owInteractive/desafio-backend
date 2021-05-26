@@ -44,14 +44,9 @@ class MovimentService
             $financial = Financial::where('user_id', $userId)->first();
             $financial->moviments()->create($request->all());
 
-            $financial->current_balance = $request->get('moviment_type_id') === 1 ?
-                $financial->current_balance - $request->get('value') :
-                $financial->current_balance + $request->get('value');
-
-            $financial->save();
+            FinancialService::recalcBalance($financial);
 
             DB::commit();
-
             return true;
         } catch (\Throwable $th) {
             DB::rollback();
@@ -62,13 +57,16 @@ class MovimentService
     public static function destroy($id, $userId)
     {
 
+        DB::beginTransaction();
         try {
-            $moviment = Moviment::join('financials', 'financials.id', 'moviments.financial_id')
-                ->where('financials.user_id', $userId)
-                ->findOrFail($id);
+            $financial = Financial::where('user_id', $userId)->first();
+            $financial->moviments()->where('id', $id)->delete();
+            FinancialService::recalcBalance($financial);
 
-            return $moviment->delete();
+            DB::commit();
+            return true;
         } catch (\Throwable $th) {
+            DB::rollBack();
             throw $th;
         }
     }
