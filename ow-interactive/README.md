@@ -8,7 +8,7 @@
 
 ## Todo
 
-- [ ] Adicionar docker
+- [x] Adicionar docker
 - [ ] Explicação de como rodar o projeto
 - [ ] Documentação da API
 - [ ] Adicionar gerenciamento de cache
