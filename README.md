@@ -73,7 +73,7 @@ Nessa etapa serão itens onde veremos como você pensou e como chegou ao resulta
 - No endpoint que cadastra usuário, adicionar a funcionalidade que apenas maiores de 18 anos podem criar uma conta;
 - No endpoint que exporta o arquivo CSV criar um cabeçalho com os dados do cliente e o seu saldo atual;
 
-### Etapa 4 -Itens Não Obrigatórios
+### Etapa 4 - Diferenciais
 - Criar validações com base na Request;
 - Utilizar cache para otimizar as consultas e buscas;
 - Criar Seeders ou Inicializadores de dados para o usuários e suas movimentações;
