@@ -1,3 +1,110 @@
+obs. Testado em Windows 10
+## 1. Instalação
+  1.1 baixar e instalar o Composer em (https://getcomposer.org/download/).   
+  1.2 clonar o projeto em (https://github.com/roxreis/desafio-backend.git).  
+  1.3 Abrir terminal e rodar o comando __"composer install"__.  
+  1.4 Após configurar o banco de dados por meio do arquivo __.env__, rodar o comando __"php artisan migrate"__ para criar as tabelas usadas no projeto
+  1.5 Deixar o servidor interno do Laravel online, rodar o comando __"php artisan serve"__.
+
+
+
+## 2. Cadastrar Usuários / Endpoint Dos Usuários
+
+abs. testado via Insomnia (https://insomnia.rest/download).  
+  __Headers -> (KEY → Content-Type) VALUE ->(application/json)__    
+  __Body(raw)__    
+
+  2.1 __CADASTRAR USUARIO__  
+    2.1.1 rota POST : (http://localhost:8000/api/cadastra-usuario).  
+
+    {
+      "name": "user1",
+      "email": "user1@user.com.br",
+      "birthday": "10/12/2010"
+    }
+
+    {
+      "name": "user2",
+      "email": "user2@user.com.br",
+      "birthday": "12/07/1980"
+    }
+
+    {
+      "name": "user3",
+      "email": "user3@user.com.br",
+      "birthday": "12/09/1999"
+    }
+
+  2.2 __LISTAR USUÁRIOS POR ORDER DE CADASTRO__  
+  2.2.1 rota GET : (http://localhost:8000/api/listar-usuarios).    
+
+  2.3 __LISTAR USUÁRIO POR ID__  
+  2.3.1 rota GET : (http://localhost:8000/api/listar-usuario/{id}).    
+
+  2.4 __EXCLUIR USUÁRIO__  
+  2.4.1 rota DELETE : (http://localhost:8000/api/excluir-usuario/{id}).
+
+
+  ## 3. Cadastrar Movimentações / Endpoint De Movimentações    
+  3.1 __ASSOCIAR UMA MOVIMENTAÇÃO A UM USUÁRIO__     
+    3.1.1 rota POST: (http://localhost:8000/api/associar-movimentacao)  
+
+    {
+      "id do usuário": 1,
+      "nome da movimentacao": "credito",
+      "valor": 10000
+    }    
+
+    {
+      "id do usuário": 2,
+      "nome da movimentacao": "debito",
+      "valor": 10000
+    }    
+
+    {
+      "id do usuário": 3,
+      "nome da movimentacao": "estorno",
+      "valor": 10000
+    }    
+
+  3.2 __LISTAR MOVIMENTAÇÕES__  
+    3.2.1 rota GET: (http://localhost:8000/api/listar-movimentacoes)  
+
+  3.3 __EXCLUIR MOVIMENTAÇÕES__  
+    3.3.1 rota DELETE (http://localhost:8000/api/excluir-movimentacao/{id})  
+
+  
+  3.4 __GERAR ARQUIVO CSV__  
+    
+    3.4.1 rota GET (http://localhost:8000/api/csv/{filtro}) 
+    
+    se quiser ver todas as movimentações, colocar {filtro} = tudo   
+    se quiser ver as movimentações dos ultimos 30 dias, {filtro} = 30  
+
+  
+  3.5 __ALTERA SALDO INICIAL__  
+    3.5.1 rota POST (http://localhost:8000/api/altera-saldo-inicial)  
+
+    informar o id do usuario e o valor  
+
+    {
+      "id": 1,
+      "valor": 0
+    }
+    
+    {
+      "id": 2,
+      "valor": 100
+    }
+
+ 3.6 __SOMA MOVIMENTACOES__ 
+  3.6.1 rota GET (http://localhost:8000/api/soma-movimentacoes)       
+
+
+3.7 __INSOMNIA TESTE__      
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=desafio%20backend%20api&uri=https%3A%2F%2Fraw.githubusercontent.com%2Froxreis%2Fdesafio-backend%2Fmaster%2FInsomnia_2021-05-24.json)
+
+
 ![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.jpg "OW Interactive")
 
 # Desafio Back-End - OW Interactive 20/21
