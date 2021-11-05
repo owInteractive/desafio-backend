@@ -24,6 +24,7 @@ Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o des
 
 ## Requisitos Obrigatórios
 - Utilizar a linguagem [PHP](https://www.php.net/) ou [NodeJS](https://nodejs.org)
+- Utilizar MySQL (ou MariaDB) como base de dados.
 - Código bem documentado, legível e limpo;
 - Fazer uma API simples e objetiva em REST, com o retorno em JSON;
 - Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio;
