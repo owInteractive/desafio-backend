@@ -1,0 +1,5 @@
+/vendor
+/desafio-backend-diego/.idea
+Homestead.json
+Homestead.yaml
+.env
