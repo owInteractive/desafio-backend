@@ -1,0 +1,325 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel Road",
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/transaction/show/{id}": {
+            "get": {
+                "tags": [
+                    "/transaction"
+                ],
+                "summary": "Listar usuário",
+                "description": "Listar usuário",
+                "operationId": "124a65f8e1c4157138cf0f8ad10fa345",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado!"
+                    }
+                }
+            }
+        },
+        "/transaction/debit/{id}/{value}": {
+            "get": {
+                "tags": [
+                    "/transaction"
+                ],
+                "summary": "Debitar saldo ao usuário",
+                "description": "Debitar saldo ao usuário",
+                "operationId": "a69d12ddfae704282f99a3a634781c57",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "value",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado!"
+                    }
+                }
+            }
+        },
+        "/transaction/credit/{id}/{value}": {
+            "get": {
+                "tags": [
+                    "/transaction"
+                ],
+                "summary": "Creditar saldo ao usuário",
+                "description": "Creditar saldo ao usuário",
+                "operationId": "d07ac9682dc4d91a8a918ad5d05e39ce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "value",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado!"
+                    }
+                }
+            }
+        },
+        "/transaction/delete-transaction/{id}/{transaction}": {
+            "delete": {
+                "tags": [
+                    "/transaction"
+                ],
+                "summary": "Deletar Usuário",
+                "description": "Deletar Usuário",
+                "operationId": "e7394047348223a11457e13dc833d7f5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "transaction",
+                        "in": "path",
+                        "description": "transaction",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Usuário deletado com sucesso!",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não existe"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "/users"
+                ],
+                "summary": "Listar todos os usuários",
+                "description": "Listar todos os usuários",
+                "operationId": "5a61fd217e7500976e1ae5c5662a4903",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid tag value"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "/users"
+                ],
+                "summary": "Criar Usuário",
+                "description": "Criar Usuário",
+                "operationId": "65d0a1caf21e84c53fa0f2b8271f26c6",
+                "requestBody": {
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário criado com sucesso"
+                    },
+                    "404": {
+                        "description": "Menor de idade"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "/users"
+                ],
+                "summary": "Listar usuário",
+                "description": "Listar usuário",
+                "operationId": "ff5f10a2275aa6fe96d9a0ef05a069ce",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Usuário não encontrado!"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "/users"
+                ],
+                "summary": "Deletar Usuário",
+                "description": "Deletar Usuário",
+                "operationId": "f1c4cdc294934242a4db00662a78305a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Usuário deletado com sucesso!",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não existe"
+                    }
+                }
+            }
+        },
+        "/users/{id}/{value}": {
+            "get": {
+                "tags": [
+                    "/users"
+                ],
+                "summary": "Adicionar saldo ao usuário",
+                "description": "Adicionar saldo ao usuário",
+                "operationId": "ae1f000c0aa311ba2ef2ade824e909f9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "value",
+                        "in": "path",
+                        "description": "value",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado!"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "200": {
+                "description": "Successful operation"
+            },
+            "404": {
+                "description": "Usuário não encontrado!"
+            }
+        },
+        "parameters": {
+            "id": {
+                "name": "id",
+                "in": "path",
+                "description": "User id",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "value": {
+                "name": "value",
+                "in": "path",
+                "description": "value",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
