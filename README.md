@@ -24,7 +24,7 @@ Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o des
 
 ## Requisitos Obrigatórios
 - Utilizar a linguagem [PHP](https://www.php.net/) ou [NodeJS](https://nodejs.org)
-OBS: Caso seja enviado em PHP e sem docker enviar o projeto para que rode no PHP 8+
+<br/> OBS: Caso seja enviado em PHP e sem docker enviar o projeto para que rode no PHP 8+
 - Utilizar MySQL (ou MariaDB) como base de dados.
 - Código bem documentado, legível e limpo;
 - Fazer uma API simples e objetiva em REST, com o retorno em JSON;
