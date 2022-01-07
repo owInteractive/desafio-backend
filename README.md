@@ -33,7 +33,7 @@ Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o des
 - Em qualquer caso de erro ou  não encontrada a API deve retorna uma resposta condizente com o problema apresentado, por exemplo um retorno 500 ou 404;
 
 ## Diferenciais
-- Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x) ou [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation);
+- Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x), [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation), [Nest JS (Node)](https://nestjs.com/) ou TypeScript;
 - Utilizar o [Docker](https://www.docker.com/get-started) para conteinerização da aplicação;
 - Pensar em desempenho e escalabilidade, quando for uma quantidade muito grande de dados como o sistema se comportaria;
 - Criar testes (Apenas um exemplo, algo bem simples como validação do login ou consumo de um endpoint com ou sem autenticação, no README adicionar qual o comando utilizado para rodar o teste); 
