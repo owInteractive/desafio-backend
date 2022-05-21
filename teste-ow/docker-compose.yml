@@ -7,19 +7,18 @@ services:
         uid : 1000
       context: ./
       dockerfile: dockerfile
-    image: teste-plan-plantao-ativo
-    container_name: teste-plan-plantao-ativo
+    image: teste-ow
+    container_name: teste-ow-app
     restart: unless-stopped
     working_dir: /var/www
-    command: composer install
-    volumes:
+    volumes:  
       - ./:/var/www
     networks:
-      - teste-plan
+      - teste-ow
 
   database:
     image: postgres:latest
-    container_name: teste-plantao-ativo-database
+    container_name: teste-ow-database
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -29,11 +28,11 @@ services:
     ports:
       - 5432:5432
     networks:
-      - teste-plan
+      - teste-ow
 
   nginx:
     image: nginx:alpine
-    container_name: teste-plantao-ativo-nginx
+    container_name: teste-ow-nginx
     restart: unless-stopped
     ports:
       - 8000:80
@@ -41,8 +40,8 @@ services:
       - ./:/var/www
       - ./docker/server/nginx:/etc/nginx/conf.d/
     networks:
-      - teste-plan
+      - teste-ow
 
 networks:
-  teste-plan:
+  teste-ow:
     driver: bridge
