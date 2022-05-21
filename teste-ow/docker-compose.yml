@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: matheus
+        uid : 1000
+      context: ./
+      dockerfile: dockerfile
+    image: teste-plan-plantao-ativo
+    container_name: teste-plan-plantao-ativo
+    restart: unless-stopped
+    working_dir: /var/www
+    command: composer install
+    volumes:
+      - ./:/var/www
+    networks:
+      - teste-plan
+
+  database:
+    image: postgres:latest
+    container_name: teste-plantao-ativo-database
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    volumes:
+      - ./docker/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - teste-plan
+
+  nginx:
+    image: nginx:alpine
+    container_name: teste-plantao-ativo-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker/server/nginx:/etc/nginx/conf.d/
+    networks:
+      - teste-plan
+
+networks:
+  teste-plan:
+    driver: bridge
