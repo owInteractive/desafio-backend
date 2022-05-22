@@ -47,4 +47,9 @@ class User extends Authenticatable
     public function setPasswordAttribute($value) {
         $this->attributes['password'] = Hash::make($value);
     }
+
+    public function transitions()
+    {
+       return $this->hasMany(Transitions::class);
+    }
 }
