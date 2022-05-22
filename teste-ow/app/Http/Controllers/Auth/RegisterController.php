@@ -16,7 +16,8 @@ class RegisterController extends BaseController
         $validator = Validator::make($input, [
             'name'     => 'required',
             'password' => 'required',
-            'email'    => 'required'
+            'email'    => 'required|unique:users',
+            'birthday' => 'required|date_format:Y-m-d',
         ]);
 
         if($validator->fails()){
