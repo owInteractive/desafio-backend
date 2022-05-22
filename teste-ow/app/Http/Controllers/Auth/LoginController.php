@@ -24,7 +24,7 @@ class LoginController extends BaseController
         }
 
         if (!Auth::attempt($input)) {
-            abort(401, trans('Invalid Credentials', [], 'pt-BR'));
+            abort(401, 'Invalid Credentials');
         }
 
         $token = auth()->user()->createToken('auth_token')->plainTextToken;
@@ -35,6 +35,8 @@ class LoginController extends BaseController
     public function logout()
     {
         auth()->user()->currentAccessToken()->delete();
+
+        return $this->sendResponse([],'logout');
     }
 
 }
