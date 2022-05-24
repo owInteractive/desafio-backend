@@ -33,7 +33,9 @@ Este Projeto tem como objetivo ser avalidado em teste.
 
 
 -[x] Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
--[x]  Etapa 3 - Nova Funcionalidades
+-[x] Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
+-[x] Etapa 3 - Nova Funcionalidades
+-[x] Etapa 4 - Diferenciais
 ---
 
 ## 🚀 Como executar o projeto
