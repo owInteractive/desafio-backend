@@ -28,6 +28,7 @@ class Transitions extends Model
 
     /**
      * casting transition value
+     * @param float $value
      */
     public function setValueAttribute($value)
     {   
@@ -55,5 +56,10 @@ class Transitions extends Model
             ->get();
 
         return $data;
+    }
+
+    public function sumTransitionsForUser()
+    {
+        return self::selectRaw("user_id, SUM(value) as sum")->groupBy('user_id')->get();
     }
 }

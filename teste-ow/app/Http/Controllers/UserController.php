@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\API\BaseController;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Transitions;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
     protected $user;
+    protected $transitions;
 
     public function __construct()
     {
         $this->user = new User();
+        $this->transitions = new Transitions;
     }
 
     /**
@@ -75,8 +78,13 @@ class UserController extends BaseController
      */
     public function destroy(User $user)
     {
-        $user = $user->deleteOrFail();
+        $balance = $user->saldo === '0.000' ? true : false;
 
-        return $this->sendResponse($user, 'user deleted');
+        if ($user->checkExistsTransitions() || $balance) {
+            $user = $user->deleteOrFail();
+            return $this->sendResponse($user, 'user deleted');
+        }
+
+        return $this->sendResponse([], 'user has transitions or user has account balance');
     }
 }

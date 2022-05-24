@@ -27,7 +27,7 @@ class StoreUserRequest extends FormRequest
             'name'     => 'required',
             'password' => 'required',
             'email'    => 'required|unique:users',
-            'birthday' => 'required|date_format:Y-m-d',
+            'birthday' => 'required|date_format:Y-m-d|only_adults',
         ];
     }
 }

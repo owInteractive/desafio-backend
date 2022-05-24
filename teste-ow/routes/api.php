@@ -15,4 +15,5 @@ Route::get('/download/transitions', [TransitionsController::class, 'download']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('transitions', TransitionsController::class)->except('update');
+    Route::get('transitions/user/sum', [TransitionsController::class, 'sumTransitions'])->name('transitions.sum');
 });

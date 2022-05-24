@@ -14,10 +14,9 @@ use Illuminate\Http\Request;
 class TransitionsController extends BaseController
 {
     protected $transitions;
-    protected $createFIle;
     protected $helpers;
 
-    const HEADERS = ['id', 'data', 'tipo', 'valor', 'user_id', 'email'];
+    const HEADERS = ['id', 'data', 'tipo', 'valor', 'user_id', 'email', 'saldo'];
 
     public function __construct()
     {
@@ -97,5 +96,12 @@ class TransitionsController extends BaseController
         $filePath = storage_path('app/public/tmp') . '/' . $nameFile;
 
         return response()->download($filePath);
+    }
+
+    public function sumTransitions(User $user) {
+
+        $data['transitions'] = $this->transitions->sumTransitionsForUser();
+
+        return $this->sendResponse($data, "transitions from user's");
     }
 }

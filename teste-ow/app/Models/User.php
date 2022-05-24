@@ -44,7 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function setPasswordAttribute($value) {
+    public function setPasswordAttribute($value) 
+    {
         $this->attributes['password'] = Hash::make($value);
     }
 
@@ -52,4 +53,9 @@ class User extends Authenticatable
     {
        return $this->hasMany(Transitions::class);
     }
+
+    public function checkExistsTransitions() 
+    {
+        return Transitions::where('user_id', $this->id)->exists();
+    }   
 }
