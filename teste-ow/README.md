@@ -76,7 +76,7 @@ $ docker-compose exec nginx <comando>
 # basta executar
 $ sudo docker-compose exec app php artisan scribe:generate
 
-# acesse http://localhost:8000/api/docs e a documentação estará disponivel.
+# acesse http://localhost:8000/docs e a documentação estará disponivel.
 ```
 
 ## 🛠 Tecnologias
