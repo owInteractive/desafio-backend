@@ -48,6 +48,7 @@ class Transitions extends Model
     public function getFromMouthYear($mouthYear) 
     {   
         $mouthYear = explode('/', $mouthYear);
+        
         $mouth = (int) $mouthYear[0];
         $year =  (int) '20'. $mouthYear[1];
 

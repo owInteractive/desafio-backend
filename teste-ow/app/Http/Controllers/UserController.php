@@ -9,6 +9,11 @@ use App\Models\Transitions;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+/**
+ * @group User
+ *
+ * API endpoints for managing users
+ */
 class UserController extends BaseController
 {
     protected $user;
@@ -40,9 +45,12 @@ class UserController extends BaseController
      */
     public function store(StoreUserRequest $request)
     {
-        $createUser = $this->user()->create($request->all());
-
-        return $this->sendResponse($createUser, 'user created');
+        try {
+            $createUser = $this->user()->create($request->all());
+            return $this->sendResponse($createUser, 'user created');
+        } catch (\Throwable $th) {
+            return $this->sendError($th->getMessage(), $request->all(), 500);
+        }
     }
 
     /**
@@ -64,10 +72,13 @@ class UserController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserRequest $request, User $user)
-    {        
-        $user->updateOrFail($request->all());
-
-        return $this->sendResponse($user, 'user updated');
+    {
+        try {
+            $user->updateOrFail($request->all());
+            return $this->sendResponse($user, 'user updated');
+        } catch (\Throwable $th) {
+            return $this->sendError($th->getMessage(), $request->all(), 500);
+        }
     }
 
     /**
@@ -78,13 +89,13 @@ class UserController extends BaseController
      */
     public function destroy(User $user)
     {
-        $balance = $user->saldo === '0.000' ? true : false;
-
-        if ($user->checkExistsTransitions() || $balance) {
-            $user = $user->deleteOrFail();
-            return $this->sendResponse($user, 'user deleted');
+        $checkBalance = $user->balance !== '0.000' ? true : false;
+        dd( $user->balance);
+        if ($user->checkExistsTransitions() || $checkBalance) {
+            return $this->sendError(['user has transitions or user has account balance'], [] ,403);
         }
 
-        return $this->sendResponse([], 'user has transitions or user has account balance');
+        $user = $user->deleteOrFail();
+        return $this->sendResponse($user, 'user deleted');
     }
 }

@@ -1,7 +1,7 @@
 
 
 <h1 align="center">
-     <a href="#" alt="site do ecoleta"> Teste OW </a>
+     <a href="#"> Teste OW </a>
 </h1>
 
 <h4 align="center">
@@ -32,8 +32,10 @@ Este Projeto tem como objetivo ser avalidado em teste.
 ## ⚙️ Funcionalidades
 
 
--[x] Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
--[x]  Etapa 3 - Nova Funcionalidades
+- [x] Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
+- [x] Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
+- [x] Etapa 3 - Nova Funcionalidades
+- [x] Etapa 4 - Diferenciais
 ---
 
 ## 🚀 Como executar o projeto
@@ -46,12 +48,6 @@ antes de começar é necessaria e instalarção do docker [Docker](https://docs.
 #### 🎲 Rodando o Backend (servidor)
 
 ```bash
-
-# Clone este repositório
-$ git clone git@github.com:tgmarinho/README-ecoleta.git
-
-# Acesse a pasta do projeto no terminal/cmd
-$ cd README-ecoleta
 
 # Vá para a pasta server
 $ docker-compose up -d --build
@@ -74,6 +70,15 @@ $ docker-compose exec nginx <comando>
 
 ```
 
+#### 🎲 acesse a docs
+
+``` bash
+# basta executar
+$ sudo docker-compose exec app php artisan scribe:generate
+
+# acesse http://localhost:8000/api/docs e a documentação estará disponivel.
+```
+
 ## 🛠 Tecnologias
 
 As seguintes ferramentas foram usadas na construção do projeto:
@@ -86,21 +91,13 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 ## 🦸 Autor
 
-<!-- <a href="https://blog.rocketseat.com.br/author/thiago/">
- <img style="border-radius: 50%;" src="https://avatars3.githubusercontent.com/u/380327?s=460&u=61b426b901b8fe02e12019b1fdb67bf0072d4f00&v=4" width="100px;" alt=""/>
- <br />
- <sub><b>Thiago Marinho</b></sub></a> <a href="https://blog.rocketseat.com.br/author/thiago/" title="Rocketseat">🚀</a>
- <br />
+-   **[Matheus](https://github.com/MatheusR1)**
 
-[![Twitter Badge](https://img.shields.io/badge/-@tgmarinho-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/tgmarinho)](https://twitter.com/tgmarinho) [![Linkedin Badge](https://img.shields.io/badge/-Thiago-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/tgmarinho/)](https://www.linkedin.com/in/tgmarinho/) 
-[![Gmail Badge](https://img.shields.io/badge/-tgmarinho@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:tgmarinho@gmail.com)](mailto:tgmarinho@gmail.com) -->
-
----
 
 ## 📝 Licença
 
 Este projeto esta sobe a licença [MIT](./LICENSE).
 
-Feito com ❤️ por Thiago Marinho 👋🏽 [Entre em contato!](https://www.linkedin.com/in/tgmarinho/)
+Matheus Rocha 👋🏽 [Entre em contato!](https://www.linkedin.com/in/matheus-rocha-724115191/)
 
 ---
