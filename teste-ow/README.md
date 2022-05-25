@@ -32,10 +32,10 @@ Este Projeto tem como objetivo ser avalidado em teste.
 ## ⚙️ Funcionalidades
 
 
--[x] Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
--[x] Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
--[x] Etapa 3 - Nova Funcionalidades
--[x] Etapa 4 - Diferenciais
+- [x] Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
+- [x] Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
+- [x] Etapa 3 - Nova Funcionalidades
+- [x] Etapa 4 - Diferenciais
 ---
 
 ## 🚀 Como executar o projeto
@@ -48,12 +48,6 @@ antes de começar é necessaria e instalarção do docker [Docker](https://docs.
 #### 🎲 Rodando o Backend (servidor)
 
 ```bash
-
-# Clone este repositório
-$ git clone git@github.com:tgmarinho/README-ecoleta.git
-
-# Acesse a pasta do projeto no terminal/cmd
-$ cd README-ecoleta
 
 # Vá para a pasta server
 $ docker-compose up -d --build
