@@ -49,7 +49,7 @@ antes de começar é necessaria e instalarção do docker [Docker](https://docs.
 
 ```bash
 
-# Vá para a pasta server
+# execute
 $ docker-compose up -d --build
 
 # Instale as dependências caso não o foram
