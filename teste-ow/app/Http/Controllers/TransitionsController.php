@@ -11,6 +11,11 @@ use App\Services\FileServices;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+/**
+ * @group Transitions
+ *
+ * API endpoints for managing Transitions
+ */
 class TransitionsController extends BaseController
 {
     protected $transitions;
@@ -45,9 +50,12 @@ class TransitionsController extends BaseController
      */
     public function store(StoreTransitionsRequest $request)
     {
-        $transition = $this->transitions->create($request->all());
-
-        return $this->sendResponse($transition, 'transition created');
+        try {
+            $transition = $this->transitions->create($request->all());
+            return $this->sendResponse($transition, 'transition created');
+        } catch (\Throwable $th) {
+            return $this->sendError($th->getMessage(), $request->all(), 500);
+        }
     }
 
     /**
@@ -74,32 +82,50 @@ class TransitionsController extends BaseController
         return $this->sendResponse($transition, 'transitions');
     }
 
+    /**
+     * download csv report transactions
+     * 
+     * @queryParam days string. Example: 30
+     * @queryParam month_year string. Example : 06/20
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function download(Request $request)
     {
-        $dateNow = Carbon::now()->format('Y-m-d');
-        $nameFile = "transitions {$dateNow}.csv";
-
-        if ($request->filled('days')) {
-            $data = $this->transitions->getFromDays($request->days);
+        try {
+            $dateNow = Carbon::now()->format('Y-m-d');
+            $nameFile = "transitions {$dateNow}.csv";
+    
+            if ($request->filled('days')) {
+                $data = $this->transitions->getFromDays($request->days);
+            }
+    
+            if ($request->filled('month_year')) {
+                $data = $this->transitions->getFromMouthYear($request->month_year);
+            }
+    
+            if (!$request->filled('month_year') && !$request->filled('mouthYear')) {
+                $data = $this->transitions->all();
+            }
+    
+            $dataCsv = $this->helpers->transformDataToCSV($data);
+            $this->fileService->createCSVFile($dataCsv, self::HEADERS, $nameFile);
+            $filePath = storage_path('app/public/tmp') . '/' . $nameFile;
+    
+            return response()->download($filePath);
+        } catch (\Throwable $th) {
+            return $this->sendError($th->getMessage(), $request->all(), 400);
         }
-
-        if ($request->filled('month_year')) {
-            $data = $this->transitions->getFromMouthYear($request->month_year);
-        }
-
-        if (!$request->filled('month_year') && !$request->filled('mouthYear')){
-            $data = $this->transitions->all();
-        }
-
-        $dataCsv = $this->helpers->transformDataToCSV($data);
-        $this->fileService->createCSVFile($dataCsv, self::HEADERS, $nameFile);
-        $filePath = storage_path('app/public/tmp') . '/' . $nameFile;
-
-        return response()->download($filePath);
     }
 
-    public function sumTransitions(User $user) {
-
+    /**
+     *  get sum of transactions per user
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function sumTransitions(User $user)
+    {
         $data['transitions'] = $this->transitions->sumTransitionsForUser();
 
         return $this->sendResponse($data, "transitions from user's");
