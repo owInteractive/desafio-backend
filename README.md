@@ -1,6 +1,6 @@
 ![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.jpg "OW Interactive")
 
-# Desafio Back-End - OW Interactive 20/21
+# Desafio Back-End - OW Interactive 20/21/22
 
 ## Sobre a OW Interactive
 Fazemos parte do universo digital, focada em criar e desenvolver experiências interativas, integrando planejamento, criatividade e tecnologia.
