@@ -24,16 +24,39 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Api desenvolvida para o desafio backend da OW Interactive!
 
-## Installation
+## Pré-requisitos
+
+```bash
+  Docker
+  Nodejs
+```
+
+## Instalação
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Dependências
 
+Neste projeto está disponível o arquivo "requests.insomnia.json". Importe as requisições a partir de um cliente Insomnia para realizar as operações
+
+Antes de executar a aplicação, inicie o container MARIADB utilizando o seguinte comando:
+
+```bash
+ $ docker run --name mariaDBDatabase -p 3306:3306 -e MARIADB_ROOT_PASSWORD=123 -e MARIADB_DATABASE=challenge -d mariadb:latest
+```
+## Exemplo de configurações do banco
+
+DATABASE_HOST=localhost
+DATABASE_PORT=3306
+DATABASE_USER=root
+DATABASE_PASSWORD=123
+DATABASE_NAME=challenge
+
+## Executando o Projeto
 ```bash
 # development
 $ npm run start
@@ -44,30 +67,51 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+## Instruções
 
-## Test
+  Uma vez iniciada a API, crie um usuário de sistema através da requisição "system-users/createSystemUser" (POST). 
 
-```bash
-# unit tests
-$ npm run test
+    Exemplo do corpo da requisição:
+    
+    {
+	    "login":"admin",
+	    "password": "admin"
+    }
+  
+  Logo após, utilize a requisição "system-users/getToken" (POST) enviando os parâmetros de login do usuário criado como no exemplo:
 
-# e2e tests
-$ npm run test:e2e
+  {
+	"login":"admin",
+	"password": "admin"
+  }
 
-# test coverage
-$ npm run test:cov
-```
+  É esperado o seguinte tipo de resposta:
+  {
+	"token": "copiarJwtToken"
+  }
 
-## Support
+  Copie o valor do token e insira no Header "Authorization" de cada requisição, tanto de usuários quanto de transações da seguinte maneira:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+  Authorization : Bearer JwtTokenCopiado.
 
-## Stay in touch
+  Agora é possível adicionar, ler, editar e excluir usuários, assim como transações usando o id do usuário desejado .
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+  ## Tipos de movimentações financeiras
 
-## License
+  No parâmetro "type", enviado para criação de movimentações financeiras para um usuário, são aceitos três tipos  de movimentações:
 
-Nest is [MIT licensed](LICENSE).
+  'DEBIT': Operação de débito de salvo.
+  'DEPOSIT': Operação de adição de saldo.
+  'REFOUND': Operação de estorno de saldo.
+
+  ## Filtro de tempo no download de movimentações
+
+  Na requisição "Transactions/downloadUserTransactions" (GET), o parâmetro "time" pode ser passado através do atributo "query" da requisição adicionando "?time=valor" ou na aba "Query" do cliente Insomnia.
+
+  Se passado um número inteiro positivo (time=x), serão retornadas as transações dos últimos x dias do usuário.
+    Time=20 retornará o histórico de transações dos últimos 20 dias do usuário.
+
+  Se passado na forma 'Mês/Ano' serão retornadas as transações do mês e ano especificados.
+    Time=06/22 retornará todas as transações do usuário no mês Junho do ano de 2022.
+  
+  Se deixado em branco, retornará todas as transações do usuário.
