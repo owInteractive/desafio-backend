@@ -19,7 +19,7 @@ export class TransactionsService {
     @Inject(UsersService) private readonly userService: UsersService,
   ) {}
 
-  async findAll(id: string, res:Response, time?: string) {
+  async findAll(id: string, res: Response, time?: string) {
     const { balance } = await this.getBalance(id);
     if (!time) {
       const data = await this.transactionRepository.find({
@@ -29,31 +29,34 @@ export class TransactionsService {
       });
 
       const tempFilePath = await this.convertDataToCvs(data, 'all', balance);
-      return res.download(tempFilePath,()=>{
+      return res.download(tempFilePath, () => {
         unlink(tempFilePath, () => {});
       });
     }
     if (time.includes('/')) {
       const [month, year] = time.split('/');
-      const startDate = dayjs(`20${year}-${month}-01`)
+      let startDate: string | Date = dayjs(`20${year}-${month}-01`)
         .startOf('month')
         .format('YYYY-MM-DD HH:mm:ss');
-      const endDate = dayjs(`20${year}-${month}-01`)
+      startDate = new Date(startDate);
+      let endDate: string | Date = dayjs(`20${year}-${month}-01`)
         .endOf('month')
         .format('YYYY-MM-DD HH:mm:ss');
+      endDate = new Date(endDate);
       const data = await this.transactionRepository.find({
         where: { createdAt: Between(startDate, endDate), userId: id },
         relations: ['user'],
       });
       const tempFilePath = await this.convertDataToCvs(data, time, balance);
-      return res.download(tempFilePath,()=>{
+      return res.download(tempFilePath, () => {
         unlink(tempFilePath, () => {});
       });
     }
     if (Number(time)) {
-      const startDate = dayjs()
+      let startDate: string | Date = dayjs()
         .subtract(Number(time), 'day')
         .format('YYYY-MM-DD 00:00:00');
+      startDate = new Date(startDate);
       const data = await this.transactionRepository.find({
         where: { createdAt: MoreThan(startDate), userId: id },
         relations: ['user'],
@@ -64,7 +67,7 @@ export class TransactionsService {
         balance,
       );
       res.download(tempFilePath);
-      return res.download(tempFilePath,()=>{
+      return res.download(tempFilePath, () => {
         unlink(tempFilePath, () => {});
       });
     }

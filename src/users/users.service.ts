@@ -43,7 +43,7 @@ export class UsersService {
 
   async findOne(id: string): Promise<User> {
     try {
-      return await this.userRepository.findOneOrFail(id);
+      return await this.userRepository.findOneOrFail({where: {id}});
     } catch (error) {
       throw new NotFoundException(error.message);
     }
