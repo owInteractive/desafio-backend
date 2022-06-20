@@ -75,3 +75,11 @@ A documentação se econtra em
 ```
 https://desafiobackend.local/doc
 ```
+Endpoint
+
+```
+https://desafiobackend.local/api
+```
+Usuario e senha padrão
+"email": "admin@admin.com",
+"password": "password"
