@@ -1,0 +1,99 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: "${PROJECT_NAME}_nginx"
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - app
+    volumes:
+      - ./:/var/www/vhost/desafiobackend:cached
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/ssl:/etc/nginx/ssl
+    working_dir: /var/www/vhost/
+    ports:
+      - '443:443'
+      - '9008:9008'
+    networks:
+      - desafiobackend
+    labels:
+      - 'traefik.http.routers.${PROJECT_NAME}_nginx.rule=HostRegexp(`${APP_DOMAIN}`, `{subdomain:[a-z]+.${APP_DOMAIN}}`)'
+      - 'traefik.http.routers.${PROJECT_NAME}_nginx.priority=1'
+      - 'traefik.docker.network=proxy'
+
+  app:
+    container_name: "${PROJECT_NAME}_php"
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    environment:
+      PHP_MEMORY_LIMIT: '512M'
+      COMPOSER_MEMORY_LIMIT: '-1'
+    user: "${USER_UID}:${USER_UID}"
+    volumes:
+      - ./:/var/www/vhost/desafiobackend:cached
+    working_dir: /var/www/vhost/desafiobackend
+    ports:
+      - '9003:9003'
+    networks:
+      - desafiobackend
+
+  redis:
+    image: redis:latest
+    container_name: "${PROJECT_NAME}_redis"
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'desafiobackend_redis:/data'
+    networks:
+      - desafiobackend
+
+  mysql:
+    image: mariadb:latest
+    container_name: "${PROJECT_NAME}_mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    volumes:
+      - 'desafiobackend_mysql:/data'
+    ports:
+      - '${FORWARD_DB_PORT:-3306}:3306'
+    networks:
+      - desafiobackend
+
+  traefik:
+    image: traefik:v2.0
+    container_name: "${PROJECT_NAME}_traefik"
+    restart: always
+    command:
+      - --entrypoints.web.address=:80
+      - --providers.docker=true
+      - --api.insecure=true
+      - --log.level=debug
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    ports:
+      - '80:80'
+      - '8080:8080'
+    networks:
+      - desafiobackend
+
+networks:
+  desafiobackend:
+    driver: bridge
+
+volumes:
+  desafiobackend_mysql:
+    driver: local
+
+  desafiobackend_redis:
+    driver: local
