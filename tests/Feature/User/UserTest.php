@@ -4,6 +4,7 @@ namespace Feature\User;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -65,22 +66,6 @@ class UserTest extends TestCase
                     "created_at",
                     "updated_at",
             ]
-        ];
-
-        $response
-            ->assertStatus(200)
-            ->assertJsonStructure($expectedResponse);
-    }
-
-    public function test_delete_one_user()
-    {
-        $user = User::factory()->create();
-
-        $response = $this->actingAs($this->user)->delete('/api/users/'.$user->id);
-
-        $expectedResponse = [
-            "message",
-            "data",
         ];
 
         $response
