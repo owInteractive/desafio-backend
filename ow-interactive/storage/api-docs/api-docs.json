@@ -1,0 +1,545 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/api",
+            "description": "OW Interactive"
+        }
+    ],
+    "paths": {
+        "/transactions": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get a listing of the Transactions.",
+                "description": "Get all Transactions",
+                "operationId": "transactions.index",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page this pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/transactions/store": {
+            "post": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Create a newly created Transaction in storage",
+                "description": "Create Transaction",
+                "operationId": "transactions.store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateTransactionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/transactions/destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Remove the specified Transaction from storage",
+                "description": "Delete Transaction",
+                "operationId": "transactions.destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Transaction ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Transaction not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/transactions/export": {
+            "post": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Creating excel to export transactions",
+                "description": "Returns the download link",
+                "operationId": "transactions.export",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExportTransactionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/users/register": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Store a newly created User in storage",
+                "description": "Store User",
+                "operationId": "users.store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get a listing of the Users.",
+                "description": "Get all Users",
+                "operationId": "users.index",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page this pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Display the specified User",
+                "description": "Get User",
+                "operationId": "users.show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update the specified User in storage",
+                "description": "Update User",
+                "operationId": "App\\Http\\Controllers\\API\\UserController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/users/{id}/current-balance": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Display the specified user's balance",
+                "description": "Get Current balance",
+                "operationId": "users.currentBalance",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/users/destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Remove the specified User from storage",
+                "description": "Delete User",
+                "operationId": "users.destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateTransactionRequest": {
+                "title": "Create Transaction Request",
+                "description": "Create Transaction Request body data",
+                "required": [
+                    "user_id",
+                    "transaction_type_id",
+                    "value"
+                ],
+                "properties": {
+                    "value": {
+                        "title": "Value",
+                        "description": "Value of the new transaction",
+                        "type": "number",
+                        "format": "decimal",
+                        "example": "1000.00"
+                    },
+                    "user_id": {
+                        "title": "User ID",
+                        "description": "User of the new transaction",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": "1"
+                    },
+                    "transaction_type_id": {
+                        "title": "Type Transaction",
+                        "description": "Type of the new transaction",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
+            "CreateUserRequest": {
+                "title": "Create User Request",
+                "description": "Create User Request body data",
+                "required": [
+                    "name",
+                    "email",
+                    "password",
+                    "birthday"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the new user",
+                        "example": "Example"
+                    },
+                    "email": {
+                        "title": "E-mail",
+                        "description": "E-mail of the new user",
+                        "example": "example@example.com"
+                    },
+                    "password": {
+                        "title": "Password",
+                        "description": "Password of the new user",
+                        "example": "example"
+                    },
+                    "birthday": {
+                        "title": "Birthday",
+                        "description": "Birthday of the new user",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "value_initial": {
+                        "title": "Value Initial",
+                        "description": "Value Initial of the new user",
+                        "type": "number",
+                        "format": "decimal",
+                        "example": "100.00"
+                    }
+                },
+                "type": "object"
+            },
+            "ExportTransactionRequest": {
+                "title": "Export Transaction Request",
+                "description": "Export Transaction body data",
+                "properties": {
+                    "filter_type": {
+                        "title": "Filter Type",
+                        "description": "\n               Choose only the type of filter.\n               (Filter type NULL = returns all transactions.)\n               (Filter type 1 = returns the last 30 days)\n               (Filter type 2 = returns the specific month and year)",
+                        "format": "integer",
+                        "example": "1"
+                    },
+                    "date_filter": {
+                        "title": "Date Filter",
+                        "description": "Choose period for filter",
+                        "format": "date",
+                        "example": "09/2020"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateUserRequest": {
+                "title": "Update User Request",
+                "description": "Update User Request body data",
+                "required": [
+                    "value_initial"
+                ],
+                "properties": {
+                    "value_initial": {
+                        "title": "Value Initial",
+                        "description": "Value Initial of the new user",
+                        "type": "number",
+                        "format": "decimal",
+                        "example": "100.00"
+                    }
+                },
+                "type": "object"
+            },
+            "Transaction": {
+                "title": "Transaction",
+                "description": "Transaction Model"
+            },
+            "TransactionType": {
+                "title": "TransactionType",
+                "description": "TransactionType Model"
+            },
+            "User": {
+                "title": "User",
+                "description": "User Model"
+            }
+        },
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://localhost:3000/oauth/authorize",
+                        "tokenUrl": "http://localhost:3000/oauth/token",
+                        "refreshUrl": "http://localhost:3000/token/refresh",
+                        "scopes": []
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
