@@ -28,15 +28,15 @@ Tabela de conteúdos
 
 ---
 
-# 🎲 Como execultar o projeto
+# Como execultar o projeto
 
 ```bash
 
 # Clone este repositório
-$ git clone git@github.com:tgmarinho/README-ecoleta.git
+$ git clone git@github.com:askagi/desafio-backend.git
 
 # Acesse a pasta do projeto no terminal/cmd
-$ cd desafio_OWInteractive
+$ cd desafio_backend
 
 # Instale as dependências
 $ npm install
