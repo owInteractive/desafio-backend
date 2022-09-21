@@ -5,26 +5,26 @@
 Tabela de conteúdos
 =================
 <!--ts-->
-* [Como executar o projeto](#-Como-executar-o-projeto)
-* [Tecnologias](#-Tecnologias)
-* [Utilitários](#-Utilitários)
+* [Como executar o projeto](#Como-executar-o-projeto)
+* [Tecnologias](#Tecnologias)
+* [Utilitários](#Utilitários)
 <!--te-->
 
-* [Endpoints Usuários](#-Endpoints-Usuários)
+* [Endpoints Usuários](#Endpoints-Usuários)
   * [Criar usuário](#Criar-usuário)
   * [Listar usuários](#Listar-todos-os-usuários)
   * [Listar um usuário](#Listar-um-usuário)
   * [Alterar saldo inicial](#Alterar-saldo-inicial)
   * [Excluir usuário](#Excluir-usuário)
   ---
-* [Endpoints Transações](#-Endpoints-ransações)
+* [Endpoints Transações](#Endpoints-ransações)
   * [Criar transação](#Criar-transação)
   * [Listar transações](#Listar-transações)
   * [Resumo das transações](#Resumo-das-transações)
   * [Emitir transações em CSV](#Emitir-transações-em-CSV)
   * [Excluir transação](#Excluir-transação)
 
-* [Autor](#-Autor)
+* [Autor](#Autor)
 
 ---
 
