@@ -50,16 +50,16 @@ $ npm run dev
 
 * ### 1 - Schema.sql
 
-  * > Arquivo localizado em [src/database/schema.sql]()
+  * > Arquivo localizado em [src/database/schema.sql](#https://github.com/askagi/desafio-backend/blob/master/src/database/Dump.sql)
 
 * ### 2 - Dump.sql
 
-  * > Arquivo localizado em [src/database/dump.sql]()
+  * > Arquivo localizado em [src/database/dump.sql](#https://github.com/askagi/desafio-backend/blob/master/src/database/schema.sql)
 
 ## Para testes deve ser instalado o [Insomnia](https://insomnia.rest/), em seguida baixe a coleção
 
 <p>
-  <a href="https://github.com/tgmarinho/README-ecoleta/blob/master/Insomnia_API_Ecoletajson.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+  <a href="https://github.com/askagi/desafio-backend/blob/master/src/docs/Insomnia.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
 </p>
 
 ---
@@ -72,15 +72,14 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 * **[Express](https://expressjs.com/)**
 * **[KnexJS](http://knexjs.org/)**
-<!-- * **[ts-node](https://github.com/TypeStrong/ts-node)** -->
-<!-- * **[dotENV](https://github.com/motdotla/dotenv)** -->
+* **[dotENV](https://github.com/motdotla/dotenv)**
 * **[csv-writer](https://www.npmjs.com/package/csv-writer)**
 * **[date-fns](https://date-fns.org/)**
 * **[mariadb](https://mariadb.org/)**
 * **[mysql2](https://www.npmjs.com/package/mysql2)**
 * **[yup](https://www.npmjs.com/package/yup)**
 
-> Veja o arquivo  [package.json](https://github.com/tgmarinho/README-ecoleta/blob/master/server/package.json)
+> Veja o arquivo  [package.json]([https://github.com/tgmarinho/README-ecoleta/blob/master/server/package.json](https://github.com/askagi/desafio-backend/blob/master/package.json))
 
 #### [](https://github.com/tgmarinho/Ecoleta#utilit%C3%A1rios)**Utilitários**
 
