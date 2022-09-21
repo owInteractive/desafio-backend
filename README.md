@@ -79,9 +79,9 @@ As seguintes ferramentas foram usadas na construção do projeto:
 * **[mysql2](https://www.npmjs.com/package/mysql2)**
 * **[yup](https://www.npmjs.com/package/yup)**
 
-> Veja o arquivo  [package.json]([https://github.com/tgmarinho/README-ecoleta/blob/master/server/package.json](https://github.com/askagi/desafio-backend/blob/master/package.json))
+> Veja o arquivo  [package.json](https://github.com/askagi/desafio-backend/blob/master/package.json)
 
-#### [](https://github.com/tgmarinho/Ecoleta#utilit%C3%A1rios)**Utilitários**
+#### **Utilitários**
 
 * Editor:  **[Visual Studio Code](https://code.visualstudio.com/)**
 * Markdown:  **[Hackmd](https://hackmd.io/)**
