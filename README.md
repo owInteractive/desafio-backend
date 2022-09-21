@@ -1,5 +1,3 @@
-![](https://i.imgur.com/xG74tOh.png)
-
 # Desafio Back-End - OW Interactive 21/22
 
 Tabela de conteúdos
