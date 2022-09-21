@@ -92,8 +92,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 ---
 
-# Endpoints Usuários
-
 # Usuários
 
 ## Criar usuário
