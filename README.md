@@ -50,11 +50,11 @@ $ npm run dev
 
 * ### 1 - Schema.sql
 
-  * > Arquivo localizado em [src/database/schema.sql](#https://github.com/askagi/desafio-backend/blob/master/src/database/Dump.sql)
+  * > Arquivo localizado em [src/database/schema.sql](https://github.com/askagi/desafio-backend/blob/master/src/database/Dump.sql)
 
 * ### 2 - Dump.sql
 
-  * > Arquivo localizado em [src/database/dump.sql](#https://github.com/askagi/desafio-backend/blob/master/src/database/schema.sql)
+  * > Arquivo localizado em [src/database/dump.sql](https://github.com/askagi/desafio-backend/blob/master/src/database/schema.sql)
 
 ## Para testes deve ser instalado o [Insomnia](https://insomnia.rest/), em seguida baixe a coleção
 
