@@ -1,0 +1,27 @@
+{
+  "name": "desafio_back_end_ow_interactive",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js"
+  },
+  "keywords": [],
+  "author": "José Costa",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "csv-writer": "^1.6.0",
+    "date-fns": "^2.29.3",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "knex": "^2.3.0",
+    "mariadb": "^3.0.1",
+    "mysql2": "^2.3.3",
+    "yup": "^0.32.11",
+    "yup-locales": "^1.2.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

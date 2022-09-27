@@ -1,42 +1,41 @@
-![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.jpg "OW Interactive")
 
 # Desafio Back-End - OW Interactive 21/22
 
 Tabela de conteúdos
 =================
 <!--ts-->
-* [Como executar o projeto](#Como-executar-o-projeto)
-* [Tecnologias](#Tecnologias)
-* [Utilitários](#Utilitários)
+* [Como executar o projeto](#-Como-executar-o-projeto)
+* [Tecnologias](#-Tecnologias)
+* [Utilitários](#-Utilitários)
 <!--te-->
 
-* [Endpoints Usuários](#Endpoints-Usuários)
+* [Endpoints Usuários](#-Endpoints-Usuários)
   * [Criar usuário](#Criar-usuário)
   * [Listar usuários](#Listar-todos-os-usuários)
   * [Listar um usuário](#Listar-um-usuário)
   * [Alterar saldo inicial](#Alterar-saldo-inicial)
   * [Excluir usuário](#Excluir-usuário)
   ---
-* [Endpoints Transações](#Endpoints-ransações)
+* [Endpoints Transações](#-Endpoints-ransações)
   * [Criar transação](#Criar-transação)
   * [Listar transações](#Listar-transações)
   * [Resumo das transações](#Resumo-das-transações)
   * [Emitir transações em CSV](#Emitir-transações-em-CSV)
   * [Excluir transação](#Excluir-transação)
 
-* [Autor](#Autor)
+* [Autor](#-Autor)
 
 ---
 
-# Como execultar o projeto
+# 🎲 Como execultar o projeto
 
 ```bash
 
 # Clone este repositório
-$ git clone git@github.com:askagi/desafio-backend.git
+$ git clone git@github.com:tgmarinho/README-ecoleta.git
 
 # Acesse a pasta do projeto no terminal/cmd
-$ cd desafio_backend
+$ cd desafio_OWInteractive
 
 # Instale as dependências
 $ npm install
@@ -52,16 +51,16 @@ $ npm run dev
 
 * ### 1 - Schema.sql
 
-  * > Arquivo localizado em [src/database/schema.sql](https://github.com/askagi/desafio-backend/blob/master/src/database/Dump.sql)
+  * > Arquivo localizado em [src/database/schema.sql]()
 
 * ### 2 - Dump.sql
 
-  * > Arquivo localizado em [src/database/dump.sql](https://github.com/askagi/desafio-backend/blob/master/src/database/schema.sql)
+  * > Arquivo localizado em [src/database/dump.sql]()
 
 ## Para testes deve ser instalado o [Insomnia](https://insomnia.rest/), em seguida baixe a coleção
 
 <p>
-  <a href="https://github.com/askagi/desafio-backend/blob/master/src/docs/Insomnia.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+  <a href="https://github.com/tgmarinho/README-ecoleta/blob/master/Insomnia_API_Ecoletajson.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
 </p>
 
 ---
@@ -74,16 +73,17 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 * **[Express](https://expressjs.com/)**
 * **[KnexJS](http://knexjs.org/)**
-* **[dotENV](https://github.com/motdotla/dotenv)**
+<!-- * **[ts-node](https://github.com/TypeStrong/ts-node)** -->
+<!-- * **[dotENV](https://github.com/motdotla/dotenv)** -->
 * **[csv-writer](https://www.npmjs.com/package/csv-writer)**
 * **[date-fns](https://date-fns.org/)**
 * **[mariadb](https://mariadb.org/)**
 * **[mysql2](https://www.npmjs.com/package/mysql2)**
 * **[yup](https://www.npmjs.com/package/yup)**
 
-> Veja o arquivo  [package.json](https://github.com/askagi/desafio-backend/blob/master/package.json)
+> Veja o arquivo  [package.json](https://github.com/tgmarinho/README-ecoleta/blob/master/server/package.json)
 
-#### **Utilitários**
+#### [](https://github.com/tgmarinho/Ecoleta#utilit%C3%A1rios)**Utilitários**
 
 * Editor:  **[Visual Studio Code](https://code.visualstudio.com/)**
 * Markdown:  **[Hackmd](https://hackmd.io/)**
