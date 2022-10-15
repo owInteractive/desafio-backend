@@ -1,7 +1,7 @@
 import { User } from '@/domain/models'
 import { AddUser, LoadUsersByEmail } from '@/domain/usecases/users'
 import { EmailAlreadyInUseError } from '@/presentation/errors'
-import { badRequest } from '@/presentation/helpers/http-helper'
+import { badRequest, serverError } from '@/presentation/helpers/http-helper'
 import { Controller, HttpResponse } from '@/presentation/protocols'
 
 export class AddUserController implements Controller {
@@ -10,6 +10,7 @@ export class AddUserController implements Controller {
   async handle(
     request: AddUserController.Request
   ): Promise<AddUserController.Response> {
+   try {
     const emaiInUse = await this.loadUsersByEmailUseCase.loadByEmail({ email: request.email })
     
     if (emaiInUse) {
@@ -17,6 +18,9 @@ export class AddUserController implements Controller {
     }
 
     return null
+   } catch (error) {
+    return serverError(error)
+   }
   }
 }
 
