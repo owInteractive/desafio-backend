@@ -1,10 +1,5 @@
 import { User } from '../../models';
 
-enum UserOrders {
-    asc = 'asc',
-    desc = 'desc'
-}
-
 export interface LoadUsers {
     /**
      * Load all users from database.
@@ -18,7 +13,7 @@ export interface LoadUsers {
  */
 export namespace LoadUsers {
     export type Params = {
-        order?: UserOrders;
+        order?: 'asc' | 'desc';
     };
 
    
