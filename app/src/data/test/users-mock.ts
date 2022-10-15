@@ -1,4 +1,5 @@
 import { mockUser } from '@/domain/tests/users-mock'
+import { LoadUsersByEmailRepository } from '../protocols/database/users'
 import { AddUserRepository } from '../protocols/database/users/add-user-repository'
 import { LoadUsersRepository } from '../protocols/database/users/load-user-repository'
 
@@ -23,5 +24,17 @@ export class LoadUsersRepositorySpy implements LoadUsersRepository {
   async load(params: LoadUsersRepository.Params): Promise<LoadUsersRepository.Result> {
     this.loadParams = params
     return this.loadResult
+  }
+}
+
+export class LoadUsersByEmailRepositorySpy implements LoadUsersByEmailRepository {
+  loadByEmailParams: LoadUsersByEmailRepository.Params
+  loadByEmailResult: LoadUsersByEmailRepository.Result
+  constructor() {
+    this.loadByEmailResult =mockUser()
+  }
+  async loadByEmail(params: LoadUsersByEmailRepository.Params): Promise<LoadUsersByEmailRepository.Result> {
+    this.loadByEmailParams = params
+    return this.loadByEmailResult
   }
 }

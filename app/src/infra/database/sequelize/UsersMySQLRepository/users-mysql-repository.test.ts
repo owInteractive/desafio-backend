@@ -83,4 +83,21 @@ describe('UsersMySqlReposiory', () => {
       expect(users[1].id).toEqual(mostRecentUser.id)
     })
   })
+
+  describe('loadByEmail()', () => {
+    test('should load the correct User according to the email', async () => {
+      const { sut } = makeSut()
+      const mockedUser = mockAddUser()
+      const mockedOtherUser = mockAddUser()
+  
+      await UsersSequelize.create(mockedUser)
+      await UsersSequelize.create(mockedOtherUser)
+
+      const user = await sut.loadByEmail({
+        email: mockedUser.email
+      })
+      expect(user.name).toEqual(mockedUser.name)
+      expect(user.email).toEqual(mockedUser.email)
+    })
+  })
 })
