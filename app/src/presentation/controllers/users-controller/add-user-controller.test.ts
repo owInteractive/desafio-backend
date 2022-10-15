@@ -70,12 +70,23 @@ describe('AddUserController', () => {
         expect(addUserUseCaseSpy.addParams).toEqual(mockedUser)
     });
 
-    test('should return 200 on success', async () => {
+    test('should return ok on success', async () => {
         const { sut, addUserUseCaseSpy } = makeSut()
         const mockedUser = mockUser()
         const response = await sut.handle(mockedUser)
     
         expect(response).toEqual(ok(addUserUseCaseSpy.addResult))
+    });
+
+    test('should return serverError if addUserUseCase throws', async () => {
+        const { sut, addUserUseCaseSpy } = makeSut()
+        const mockedUser = mockUser()
+        const mockedError = new Error('some_error')
+        vitest.spyOn(addUserUseCaseSpy, 'add').mockRejectedValueOnce(mockedError)
+        const response = await sut.handle(mockedUser)
+        expect(response).toEqual(
+          serverError(mockedError)
+        )
     });
   })
 })
