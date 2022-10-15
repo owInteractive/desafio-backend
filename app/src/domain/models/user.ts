@@ -2,9 +2,9 @@ export type User = {
     id: number;
     name: string;
     email: string;
-    brithDay: string;
+    brithDay: Date;
     role: string;
-    password: string;
-    createdAt: string;
-    updatedAt: string;
+    password: string
+    createdAt: Date;
+    updatedAt: Date;
 }
