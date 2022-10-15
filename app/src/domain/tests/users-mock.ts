@@ -2,6 +2,15 @@ import { faker } from '@faker-js/faker'
 import { User } from '../models'
 import { AddUser, LoadUsersById } from '../usecases/users'
 import { LoadUsersByEmail } from '../usecases/users/load-users-by-email'
+export function mockAddUser(): AddUser.Params {
+  return {
+    name: faker.name.fullName(),
+    email: faker.internet.email(),
+    password: faker.internet.password(),
+    brithDay: faker.date.past(),
+    role: faker.helpers.arrayElement(['admin', 'user']),
+  }
+}
 
 export function mockUser(): User {
   return {
@@ -11,8 +20,8 @@ export function mockUser(): User {
     password: faker.internet.password(),
     brithDay: faker.date.past(),
     role: faker.helpers.arrayElement(['admin', 'user']),
-    createdAt: faker.date.past(),
-    updatedAt: faker.date.past(),
+    createdAt: new Date(),
+    updatedAt: null,
   }
 }
 
