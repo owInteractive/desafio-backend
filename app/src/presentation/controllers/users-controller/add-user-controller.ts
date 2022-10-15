@@ -1,7 +1,7 @@
 import { User } from '@/domain/models'
 import { AddUser, LoadUsersByEmail } from '@/domain/usecases/users'
 import { EmailAlreadyInUseError } from '@/presentation/errors'
-import { badRequest, serverError } from '@/presentation/helpers/http-helper'
+import { badRequest, ok, serverError } from '@/presentation/helpers/http-helper'
 import { Controller, HttpResponse } from '@/presentation/protocols'
 
 export class AddUserController implements Controller {
@@ -22,9 +22,9 @@ export class AddUserController implements Controller {
         return badRequest(new EmailAlreadyInUseError(request.email))
       }
 
-      await this.addUserUseCase.add(request)
+      const result = await this.addUserUseCase.add(request)
 
-      return null
+      return ok(result)
     } catch (error) {
       return serverError(error)
     }
