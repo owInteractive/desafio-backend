@@ -9,11 +9,7 @@ export interface LoadUsers {
     /**
      * Load all users from database.
      */
-    load (params: LoadUsers.Params): Promise<LoadUsers.Result[]>
-    /**
-     * This method is an overload, it's used to load a single user by id.
-     */
-    load (params: LoadUsers.ParamsById): Promise<LoadUsers.Result>
+    load (params: LoadUsers.Params): Promise<LoadUsers.Result>
 }
 
 /**
@@ -25,8 +21,6 @@ export namespace LoadUsers {
         order?: UserOrders;
     };
 
-    export type ParamsById = {
-        id: number;
-    };
-    export type Result = User;
+   
+    export type Result = User[];
 }
