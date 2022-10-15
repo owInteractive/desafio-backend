@@ -4,7 +4,7 @@ import {
   AddUserSpy,
   LoadUsersByEmailSpy,
   mockUser,
-} from '@/domain/tests/users.mock'
+} from '@/domain/tests/users-mock'
 import { badRequest, serverError } from '@/presentation/helpers/http-helper'
 import { EmailAlreadyInUseError } from '@/presentation/errors'
 
@@ -17,6 +17,7 @@ describe('AddUserController', () => {
   function makeSut(): SutType {
     const addUserUseCaseSpy = new AddUserSpy()
     const loadUsersByEmailUseCaseSpy = new LoadUsersByEmailSpy()
+    loadUsersByEmailUseCaseSpy.loadByEmailResult = null
     const sut = new AddUserController(
       addUserUseCaseSpy,
       loadUsersByEmailUseCaseSpy
@@ -59,6 +60,14 @@ describe('AddUserController', () => {
         expect(response).toEqual(
           serverError(mockedError)
         )
+    });
+
+    test('should call AddUser with correct params', async () => {
+        const { sut, addUserUseCaseSpy } = makeSut()
+        const mockedUser = mockUser()
+        await sut.handle(mockedUser)
+    
+        expect(addUserUseCaseSpy.addParams).toEqual(mockedUser)
     });
   })
 })
