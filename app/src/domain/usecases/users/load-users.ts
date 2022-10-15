@@ -4,7 +4,7 @@ export interface LoadUsers {
     /**
      * Load all users from database.
      */
-    load (params: LoadUsers.Params): Promise<LoadUsers.Result>
+    load (params?: LoadUsers.Params): Promise<LoadUsers.Result>
 }
 
 /**
