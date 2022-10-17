@@ -13,6 +13,11 @@ export class UsersMySqlReposiory
     return newUser as any as AddUserRepository.Result
   }
 
+  /**
+   * 
+   * Returns all users from database.
+   * By default it returns all users ordered by createdAt in descending order.
+   */
   async load(
     params?: LoadUsersRepository.Params
   ): Promise<LoadUsersRepository.Result> {

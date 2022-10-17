@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { User } from '../models'
-import { AddUser, LoadUsersById } from '../usecases/users'
+import { AddUser, LoadUsers, LoadUsersById } from '../usecases/users'
 import { LoadUsersByEmail } from '../usecases/users/load-users-by-email'
 export function mockAddUser(): AddUser.Params {
   return {
@@ -37,6 +37,17 @@ export class LoadUsersByIdSpy implements LoadUsersById {
   }
 }
 
+export class LoadUsersSpy implements LoadUsers {
+  loadResult: LoadUsers.Result
+  loadParams: LoadUsers.Params
+  constructor() {
+    this.loadResult = [mockUser(), mockUser()]
+  }
+  async load(params: LoadUsers.Params): Promise<LoadUsers.Result> {
+    this.loadParams = params
+    return new Promise((resolve) => resolve(this.loadResult))
+  }
+}
 export class LoadUsersByEmailSpy implements LoadUsersByEmail {
     loadByEmailResult: LoadUsersByEmail.Result
     loadByEmailParams: LoadUsersByEmail.Params
