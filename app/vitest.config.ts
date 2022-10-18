@@ -4,7 +4,7 @@ import tsconfigPaths from 'vitest-tsconfig-paths'
 export default defineConfig({
     test: {
         coverage: {
-            include: ['src/**/*.{ts}'],
+            include: ['src/**/*.ts'],
             provider: 'istanbul'
         }
     },
