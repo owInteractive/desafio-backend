@@ -1,3 +1,7 @@
 export interface DeleteUser {
-    delete (userId: string): Promise<void>
+  delete(params: DeleteUser.Params): Promise<void>
+}
+
+export namespace DeleteUser {
+  export type Params = { userId: string | number }
 }
