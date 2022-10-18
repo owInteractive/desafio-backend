@@ -138,4 +138,25 @@ describe('UsersMySqlReposiory', () => {
       expect(user).toBeNull()
     })
   })
+
+  describe('delete()', () => {
+    test('should delete the correct User according to the id', async () => {
+      const { sut } = makeSut()
+      const mockedUser = mockAddUser()
+      const mockedOtherUser = mockAddUser()
+
+      const { id } = await UsersSequelize.create(mockedUser) as any
+      await UsersSequelize.create(mockedOtherUser)
+
+      await sut.delete({
+        userId: id
+      })
+      const user = await UsersSequelize.findOne({
+        where: {
+          id
+        }
+      })
+      expect(user).toBeNull()
+    })
+  });
 })
