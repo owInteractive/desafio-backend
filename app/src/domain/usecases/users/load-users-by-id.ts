@@ -6,7 +6,7 @@ export interface LoadUsersById {
 
 export namespace LoadUsersById {
     export type Params = {
-        userId: string;
+        userId: string | number;
     };
 
    

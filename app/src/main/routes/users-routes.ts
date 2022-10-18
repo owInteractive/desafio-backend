@@ -6,5 +6,6 @@ import { makeLoadUsersController } from '../factories/controllers/user/load-user
 
 export const usersRoutes = (router: Router): void => {
   router.get('/users', adaptRoute(makeLoadUsersController()))
+  router.get('/users/:id', adaptRoute(makeLoadUserByIdController()))
   router.post('/users', adaptRoute(makeAddUserController()))
 }
