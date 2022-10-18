@@ -19,7 +19,7 @@ export function mockUser(): User {
     email: faker.internet.email(),
     password: faker.internet.password(),
     birthDay: faker.date.past(),
-    role: faker.helpers.arrayElement(['admin', 'user']),
+    role: faker.helpers.arrayElement(['admin', 'user', null]),
     createdAt: new Date(),
     updatedAt: null,
   }
