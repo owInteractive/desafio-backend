@@ -6,27 +6,27 @@ import {
   mockUser,
 } from '@/domain/tests/users-mock'
 import { badRequest, ok, serverError } from '@/presentation/helpers/http-helper'
-import { EmailAlreadyInUseError } from '@/presentation/errors'
+import { EmailAlreadyInUseError, MissingParamError } from '@/presentation/errors'
+import { ValidationSpy } from '@/validation/test/mock-validation'
 
 describe('AddUserController', () => {
-  type SutType = {
-    sut: AddUserController
-    addUserUseCaseSpy: AddUserSpy
-    loadUsersByEmailUseCaseSpy: LoadUsersByEmailSpy
-  }
-  function makeSut(): SutType {
+
+  function makeSut() {
     const addUserUseCaseSpy = new AddUserSpy()
     const loadUsersByEmailUseCaseSpy = new LoadUsersByEmailSpy()
+    const validationSpy = new ValidationSpy()
     loadUsersByEmailUseCaseSpy.loadByEmailResult = null
     const sut = new AddUserController(
       addUserUseCaseSpy,
-      loadUsersByEmailUseCaseSpy
+      loadUsersByEmailUseCaseSpy,
+      validationSpy
     )
 
     return {
       sut,
       addUserUseCaseSpy,
       loadUsersByEmailUseCaseSpy,
+      validationSpy
     }
   }
   describe('handle()', () => {
@@ -88,5 +88,22 @@ describe('AddUserController', () => {
           serverError(mockedError)
         )
     });
+
+
+  test('Should call Validation with correct value', async () => {
+    const { sut, validationSpy } = makeSut()
+    const request = mockUser()
+    await sut.handle(request)
+    expect(validationSpy.input).toEqual(request)
+  })
+
+  test('Should return 400 if Validation returns an error', async () => {
+    const { sut, validationSpy } = makeSut()
+    const errorMock = new MissingParamError('any_field')
+    validationSpy.error = errorMock
+    const request = mockUser()
+    const httpResponse = await sut.handle(request)
+    expect(httpResponse).toEqual(badRequest(errorMock))
+  })
   })
 })
