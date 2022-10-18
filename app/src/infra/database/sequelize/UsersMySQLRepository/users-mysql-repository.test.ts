@@ -38,6 +38,19 @@ describe('UsersMySqlReposiory', () => {
       expect(user.role).toEqual(mockedUser.role)
       expect(user.createdAt).toEqual(new Date())
     })
+
+    test('should return an user without role on success', async () => {
+      const { sut } = makeSut()
+      const mockedUser = mockAddUser()
+      delete  mockedUser.role
+      const user = await sut.add(mockedUser)
+      expect(user.name).toEqual(mockedUser.name)
+      expect(user.email).toEqual(mockedUser.email)
+      expect(user.password).toEqual(mockedUser.password)
+      expect(user.birthDay).toEqual(mockedUser.birthDay)
+      expect(user.createdAt).toEqual(new Date())
+    })
+
   })
 
   describe('load()', () => {
