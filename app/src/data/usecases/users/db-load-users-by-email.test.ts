@@ -1,4 +1,4 @@
-import { LoadUsersByEmailRepositorySpy } from '@/data/test/users-mock';
+import { LoadUsersByEmailRepositorySpy } from '@/data/test/mock-users';
 import { faker } from '@faker-js/faker';
 import { describe, expect, test, vitest } from 'vitest';
 import { DbLoadUsersByEmail } from './db-load-users-by-email';

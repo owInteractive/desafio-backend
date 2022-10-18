@@ -1,4 +1,4 @@
-import { DeleteUserRepositorySpy, LoadUsersByIdRepositorySpy } from '@/data/test/users-mock'
+import { DeleteUserRepositorySpy, LoadUsersByIdRepositorySpy } from '@/data/test/mock-users'
 import { NotFoundError } from '@/presentation/errors'
 import { faker } from '@faker-js/faker'
 import { describe, expect, test, vitest } from 'vitest'

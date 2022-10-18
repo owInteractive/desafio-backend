@@ -1,4 +1,4 @@
-import { LoadUsersByIdRepositorySpy } from '@/data/test/users-mock'
+import { LoadUsersByIdRepositorySpy } from '@/data/test/mock-users'
 import { faker } from '@faker-js/faker'
 import { describe, expect, test, vitest } from 'vitest'
 import { DbLoadUsersById } from './db-load-users-by-id'

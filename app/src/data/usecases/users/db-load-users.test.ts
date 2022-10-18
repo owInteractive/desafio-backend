@@ -1,4 +1,4 @@
-import { LoadUsersRepositorySpy } from '@/data/test/users-mock';
+import { LoadUsersRepositorySpy } from '@/data/test/mock-users';
 import { describe, expect, test, vitest } from 'vitest';
 import { DbLoadUsers } from './db-load-users';
 
