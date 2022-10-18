@@ -2,7 +2,7 @@ export type User = {
     id?: number;
     name: string;
     email: string;
-    birthDay: Date;
+    birthDay: Date | string;
     role?: string;
     password: string
     createdAt?: Date;

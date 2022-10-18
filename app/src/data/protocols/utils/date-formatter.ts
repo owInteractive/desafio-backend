@@ -1,3 +1,3 @@
 export interface DateFormatter {
-  format: (date: string|Date) => Date
+  format: (date: string|Date) => string
 }

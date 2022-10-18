@@ -4,6 +4,7 @@ import { migrate, truncate } from '@/infra/database/sequelize/__tests__/utils'
 import request from 'supertest'
 import { afterAll, beforeAll, beforeEach, describe, expect, test } from 'vitest'
 import app from '../config/app'
+import MockDate from 'mockdate'
 
 describe('Users Routes', () => {
   beforeAll(async () => {
