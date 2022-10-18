@@ -1,4 +1,5 @@
 import { DeleteUserRepositorySpy, LoadUsersByIdRepositorySpy } from '@/data/test/users-mock'
+import { NotFoundError } from '@/presentation/errors'
 import { faker } from '@faker-js/faker'
 import { describe, expect, test, vitest } from 'vitest'
 import { DbDeleteUser } from './db-delete-user'
@@ -48,7 +49,7 @@ describe('DbDeleteUser', () => {
       loadUsersByIdRepositorySpy.loadByIdResult = null
       const userId = faker.datatype.number()
       const promise = sut.delete({ userId })
-      await expect(promise).rejects.toThrow('User')
+      await expect(promise).rejects.toThrow(new NotFoundError('user'))
     });
 
     
