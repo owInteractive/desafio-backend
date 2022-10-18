@@ -11,7 +11,7 @@ UsersSequelize.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    brithDay: {
+    birthDay: {
       type: Sequelize.DATE,
       allowNull: false,
     },

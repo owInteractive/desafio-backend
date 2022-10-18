@@ -34,7 +34,7 @@ describe('UsersMySqlReposiory', () => {
       expect(user.name).toEqual(mockedUser.name)
       expect(user.email).toEqual(mockedUser.email)
       expect(user.password).toEqual(mockedUser.password)
-      expect(user.brithDay).toEqual(mockedUser.brithDay)
+      expect(user.birthDay).toEqual(mockedUser.birthDay)
       expect(user.role).toEqual(mockedUser.role)
       expect(user.createdAt).toEqual(new Date())
     })

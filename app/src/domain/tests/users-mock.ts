@@ -7,7 +7,7 @@ export function mockAddUser(): AddUser.Params {
     name: faker.name.fullName(),
     email: faker.internet.email(),
     password: faker.internet.password(),
-    brithDay: faker.date.past(),
+    birthDay: faker.date.past(),
     role: faker.helpers.arrayElement(['admin', 'user']),
   }
 }
@@ -18,7 +18,7 @@ export function mockUser(): User {
     name: faker.name.fullName(),
     email: faker.internet.email(),
     password: faker.internet.password(),
-    brithDay: faker.date.past(),
+    birthDay: faker.date.past(),
     role: faker.helpers.arrayElement(['admin', 'user']),
     createdAt: new Date(),
     updatedAt: null,
