@@ -2,7 +2,7 @@ import { HttpResponse } from '@/presentation/protocols/http'
 import { ClientError } from '../errors/client-error'
 import { NotFoundError } from '../errors/not-found-error'
 
-export const badRequest = (error: ClientError): HttpResponse => ({
+export const badRequest = (error: ClientError | Error | any): HttpResponse => ({
   statusCode: error.statusCode || 400,
   body: error,
 })
@@ -12,7 +12,7 @@ export const ok = (data: any): HttpResponse => ({
   body: data,
 })
 
-export const forbidden = (error: ClientError): HttpResponse => ({
+export const forbidden = (error: ClientError | any | Error): HttpResponse => ({
   statusCode: error.statusCode || 403,
   body: error,
 })
@@ -22,7 +22,9 @@ export const noContent = (): HttpResponse => ({
   body: null,
 })
 
-export const serverError = (error: ClientError): HttpResponse => ({
+export const serverError = (
+  error: ClientError | any | Error
+): HttpResponse => ({
   statusCode: error.statusCode || 500,
   body: error,
 })
