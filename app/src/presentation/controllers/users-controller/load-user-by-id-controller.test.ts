@@ -1,12 +1,14 @@
 import { LoadUsersByIdSpy } from '@/domain/tests/users-mock'
-import { ok, serverError } from '@/presentation/helpers/http-helper'
+import { MissingParamError } from '@/presentation/errors/missing-param-error'
+import { badRequest, notFound, ok, serverError } from '@/presentation/helpers/http-helper'
+import { faker } from '@faker-js/faker'
 import { describe, expect, test, vitest } from 'vitest'
-import { LoadUserByIdController } from './load-user-by-id-controller'
+import { LoadUsersByIdController } from './load-user-by-id-controller'
 
 describe('LoadUserByIdControler', () => {
   function makeSut() {
     const loadUserByIdSpy = new LoadUsersByIdSpy()
-    const sut = new LoadUserByIdController(loadUserByIdSpy)
+    const sut = new LoadUsersByIdController(loadUserByIdSpy)
 
     return {
       sut,
@@ -22,6 +24,25 @@ describe('LoadUserByIdControler', () => {
       await sut.handle(request)
       expect(loadUserByIdSpy.loadByIdParams).toEqual(request)
     })
+
+    test('should return 400 if userId was not provided', async () => {
+      const { sut } = makeSut()
+      const request = {
+        userId: null,
+      }
+      const response = await sut.handle(request)
+      expect(response).toEqual(badRequest(new MissingParamError('userId')))
+    });
+
+    test('should return 404 if loadUserByIdUseCase returns null', async () => {
+      const { sut,loadUserByIdSpy } = makeSut()
+      loadUserByIdSpy.loadByIdResult = null
+      const request = {
+        userId: faker.datatype.number(),
+      }
+      const response = await sut.handle(request)
+      expect(response).toEqual(notFound('user'))
+    });
 
     test('should return 500 if loadUserByIdUseCase throws', async () => {
       const { sut, loadUserByIdSpy } = makeSut()

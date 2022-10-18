@@ -45,7 +45,7 @@ describe('UsersMySqlReposiory', () => {
       const { sut } = makeSut()
       const mockedUser = mockAddUser()
       const mockedOtherUser = mockAddUser()
-  
+
       await UsersSequelize.create(mockedUser)
       await UsersSequelize.create(mockedOtherUser)
 
@@ -61,8 +61,10 @@ describe('UsersMySqlReposiory', () => {
       const mockOldestUser = mockAddUser()
       mockOldestUser.createdAt = new Date('2021-01-01 12:00:00')
 
-      const mostRecentUser = await UsersSequelize.create(mockMostRecentUser) as any 
-      const oldestUser = await UsersSequelize.create(mockOldestUser) as any
+      const mostRecentUser = (await UsersSequelize.create(
+        mockMostRecentUser
+      )) as any
+      const oldestUser = (await UsersSequelize.create(mockOldestUser)) as any
       const users = await sut.load({ order: 'desc' })
       expect(users[0].id).toEqual(mostRecentUser.id)
       expect(users[1].id).toEqual(oldestUser.id)
@@ -76,8 +78,10 @@ describe('UsersMySqlReposiory', () => {
       const mockOldestUser = mockAddUser()
       mockOldestUser.createdAt = new Date('2021-01-01 12:00:00')
 
-      const mostRecentUser = await UsersSequelize.create(mockMostRecentUser) as any 
-      const oldestUser = await UsersSequelize.create(mockOldestUser) as any
+      const mostRecentUser = (await UsersSequelize.create(
+        mockMostRecentUser
+      )) as any
+      const oldestUser = (await UsersSequelize.create(mockOldestUser)) as any
       const users = await sut.load({ order: 'asc' })
       expect(users[0].id).toEqual(oldestUser.id)
       expect(users[1].id).toEqual(mostRecentUser.id)
@@ -89,15 +93,49 @@ describe('UsersMySqlReposiory', () => {
       const { sut } = makeSut()
       const mockedUser = mockAddUser()
       const mockedOtherUser = mockAddUser()
-  
+
       await UsersSequelize.create(mockedUser)
       await UsersSequelize.create(mockedOtherUser)
 
       const user = await sut.loadByEmail({
-        email: mockedUser.email
+        email: mockedUser.email,
       })
       expect(user.name).toEqual(mockedUser.name)
       expect(user.email).toEqual(mockedUser.email)
+    })
+
+    test('should return null if the User does not exists', async () => {
+      const { sut } = makeSut()
+      const user = await sut.loadByEmail({
+        email: 'some_email@mail.com',
+      })
+      expect(user).toBeNull()
+    })
+  })
+
+  describe('loadById()', () => {
+    test('should load the correct User according to the id', async () => {
+      const { sut } = makeSut()
+      const mockedUser = mockAddUser()
+      const mockedOtherUser = mockAddUser()
+
+      const { id } = await UsersSequelize.create(mockedUser) as any
+      await UsersSequelize.create(mockedOtherUser)
+
+      const user = await sut.loadById({
+        userId: id
+      })
+      expect(user.id).toBe(id)
+      expect(user.name).toEqual(mockedUser.name)
+      expect(user.email).toEqual(mockedUser.email)
+    })
+
+    test('should return null if the User does not exists', async () => {
+      const { sut } = makeSut()
+      const user = await sut.loadById({
+        userId: 1
+      })
+      expect(user).toBeNull()
     })
   })
 })

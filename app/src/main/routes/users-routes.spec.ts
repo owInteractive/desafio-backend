@@ -63,4 +63,23 @@ describe('Users Routes', () => {
       expect(res.body[1].id).toBe(userOne.getDataValue('id'))
     })
   })
+
+  describe('GET /users/{id}', () => {
+    test('should return 404 if the user does not exits', async () => {
+      await request(app)
+        .get('/users/1')
+        .expect(404)
+        .expect({ error: 'user not found' })
+    })
+
+    test('should return 200 with the user', async () => {
+      const user = await UsersSequelize.create(mockAddUser())
+
+      const res = await request(app)
+        .get(`/users/${user.getDataValue('id')}`)
+        .expect(200)
+
+      expect(res.body.id).toBe(user.getDataValue('id'))
+    })
+  })
 })
