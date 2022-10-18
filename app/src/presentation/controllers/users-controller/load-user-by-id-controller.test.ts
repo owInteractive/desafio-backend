@@ -19,16 +19,18 @@ describe('LoadUserByIdControler', () => {
     test('should call loadUserByIdUseCase with correct user id', async () => {
       const { sut, loadUserByIdSpy } = makeSut()
       const request = {
-        userId: 1,
+        id: 1,
       }
       await sut.handle(request)
-      expect(loadUserByIdSpy.loadByIdParams).toEqual(request)
+      expect(loadUserByIdSpy.loadByIdParams).toEqual({
+        userId: request.id,
+      })
     })
 
     test('should return 400 if userId was not provided', async () => {
       const { sut } = makeSut()
       const request = {
-        userId: null,
+        id: null,
       }
       const response = await sut.handle(request)
       expect(response).toEqual(badRequest(new MissingParamError('userId')))
@@ -38,7 +40,7 @@ describe('LoadUserByIdControler', () => {
       const { sut,loadUserByIdSpy } = makeSut()
       loadUserByIdSpy.loadByIdResult = null
       const request = {
-        userId: faker.datatype.number(),
+        id: faker.datatype.number(),
       }
       const response = await sut.handle(request)
       expect(response).toEqual(notFound('user'))
@@ -51,7 +53,7 @@ describe('LoadUserByIdControler', () => {
         .spyOn(loadUserByIdSpy, 'loadById')
         .mockRejectedValueOnce(mockedError)
       const request = {
-        userId: 1,
+        id: 1,
       }
       const response = await sut.handle(request)
       expect(response).toEqual(serverError(mockedError))
@@ -60,7 +62,7 @@ describe('LoadUserByIdControler', () => {
     test('should return 200 if loadUserByIdUseCase succeeds', async () => {
       const { sut, loadUserByIdSpy } = makeSut()
       const request = {
-        userId: 1,
+        id: 1,
       }
       const response = await sut.handle(request)
       expect(response).toEqual(ok(loadUserByIdSpy.loadByIdResult))
