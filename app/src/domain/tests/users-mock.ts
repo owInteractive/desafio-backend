@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { User } from '../models'
-import { AddUser, LoadUsers, LoadUsersById } from '../usecases/users'
+import { AddUser, DeleteUser, LoadUsers, LoadUsersById } from '../usecases/users'
 import { LoadUsersByEmail } from '../usecases/users/load-users-by-email'
 export function mockAddUser(): AddUser.Params {
   return {
@@ -69,5 +69,13 @@ export class AddUserSpy implements AddUser {
   async add(user: AddUser.Params): Promise<AddUser.Result> {
     this.addParams = user
     return new Promise((resolve) => resolve(this.addResult))
+  }
+}
+
+export class DeleteUserSpy implements DeleteUser {
+  deleteParams: DeleteUser.Params
+  async delete(params: DeleteUser.Params): Promise<void> {
+    this.deleteParams = params
+    return new Promise((resolve) => resolve())
   }
 }
