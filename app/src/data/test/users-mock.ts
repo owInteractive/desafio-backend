@@ -1,6 +1,7 @@
 import { mockUser } from '@/domain/tests/users-mock'
 import { LoadUsersByEmailRepository, LoadUsersByIdRepository } from '../protocols/database/users'
 import { AddUserRepository } from '../protocols/database/users/add-user-repository'
+import { DeleteUserRepository } from '../protocols/database/users/delete-user-repository'
 import { LoadUsersRepository } from '../protocols/database/users/load-user-repository'
 
 export class AddUserRepositorySpy implements AddUserRepository {
@@ -48,5 +49,13 @@ export class LoadUsersByIdRepositorySpy implements LoadUsersByIdRepository {
   async loadById(params: LoadUsersByIdRepository.Params): Promise<LoadUsersByIdRepository.Result> {
     this.loadByIdParams = params
     return this.loadByIdResult
+  }
+}
+
+export class DeleteUserRepositorySpy implements DeleteUserRepository {
+  deleteParams: DeleteUserRepository.Params
+
+  async delete(params: DeleteUserRepository.Params): Promise<void> {
+    this.deleteParams = params
   }
 }
