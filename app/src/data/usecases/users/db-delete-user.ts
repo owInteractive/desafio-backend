@@ -13,7 +13,7 @@ export class DbDeleteUser implements DeleteUser {
       userId: params.userId
     })
     if (!usersExists) {
-      throw new NotFoundError('User')
+      throw new NotFoundError('user')
     }
     await this.deleteUserRepository.delete(params)
   }
