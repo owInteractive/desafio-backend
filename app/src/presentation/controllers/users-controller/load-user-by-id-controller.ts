@@ -1,30 +1,39 @@
 import { User } from '@/domain/models'
 import { LoadUsersById } from '@/domain/usecases/users'
-import { ok, serverError } from '@/presentation/helpers/http-helper'
+import { MissingParamError } from '@/presentation/errors/missing-param-error'
+import { ok, serverError, notFound, badRequest } from '@/presentation/helpers/http-helper'
 import { HttpResponse } from '@/presentation/protocols'
 
-export class LoadUserByIdController {
+export class LoadUsersByIdController {
   constructor(private readonly loadUserByIdUseCase: LoadUsersById) {}
 
   async handle(
-    request: LoadUserByIdController.Request
-  ): Promise<LoadUserByIdController.Response> {
+    request: LoadUsersByIdController.Request
+  ): Promise<LoadUsersByIdController.Response> {
     try {
-      const { userId } = request
+      const { id: userId } = request
+      if (!userId) {
+        return badRequest(new MissingParamError('userId'))
+      } 
       const user = await this.loadUserByIdUseCase.loadById({
         userId,
       })
 
+      if (!user) {
+        return notFound('user')
+      }
       return ok(user)
     } catch (error) {
+      console.error(error);
+      
       return serverError(error)
     }
   }
 }
 
-export namespace LoadUserByIdController {
+export namespace LoadUsersByIdController {
   export type Request = {
-    userId: number
+    id: number
   }
   export type Response = HttpResponse<User>
 }

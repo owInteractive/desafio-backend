@@ -3,10 +3,15 @@ import {
   LoadUsersByEmailRepository,
   LoadUsersRepository,
 } from '@/data/protocols/database/users'
+import { LoadUsersByIdRepository } from '@/data/protocols/database/users/load-user-by-id-repository'
 import UsersSequelize from '../models/Users'
 
 export class UsersMySqlReposiory
-  implements AddUserRepository, LoadUsersRepository, LoadUsersByEmailRepository
+  implements
+    AddUserRepository,
+    LoadUsersRepository,
+    LoadUsersByEmailRepository,
+    LoadUsersByIdRepository
 {
   async add(user: AddUserRepository.Params): Promise<AddUserRepository.Result> {
     const newUser = await UsersSequelize.create(user)
@@ -14,7 +19,7 @@ export class UsersMySqlReposiory
   }
 
   /**
-   * 
+   *
    * Returns all users from database.
    * By default it returns all users ordered by createdAt in descending order.
    */
@@ -26,6 +31,18 @@ export class UsersMySqlReposiory
     })
 
     return users as any as LoadUsersRepository.Result
+  }
+
+  async loadById(
+    params: LoadUsersByIdRepository.Params
+  ): Promise<LoadUsersByIdRepository.Result> {
+    const user = await UsersSequelize.findOne({
+      where: {
+        id: params.userId,
+      }
+    })
+
+    return user as any as LoadUsersByIdRepository.Result
   }
 
   async loadByEmail(
