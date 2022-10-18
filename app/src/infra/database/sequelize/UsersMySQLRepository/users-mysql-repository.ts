@@ -1,9 +1,11 @@
 import {
   AddUserRepository,
+  DeleteUserRepository,
   LoadUsersByEmailRepository,
   LoadUsersRepository,
 } from '@/data/protocols/database/users'
 import { LoadUsersByIdRepository } from '@/data/protocols/database/users/load-user-by-id-repository'
+import { DeleteUser } from '@/domain/usecases/users'
 import UsersSequelize from '../models/Users'
 
 export class UsersMySqlReposiory
@@ -11,7 +13,8 @@ export class UsersMySqlReposiory
     AddUserRepository,
     LoadUsersRepository,
     LoadUsersByEmailRepository,
-    LoadUsersByIdRepository
+    LoadUsersByIdRepository,
+    DeleteUserRepository
 {
   async add(user: AddUserRepository.Params): Promise<AddUserRepository.Result> {
     const newUser = await UsersSequelize.create(user)
@@ -56,4 +59,12 @@ export class UsersMySqlReposiory
 
     return users as any as LoadUsersByEmailRepository.Result
   }
+
+  async delete (params?: DeleteUser.Params): Promise<void> {
+    await UsersSequelize.destroy({
+      where: {
+        id: params.userId,
+      },
+    })
+  };
 }
