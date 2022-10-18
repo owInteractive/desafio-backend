@@ -33,7 +33,7 @@ describe('Date Validation', () => {
     }
 
     const result = sut.validate(mockedObject)
-    expect(result).toEqual(new InvalidParamError('someDate'))
+    expect(result).toEqual(new InvalidParamError('someDate', `the date invalid date is not valid`))
   });
 
   test('should not return if dateValidator returns true', () => {

@@ -9,10 +9,11 @@ export class DateValidation implements Validation {
   ) {}
 
   validate(input: any ): Error {
-    const isValidDate = this.dateValidator.isValidDate(input[this.fieldName])
+    const dateField = input[this.fieldName]
+    const isValidDate = this.dateValidator.isValidDate(dateField)
 
     if(!isValidDate) {
-      return new InvalidParamError(this.fieldName)
+      return new InvalidParamError(this.fieldName, `the date ${dateField} is not valid`)
     }
   }
 }
