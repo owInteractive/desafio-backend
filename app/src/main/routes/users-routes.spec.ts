@@ -82,4 +82,21 @@ describe('Users Routes', () => {
       expect(res.body.id).toBe(user.getDataValue('id'))
     })
   })
+
+  describe('Delete /users/{id}', () => {
+    test('should return 404 if the user does not exits', async () => {
+      await request(app)
+        .delete('/users/1')
+        .expect(404)
+        .expect({ error: 'user not found' })
+    })
+
+    test('should delete an user according to the id', async () => {
+      const user = await UsersSequelize.create(mockAddUser())
+      const id = user.getDataValue('id')
+      await request(app).delete(`/users/${id}`).expect(204)
+      const usersExists = await UsersSequelize.findOne({ where: { id } })
+      expect(usersExists).toBeFalsy()
+    });
+  })
 })
