@@ -46,6 +46,7 @@ UsersSequelize.init(
     updatedAt: 'updatedAt',
     sequelize: sequelizeConnection,
     tableName: 'users',
+    modelName: 'Users',
   },
 )
 

@@ -6,7 +6,7 @@ import {
 } from '@/data/protocols/database/users'
 import { LoadUsersByIdRepository } from '@/data/protocols/database/users/load-user-by-id-repository'
 import { DeleteUser } from '@/domain/usecases/users'
-import UsersSequelize from '../models/Users'
+import UsersSequelize from '../models/User'
 
 export class UsersMySqlReposiory
   implements

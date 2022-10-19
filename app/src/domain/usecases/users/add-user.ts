@@ -1,4 +1,4 @@
-import { User } from '../../models';
+import { AddUserModel, User } from '../../models';
 
 export interface AddUser {
     add: (params: AddUser.Params) => Promise<AddUser.Result>
@@ -9,6 +9,6 @@ export interface AddUser {
  * Here we declare all types used by AddUser use case, like the params and the result.
  */
 export namespace AddUser {
-    export type Params = Omit<User, 'id'>;
+    export type Params = AddUserModel;
     export type Result = User;
 }

@@ -1,6 +1,6 @@
 import { DbAddUser } from '@/data/usecases/users/db-add-user';
 import { AddUser } from '@/domain/usecases/users';
-import { UsersMySqlReposiory } from '@/infra/database/sequelize/UsersMySQLRepository/users-mysql-repository';
+import { UsersMySqlReposiory } from '@/infra/database/sequelize/UsersMySqlRepository/users-mysql-repository';
 import { MomentDateFormatter } from '@/infra/utils';
 
 export function makeDbAddUser(): AddUser {
