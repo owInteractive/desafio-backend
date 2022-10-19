@@ -7,12 +7,7 @@ export class TransactionsMySqlReposiory implements AddTransactionRepository {
   async add(
     transaction: AddTransactionRepository.Params
   ): Promise<AddTransactionRepository.Result> {
-    const newTransaction = (await TransactionSequelize.create({
-      ...transaction,
-      from: transaction.from.id,
-      to: transaction.to.id,
-      chargebackFrom: transaction.chargebackFrom?.id,
-    })).toJSON()
+    const newTransaction = (await TransactionSequelize.create(transaction)).toJSON()
     
 
     const insertedTransaction = (await TransactionSequelize.findOne({

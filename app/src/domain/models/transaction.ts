@@ -4,9 +4,9 @@ export type AddTransactionModel = {
   description?: string;
   amount: number;
   type: "debt" | "credit" | "chargeback";
-  chargebackFrom?: Transaction;
-  from: User;
-  to: User;
+  chargebackFrom?: number;
+  from: number;
+  to: number;
   createdAt?: Date;
 }
 

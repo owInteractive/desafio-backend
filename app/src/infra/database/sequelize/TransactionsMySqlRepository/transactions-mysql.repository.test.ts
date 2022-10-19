@@ -22,12 +22,7 @@ describe('TransactionsMySqlRepository', () => {
     const to = await makeUser()
     const from = await makeUser()
     const rawTransactionDb = (
-      await TransactionSequelize.create({
-        ...transaction,
-        from: from.id,
-        to: to.id,
-        chargebackFrom: transaction.chargebackFrom?.id,
-      })
+      await TransactionSequelize.create({...transaction, to: to.id, from: from.id})
     ).toJSON()
 
     const { From, ChargebackFrom, To, ...transactionDb } = (
@@ -68,8 +63,8 @@ describe('TransactionsMySqlRepository', () => {
       const to = await makeUser()
       const from = await makeUser()
       const mockedTransaction = mockAddTransaction()
-      mockedTransaction.to = to
-      mockedTransaction.from = from
+      mockedTransaction.to = to.id
+      mockedTransaction.from = from.id
       const transaction = await sut.add(mockedTransaction)
 
       expect(transaction.amount).toBe(mockedTransaction.amount)
@@ -92,10 +87,10 @@ describe('TransactionsMySqlRepository', () => {
       const mockedChargebackTransaction = await makeTransaction()
       
       const mockedTransaction = mockAddTransaction()
-      mockedTransaction.to = to
-      mockedTransaction.from = from
+      mockedTransaction.to = to.id
+      mockedTransaction.from = from.id
       mockedTransaction.type = 'chargeback'
-      mockedTransaction.chargebackFrom = mockedChargebackTransaction
+      mockedTransaction.chargebackFrom = mockedChargebackTransaction.id
       const transaction = await sut.add(mockedTransaction)
 
       expect(transaction.amount).toBe(mockedTransaction.amount)
