@@ -15,7 +15,7 @@ export function makeAddTransactionControllerValidator(): ValidationComposite {
     validations.push(new RequiredFieldValidation(requiredField))
   }
 
-  validations.push(new FieldShouldBeValidation('type', ['credit', 'debit', 'chargeback']))
+  validations.push(new FieldShouldBeValidation('type', ['credit', 'debt', 'chargeback']))
 
 
   return new ValidationComposite(validations)
