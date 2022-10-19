@@ -32,7 +32,7 @@ describe('DbDeleteUser', () => {
       const { sut, loadUsersByIdRepositorySpy } = makeSut()
       const userId = faker.datatype.number()
       await sut.delete({ userId })
-      expect(loadUsersByIdRepositorySpy.loadByIdParams).toEqual({ userId })
+      expect(loadUsersByIdRepositorySpy.loadByIdParams[0]).toEqual({ userId })
     });
 
     test('should throw if LoadUsersByIdRepository throws', async () => {

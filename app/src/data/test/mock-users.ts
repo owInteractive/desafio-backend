@@ -41,13 +41,13 @@ export class LoadUsersByEmailRepositorySpy implements LoadUsersByEmailRepository
 }
 
 export class LoadUsersByIdRepositorySpy implements LoadUsersByIdRepository {
-  loadByIdParams: LoadUsersByIdRepository.Params
+  loadByIdParams: LoadUsersByIdRepository.Params[] = []
   loadByIdResult: LoadUsersByIdRepository.Result
   constructor() {
     this.loadByIdResult = mockUser()
   }
   async loadById(params: LoadUsersByIdRepository.Params): Promise<LoadUsersByIdRepository.Result> {
-    this.loadByIdParams = params
+    this.loadByIdParams.push(params)
     return this.loadByIdResult
   }
 }

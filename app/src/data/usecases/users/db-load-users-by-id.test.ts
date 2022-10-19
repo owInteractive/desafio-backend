@@ -14,7 +14,7 @@ describe('DbLoadUsersById', () => {
       const { sut, loadUsersByIdRepositorySpy } = makeSut()
       const userId = faker.datatype.number()
       await sut.loadById({ userId })
-      expect(loadUsersByIdRepositorySpy.loadByIdParams).toEqual({ userId })
+      expect(loadUsersByIdRepositorySpy.loadByIdParams[0]).toEqual({ userId })
     })
 
     test('should return a user on success', async () => {

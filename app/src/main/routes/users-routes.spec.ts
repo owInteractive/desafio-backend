@@ -70,7 +70,7 @@ describe('Users Routes', () => {
       await request(app)
         .get('/users/1')
         .expect(404)
-        .expect({ error: 'user not found' })
+        .expect({ error: 'Not Found: user' })
     })
 
     test('should return 200 with the user', async () => {
@@ -89,7 +89,7 @@ describe('Users Routes', () => {
       await request(app)
         .delete('/users/1')
         .expect(404)
-        .expect({ error: 'user not found' })
+        .expect({ error: 'Not Found: user' })
     })
 
     test('should delete an user according to the id', async () => {
