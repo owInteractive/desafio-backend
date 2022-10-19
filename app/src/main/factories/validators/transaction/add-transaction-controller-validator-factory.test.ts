@@ -21,7 +21,7 @@ describe('AddTransactionControllerValidator Factory', () => {
       validations.push(new RequiredFieldValidation(requiredField))
     }
   
-  validations.push(new FieldShouldBeValidation('type', ['credit', 'debit', 'chargeback']))
+  validations.push(new FieldShouldBeValidation('type', ['credit', 'debt', 'chargeback']))
     
     expect(ValidationComposite).toHaveBeenCalledWith([
       ...validations
