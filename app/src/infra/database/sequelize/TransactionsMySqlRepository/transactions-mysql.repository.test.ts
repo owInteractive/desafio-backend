@@ -107,4 +107,99 @@ describe('TransactionsMySqlRepository', () => {
       expect(transactionExists.toJSON().id).toBe(transaction.id)
     })
   })
+
+  describe('loadByUser()', () => {
+    test('should return an empty array with the pagination if no transactions are found', async () => {
+      const sut = makeSut()
+      const user = await makeUser()
+      const transactions = await sut.loadByUser({
+        userId: user.id,
+        page: 1,
+        perPage: 10,
+      })
+      expect(transactions).toEqual({
+        data: [],
+        pagination: {
+          page: 1,
+          perPage: 10,
+          total: 0,
+          totalPages: 0,
+        }
+      })
+    })
+
+    test('should return valid pagination if transactions was found', async () => {
+      const sut = makeSut()
+      const userOne = await makeUser()
+      const userTwo = await makeUser()
+      const transactionOne = mockAddTransaction()
+      transactionOne.to = userOne.id
+      transactionOne.from = userTwo.id
+      const transactionTwo = mockAddTransaction()
+      transactionTwo.to = userOne.id
+      transactionTwo.from = userTwo.id
+      const transactionThree = mockAddTransaction()
+      transactionThree.from = userOne.id
+      transactionThree.to = userTwo.id
+
+      const [transactionOneInserted] =await TransactionSequelize.bulkCreate([
+        transactionOne,
+        transactionTwo,
+        transactionThree,
+      ])
+      const transactionsOfUserOne = await sut.loadByUser({
+        userId: userOne.id,
+        page: 1,
+        perPage: 10,
+      })
+
+      expect(transactionsOfUserOne.pagination).toEqual({
+          page: 1,
+          perPage: 10,
+          total: 3,
+          totalPages: 1,
+      })
+
+      expect(transactionsOfUserOne.data[0].id).toBe(transactionOneInserted.getDataValue('id'))
+      expect(transactionsOfUserOne.data[0].to.id).toEqual(userOne.id)
+      expect(transactionsOfUserOne.data[0].from.id).toEqual(userTwo.id)
+    });
+    
+    test('should change the page correctly', async () => {
+      const sut = makeSut()
+      const userOne = await makeUser()
+      const userTwo = await makeUser()
+      const transactionOne = mockAddTransaction()
+      transactionOne.to = userOne.id
+      transactionOne.from = userTwo.id
+      const transactionTwo = mockAddTransaction()
+      transactionTwo.to = userOne.id
+      transactionTwo.from = userTwo.id
+      const transactionThree = mockAddTransaction()
+      transactionThree.from = userOne.id
+      transactionThree.to = userTwo.id
+
+      const [_,transactionTwoInserted] =await TransactionSequelize.bulkCreate([
+        transactionOne,
+        transactionTwo,
+        transactionThree,
+      ])
+      const transactionsOfUserOne = await sut.loadByUser({
+        userId: userOne.id,
+        page: 2,
+        perPage: 1,
+      })
+
+      expect(transactionsOfUserOne.pagination).toEqual({
+          page: 2,
+          perPage: 1,
+          total: 3,
+          totalPages: 3,
+      })
+
+      expect(transactionsOfUserOne.data[0].id).toBe(transactionTwoInserted.getDataValue('id'))
+      expect(transactionsOfUserOne.data[0].to.id).toEqual(userOne.id)
+      expect(transactionsOfUserOne.data[0].from.id).toEqual(userTwo.id)
+    });
+  });
 })
