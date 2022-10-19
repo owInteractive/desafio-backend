@@ -70,6 +70,7 @@ TransactionSequelize.init(
   },
   {
     createdAt: 'createdAt',
+    updatedAt: false,
     sequelize: sequelizeConnection,
     tableName: 'transactions',
     modelName: 'Transactions',
