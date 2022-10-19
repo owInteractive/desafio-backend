@@ -2,7 +2,6 @@ import { AddTransactionRepository } from '@/data/protocols/database/transactions
 import TransactionSequelize, {
   TransactionModelSequelize,
 } from '../models/Transaction'
-import UsersSequelize from '../models/User'
 
 export class TransactionsMySqlReposiory implements AddTransactionRepository {
   async add(
@@ -14,6 +13,7 @@ export class TransactionsMySqlReposiory implements AddTransactionRepository {
       to: transaction.to.id,
       chargebackFrom: transaction.chargebackFrom?.id,
     })).toJSON()
+    
 
     const insertedTransaction = (await TransactionSequelize.findOne({
       where: {
@@ -21,9 +21,10 @@ export class TransactionsMySqlReposiory implements AddTransactionRepository {
       },
       include: {
         all: true
+   
       }
     })).toJSON()
-
+    
     return this.formatTransaction(insertedTransaction)
   }
 
@@ -31,6 +32,7 @@ export class TransactionsMySqlReposiory implements AddTransactionRepository {
     transaction: TransactionModelSequelize
   ): AddTransactionRepository.Result {
     const { From, To, ChargebackFrom, ...prunedTransaction} = transaction
+    
     const newTransaction: AddTransactionRepository.Result = {
       ...prunedTransaction,
       from: transaction.From,

@@ -78,5 +78,5 @@ TransactionSequelize.init(
 
 TransactionSequelize.belongsTo(UsersSequelize, { as: 'From', foreignKey: 'from', onDelete: 'CASCADE' })
 TransactionSequelize.belongsTo(UsersSequelize, { as: 'To', foreignKey: 'to',  onDelete: 'CASCADE' })
-TransactionSequelize.hasOne(TransactionSequelize, { as: 'ChargebackFrom', foreignKey: 'chargebackFrom', onDelete: 'CASCADE' })
+TransactionSequelize.belongsTo(TransactionSequelize, { as: 'ChargebackFrom', foreignKey: 'chargebackFrom', onDelete: 'CASCADE' })
 export default TransactionSequelize
