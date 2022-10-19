@@ -1,26 +1,26 @@
-import { User } from './user'
+import { User } from "./user";
 
 export type AddTransactionModel = {
-  description?: string
-  amount: number
-  type: 'debt' | 'credit' | 'chargeback'
-  chargebackFrom?: number
-  from: number
-  to: number
-  createdAt?: Date
+  description?: string;
+  amount: number;
+  type: "debt" | "credit" | "chargeback";
+  chargebackFrom?: Transaction;
+  from: User;
+  to: User;
+  createdAt?: Date;
 }
 
 export type Transaction = {
-  id?: number
-  description?: string
-  amount: number
-  type: 'debt' | 'credit' | 'chargeback'
+  id: number;
+  description?: string;
+  amount: number;
+  type: "debt" | "credit" | "chargeback";
   /**
    * The transaction that was charged back.
    * This field is only present when the transaction is a chargeback.
    */
-  chargebackFrom?: Transaction
-  from: User
-  to: User
-  createdAt?: Date
+  chargebackFrom?: Transaction;
+  from: User;
+  to: User;
+  createdAt?: Date;
 }

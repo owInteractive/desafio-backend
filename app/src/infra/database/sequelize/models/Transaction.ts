@@ -1,13 +1,22 @@
-import { AddTransactionModel, Transaction, } from '@/domain/models'
-import Sequelize, { Model, Optional } from 'sequelize'
+import { AddTransactionModel, Transaction, User } from '@/domain/models'
+import Sequelize, { Model } from 'sequelize'
 import { sequelizeConnection } from '../helpers'
 import UsersSequelize from './User'
 
-class TransactionSequelize extends Model<
-  Transaction,
-  AddTransactionModel
-> {
-}
+export type TransactionModelSequelize = {
+  id: number,
+  description: string,
+  amount: number,
+  type: 'debt' | 'credit' | 'chargeback',
+  chargebackFrom: number,
+  ChargebackFrom?: Transaction,
+  from: number,
+  From?: User,
+  To?: User,
+  to: number,
+  createdAt?: Date
+} 
+class TransactionSequelize extends Model<TransactionModelSequelize> {}
 
 TransactionSequelize.init(
   {
@@ -23,7 +32,6 @@ TransactionSequelize.init(
     from: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      field: 'fromId',
       references: {
         model: UsersSequelize,
         key: 'id',
@@ -32,7 +40,6 @@ TransactionSequelize.init(
     to: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      field: 'toId',
       references: {
         model: UsersSequelize,
         key: 'id',
@@ -45,11 +52,11 @@ TransactionSequelize.init(
     chargebackFrom: {
       type: Sequelize.INTEGER,
       allowNull: true,
-      field: 'chargebackFromId',
       references: {
         model: TransactionSequelize,
         key: 'id',
-      }
+      },
+
     },
     createdAt: {
       type: Sequelize.DATE,
@@ -59,7 +66,7 @@ TransactionSequelize.init(
     description: {
       type: Sequelize.STRING,
       allowNull: true,
-    }
+    },
   },
   {
     createdAt: 'createdAt',
@@ -68,13 +75,8 @@ TransactionSequelize.init(
     modelName: 'Transactions',
   }
 )
-TransactionSequelize.belongsTo(UsersSequelize, {
-  foreignKey: 'toId',
-})
 
-TransactionSequelize.belongsTo(UsersSequelize, {
-  foreignKey: 'fromId',
-})
-
-
+TransactionSequelize.belongsTo(UsersSequelize, { as: 'From', foreignKey: 'from', onDelete: 'CASCADE' })
+TransactionSequelize.belongsTo(UsersSequelize, { as: 'To', foreignKey: 'to',  onDelete: 'CASCADE' })
+TransactionSequelize.hasOne(TransactionSequelize, { as: 'ChargebackFrom', foreignKey: 'chargebackFrom', onDelete: 'CASCADE' })
 export default TransactionSequelize

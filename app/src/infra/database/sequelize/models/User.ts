@@ -39,7 +39,8 @@ UsersSequelize.init(
     role: {
         type: Sequelize.STRING,
         allowNull: true,
-    }
+    },
+
   },
   {
     createdAt: 'createdAt',
@@ -48,6 +49,7 @@ UsersSequelize.init(
     tableName: 'users',
     modelName: 'Users',
   },
+
 )
 
 export default UsersSequelize
