@@ -1,5 +1,5 @@
 import { ClientError } from "../errors";
 
-export interface Validation {
-  validate: (input: any) => ClientError  | undefined
+export interface Validation<T = any> {
+  validate: (input: T) => ClientError  | undefined
 }
