@@ -1,9 +1,11 @@
 import { AddTransactionRepository } from '@/data/protocols/database/transactions/add-transaction-repository'
+import { LoadTransactionByUserRepository } from '@/data/protocols/database/transactions/load-transaction-by-user-repository'
+import { Op } from 'sequelize'
 import TransactionSequelize, {
   TransactionModelSequelize,
 } from '../models/Transaction'
 
-export class TransactionsMySqlReposiory implements AddTransactionRepository {
+export class TransactionsMySqlReposiory implements AddTransactionRepository, LoadTransactionByUserRepository {
   async add(
     transaction: AddTransactionRepository.Params
   ): Promise<AddTransactionRepository.Result> {
@@ -37,5 +39,37 @@ export class TransactionsMySqlReposiory implements AddTransactionRepository {
 
 
     return newTransaction
+  }
+
+  async loadByUser(params: LoadTransactionByUserRepository.Params): Promise<LoadTransactionByUserRepository.Result> {
+    const { page, perPage, userId } = params
+    const offset = (page - 1) * perPage
+
+    const transactions = await TransactionSequelize.findAndCountAll({
+      where: {
+        [Op.or]: {
+          from: userId,
+          to: userId,
+        }
+      },
+      offset,
+      limit: perPage,
+      include: {
+        all: true,
+      }
+    })
+
+    const data = transactions.rows.map(transaction => this.formatTransaction(transaction.toJSON()))
+    const pagination = {
+      page,
+      perPage,
+      total: transactions.count,
+      totalPages: Math.ceil(transactions.count / perPage)
+    }
+
+    return {
+      data,
+      pagination
+    }
   }
 }
