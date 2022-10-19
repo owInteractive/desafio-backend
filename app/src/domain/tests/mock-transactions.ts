@@ -18,8 +18,8 @@ export function mockTransaction(): Transaction {
 export function mockAddTransaction(): AddTransactionModel {
   return {
     amount: faker.datatype.float(),
-    from: mockUser().id,
-    to: mockUser().id,
+    from: mockUser(),
+    to: mockUser(),
     type: faker.helpers.arrayElement(['debt', 'credit', 'chargeback']),
     chargebackFrom: null,
     description: faker.lorem.sentence(),

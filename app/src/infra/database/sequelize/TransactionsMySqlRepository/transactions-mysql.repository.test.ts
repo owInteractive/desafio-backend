@@ -34,15 +34,16 @@ describe('TransactionsMySqlRepository', () => {
       const to = await makeUser()
       const from = await makeUser()
       const mockedTransaction = mockAddTransaction()
-      mockedTransaction.to = to.id
-      mockedTransaction.from = from.id
+      mockedTransaction.to = to
+      mockedTransaction.from = from
       const transaction = await sut.add(mockedTransaction)
 
-      expect(transaction.amount).toEqual(mockedTransaction.amount)
-      expect(transaction.description).toEqual(mockedTransaction.description)
-      expect(transaction.type).toEqual(mockedTransaction.type)
-      expect(transaction.to).toEqual(to.id)
-      expect(transaction.from).toEqual(from.id)
+      expect(transaction.amount).toBe(mockedTransaction.amount)
+      expect(transaction.description).toBe(mockedTransaction.description)
+      expect(transaction.type).toBe(mockedTransaction.type)
+      expect(transaction.to.id).toEqual(to.id)
+      expect(transaction.from.id).toEqual(from.id)
+      
     })
   })
 })
