@@ -4,7 +4,7 @@ import {
   AddUserSpy,
   LoadUsersByEmailSpy,
   mockUser,
-} from '@/domain/tests/users-mock'
+} from '@/domain/tests/mock-users'
 import { badRequest, ok, serverError } from '@/presentation/helpers/http-helper'
 import { EmailAlreadyInUseError, MissingParamError } from '@/presentation/errors'
 import { ValidationSpy } from '@/validation/test/mock-validation'

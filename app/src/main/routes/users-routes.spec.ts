@@ -1,5 +1,5 @@
-import { mockAddUser } from '@/domain/tests/users-mock'
-import UsersSequelize from '@/infra/database/sequelize/models/Users'
+import { mockAddUser } from '@/domain/tests/mock-users'
+import UsersSequelize from '@/infra/database/sequelize/models/User'
 import { migrate, truncate } from '@/infra/database/sequelize/__tests__/utils'
 import request from 'supertest'
 import { afterAll, beforeAll, beforeEach, describe, expect, test } from 'vitest'

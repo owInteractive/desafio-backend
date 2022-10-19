@@ -1,6 +1,6 @@
 import { DateFormatterSpy } from '@/data/test/mock-date-formatter';
 import { AddUserRepositorySpy } from '@/data/test/mock-users';
-import { mockAddUser } from '@/domain/tests/users-mock';
+import { mockAddUser } from '@/domain/tests/mock-users';
 import { afterAll, beforeAll, beforeEach, describe, expect, test } from 'vitest';
 import { DbAddUser } from './db-add-user';
 import MockDate from 'mockdate'

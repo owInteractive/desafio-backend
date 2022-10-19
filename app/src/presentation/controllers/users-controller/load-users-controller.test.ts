@@ -1,4 +1,4 @@
-import { LoadUsersSpy } from '@/domain/tests/users-mock';
+import { LoadUsersSpy } from '@/domain/tests/mock-users';
 import {  ok, serverError } from '@/presentation/helpers/http-helper';
 import { describe, expect, test, vitest } from 'vitest';
 import { LoadUsersController } from './load-users-controller';

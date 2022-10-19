@@ -1,4 +1,4 @@
-import { mockUser } from '@/domain/tests/users-mock'
+import { mockUser } from '@/domain/tests/mock-users'
 import { LoadUsersByEmailRepository, LoadUsersByIdRepository } from '../protocols/database/users'
 import { AddUserRepository } from '../protocols/database/users/add-user-repository'
 import { DeleteUserRepository } from '../protocols/database/users/delete-user-repository'

@@ -1,4 +1,4 @@
-import { LoadUsersByIdSpy } from '@/domain/tests/users-mock'
+import { LoadUsersByIdSpy } from '@/domain/tests/mock-users'
 import { MissingParamError } from '@/presentation/errors/missing-param-error'
 import { badRequest, notFound, ok, serverError } from '@/presentation/helpers/http-helper'
 import { faker } from '@faker-js/faker'

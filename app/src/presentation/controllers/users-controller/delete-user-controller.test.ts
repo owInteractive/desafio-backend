@@ -1,4 +1,4 @@
-import { DeleteUserSpy } from "@/domain/tests/users-mock";
+import { DeleteUserSpy } from "@/domain/tests/mock-users";
 import { NotFoundError } from "@/presentation/errors/not-found-error";
 import { noContent, serverError } from "@/presentation/helpers/http-helper";
 import { describe, expect, test, vitest } from "vitest";

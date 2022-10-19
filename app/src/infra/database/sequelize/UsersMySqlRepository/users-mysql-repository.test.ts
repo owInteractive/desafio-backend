@@ -1,9 +1,9 @@
-import { mockAddUser } from '@/domain/tests/users-mock'
+import { mockAddUser } from '@/domain/tests/mock-users'
 import { afterAll, beforeAll, beforeEach, describe, expect, test } from 'vitest'
 import { UsersMySqlReposiory } from './users-mysql-repository'
 import { migrate, truncate } from '../__tests__/utils'
 import MockDate from 'mockdate'
-import UsersSequelize from '../models/Users'
+import UsersSequelize from '../models/User'
 import { User } from '@/domain/models'
 
 describe('UsersMySqlReposiory', () => {
