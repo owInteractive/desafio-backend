@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { AddTransactionModel, Transaction } from "../models";
-import { AddTransaction } from "../usecases/transactions";
+import { AddTransaction, LoadTransactionByUser } from "../usecases/transactions";
+import { mockPagination } from "./mock-pagination";
 import { mockUser } from "./mock-users";
 
 export function mockTransaction(): Transaction {
@@ -36,5 +37,17 @@ export class AddTransactionSpy implements AddTransaction {
   async add(params: AddTransaction.Params): Promise<AddTransaction.Result> {
     this.addParams = params
     return new Promise((resolve) => resolve(this.addResult))
+  }
+}
+
+export class LoadTransactionByUserSpy implements LoadTransactionByUser {
+  loadByUserResult: LoadTransactionByUser.Result
+  loadByUserParams: LoadTransactionByUser.Params
+  constructor() {
+    this.loadByUserResult = mockPagination<Transaction>([mockTransaction()])
+  }
+  async loadByUser(params: LoadTransactionByUser.Params): Promise<LoadTransactionByUser.Result> {
+    this.loadByUserParams = params
+    return new Promise((resolve) => resolve(this.loadByUserResult))
   }
 }
