@@ -202,4 +202,24 @@ describe('TransactionsMySqlRepository', () => {
       expect(transactionsOfUserOne.data[0].from.id).toEqual(userTwo.id)
     });
   });
+
+  describe('deleteById()', () => {
+    test('should return true if the transaction was deleted', async () => {
+      const sut = makeSut()
+      const transaction = await makeTransaction()
+      const transactionExists = await TransactionSequelize.findByPk(transaction.id)
+      expect(transactionExists).toBeTruthy()
+      const result = await sut.deleteById({id: transaction.id})
+      const transactionAfterDelete = await TransactionSequelize.findByPk(transaction.id)
+
+      expect(result).toBe(true)
+      expect(transactionAfterDelete).toBeFalsy()
+    })
+
+    test('should return false if the transaction was not deleted', async () => {
+      const sut = makeSut()
+      const deleted = await sut.deleteById({id: 1})
+      expect(deleted).toBe(false)
+    })
+  });
 })

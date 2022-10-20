@@ -35,9 +35,7 @@ describe('Transactions Routes', () => {
         to: userTo.getDataValue('id'),
         type: 'credit',
       }
-      const res = await request(app)
-        .post(`/transactions`)
-        .send(body)
+      const res = await request(app).post(`/transactions`).send(body)
 
       expect(res.body.id).toBeTruthy()
       const transaction = await TransactionSequelize.findOne({
@@ -58,9 +56,7 @@ describe('Transactions Routes', () => {
         to: userTo.getDataValue('id'),
         type: 'credit',
       }
-      const res = await request(app)
-        .post(`/transactions`)
-        .send(body)
+      const res = await request(app).post(`/transactions`).send(body)
 
       expect(res.statusCode).toBe(200)
       expect(res.body.amount).toBe(body.amount)
@@ -77,7 +73,7 @@ describe('Transactions Routes', () => {
       const userTo = await UsersSequelize.create(mockAddUser())
       const idFrom = userFrom.getDataValue('id')
       const idTo = userTo.getDataValue('id')
- await TransactionSequelize.bulkCreate(
+      await TransactionSequelize.bulkCreate(
         [
           mockAddTransaction(),
           mockAddTransaction(),
@@ -152,40 +148,44 @@ describe('Transactions Routes', () => {
       const res = await request(app).delete('/transactions/1')
 
       expect(res.statusCode).toBe(404)
-    });
+    })
 
     test('should delete the user provided', async () => {
       const userFrom = await UsersSequelize.create(mockAddUser())
       const userTo = await UsersSequelize.create(mockAddUser())
       const idFrom = userFrom.getDataValue('id')
       const idTo = userTo.getDataValue('id')
-      const transaction = await TransactionSequelize.create(
-        {...mockAddTransaction(),  from: idFrom, to: idTo }
-      )
+      const transaction = await TransactionSequelize.create({
+        ...mockAddTransaction(),
+        from: idFrom,
+        to: idTo,
+      })
 
-       await request(app).delete(
+      await request(app).delete(
         `/transactions/${transaction.getDataValue('id')}`
       )
-        const transactionExits = await TransactionSequelize.findOne({
-          where: { id: transaction.getDataValue('id') },
-        })
-        expect(transactionExits).toBeFalsy()
-    });
+      const transactionExits = await TransactionSequelize.findOne({
+        where: { id: transaction.getDataValue('id') },
+      })
+      expect(transactionExits).toBeFalsy()
+    })
 
     test('should delete the user provided', async () => {
       const userFrom = await UsersSequelize.create(mockAddUser())
       const userTo = await UsersSequelize.create(mockAddUser())
       const idFrom = userFrom.getDataValue('id')
       const idTo = userTo.getDataValue('id')
-      const transaction = await TransactionSequelize.create(
-        {...mockAddTransaction(),  from: idFrom, to: idTo }
-      )
+      const transaction = await TransactionSequelize.create({
+        ...mockAddTransaction(),
+        from: idFrom,
+        to: idTo,
+      })
 
-       const res = await request(app).delete(
+      const res = await request(app).delete(
         `/transactions/${transaction.getDataValue('id')}`
       )
-        
-        expect(res.statusCode).toBe(200)
-    });
-  });
+
+      expect(res.statusCode).toBe(200)
+    })
+  })
 })

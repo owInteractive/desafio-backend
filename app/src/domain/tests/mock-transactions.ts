@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { AddTransactionModel, Transaction } from "../models";
-import { AddTransaction, LoadTransactionByUser } from "../usecases/transactions";
+import { AddTransaction, DeleteTransactionById, LoadTransactionByUser } from "../usecases/transactions";
 import { mockPagination } from "./mock-pagination";
 import { mockUser } from "./mock-users";
 
@@ -49,5 +49,17 @@ export class LoadTransactionByUserSpy implements LoadTransactionByUser {
   async loadByUser(params: LoadTransactionByUser.Params): Promise<LoadTransactionByUser.Result> {
     this.loadByUserParams = params
     return new Promise((resolve) => resolve(this.loadByUserResult))
+  }
+}
+
+export class DeleteTransactionByIdSpy implements DeleteTransactionById {
+  deleteByIdResult: DeleteTransactionById.Result
+  deleteByIdParams: DeleteTransactionById.Params
+  constructor() {
+    this.deleteByIdResult = true
+  }
+  async deleteById(params: DeleteTransactionById.Params): Promise<DeleteTransactionById.Result> {
+    this.deleteByIdParams = params
+    return new Promise((resolve) => resolve(this.deleteByIdResult))
   }
 }
