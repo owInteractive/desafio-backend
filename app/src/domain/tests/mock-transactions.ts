@@ -1,8 +1,13 @@
-import { faker } from "@faker-js/faker";
-import { AddTransactionModel, Transaction } from "../models";
-import { AddTransaction, DeleteTransactionById, LoadTransactionByUser } from "../usecases/transactions";
-import { mockPagination } from "./mock-pagination";
-import { mockUser } from "./mock-users";
+import { faker } from '@faker-js/faker'
+import { AddTransactionModel, Transaction } from '../models'
+import {
+  AddTransaction,
+  DeleteTransactionById,
+  LoadTransactionByUser,
+  LoadTransactions,
+} from '../usecases/transactions'
+import { mockPagination } from './mock-pagination'
+import { mockUser } from './mock-users'
 
 export function mockTransaction(): Transaction {
   return {
@@ -36,7 +41,7 @@ export class AddTransactionSpy implements AddTransaction {
   }
   async add(params: AddTransaction.Params): Promise<AddTransaction.Result> {
     this.addParams = params
-    return new Promise((resolve) => resolve(this.addResult))
+    return new Promise(resolve => resolve(this.addResult))
   }
 }
 
@@ -46,9 +51,25 @@ export class LoadTransactionByUserSpy implements LoadTransactionByUser {
   constructor() {
     this.loadByUserResult = mockPagination<Transaction>([mockTransaction()])
   }
-  async loadByUser(params: LoadTransactionByUser.Params): Promise<LoadTransactionByUser.Result> {
+  async loadByUser(
+    params: LoadTransactionByUser.Params
+  ): Promise<LoadTransactionByUser.Result> {
     this.loadByUserParams = params
-    return new Promise((resolve) => resolve(this.loadByUserResult))
+    return new Promise(resolve => resolve(this.loadByUserResult))
+  }
+}
+
+export class LoadTransactionsSpy implements LoadTransactions {
+  loadResult: LoadTransactions.Result
+  loadParams: LoadTransactions.Params
+  constructor() {
+    this.loadResult = [mockTransaction()]
+  }
+  async load(
+    params: LoadTransactions.Params
+  ): Promise<LoadTransactions.Result> {
+    this.loadParams = params
+    return new Promise(resolve => resolve(this.loadResult))
   }
 }
 
@@ -58,8 +79,10 @@ export class DeleteTransactionByIdSpy implements DeleteTransactionById {
   constructor() {
     this.deleteByIdResult = true
   }
-  async deleteById(params: DeleteTransactionById.Params): Promise<DeleteTransactionById.Result> {
+  async deleteById(
+    params: DeleteTransactionById.Params
+  ): Promise<DeleteTransactionById.Result> {
     this.deleteByIdParams = params
-    return new Promise((resolve) => resolve(this.deleteByIdResult))
+    return new Promise(resolve => resolve(this.deleteByIdResult))
   }
 }
