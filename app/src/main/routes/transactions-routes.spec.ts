@@ -9,7 +9,7 @@ import { faker } from '@faker-js/faker'
 import TransactionSequelize from '@/infra/database/sequelize/models/Transaction'
 import { mockAddTransaction } from '@/domain/tests/mock-transactions'
 
-describe('Users Routes', () => {
+describe('Transactions Routes', () => {
   beforeAll(async () => {
     await migrate()
   })
@@ -22,96 +22,8 @@ describe('Users Routes', () => {
     await truncate()
   })
 
-  async function makeUser() {
-    const user = mockAddUser()
-    const createdUser = await UsersSequelize.create(user)
-    return createdUser.toJSON()
-  }
-  describe('POST /users', () => {
-    test('should return 200 with a valid user', async () => {
-      const body = mockAddUser()
-
-      const res = await request(app).post('/users').send(body).expect(200)
-
-      expect(res.body.name).toBe(body.name)
-      expect(res.body.email).toBe(body.email)
-      expect(res.body.id).toBeTruthy()
-    })
-  })
-
-  describe('GET /users', () => {
-    test('should return 200 with valid users in descending order', async () => {
-      const now = new Date()
-      const older = new Date(now.getTime() - 1000)
-
-      const [userOne, userTwo] = await UsersSequelize.bulkCreate([
-        { ...mockAddUser(), createdAt: now },
-        { ...mockAddUser(), createdAt: older },
-      ])
-
-      const res = await request(app).get('/users').expect(200)
-
-      expect(res.body[0].id).toBe(userOne.getDataValue('id'))
-      expect(res.body[1].id).toBe(userTwo.getDataValue('id'))
-    })
-
-    test('should return 200 with valid users in asccending order', async () => {
-      const now = new Date()
-      const older = new Date(now.getTime() - 1000)
-
-      const [userOne, userTwo] = await UsersSequelize.bulkCreate([
-        { ...mockAddUser(), createdAt: now },
-        { ...mockAddUser(), createdAt: older },
-      ])
-
-      const res = await request(app)
-        .get('/users')
-        .query({ order: 'asc' })
-        .expect(200)
-
-      expect(res.body[0].id).toBe(userTwo.getDataValue('id'))
-      expect(res.body[1].id).toBe(userOne.getDataValue('id'))
-    })
-  })
-
-  describe('GET /users/{id}', () => {
-    test('should return 404 if the user does not exits', async () => {
-      await request(app)
-        .get('/users/1')
-        .expect(404)
-        .expect({ error: 'Not Found: user' })
-    })
-
-    test('should return 200 with the user', async () => {
-      const user = await UsersSequelize.create(mockAddUser())
-
-      const res = await request(app)
-        .get(`/users/${user.getDataValue('id')}`)
-        .expect(200)
-
-      expect(res.body.id).toBe(user.getDataValue('id'))
-    })
-  })
-
-  describe('DELETE /users/{id}', () => {
-    test('should return 404 if the user does not exits', async () => {
-      await request(app)
-        .delete('/users/1')
-        .expect(404)
-        .expect({ error: 'Not Found: user' })
-    })
-
-    test('should delete an user according to the id', async () => {
-      const user = await UsersSequelize.create(mockAddUser())
-      const id = user.getDataValue('id')
-      await request(app).delete(`/users/${id}`).expect(204)
-      const usersExists = await UsersSequelize.findOne({ where: { id } })
-      expect(usersExists).toBeFalsy()
-    })
-  })
-
-  describe('POST /users/{id}/transactions', () => {
-    test('should create an transaction from an user to other', async () => {
+  describe('POST /transactions', () => {
+    test('should create an transaction', async () => {
       const userFrom = await UsersSequelize.create(mockAddUser())
       const userTo = await UsersSequelize.create(mockAddUser())
 
@@ -119,11 +31,12 @@ describe('Users Routes', () => {
       const body = {
         amount: faker.datatype.number(),
         description: faker.lorem.sentence(),
+        from: id,
         to: userTo.getDataValue('id'),
         type: 'credit',
       }
       const res = await request(app)
-        .post(`/users/${id}/transactions`)
+        .post(`/transactions`)
         .send(body)
 
       expect(res.body.id).toBeTruthy()
@@ -141,11 +54,12 @@ describe('Users Routes', () => {
       const body = {
         amount: faker.datatype.number(),
         description: faker.lorem.sentence(),
+        from: id,
         to: userTo.getDataValue('id'),
         type: 'credit',
       }
       const res = await request(app)
-        .post(`/users/${id}/transactions`)
+        .post(`/transactions`)
         .send(body)
 
       expect(res.statusCode).toBe(200)
@@ -157,13 +71,13 @@ describe('Users Routes', () => {
     })
   })
 
-  describe('GET /users/{id}/transactions', () => {
-    test('should return the users transactions paginated', async () => {
+  describe('GET /transactions', () => {
+    test('should return the users transactions paginated according to the userId', async () => {
       const userFrom = await UsersSequelize.create(mockAddUser())
       const userTo = await UsersSequelize.create(mockAddUser())
       const idFrom = userFrom.getDataValue('id')
       const idTo = userTo.getDataValue('id')
-      await TransactionSequelize.bulkCreate(
+ await TransactionSequelize.bulkCreate(
         [
           mockAddTransaction(),
           mockAddTransaction(),
@@ -175,7 +89,7 @@ describe('Users Routes', () => {
       )
 
       const res = await request(app)
-        .get(`/users/${idFrom}/transactions`)
+        .get(`/transactions`)
         .query({ page: 1, perPage: 3, userId: idTo })
 
       expect(res.body.pagination).toEqual({
