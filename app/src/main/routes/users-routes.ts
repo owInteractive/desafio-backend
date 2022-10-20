@@ -12,6 +12,6 @@ export const usersRoutes = (router: Router): void => {
   router.post('/users', adaptRoute(makeAddUserController()))
   router.delete('/users/:id', adaptRoute(makeDeleteUserController()))
 
-  router.get('/users/:id/transactions', adaptRoute(makeLoadTransactionsByUserController()))
+  router.get('/users/:userId/transactions', adaptRoute(makeLoadTransactionsByUserController()))
   router.post('/users/:from/transactions', adaptRoute(makeAddTransactionController()))
 }

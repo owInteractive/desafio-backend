@@ -16,7 +16,11 @@ export class LoadTransactionByUserController implements Controller {
         return badRequest(error)
       }
 
-      const result = await this.loadTransactionByUserUseCase.loadByUser(params)
+      const result = await this.loadTransactionByUserUseCase.loadByUser({
+        page: parseInt(params.page.toString()),
+        perPage: parseInt(params.perPage.toString()),
+        userId: params.userId,
+      })
       return ok(result)
     } catch (error) {
       return serverError(error)
