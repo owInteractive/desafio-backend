@@ -22,7 +22,11 @@ describe('TransactionsMySqlRepository', () => {
     const to = await makeUser()
     const from = await makeUser()
     const rawTransactionDb = (
-      await TransactionSequelize.create({...transaction, to: to.id, from: from.id})
+      await TransactionSequelize.create({
+        ...transaction,
+        to: to.id,
+        from: from.id,
+      })
     ).toJSON()
 
     const { From, ChargebackFrom, To, ...transactionDb } = (
@@ -85,7 +89,7 @@ describe('TransactionsMySqlRepository', () => {
       const to = await makeUser()
       const from = await makeUser()
       const mockedChargebackTransaction = await makeTransaction()
-      
+
       const mockedTransaction = mockAddTransaction()
       mockedTransaction.to = to.id
       mockedTransaction.from = from.id
@@ -98,8 +102,10 @@ describe('TransactionsMySqlRepository', () => {
       expect(transaction.type).toBe(mockedTransaction.type)
       expect(transaction.to.id).toEqual(to.id)
       expect(transaction.from.id).toEqual(from.id)
-      expect(transaction.chargebackFrom.id).toEqual(mockedChargebackTransaction.id)
-      
+      expect(transaction.chargebackFrom.id).toEqual(
+        mockedChargebackTransaction.id
+      )
+
       const transactionExists = await TransactionSequelize.findByPk(
         transaction.id
       )
@@ -124,7 +130,7 @@ describe('TransactionsMySqlRepository', () => {
           perPage: 10,
           total: 0,
           totalPages: 0,
-        }
+        },
       })
     })
 
@@ -142,7 +148,7 @@ describe('TransactionsMySqlRepository', () => {
       transactionThree.from = userOne.id
       transactionThree.to = userTwo.id
 
-      const [transactionOneInserted] =await TransactionSequelize.bulkCreate([
+      const [transactionOneInserted] = await TransactionSequelize.bulkCreate([
         transactionOne,
         transactionTwo,
         transactionThree,
@@ -154,17 +160,19 @@ describe('TransactionsMySqlRepository', () => {
       })
 
       expect(transactionsOfUserOne.pagination).toEqual({
-          page: 1,
-          perPage: 10,
-          total: 3,
-          totalPages: 1,
+        page: 1,
+        perPage: 10,
+        total: 3,
+        totalPages: 1,
       })
 
-      expect(transactionsOfUserOne.data[0].id).toBe(transactionOneInserted.getDataValue('id'))
+      expect(transactionsOfUserOne.data[0].id).toBe(
+        transactionOneInserted.getDataValue('id')
+      )
       expect(transactionsOfUserOne.data[0].to.id).toEqual(userOne.id)
       expect(transactionsOfUserOne.data[0].from.id).toEqual(userTwo.id)
-    });
-    
+    })
+
     test('should change the page correctly', async () => {
       const sut = makeSut()
       const userOne = await makeUser()
@@ -179,11 +187,9 @@ describe('TransactionsMySqlRepository', () => {
       transactionThree.from = userOne.id
       transactionThree.to = userTwo.id
 
-      const [_,transactionTwoInserted] =await TransactionSequelize.bulkCreate([
-        transactionOne,
-        transactionTwo,
-        transactionThree,
-      ])
+      const [_, transactionTwoInserted] = await TransactionSequelize.bulkCreate(
+        [transactionOne, transactionTwo, transactionThree]
+      )
       const transactionsOfUserOne = await sut.loadByUser({
         userId: userOne.id,
         page: 2,
@@ -191,26 +197,32 @@ describe('TransactionsMySqlRepository', () => {
       })
 
       expect(transactionsOfUserOne.pagination).toEqual({
-          page: 2,
-          perPage: 1,
-          total: 3,
-          totalPages: 3,
+        page: 2,
+        perPage: 1,
+        total: 3,
+        totalPages: 3,
       })
 
-      expect(transactionsOfUserOne.data[0].id).toBe(transactionTwoInserted.getDataValue('id'))
+      expect(transactionsOfUserOne.data[0].id).toBe(
+        transactionTwoInserted.getDataValue('id')
+      )
       expect(transactionsOfUserOne.data[0].to.id).toEqual(userOne.id)
       expect(transactionsOfUserOne.data[0].from.id).toEqual(userTwo.id)
-    });
-  });
+    })
+  })
 
   describe('deleteById()', () => {
     test('should return true if the transaction was deleted', async () => {
       const sut = makeSut()
       const transaction = await makeTransaction()
-      const transactionExists = await TransactionSequelize.findByPk(transaction.id)
+      const transactionExists = await TransactionSequelize.findByPk(
+        transaction.id
+      )
       expect(transactionExists).toBeTruthy()
-      const result = await sut.deleteById({id: transaction.id})
-      const transactionAfterDelete = await TransactionSequelize.findByPk(transaction.id)
+      const result = await sut.deleteById({ id: transaction.id })
+      const transactionAfterDelete = await TransactionSequelize.findByPk(
+        transaction.id
+      )
 
       expect(result).toBe(true)
       expect(transactionAfterDelete).toBeFalsy()
@@ -218,8 +230,95 @@ describe('TransactionsMySqlRepository', () => {
 
     test('should return false if the transaction was not deleted', async () => {
       const sut = makeSut()
-      const deleted = await sut.deleteById({id: 1})
+      const deleted = await sut.deleteById({ id: 1 })
       expect(deleted).toBe(false)
     })
-  });
+  })
+
+  describe('load()', () => {
+    test('should return an empty array no transactions are found', async () => {
+      const sut = makeSut()
+      const transactions = await sut.load()
+      expect(transactions).toEqual([])
+    })
+
+    test('should filter only the transactions of the lastDays provided', async () => {
+      const sut = makeSut()
+      const userOne = await makeUser()
+      const userTwo = await makeUser()
+      const transactionOne = mockAddTransaction()
+      transactionOne.to = userOne.id
+      transactionOne.from = userTwo.id
+      const transactionTwo = mockAddTransaction()
+      transactionTwo.to = userOne.id
+      transactionTwo.from = userTwo.id
+      const transactionThree = mockAddTransaction()
+      transactionThree.from = userOne.id
+      transactionThree.to = userTwo.id
+
+      const [insertedTransactionOne] = await TransactionSequelize.bulkCreate([
+        transactionOne,
+        transactionTwo,
+        transactionThree,
+      ])
+
+      await TransactionSequelize.update(
+        {
+          createdAt: new Date('2020-01-01'),
+        },
+        {
+          where: {
+            id: insertedTransactionOne.getDataValue('id'),
+          },
+        }
+      )
+
+      const transactions = await sut.load({
+        lastDays: 1,
+      })
+
+      expect(transactions.length).toBe(2)
+    })
+
+    test('should filter only the transactions of the monthAndYear provided', async () => {
+      const sut = makeSut()
+      const userOne = await makeUser()
+      const userTwo = await makeUser()
+      const transactionOne = mockAddTransaction()
+      transactionOne.to = userOne.id
+      transactionOne.from = userTwo.id
+      const transactionTwo = mockAddTransaction()
+      transactionTwo.to = userOne.id
+      transactionTwo.from = userTwo.id
+      const transactionThree = mockAddTransaction()
+      transactionThree.from = userOne.id
+      transactionThree.to = userTwo.id
+      const month = 1
+      const year = 20
+      const monthAndYear = `${month}/${year}`
+
+      const [insertedTransactionOne] = await TransactionSequelize.bulkCreate([
+        transactionOne,
+        transactionTwo,
+        transactionThree,
+      ])
+
+      await TransactionSequelize.update(
+        {
+          createdAt: new Date(2020, 0, 1),
+        },
+        {
+          where: {
+            id: insertedTransactionOne.getDataValue('id'),
+          },
+        }
+      )
+
+      const transactions = await sut.load({
+        monthAndYear,
+      })
+
+      expect(transactions[0].id).toBe(insertedTransactionOne.getDataValue('id'))
+    })
+  })
 })

@@ -15,7 +15,7 @@ describe('DbLoadTransactionByUser', () => {
       loadTransactionByUserRepositorySpy
     }
   }
-  describe('lodByUser()', () => {
+  describe('loadByUser()', () => {
     test('should call loadTransactionByUserRepository with correct params', async () => {
       const { sut, loadTransactionByUserRepositorySpy } = makeSut()
       const params = {
