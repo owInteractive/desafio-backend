@@ -1,5 +1,6 @@
 import { CsvParserSpy } from '@/data/test/mock-csv-parser'
 import { LoadTransactionsSpy } from '@/domain/tests/mock-transactions'
+import { FileResponseGenerator } from '@/presentation/helpers/file-response'
 import { badRequest, ok, serverError } from '@/presentation/helpers/http-helper'
 import { faker } from '@faker-js/faker'
 import { describe, expect, test, vitest } from 'vitest'
@@ -40,7 +41,7 @@ describe('LoadTransactionsCsvController', () => {
       const { sut, loadTransactions, csvParserSpy } = makeSut()
 
       await sut.handle({})
-      expect(csvParserSpy.input).toEqual(loadTransactions.loadResult)
+      expect(csvParserSpy.input.length).toBe(loadTransactions.loadResult.length)
     });
 
     test('should return 500 if csvParser throws', async () => {
@@ -55,7 +56,12 @@ describe('LoadTransactionsCsvController', () => {
       const { sut, csvParserSpy } = makeSut()
 
       const response = await sut.handle({})
-      expect(response).toEqual(ok(csvParserSpy.result))
+      expect(response).toEqual(ok(new FileResponseGenerator().generate({
+        data: csvParserSpy.result,
+        name: 'transactions',
+        ext: 'csv',
+        mimetype: 'text/csv',
+      })))
     })
   })
 })

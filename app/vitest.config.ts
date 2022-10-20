@@ -6,7 +6,7 @@ export default defineConfig({
         coverage: {
             include: ['src/**/*.ts'],
             provider: 'istanbul'
-        }
+        },
     },
     plugins: [tsconfigPaths()],
 })

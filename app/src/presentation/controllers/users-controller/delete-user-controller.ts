@@ -14,6 +14,8 @@ export class DeleteUserController implements Controller {
     })
     return noContent()
    } catch (error) {
+    console.error('ERRO AO APAGAR USUÁRIO', error);
+    
     return serverError(error)
    }
   }

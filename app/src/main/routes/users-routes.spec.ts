@@ -104,9 +104,11 @@ describe('Users Routes', () => {
     test('should delete an user according to the id', async () => {
       const user = await UsersSequelize.create(mockAddUser())
       const id = user.getDataValue('id')
-      await request(app).delete(`/users/${id}`).expect(204)
       const usersExists = await UsersSequelize.findOne({ where: { id } })
-      expect(usersExists).toBeFalsy()
+      expect(usersExists).toBeTruthy()
+      await request(app).delete(`/users/${id}`).expect(204)
+      const usersAfterDelete = await UsersSequelize.findOne({ where: { id } })
+      expect(usersAfterDelete).toBeFalsy()
     })
   })
 

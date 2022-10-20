@@ -188,4 +188,32 @@ describe('Transactions Routes', () => {
       expect(res.statusCode).toBe(200)
     })
   })
+
+  describe('GET /transactions/csv', () => {
+    test('should return a csv file according to the transactions', async () => {
+      const userFrom = await UsersSequelize.create(mockAddUser())
+      const userTo = await UsersSequelize.create(mockAddUser())
+      const idFrom = userFrom.getDataValue('id')
+      const idTo = userTo.getDataValue('id')
+      await TransactionSequelize.bulkCreate(
+        [
+          mockAddTransaction(),
+          mockAddTransaction(),
+          mockAddTransaction(),
+          mockAddTransaction(),
+          mockAddTransaction(),
+          mockAddTransaction(),
+        ].map(transaction => ({ ...transaction, from: idFrom, to: idTo }))
+      )
+
+      const res = await request(app)
+        .get(`/transactions/csv`)
+        .query({ userId: idTo })
+
+      expect(res.statusCode).toBe(200)
+      expect(res.header['content-type']).toBe('text/csv; charset=utf-8')
+    })
+
+
+  });
 })
