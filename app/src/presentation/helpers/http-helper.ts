@@ -29,7 +29,7 @@ export const serverError = (
   body: error,
 })
 
-export const notFound = (item: string): HttpResponse => ({
+export const notFound = (item: string, details?:string): HttpResponse => ({
   statusCode: 404,
-  body: new NotFoundError(item),
+  body: new NotFoundError(item, details),
 })

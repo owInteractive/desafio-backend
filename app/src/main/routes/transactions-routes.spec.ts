@@ -146,4 +146,46 @@ describe('Transactions Routes', () => {
       expect(res.body.data[0].id).toBe(transactions[3].getDataValue('id'))
     })
   })
+
+  describe('DELETE /transactions/{id}', () => {
+    test('should return 404 if an unexisting user is provided', async () => {
+      const res = await request(app).delete('/transactions/1')
+
+      expect(res.statusCode).toBe(404)
+    });
+
+    test('should delete the user provided', async () => {
+      const userFrom = await UsersSequelize.create(mockAddUser())
+      const userTo = await UsersSequelize.create(mockAddUser())
+      const idFrom = userFrom.getDataValue('id')
+      const idTo = userTo.getDataValue('id')
+      const transaction = await TransactionSequelize.create(
+        {...mockAddTransaction(),  from: idFrom, to: idTo }
+      )
+
+       await request(app).delete(
+        `/transactions/${transaction.getDataValue('id')}`
+      )
+        const transactionExits = await TransactionSequelize.findOne({
+          where: { id: transaction.getDataValue('id') },
+        })
+        expect(transactionExits).toBeFalsy()
+    });
+
+    test('should delete the user provided', async () => {
+      const userFrom = await UsersSequelize.create(mockAddUser())
+      const userTo = await UsersSequelize.create(mockAddUser())
+      const idFrom = userFrom.getDataValue('id')
+      const idTo = userTo.getDataValue('id')
+      const transaction = await TransactionSequelize.create(
+        {...mockAddTransaction(),  from: idFrom, to: idTo }
+      )
+
+       const res = await request(app).delete(
+        `/transactions/${transaction.getDataValue('id')}`
+      )
+        
+        expect(res.statusCode).toBe(200)
+    });
+  });
 })

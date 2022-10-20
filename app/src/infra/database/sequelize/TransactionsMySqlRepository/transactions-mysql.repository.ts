@@ -1,11 +1,12 @@
 import { AddTransactionRepository } from '@/data/protocols/database/transactions/add-transaction-repository'
+import { DeleteTransactionByIdRepository } from '@/data/protocols/database/transactions/delete-transaction-by-id-repository'
 import { LoadTransactionByUserRepository } from '@/data/protocols/database/transactions/load-transaction-by-user-repository'
 import { Op } from 'sequelize'
 import TransactionSequelize, {
   TransactionModelSequelize,
 } from '../models/Transaction'
 
-export class TransactionsMySqlReposiory implements AddTransactionRepository, LoadTransactionByUserRepository {
+export class TransactionsMySqlReposiory implements AddTransactionRepository, LoadTransactionByUserRepository,DeleteTransactionByIdRepository {
   async add(
     transaction: AddTransactionRepository.Params
   ): Promise<AddTransactionRepository.Result> {
@@ -71,5 +72,16 @@ export class TransactionsMySqlReposiory implements AddTransactionRepository, Loa
       data,
       pagination
     }
+  }
+
+  async deleteById(params: DeleteTransactionByIdRepository.Params): Promise<DeleteTransactionByIdRepository.Result> {
+    const result = await TransactionSequelize.destroy({
+
+      where: {
+        id: params.id
+      },
+    })
+
+    return result > 0
   }
 }
