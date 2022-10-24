@@ -12,9 +12,9 @@
   - [X] Criar um endpoint para excluir um usuário através do seu id.
   
 - Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
-  - [ ] Criar um endpoint ou endpoint`s onde é possível associar uma operação de débito, crédito ou estorno para o usuário;
-  - [ ] Criar um endpoint onde seja possível visualizar toda a movimentação (páginada) do usuários mais as suas informações pessoais;
-  - [ ] Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário;
+  - [X] Criar um endpoint ou endpoint`s onde é possível associar uma operação de débito, crédito ou estorno para o usuário;
+  - [X] Criar um endpoint onde seja possível visualizar toda a movimentação (páginada) do usuários mais as suas informações pessoais;
+  - [X] Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário;
   - [ ] Criar um endpoint onde é retornado um arquivo no formato (csv) com 3 tipos de filtros para as movimentações;
   
 - Etapa 3 - Nova Funcionalidades
