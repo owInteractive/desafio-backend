@@ -1,0 +1,17 @@
+##This compose file is for the purpose of creating a local development environment for the project. It is not intended for production use.##
+##If you are using this compose file for production, please make sure you understand the security implications of doing so.##
+##If want to modify this compose file, delete the existing containers and volumes and recreate them.##
+  services:
+    mysql:
+      build: ./Docker
+      stdin_open: true
+      tty: true
+      container_name: mysql_owInteractive
+      restart: always
+      ports:
+        - "3306:3306"
+      environment:
+          MYSQL_ROOT_PASSWORD: appRoot
+          MYSQL_DATABASE: ow_interactive
+      volumes:
+        - ./mysql:/var/lib/mysql
