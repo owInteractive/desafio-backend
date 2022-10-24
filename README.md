@@ -2,6 +2,8 @@
 
 # Desafio Back-End - OW Interactive 21/22
 
+*Lembre-se de trocar para a pasta correta:* ```cd ./challenge```
+
 ## 📚 Checklist
 - Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
   - [X] Criar um endpoint onde é cadastrado um usuário.
