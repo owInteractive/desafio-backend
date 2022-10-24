@@ -25,11 +25,11 @@
   - [ ] No endpoint que exporta o arquivo CSV criar um cabeçalho com os dados do cliente e o seu saldo atual;
 
 - Etapa 4 - Diferenciais
-  - [ ] Criar validações com base na Request;
+  - [X] Criar validações com base na Request;
   - [ ] Utilizar cache para otimizar as consultas e buscas;
   - [ ] Criar Seeders ou Inicializadores de dados para o usuários e suas movimentações;
   - [ ] Criar os métodos baseados em algum método de autênticação.
-  - [ ] Documentação dos endpoint`s;
+  - [X] Documentação dos endpoint`s;
 
 ## Sobre a OW Interactive
 Fazemos parte do universo digital, focada em criar e desenvolver experiências interativas, integrando planejamento, criatividade e tecnologia.
