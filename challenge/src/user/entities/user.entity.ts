@@ -8,11 +8,17 @@ export class User {
     @Column({ length: 200 })
     name: string;
 
-    @Column({ length: 150 })
+    @Column({ length: 150, unique: true })
     email: string;
 
-    @Column({ type: 'datetime' })
+    @Column({ length: 255 })
+    password: string;
+
+    @Column({ type: 'date', nullable: false })
     birthday: Date;
+
+    @Column({ type: 'decimal', precision: 10, scale: 2, default: () => '0.00' })
+    balance: number;
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;

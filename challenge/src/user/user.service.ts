@@ -36,16 +36,14 @@ export class UserService {
     if (user.id !== id) {
       throw new HttpException('Email already in use', HttpStatus.BAD_REQUEST);
     } else {
-      if (await this.userRepository.findOne({ where: { email: updateUserDto.email } })) {
-        return await this.userRepository.update(id, updateUserDto);
-      }
+      return await this.userRepository.update(id, updateUserDto);
     }
   }
 
   // Delete user by id
   async remove(id: number) {
-    if(await this.userRepository.findOne({ where: { id } })) {
-    return await this.userRepository.delete(id);
+    if (await this.userRepository.findOne({ where: { id } })) {
+      return await this.userRepository.delete(id);
     } else {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }

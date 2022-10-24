@@ -5,13 +5,29 @@ USE ow_interactive;
 CREATE TABLE IF NOT EXISTS `user` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(200) NOT NULL,
-    `email` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(150) NOT NULL UNIQUE,
+    `password` VARCHAR(255) NOT NULL,
     `birthday` DATE NOT NULL,
+    `balance` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
     `createdAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE
 );
 
-INSERT INTO `user` (`name`, `email`, `birthday`) VALUES ('teste', 'teste@email.com.br', '1990-01-01');
-INSERT INTO `user` (`name`, `email`, `birthday`) VALUES ('teste 2', 'teste2@email.com.br', '1991-01-01');
+CREATE TABLE IF NOT EXISTS `transaction` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `userId` INT NOT NULL,
+    `value` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    `description` VARCHAR(200) NOT NULL,
+    `type` ENUM('credit', 'debit', 'reversal') NOT NULL,
+    `createdAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    INDEX `userId_idx` (`userId` ASC) VISIBLE,
+    CONSTRAINT `userId`
+        FOREIGN KEY (`userId`)
+        REFERENCES `user` (`id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION
+);

@@ -7,6 +7,7 @@ import { userProviders } from './user.provider';
 @Module({
   imports: [DatabaseModule],
   controllers: [UserController],
-  providers: [...userProviders, UserService]
+  providers: [...userProviders, UserService],
+  exports: [UserService]
 })
 export class UserModule { }
