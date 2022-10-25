@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Put, Param, Delete, HttpException, HttpStatus, UseGuards } from '@nestjs/common';
-import { ApiCreatedResponse, ApiTags, ApiBadRequestResponse, ApiOkResponse, ApiNotFoundResponse, ApiAcceptedResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiTags, ApiBadRequestResponse, ApiOkResponse, ApiNotFoundResponse, ApiAcceptedResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto, UpdateUserBalanceDto } from './dto/update-user.dto';
@@ -40,6 +40,7 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Get()
   @ApiOkResponse({ description: 'All users returned successfully' })
+  @ApiBearerAuth()
   async findAll() {
     return this.userService.findAll();
   }
@@ -49,6 +50,7 @@ export class UserController {
   @Get(':id')
   @ApiOkResponse({ description: 'User were returned successfully' })
   @ApiNotFoundResponse({ description: 'User not found' })
+  @ApiBearerAuth()
   async findOne(@Param('id') id: string) {
     const user = await this.userService.findOne(+id);
     if (user) return user;
@@ -62,6 +64,7 @@ export class UserController {
   @ApiOkResponse({ description: 'The user was updated successfully' })
   @ApiNotFoundResponse({ description: 'User not found' })
   @ApiBadRequestResponse({ description: 'Bad Request' })
+  @ApiBearerAuth()
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     if (updateUserDto.name && updateUserDto.email && updateUserDto.birthday) {
 
@@ -83,6 +86,7 @@ export class UserController {
   @ApiOkResponse({ description: 'Balance added successfully' })
   @ApiNotFoundResponse({ description: 'User not found' })
   @ApiBadRequestResponse({ description: 'Bad Request' })
+  @ApiBearerAuth()
   async addBalance(@Param('id') id: string, @Body() balance: UpdateUserBalanceDto) {
     return await this.userService.addBalance(+id, balance);
   }
@@ -93,6 +97,7 @@ export class UserController {
   @ApiOkResponse({ description: 'The user was deleted successfully' })
   @ApiNotFoundResponse({ description: 'User not found' })
   @ApiBadRequestResponse({ description: 'Bad Request, check if the user has transactions' })
+  @ApiBearerAuth()
   async remove(@Param('id') id: string) {
     const del = await this.userService.remove(+id);
     if (del.affected === 0) throw new HttpException('User cannot be deleted, check if they have transactions and/or balance', HttpStatus.BAD_REQUEST);

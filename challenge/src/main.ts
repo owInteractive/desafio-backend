@@ -10,6 +10,7 @@ async function bootstrap() {
     .setTitle('Challenge Ow Interactive')
     .setDescription('The challenge API description')
     .setVersion('0.0.1')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

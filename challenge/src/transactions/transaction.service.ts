@@ -53,6 +53,45 @@ export class TransactionsService {
     return await this.transactionRepository.findOne({ where: { id } });
   }
 
+  async findUserTransactions(userId: number) {
+    const user = await this.userService.findOne(userId);
+    if (user) {
+      const transaction = await this.transactionRepository.createQueryBuilder('transaction')
+        .select('SUM(transaction.value)', 'total')
+        .where('transaction.userId = :userId', { userId })
+        .leftJoin('transaction.user', 'user')
+        .getRawOne();
+      if (transaction) {
+        transaction.total = Number(transaction.total) + Number(user.balance);
+        return { user: { name: user.name, email: user.email, birthday: user.birthday, createdAt: user.createdAt }, userTransactions: transaction };
+      }
+    }
+  }
+
+  async exportTransactions(userId: number) {
+    const user = await this.userService.findOne(userId);
+    if (user) {
+      const transactions = await this.transactionRepository.find({ where: { userId } });
+
+      if (transactions) {
+        const fs = require('fs');
+        const writeStream = fs.createWriteStream('uploads/transactions_userId_' + userId + '.csv');
+        await writeStream.write(`Transaction Id, Value, Description, Type, CreatedAt, UpdatedAt\n`);
+        transactions.forEach((transaction) => {
+          writeStream.write(`${transaction.id}, ${transaction.value}, ${transaction.description}, ${transaction.type}, ${new Date(transaction.createdAt).toLocaleString()}, ${new Date(transaction.updatedAt).toLocaleString()}\n`);
+        });
+        await writeStream.end();
+        if (writeStream) {
+          return true; // return true if file is created
+        } else {
+          throw new HttpException('Error creating file', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+      }
+
+      throw new HttpException('No transactions found', HttpStatus.NOT_FOUND);
+    }
+  }
+
   async update(id: number, updateTransactionDto: UpdateTransactionDto) {
     const transaction = await this.transactionRepository.findOne({ where: { id } });
     if (transaction.userId !== updateTransactionDto.userId) {

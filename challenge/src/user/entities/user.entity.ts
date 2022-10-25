@@ -23,7 +23,7 @@ export class User extends BaseEntity {
     balance: number;
 
     @OneToMany(() => Transaction, transaction => transaction.user)
-    transactions: Transaction[];
+    public transactions: Transaction[];
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
     @CreateDateColumn()
