@@ -95,7 +95,7 @@ export class UserController {
   @ApiBadRequestResponse({ description: 'Bad Request, check if the user has transactions' })
   async remove(@Param('id') id: string) {
     const del = await this.userService.remove(+id);
-    if (del.affected === 0) throw new HttpException('User cannot be deleted, check if they have transactions', HttpStatus.BAD_REQUEST);
+    if (del.affected === 0) throw new HttpException('User cannot be deleted, check if they have transactions and/or balance', HttpStatus.BAD_REQUEST);
 
       return ({ message: 'User deleted successfully' });
   }
