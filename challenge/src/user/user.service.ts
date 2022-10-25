@@ -78,8 +78,9 @@ export class UserService {
 
   // Delete user by id
   async remove(id: number) {
-    if (await this.userRepository.findOne({ where: { id } })) {
-      if (await this.transaction.findAll(id))
+    const user = await this.userRepository.findOne({ where: { id } })
+    if (user) {
+      if (await this.transaction.findAll(id) || user.balance > 0)
         throw new HttpException('User has transactions', HttpStatus.BAD_REQUEST);
 
       return await this.userRepository.delete(id);
