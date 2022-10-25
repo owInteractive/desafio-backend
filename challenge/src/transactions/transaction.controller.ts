@@ -1,14 +1,17 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, HttpException, HttpStatus, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, HttpException, HttpStatus, Query, UseGuards } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiBody, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { TransactionsService } from './transaction.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
+import { AuthGuard } from '../auth/auth.guard';
 
 @ApiTags('Transaction')
 @Controller('transactions')
 export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) { }
 
+  // Create a new transaction for an user
+  @UseGuards(AuthGuard)
   @Post()
   @ApiBody({ type: CreateTransactionDto })
   @ApiCreatedResponse({ description: 'Created Succesfully' })
@@ -21,6 +24,8 @@ export class TransactionsController {
     }
   }
 
+  // Get all transactions for an user
+  @UseGuards(AuthGuard)
   @Get(':userId')
   @ApiOkResponse({ description: 'All transactions returned successfully by descending' })
   @ApiNotFoundResponse({ description: 'No transactions found' })
@@ -37,6 +42,8 @@ export class TransactionsController {
     }
   }
 
+  // Get transaction by id
+  @UseGuards(AuthGuard)
   @Get(':id')
   @ApiOkResponse({ description: 'Transaction were returned successfully' })
   @ApiNotFoundResponse({ description: 'Transaction not found' })
@@ -49,6 +56,8 @@ export class TransactionsController {
     }
   }
 
+  // Update transaction by id
+  @UseGuards(AuthGuard)
   @Put(':id')
   @ApiBody({ type: UpdateTransactionDto })
   @ApiOkResponse({ description: 'The transaction was updated successfully' })
@@ -67,11 +76,16 @@ export class TransactionsController {
     }
   }
 
+  // Delete transaction by id
+  @UseGuards(AuthGuard)
   @Delete(':id')
   @ApiOkResponse({ description: 'The transaction was deleted successfully' })
   @ApiNotFoundResponse({ description: 'Transaction not found' })
   @ApiBadRequestResponse({ description: 'Bad Request' })
-  remove(@Param('id') id: string) {
-    return this.transactionsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    const del = await this.transactionsService.remove(+id);
+    if (del.affected === 0) throw new HttpException('Transaction cannot be deleted, check if they have transactions', HttpStatus.BAD_REQUEST);
+
+    return ({ message: 'Transaction deleted successfully' });
   }
 }

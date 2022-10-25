@@ -1,16 +1,16 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { Transaction } from './entities/transaction.entity';
-import { User } from '../user/entities/user.entity';
-import { UserService } from 'src/user/user.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class TransactionsService {
   constructor(
     @Inject('TRANSACTION_REPOSITORY')
     private transactionRepository: Repository<Transaction>,
+    @Inject(forwardRef(() => UserService))
     private userService: UserService,
   ) { }
 

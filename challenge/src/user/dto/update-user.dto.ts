@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger'
-import { IsEmail, IsNotEmpty, IsString, IsDate } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, IsDate, IsNumber, IsDecimal } from 'class-validator';
 import { CreateUserDto } from './create-user.dto';
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {
@@ -38,4 +38,26 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
         example: '1990-01-01'
     })
     birthday: Date;
+
+
+    /* Disabled because is in another endpoint (check UpdateUserBalanceDto) for securence */
+    // @IsNotEmpty()
+    // @IsNumber()
+    // @ApiProperty({
+    //     type: Number,
+    //     description: 'User balance',
+    //     example: 1000.00
+    // })
+    // balance: number;
+}
+
+export class UpdateUserBalanceDto {
+    @IsNotEmpty()
+    @IsDecimal()
+    @ApiProperty({
+        type: Number,
+        description: 'User balance, the number cannot be negative',
+        example: 1000
+    })
+    balance: number;
 }

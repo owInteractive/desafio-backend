@@ -1,32 +1,37 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from '../../user/entities/user.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 export enum TransactionType {
-    credit = 'credit',
-    debit = 'debit',
-    reversal = 'reversal',
-  }
+  credit = 'credit',
+  debit = 'debit',
+  reversal = 'reversal',
+}
 
 @Entity()
 export class Transaction {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({ type: 'int', nullable: false })
-    userId: number;
+  @Column({ type: 'numeric', precision: 10, scale: 2, default: () => '0.00' })
+  value: number;
 
-    @Column({ type: 'decimal', precision: 10, scale: 2, default: () => '0.00' })
-    value: number;
+  @Column({ nullable: false })
+  description: string;
 
-    @Column({ nullable: false })
-    description: string;
+  @Column({ type: 'enum', enum: TransactionType, default: 'credit' })
+  type: string;
 
-    @Column({ type: 'enum', enum: TransactionType, default: 'credit' })
-    type: string;
+  @Column({ type: 'int', nullable: false })
+  userId: number;
 
-    @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
-    createdAt: Date;
+  @ManyToOne((type) => User, (user) => user.transactions)
+  @JoinColumn({ name: 'userId' })
+  user: User;
 
-    @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
-    updatedAt: Date;
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
+
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  updatedAt: Date;
 }
 

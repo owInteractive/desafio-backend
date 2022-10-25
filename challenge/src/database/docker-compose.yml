@@ -13,5 +13,3 @@
       environment:
           MYSQL_ROOT_PASSWORD: appRoot
           MYSQL_DATABASE: ow_interactive
-      volumes:
-        - ./mysql:/var/lib/mysql
