@@ -2,6 +2,35 @@
 
 # Desafio Back-End - OW Interactive 21/22
 
+*Lembre-se de trocar para a pasta correta:* ```cd ./challenge```
+
+## 📚 Checklist
+- Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
+  - [X] Criar um endpoint onde é cadastrado um usuário.
+  - [X] Criar um endpoint para listagem desses usuários, ordernados por ordem de cadastro decrescente (mais novo para mais antigo);
+  - [X] Criar um endpoint para listar um único usuário através do seu id;
+  - [X] Criar um endpoint para excluir um usuário através do seu id.
+
+- Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
+  - [X] Criar um endpoint ou endpoint`s onde é possível associar uma operação de débito, crédito ou estorno para o usuário;
+  - [X] Criar um endpoint onde seja possível visualizar toda a movimentação (páginada) do usuários mais as suas informações pessoais;
+  - [X] Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário;
+  - [ ] Criar um endpoint onde é retornado um arquivo no formato (csv) com 3 tipos de filtros para as movimentações;
+
+- Etapa 3 - Nova Funcionalidades
+  - [X] Adicionar dentro do usuário um campo para saldo inicial, e criar um endpoint para alterar esse valor;
+  - [X] Criar um endpoint com a soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário;
+  - [X] No endpoint que exclui um usuário, adicionar a funcionalidade que agora não será mais possível excluir um usuário que tenha qualquer tipo de movimentação ou saldo;
+  - [X] No endpoint que cadastra usuário, adicionar a funcionalidade que apenas maiores de 18 anos podem criar uma conta;
+  - [ ] No endpoint que exporta o arquivo CSV criar um cabeçalho com os dados do cliente e o seu saldo atual;
+
+- Etapa 4 - Diferenciais
+  - [X] Criar validações com base na Request;
+  - [ ] Utilizar cache para otimizar as consultas e buscas;
+  - [ ] Criar Seeders ou Inicializadores de dados para o usuários e suas movimentações;
+  - [X] Criar os métodos baseados em algum método de autênticação.
+  - [X] Documentação dos endpoint`s;
+
 ## Sobre a OW Interactive
 Fazemos parte do universo digital, focada em criar e desenvolver experiências interativas, integrando planejamento, criatividade e tecnologia.
 
