@@ -86,7 +86,6 @@ export class TransactionsController {
     if (transactions) {
       const file = createReadStream(join(process.cwd(), 'uploads/' + fileName + '.csv'));
       const stream = new StreamableFile(file);
-      console.log(stream);
       const buffer = readFileSync(join(process.cwd(), 'uploads/' + fileName + '.csv'));
       const mimeType = await getMimeType(buffer, { filename: fileName });
 
