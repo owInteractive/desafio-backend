@@ -1,3 +1,0 @@
-FROM redis:3
-
-ENV REDIS_PASSWORD=owpass

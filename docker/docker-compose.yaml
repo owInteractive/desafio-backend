@@ -1,0 +1,64 @@
+version: '3.3'
+services:
+  ow-mysql:
+    image: mysql
+    container_name: ow-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'owpass'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    networks:
+      - backend
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+  ow-redis:
+    image: redis/redis-stack-server
+    container_name: ow-redis
+    restart: always
+    environment:
+      REDIS_PASSWORD: 'owpass'
+    ports:
+      - '6379:6379'
+    expose:
+      - '6379'
+    networks:
+      - backend
+  ow-application:
+    depends_on:
+      - ow-mysql
+      - ow-redis
+    image: node:18
+    container_name: ow-application
+    restart: always
+    environment:
+      PORT: '4000'
+      HOST: '0.0.0.0'
+      NODE_ENV: 'development'
+      APP_KEY: '0BmWXx0158JiiQzByJd8cpznXqsXTSIT'
+      DRIVE_DISK: 'local'
+      REDIS_CONNECTION: 'local'
+      REDIS_HOST: '127.0.0.1'
+      REDIS_PORT: '6379'
+      REDIS_PASSWORD: 'owpass'
+      DB_CONNECTION: 'mysql'
+      MYSQL_HOST: ow-mysql
+      MYSQL_PORT: '3306'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'owpass'
+      MYSQL_DB_NAME: 'owdb'
+    ports:
+      - '4000:4000'
+    expose:
+      - '4000'
+    networks:
+      - backend
+    volumes:
+      - '../app/:/var/www/html/'
+    working_dir: /var/www/html
+    command: node ace serve --watch
+networks:
+    backend:
+      driver: bridge
