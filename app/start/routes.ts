@@ -20,4 +20,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/users','UsersController.index')
+Route.get('/users','UsersController.get')
+Route.get('/users/:id','UsersController.getById')
+Route.delete('/users/:id','UsersController.delete')
+Route.post('/users','UsersController.post')
