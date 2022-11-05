@@ -30,3 +30,5 @@ Obs: Para isso você precisa ter seu próprio banco SQL e Redis rodando localmen
 
 ## Observações
 Não implementei a roda de gerar o CSV por conta da falta de tempo, se necessário e com mais tempo posso também fazer essa rota facilmente.
+
+Também não consegui implementar a solução cache por conta do tempo, se necessário também consigo implementar, pois, já temos a aplicação configurada para usar o servidor Redis do docker-compose file.
