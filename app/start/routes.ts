@@ -24,3 +24,8 @@ Route.get('/users','UsersController.get')
 Route.get('/users/:id','UsersController.getById')
 Route.delete('/users/:id','UsersController.delete')
 Route.post('/users','UsersController.post')
+Route.put('/users','UsersController.put')
+
+Route.get('/transactions/:user_id','TransactionsController.get')
+Route.post('/transactions','TransactionsController.post')
+Route.delete('/transactions','TransactionsController.delete')
