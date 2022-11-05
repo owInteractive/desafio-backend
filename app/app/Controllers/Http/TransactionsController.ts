@@ -52,7 +52,7 @@ export default class TransactionsController {
         const payload = await ctx.request.validate({schema: rules})
 
         try {
-            const user = await User.findByOrFail('id',payload.user_id)
+            await User.findByOrFail('id',payload.user_id)
         } catch (error) {
             ctx.response.send({
                 error: "User not found"
