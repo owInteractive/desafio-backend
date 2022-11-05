@@ -58,7 +58,9 @@ services:
     volumes:
       - '../app/:/var/www/html/'
     working_dir: /var/www/html
-    command: node ace serve --watch
+    command: >
+      bash -c "node ace migration:run
+      && node ace serve --watch"
 networks:
     backend:
       driver: bridge
