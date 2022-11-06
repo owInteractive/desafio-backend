@@ -5,29 +5,30 @@ import { schema } from '@ioc:Adonis/Core/Validator'
 
 export default class TransactionsController {
     public async get(ctx: HttpContextContract) {
+        let user_id = ctx.request.params().user_id
         let transaction, user
         try {
-            user = await User.findByOrFail('id',ctx.request.params().user_id)
+            user = await User.findByOrFail('id',user_id)
             if (ctx.request.qs().type) {
                 switch (ctx.request.qs().type) {
                     case "credit":
-                        transaction = await Transaction.query().where('user_id','=',ctx.request.params().user_id).
+                        transaction = await Transaction.query().where('user_id','=',user_id).
                             where('type','=','credit')
                     break
                     case "debt":
-                        transaction = await Transaction.query().where('user_id','=',ctx.request.params().user_id).
+                        transaction = await Transaction.query().where('user_id','=',user_id).
                             where('type','=','debt')
                     break
                     case "reversal":
-                        transaction = await Transaction.query().where('user_id','=',ctx.request.params().user_id).
+                        transaction = await Transaction.query().where('user_id','=',user_id).
                             where('type','=','reversal')
                     break
                     default:
-                        transaction = await Transaction.query().where('user_id','=',ctx.request.params().user_id)
+                        transaction = await Transaction.query().where('user_id','=',user_id)
                     break
                 }
             } else {
-                transaction = await Transaction.query().where('user_id','=',ctx.request.params().user_id)
+                transaction = await Transaction.query().where('user_id','=',user_id)
             }
         } catch (error) {
             ctx.response.send({
@@ -36,9 +37,45 @@ export default class TransactionsController {
             ctx.response.status(404)
             return
         }
+        
         ctx.response.send({
             user: user,
             transactions: transaction
+        })
+        ctx.response.status(200)
+    }
+
+    public async getAllTypesById(ctx: HttpContextContract) {
+        let transactions, user
+        try {
+            transactions = await Transaction.query().where('user_id','=',ctx.request.params().user_id)
+            user = await User.findByOrFail('id',ctx.request.params().user_id)
+        } catch (error) {
+            ctx.response.send({
+                error: "Transactions by user not found"
+            })
+            ctx.response.status(404)
+            return
+        }
+
+        let response = {
+            credit: 0,
+            debt: 0,
+            reversal: 0
+        }
+        transactions.forEach((transaction: Transaction) => {
+            if (transaction.type == "credit") {
+                response.credit += transaction.value
+            } else if (transaction.type == "debt") {
+                response.debt += transaction.value
+            } else if (transaction.type == "reversal") {
+                response.reversal += transaction.value
+            }
+        });
+        
+        ctx.response.send({
+            balance: user.balance,
+            transactions: response
         })
         ctx.response.status(200)
     }

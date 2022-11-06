@@ -27,5 +27,6 @@ Route.post('/users','UsersController.post')
 Route.put('/users','UsersController.put')
 
 Route.get('/transactions/:user_id','TransactionsController.get')
+Route.get('/transactions/:user_id/all','TransactionsController.getAllTypesById')
 Route.post('/transactions','TransactionsController.post')
 Route.delete('/transactions','TransactionsController.delete')
