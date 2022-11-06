@@ -26,55 +26,67 @@ Obs: Para isso você precisa ter seu próprio banco SQL e Redis rodando localmen
 
 Users:
 
-GET
-/users
+<strong style="color:green">GET</strong><br>
+`/users`
 
-GET
-/users/$user_id
+<strong style="color:green">GET</strong><br>
+`/users/$user_id`
 
-POST 
-/users
+<strong style="color:blue">POST</strong><br>
+`/users`
+
+```curl
 {
   "name": string,
   "email": string,
   "birthday": date (YYYY-MM-DD),
   "balance": float
 }
+```
 
-DELETE
-/users/$user_id
+<strong style="color:red">DELETE</strong><br>
+`/users/$user_id`
 
-PUT
-/users
+<strong style="color:orange">PUT</strong><br>
+`/users`
+
+```curl
 {
     "user_id": integer,
     "balance": float
 }
+```
 
 ### Endpoint De Movimentações
 
 Transactions
 
-GET
-/transactions/$user_id?type=$type
+<strong style="color:green">GET</strong><br>
+`/transactions/$user_id?type=$type`
 $type = enum('credit','debt','reversal')
 
-GET
-/transactions/$user_id/all
+<strong style="color:green">GET</strong><br>
+`/transactions/$user_id/all`
 
-POST
-/transactions
+<strong style="color:blue">POST</strong><br>
+`/transactions`
+
+```curl
 {
   "type": enum('credit','debt','reversal'),
   "value": float,
   "user_id": integer
 }
+```
 
-DELETE
-/transactions
+<strong style="color:red">DELETE</strong><br>
+`/transactions`
+
+```curl
 {
     "transaction_id": integer
 }
+```
 
 ## Observações
 Não implementei a roda de gerar o CSV por conta da falta de tempo, se necessário e com mais tempo posso também fazer essa rota facilmente.
