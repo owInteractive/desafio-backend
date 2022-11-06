@@ -13,7 +13,9 @@ services:
     networks:
       - backend
     volumes:
+      - ./init.sql:/data/application/init.sql
       - /var/lib/mysql:/var/lib/mysql
+    command: --init-file /data/application/init.sql
   ow-redis:
     image: redis/redis-stack-server
     container_name: ow-redis

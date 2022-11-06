@@ -6,6 +6,8 @@ Para saber mais sobre: [Docker Compose](https://docs.docker.com/compose/).
 
 Para rodar o projeto localmente usando o docker-compose eu coloquei um Makefile para facilitar o processo, por tanto na raiz do projeto rode:
 
+`make build` -> Para instalar as dependências do adonis.
+
 `make up` -> Para gerar toda a aplicação, migrations e rodar o servidor node.
 
 Isso ira criar roda a rede necessária para a execução do processo, após isso você já pode executar as requisições.
