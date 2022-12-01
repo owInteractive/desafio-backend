@@ -4,14 +4,15 @@ import { CreateUserService, DeleteUserService, ListUserService, UpdateUserServic
 class UserController {
   // função que cria um usuário
   async createUser(request: Request, response: Response) {
-    const { name, email, birthday } = request.body;
+    const { name, email, birthday, opening_balance } = request.body;
 
     const createUserService = new CreateUserService();
     
     const user = await createUserService.execute({
       name,
       email,
-      birthday
+      birthday,
+      opening_balance
     });
 
     if(user.error){
