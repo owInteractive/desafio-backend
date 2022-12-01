@@ -2,93 +2,88 @@
 
 # Desafio Back-End - OW Interactive 21/22
 
-## Sobre a OW Interactive
-Fazemos parte do universo digital, focada em criar e desenvolver experiências interativas, integrando planejamento, criatividade e tecnologia.
+## Como rodar o projeto?
+É possível rodar esse projeto manualmente com seu banco de dados. 
 
-Conheça mais sobre nós em: [OW Interactive - Quem somos](http://www.owinteractive.com/quem-somos/).
+Renomeie o arquivo .env.example para .env e configure no arquivo .env as variaveis ambientes para configurar com o próprio banco mysql. 
+As váriaveis necessárias são: NODE_SECRET para criação e verificação do token de autenticação, HOST que é o Ip do banco, o USERNAMEDB que é o nome do usuário do banco, PASSWORD a senha do banco, DATABASE o nome do banco e PORTDB que é a porta do banco.
 
-## Sobre a Vaga
-Esse desafio é destinado todos os níveis e não é exigido que você consiga realizar esse desafio por completo.
+##### Para rodar o projeto manualmente siga os comandos abaixo:
+`cd server`
+`npm i`
+`npm run start`
 
-Sua avaliação será dada pelas etapas que conseguir entregar.
+#### Teste
+Para rodar o teste é necessário a aplicação estar rodando, para que seja possivel verificar a autenticação de um email.
+`npm run test`
 
-Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owinteractive.com/vagas/).
+## Requisições
 
-Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o desafio e aplicar para alguma vaga de backend.
+### Endpoint Dos Usuários
 
-## Pré-requisitos
-- Lógica de programação;
-- Conhecimentos sobre Banco de dados;
-- Conhecimentos sobre REST, HTTP e API's;
-- Conhecimentos sobre Git;
+**GET**
+`/users`
 
-## Requisitos Obrigatórios
-- Utilizar a linguagem [PHP](https://www.php.net/) ou [NodeJS](https://nodejs.org)
-<br/> OBS: Caso seja enviado em PHP e sem docker enviar o projeto para que rode no PHP 8+
-- Utilizar MySQL (ou MariaDB) como base de dados.
-- Código bem documentado, legível e limpo;
-- Fazer uma API simples e objetiva em REST, com o retorno em JSON;
-- Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio;
-- Deve ser usado [Postman](https://www.php.net/), [Insomnia](https://insomnia.rest/), [Swagger](https://swagger.io/) e etc.Para montar o exemplos da API e adicione ao repósitorio o arquivo gerado pelo programa e especificar qual o arquivo e programa devem ser usados, caso não seja enviado será desconsiderado o desafio;
-- Em qualquer caso de erro ou  não encontrada a API deve retorna uma resposta condizente com o problema apresentado, por exemplo um retorno 500 ou 404;
+**GET**
+`/users/$user_id`
 
-## Diferenciais
-- Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x), [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation), [Nest JS (Node)](https://nestjs.com/) ou TypeScript;
-- Utilizar o [Docker](https://www.docker.com/get-started) para conteinerização da aplicação;
-- Pensar em desempenho e escalabilidade, quando for uma quantidade muito grande de dados como o sistema se comportaria;
-- Criar testes (Apenas um exemplo, algo bem simples como validação do login ou consumo de um endpoint com ou sem autenticação, no README adicionar qual o comando utilizado para rodar o teste); 
-- Utilizar apenas as ferramentas do framework caso use um, evitando criar dependência de outros pacotes ou bibliotecas;
+**POST**
+`/users`
 
-## Desafio
+```curl
+{
+  "name": string,
+  "email": string,
+  "birthday": date (YYYY-MM-DD),
+  "opening_balance": float
+}
+```
 
-### Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
-Nessa etapa daremos algumas premissas que devem ser seguidas.
+**DELETE**
+`/users/$user_id`
 
-- Criar um endpoint onde é cadastrado um usuário.
-  - Esses usuários devem ter obrigátoriamente os seguintes dados modelados, caso você ache necessário outros campos fique a vontade.
-    - **name** | string (Nome)
-    - **email** | string (E-mail)
-    - **birthday** | date (Data de aniversário)
-    - **created_at** | datetime (Criado Em)
-    - **updated_at** | datetime (Atualizado Em)
-- Criar um endpoint para listagem desses usuários, ordernados por ordem de cadastro decrescente (mais novo para mais antigo);
-- Criar um endpoint para listar um único usuário através do seu id;
-- Criar um endpoint para excluir um usuário através do seu id.
+**PATCH**
+`/users/$user_id`
 
-### Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
-Nessa etapa você precisará criar a modelagem e lógica para implementar as funcionalidades abaixo:
+```curl
+{
+    "opening_balance": float
+}
+```
 
-- Criar um endpoint ou endpoint`s onde é possível associar uma operação de débito, crédito ou estorno para o usuário;
-- Criar um endpoint onde seja possível visualizar toda a movimentação (páginada) do usuários mais as suas informações pessoais;
-- Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário;
-- Criar um endpoint onde é retornado um arquivo no formato (csv) com 3 tipos de filtros para as movimentações:
-  - Últimos 30 dias;
-  - Passando o mês e ano por exemplo: 06/20;
-  - Todo as movimentações;
+### Endpoint De Movimentações
 
-### Etapa 3 - Nova Funcionalidades
-Nessa etapa serão itens onde veremos como você pensou e como chegou ao resultado final.
+**GET**
+`/movimentacoes/$user_id`
 
-- Adicionar dentro do usuário um campo para saldo inicial, e criar um endpoint para alterar esse valor;
-- Criar um endpoint com a soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário;
-- No endpoint que exclui um usuário, adicionar a funcionalidade que agora não será mais possível excluir um usuário que tenha qualquer tipo de movimentação ou saldo;
-- No endpoint que cadastra usuário, adicionar a funcionalidade que apenas maiores de 18 anos podem criar uma conta;
-- No endpoint que exporta o arquivo CSV criar um cabeçalho com os dados do cliente e o seu saldo atual;
+**GET**
+`/movimentacoes/balanco/$user_id`
 
-### Etapa 4 - Diferenciais
-- Criar validações com base na Request;
-- Utilizar cache para otimizar as consultas e buscas;
-- Criar Seeders ou Inicializadores de dados para o usuários e suas movimentações;
-- Criar os métodos baseados em algum método de autênticação.
-- Documentação dos endpoint`s;
+**POST**
+`/movimentacoes/export/$user_id`
 
-## Conclusão
-Crie um Fork e submeta uma Pull Request ao Github com o seu desafio. Após isso envie um e-mail para [letsrock@owinteractive.com](mailto:letsrock@owinteractive.com), com o assunto [DESAFIO BACK-END] com o link para o seu desafio, sua apresentação e currículo anexado em formato PDF.
+```curl
+{
+  "filter": enum('last','monthly','all'),
+  "monthly?": "12/2022",
+}
+```
 
-Caso tenha alguma sugestão sobre o teste ela é bem vinda, fique a vontade para envia-la junto ao e-mail.
+**POST**
+`/movimentacoes`
 
-E fique a vontade para usar os programas e ferramentas que se sentir bem, lembrando que aqui somos team [VS Code](https://code.visualstudio.com/) rs.
+```curl
+{
+  ""user_id": int,
+  "operation": enum('credito','debito','estorno'),
+  "value": float
+}
+```
 
-Obrigado por participar e boa sorte 😀
+**DELETE**
+`/movimentacoes/$movimentacoes_id`
+
+## Observações
+O arquivo `insomnia.json` contém a collection de requisições que podem ser importadas no Insomnia.
 
 ![Cachorro programando](https://github.com/owInteractive/desafio-backend/raw/master/media/dog.webp "Cachorro programando")
