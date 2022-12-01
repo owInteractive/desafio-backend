@@ -19,6 +19,9 @@ import { User } from "./User";
   
     @Column()
     operation!: Operations;
+
+    @Column('float')
+    value!: number;
   
     @ManyToOne(() => User, { onDelete:'CASCADE', nullable: true })
     @JoinColumn({ name: 'user_id' })

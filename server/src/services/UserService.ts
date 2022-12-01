@@ -1,4 +1,6 @@
   
+import { Movement } from "../entities/Movement";
+import { MovementRepositories } from "../repositories/MovementRepositories";
 import { UsersRepositories } from "../repositories/UsersRepositories";
 
 interface IUserRequest {
@@ -27,6 +29,12 @@ class CreateUserService {
 
     // converte uma string para o tipo de dados de data
     birthday = new Date(birthday)
+    
+    // verifica se a data é maior de 18 anos
+    let age = new Date().getFullYear() - birthday.getFullYear();;
+    if(age < 18){
+      return JSON.parse(`{"error":"Não é possível cadastrar usuário com menos de 18 anos."}`);
+    }
 
     const user = UsersRepositories.create({
       name,
@@ -34,12 +42,34 @@ class CreateUserService {
       birthday
     });
 
+    // await UsersRepositories.save(user);
+
+    return {user:''};
+  }
+}
+
+class UpdateUserService {
+  // função que cria um usuário caso ele não exista
+  async execute(id:number, opening_balance: number) {
+    
+    const userAlreadyExists = await UsersRepositories.findOneBy({
+      id,
+    });
+
+    if (!userAlreadyExists) {
+      return JSON.parse(`{"error":"Usuário não existe."}`);
+    }
+
+    const user = UsersRepositories.create({
+      ...userAlreadyExists, 
+      opening_balance:opening_balance
+    });
+
     await UsersRepositories.save(user);
 
     return user;
   }
 }
-
 class ListUserService {
 
   // função que lista todos os usuários ordenando do mais novo pro mais velho
@@ -84,6 +114,28 @@ class DeleteUserService {
       return JSON.parse(`{"error":"Usuário não existe."}`);
     }
 
+    const movement = await MovementRepositories.find({
+      relations: ['user_id'],
+      where: {
+        user_id:{
+          id: user.id
+        }
+      }
+    })
+
+    let balance = user.opening_balance 
+    movement.forEach((mov:Movement) => {
+      if(mov.operation === 'credito' || mov.operation === 'debito'){
+        balance -= mov.value
+      }else{
+        balance += mov.value
+      }
+    })
+
+    if(balance > 0 || movement.length > 0){
+      return JSON.parse(`{"error":"Não é possível excluir usuário."}`);
+    }
+
     const res = await UsersRepositories.delete(id);
 
     if(res.affected === 1){
@@ -94,4 +146,4 @@ class DeleteUserService {
   }
 }
 
-export { CreateUserService, ListUserService, DeleteUserService };
+export { CreateUserService, ListUserService, DeleteUserService, UpdateUserService };

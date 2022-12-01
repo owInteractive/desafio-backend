@@ -21,6 +21,10 @@ router.get(
   "/users/:id",
   createUserController.getUserBy
 );
+router.patch(
+  "/users/:id",
+  createUserController.updateUser
+);
 router.delete(
   "/users/:id",
   createUserController.deleteUser
@@ -35,6 +39,10 @@ router.post(
 router.get(
   "/movimentacoes/:id",
   createMovementController.getMovementBy
+);
+router.get(
+  "/movimentacoes/balanco/:id",
+  createMovementController.getMovementBalance
 );
 router.post(
   "/movimentacoes/export/:id",

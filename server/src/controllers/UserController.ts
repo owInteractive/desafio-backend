@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateUserService, DeleteUserService, ListUserService } from "../services/UserService";
+import { CreateUserService, DeleteUserService, ListUserService, UpdateUserService } from "../services/UserService";
 
 class UserController {
   // função que cria um usuário
@@ -29,6 +29,25 @@ class UserController {
     const user = await listUsersService.execute();
 
     return response.json(user);
+  }
+
+  // função que atualiza o saldo inicial usuário
+  async updateUser(request: Request, response: Response) {
+    const { opening_balance } = request.body;
+    const { id } = request.params
+
+    const updateUserService = new UpdateUserService();
+    
+    const user = await updateUserService.execute(
+      parseInt(id),
+      opening_balance
+    );
+
+    if(user.error){
+      return response.status(200).json(user)
+    }else{
+      return response.status(201).json(user);
+    }
   }
 
   // função que pega um id de um usuário para mostrar

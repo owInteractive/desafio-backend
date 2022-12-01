@@ -19,6 +19,9 @@ import {
     
     @Column()
     birthday!: Date;
+
+    @Column('float')
+    opening_balance!: number;
   
     @CreateDateColumn()
     created_at!: Date;

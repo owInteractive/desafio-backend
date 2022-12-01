@@ -5,13 +5,14 @@ class MovementController {
 
   // função que cria uma movimentação de um usuário
   async createMovement(request: Request, response: Response) {
-    const { operation, user_id } = request.body;
+    const { operation, user_id, value } = request.body;
 
     const createMovementService = new CreateMovementService();
     
     const movement = await createMovementService.execute({
       operation,
-      user_id
+      user_id,
+      value
     });
 
     return response.json(movement);
@@ -40,6 +41,17 @@ class MovementController {
     const listMovementsService = new ListMovementService();
 
     const Movement = await listMovementsService.getMovementBy(parseInt(id));
+
+    return response.json(Movement);
+  }
+
+  // função que retorna a soma das movimentações de um usuário
+  async getMovementBalance(request: Request, response: Response) {
+    const { id } = request.params
+
+    const listMovementsService = new ListMovementService();
+
+    const Movement = await listMovementsService.getMovementBalance(parseInt(id));
 
     return response.json(Movement);
   }
