@@ -8,12 +8,12 @@ interface IUserRequest {
   name: string;
   email: string;
   birthday: Date;
+  opening_balance: number;
 }
 
 class CreateUserService {
-
   // função que cria um usuário caso ele não exista
-  async execute({ name, email, birthday }: IUserRequest) {
+  async execute({ name, email, birthday, opening_balance }: IUserRequest) {
     
     if (!email) {
       return JSON.parse(`{"error":"Email incorreto."}`);
@@ -39,7 +39,8 @@ class CreateUserService {
     const user = UsersRepositories.create({
       name,
       email,
-      birthday
+      birthday,
+      opening_balance
     });
 
     // await UsersRepositories.save(user);
