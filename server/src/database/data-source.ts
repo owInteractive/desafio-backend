@@ -13,6 +13,6 @@ export const dataSource = new DataSource({
     synchronize: true,
     // logging: true,
     entities: [
-        'src/entities/*.ts',
+        process.env.NODE_ENV === 'production' ? 'dist/entities/*.js' : 'src/entities/*.ts',
     ],
 })

@@ -70,6 +70,7 @@ class UpdateUserService {
     return user;
   }
 }
+
 class ListUserService {
 
   // função que lista todos os usuários ordenando do mais novo pro mais velho

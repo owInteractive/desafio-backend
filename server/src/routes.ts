@@ -2,11 +2,14 @@ import { Router } from "express";
 
 import { UserController } from "./controllers/UserController";
 import { MovementController } from "./controllers/MovementController";
+import { AuthenticateUserController } from "./controllers/AuthenticateUserController";
+import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
 
 const router = Router();
 
 const createUserController = new UserController();
 const createMovementController = new MovementController();
+const authenticateUserController = new AuthenticateUserController();
 
 // rotas do usuário
 router.post(
@@ -51,6 +54,19 @@ router.post(
 router.delete(
   "/movimentacoes/:id",
   createMovementController.deleteMovement
+);
+
+
+
+// rota de autenticação
+router.post(
+  "/auth",
+  authenticateUserController.handle
+);
+router.get(
+  "/auth",
+  ensureAuthenticated,
+  authenticateUserController.getInfo
 );
 
 export { router };

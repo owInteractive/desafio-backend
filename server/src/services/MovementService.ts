@@ -71,6 +71,7 @@ class ListMovementService {
 
     return movement;
   }
+
   // função que lista as movimentações de usuário caso ele exista
   async getMovementBalance(id: number){
 
@@ -106,6 +107,7 @@ class ExportMovementService {
   // função que lista as movimentações de usuário caso ele exista
   async execute(id: number, filter:Filter, monthly?: string){
 
+    // verifica se o filtro é todas as movimentações, ou as ultimas 30 ou seleciona um mês especifico
     if(filter !== 'all' && filter !== 'last' && filter !== 'monthly'){
       return JSON.parse(`{"error":"Filtro incorreto."}`)
     }
