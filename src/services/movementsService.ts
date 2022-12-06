@@ -89,12 +89,15 @@ export default class movementsServices {
             let valueBalance = this._functionsUtils.formatMoney(results[0][0].initialValue);
             results[0].forEach((element: movements) => {
               switch (element.idTypeOperation) {
+                //Crédito
                 case 1:
                   valueBalance += this._functionsUtils.formatMoney(element.valueOperation);
                   break;
+                //Débito                   
                 case 2:
                   valueBalance -= this._functionsUtils.formatMoney(element.valueOperation);
                   break;
+                //Estorno
                 default:
                   valueBalance += this._functionsUtils.formatMoney(element.valueOperation);
                   break;
@@ -150,12 +153,15 @@ export default class movementsServices {
             let valueBalance = this._functionsUtils.formatMoney(results[0][0].initialValue);
             results[0].forEach((element: movements) => {
               switch (element.idTypeOperation) {
+                //Crédito
                 case 1:
                   valueBalance += this._functionsUtils.formatMoney(element.valueOperation);
                   break;
+                //Débito
                 case 2:
                   valueBalance -= this._functionsUtils.formatMoney(element.valueOperation);
                   break;
+                //Estorno
                 default:
                   valueBalance += this._functionsUtils.formatMoney(element.valueOperation);
                   break;

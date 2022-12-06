@@ -11,7 +11,7 @@ export default class ReportCSV {
       fs.unlinkSync(file);
     }
 
-    let infosUser = `Nome,E-mail,Valor inicial, Salto atual\r\n${ObjectMountedToCSV.results[0].name},${ObjectMountedToCSV.results[0].email},${ObjectMountedToCSV.results[0].initialValue}, ${ObjectMountedToCSV.valueBalance}\r\n\r\n`;
+    let infosUser = `Nome,E-mail,Valor inicial, Saldo atual\r\n${ObjectMountedToCSV.results[0].name},${ObjectMountedToCSV.results[0].email},${ObjectMountedToCSV.results[0].initialValue}, ${ObjectMountedToCSV.valueBalance}\r\n\r\n`;
     await fs.writeFileSync(file, infosUser);
 
     let HeaderInfos = "Tipo de operação,Valor da operação,Data de criação,Data de edição\r\n";
