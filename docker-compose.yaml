@@ -10,6 +10,13 @@ services:
       - /desafio-backend/node_modules
     environment:
       - NODE_ENV=development
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=123456
+      - DB_NAME=desafio-back-end
+    links:
+      - db
     command:
       - yarn 
       - developer

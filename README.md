@@ -53,14 +53,10 @@ Nesse ponto, é de suma importância que o banco esteja ativo e operando,
 podendo ser através de migrations e seeders enviados 
 ou através do restore do dump enviado. 
 
-Dentro do diretorio ```/database```encontrará as informações relacionadas
+Dentro do arquivo ```.env``` encontrará as informações relacionadas
 ao banco de dados, caso utilize alguma informação diferente das que 
 estão lá, é necessário realizar a mudança nesse arquivo. 
-E de suma importância, realizar a mudança também no arquivo do seguinte 
-diretório: ```/src/sequelize/config/config.json``` nele estão as informações
-referentes ao banco de dados onde serão realizados
-as migrations, bem como, os seeders. 
-
+ 
 ## Iniciando em modo desenvolvimento
 
 Para iniciar em modo desenvolvimento, basta seguir os passos abaixo:
@@ -78,8 +74,21 @@ Para iniciar em modo desenvolvimento, basta seguir os passos abaixo:
 - O comando acima irá iniciar a aplicação em modo de desenvolvimento e irá transpilar os arquivos .TS para .JS para o seguinte diretório: /dist
 - O comando acima, também será responsável por observar as mudanças nos arquivos .TS e atualizar os arquivos .JS no diretório /dist. 
 
+## Utilização de containers docker (necessário o docker e o compose instalados)
 
+- Dentro do diretório raiz do projeto, rodar o seguinte comando (caso ainda não tenha instalado as dependências): 
+   
+    ```yarn install```
 
+- O comando acima irá realizar as instalações das dependências para desenvolvimento local na máquina host. Em produção, não há necessidade, bastando modificar o Dockerfile para realizar a instalação. É útil rodar o comando para não duplicar a pasta node_modules em desenvolvimento. Já em produção, esse comando pode ser ignorado, pois o próprio docker file fará a instalação da node_modules.
+
+- Após realizar a instalação, rodar o seguinte comando:
+   
+    ```docker compose up```
+
+- O comando acima irá fazer o download das imagens, node e mysql e iniciará os containers com as respectivas imagens e informações do repositório.
+
+- Após realizar as instalações, bem como, iniciar os containers, é necessário realizar as migrations e seeders ou restaurar o dump enviado do mysql. Todo o mapamento das configurações foram realizadas para atender a criação e utilização dos containers.
 
 ## Fazendo requisições
 
