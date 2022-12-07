@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "584c7f1c-e10b-4b4c-b307-771efdbc0356",
+		"name": "Desafio Back End - Ow Interactive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Users",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55TmFtZSI6Ik93IEludGVyYWN0aXZlIn0.ejjI2zuDsEx26kPDYvrcCIOgzxe1IW_Sq6KKGPdJwaI",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3050/users/getUsers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"users",
+						"getUsers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55TmFtZSI6Ik93IEludGVyYWN0aXZlIn0.ejjI2zuDsEx26kPDYvrcCIOgzxe1IW_Sq6KKGPdJwaI",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3050/users/getUser/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"users",
+						"getUser",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55TmFtZSI6Ik93IEludGVyYWN0aXZlIn0.ejjI2zuDsEx26kPDYvrcCIOgzxe1IW_Sq6KKGPdJwaI",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"John Doen\",\n    \"email\": \"johndoen21@hotmail.com\",\n    \"birthday\": \"1995-12-25\",\n    \"initialValue\": \"50,00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3050/users/createUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"users",
+						"createUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55TmFtZSI6Ik93IEludGVyYWN0aXZlIn0.ejjI2zuDsEx26kPDYvrcCIOgzxe1IW_Sq6KKGPdJwaI",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"1\",\n    \"name\": \"John Doen\",\n    \"email\": \"johndoen@hotmail.com\",\n    \"birthday\": \"1995-12-25\",\n    \"openingBalance\": \"50,00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3050/users/editUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"users",
+						"editUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55TmFtZSI6Ik93IEludGVyYWN0aXZlIn0.ejjI2zuDsEx26kPDYvrcCIOgzxe1IW_Sq6KKGPdJwaI",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3050/users/deleteUser/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"users",
+						"deleteUser",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Initial Value",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55TmFtZSI6Ik93IEludGVyYWN0aXZlIn0.ejjI2zuDsEx26kPDYvrcCIOgzxe1IW_Sq6KKGPdJwaI",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"1\",\n    \"openingBalance\": \"55,00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3050/users/editInitialValue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"users",
+						"editInitialValue"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Associate Operation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55TmFtZSI6Ik93IEludGVyYWN0aXZlIn0.ejjI2zuDsEx26kPDYvrcCIOgzxe1IW_Sq6KKGPdJwaI",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idUser\": \"1\",\n    \"idTypeOperation\": \"2\",\n    \"valueOperation\": \"55.20\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3050/movements/associateOperation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"movements",
+						"associateOperation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Operation",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55TmFtZSI6Ik93IEludGVyYWN0aXZlIn0.ejjI2zuDsEx26kPDYvrcCIOgzxe1IW_Sq6KKGPdJwaI",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3050/movements/deleteOperation/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"movements",
+						"deleteOperation",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Movements User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55TmFtZSI6Ik93IEludGVyYWN0aXZlIn0.ejjI2zuDsEx26kPDYvrcCIOgzxe1IW_Sq6KKGPdJwaI",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3050/movements/getMovements/1/0/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"movements",
+						"getMovements",
+						"1",
+						"0",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Movements Balance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55TmFtZSI6Ik93IEludGVyYWN0aXZlIn0.ejjI2zuDsEx26kPDYvrcCIOgzxe1IW_Sq6KKGPdJwaI",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3050/movements/getBalanceMovements/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"movements",
+						"getBalanceMovements",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Movements Report CSV",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55TmFtZSI6Ik93IEludGVyYWN0aXZlIn0.ejjI2zuDsEx26kPDYvrcCIOgzxe1IW_Sq6KKGPdJwaI",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idUser\": 1,\n    \"filter\": \"last\"\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3050/movements/reportsMovements",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3050",
+					"path": [
+						"movements",
+						"reportsMovements"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

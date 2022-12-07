@@ -1,94 +1,158 @@
-![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.jpg "OW Interactive")
 
-# Desafio Back-End - OW Interactive 21/22
+# Desafio - Back end Ow Interactive
 
-## Sobre a OW Interactive
-Fazemos parte do universo digital, focada em criar e desenvolver experiências interativas, integrando planejamento, criatividade e tecnologia.
+## Sobre o projeto
 
-Conheça mais sobre nós em: [OW Interactive - Quem somos](http://www.owinteractive.com/quem-somos/).
+Desenvolvi uma API em node com typescript utilizando express
+e sequelize para atender a demanda solicitada no desafio. Abaixo,
+explicarei como inicia-la e fazer todos os testes necessários.
 
-## Sobre a Vaga
-Esse desafio é destinado todos os níveis e não é exigido que você consiga realizar esse desafio por completo.
 
-Sua avaliação será dada pelas etapas que conseguir entregar.
+## Tecnologias utilizadas
 
-Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owinteractive.com/vagas/).
+- [x]  Node
+- [x]  Nodemon
+- [x]  Javascript
+- [x]  Typescript
+- [x]  Express
+- [x]  Sequelize
+- [x]  Jest
+- [x]  Mysql
+- [x]  Postman
 
-Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o desafio e aplicar para alguma vaga de backend.
+## Resumo sobre as tecnologias utilizadas
 
-## Pré-requisitos
-- Lógica de programação;
-- Conhecimentos sobre Banco de dados;
-- Conhecimentos sobre REST, HTTP e API's;
-- Conhecimentos sobre Git;
+Utilizei o sequelize como ORM e o Mysql 8 como banco de dados. 
 
-## Requisitos Obrigatórios
-- Utilizar a linguagem [PHP](https://www.php.net/) ou [NodeJS](https://nodejs.org)
-<br/> OBS: Caso seja enviado em PHP e sem docker enviar o projeto para que rode no PHP 8+
-- Utilizar MySQL (ou MariaDB) como base de dados.
-- Código bem documentado, legível e limpo;
-- Fazer uma API simples e objetiva em REST, com o retorno em JSON;
-- Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio;
-- Deve ser usado [Postman](https://www.php.net/), [Insomnia](https://insomnia.rest/), [Swagger](https://swagger.io/) e etc.Para montar o exemplos da API e adicione ao repósitorio o arquivo gerado pelo programa e especificar qual o arquivo e programa devem ser usados, caso não seja enviado será desconsiderado o desafio;
-- Em qualquer caso de erro ou  não encontrada a API deve retorna uma resposta condizente com o problema apresentado, por exemplo um retorno 500 ou 404;
+Abaixo os links para baixa-los, caso necessário:
 
-## Diferenciais
-- Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x), [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation), [Nest JS (Node)](https://nestjs.com/) ou TypeScript;
-- Utilizar o [Docker](https://www.docker.com/get-started) para conteinerização da aplicação;
-- Pensar em desempenho e escalabilidade, quando for uma quantidade muito grande de dados como o sistema se comportaria;
-- Criar testes (Apenas um exemplo, algo bem simples como validação do login ou consumo de um endpoint com ou sem autenticação, no README adicionar qual o comando utilizado para rodar o teste); 
-- Utilizar apenas as ferramentas do framework caso use um, evitando criar dependência de outros pacotes ou bibliotecas;
+https://hub.docker.com/_/mysql
+https://yarnpkg.com/package/sequelize-cli
 
-## Desafio
+Estou enviando no projeto, o dump do banco de dados, o arquivo se encontra
+no seguinte diretório: 
 
-### Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
-Nessa etapa daremos algumas premissas que devem ser seguidas.
+```/src/docs/mysql/dump-desafio-back-end-202211250040.tar``` 
 
-- Criar um endpoint onde é cadastrado um usuário.
-  - Esses usuários devem ter obrigátoriamente os seguintes dados modelados, caso você ache necessário outros campos fique a vontade.
-    - **name** | string (Nome)
-    - **email** | string (E-mail)
-    - **birthday** | date (Data de aniversário)
-    - **created_at** | datetime (Criado Em)
-    - **updated_at** | datetime (Atualizado Em)
-- Criar um endpoint para listagem desses usuários, ordernados por ordem de cadastro decrescente (mais novo para mais antigo);
-- Criar um endpoint para listar um único usuário através do seu id;
-- Criar um endpoint para excluir um usuário através do seu id.
 
-### Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
-Nessa etapa você precisará criar a modelagem e lógica para implementar as funcionalidades abaixo:
+O sequelize cli é especialmente importante para que seja possível realizar
+as migrations, bem como, os seeders no banco de dados. 
+Abaixo link explicando como utiliza-lo:
 
-- Criar um endpoint ou endpoint`s onde é possível associar uma operação de débito, crédito ou estorno para o usuário;
-- Criar um endpoint onde seja possível visualizar toda a movimentação (páginada) do usuários mais as suas informações pessoais;
-- Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário;
-- Criar um endpoint onde é retornado um arquivo no formato (csv) com 3 tipos de filtros para as movimentações:
-  - Últimos 30 dias;
-  - Passando o mês e ano por exemplo: 06/20;
-  - Todo as movimentações;
+https://sequelize.org/docs/v6/other-topics/migrations/
 
-### Etapa 3 - Nova Funcionalidades
-Nessa etapa serão itens onde veremos como você pensou e como chegou ao resultado final.
+Para realizar as requisições de testes para a API, utilizei o 
+postman. O arquivo de configuração .json com todas as informações 
+sobre os requests encontram se no seguinte diretório: 
 
-- Adicionar dentro do usuário um campo para saldo inicial, e criar um endpoint para alterar esse valor;
-- Criar um endpoint com a soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário;
-- No endpoint que exclui um usuário, adicionar a funcionalidade que agora não será mais possível excluir um usuário que tenha qualquer tipo de movimentação ou saldo;
-- No endpoint que cadastra usuário, adicionar a funcionalidade que apenas maiores de 18 anos podem criar uma conta;
-- No endpoint que exporta o arquivo CSV criar um cabeçalho com os dados do cliente e o seu saldo atual;
+```/src/docs/postman/ow-postman_collection.json``` 
 
-### Etapa 4 - Diferenciais
-- Criar validações com base na Request;
-- Utilizar cache para otimizar as consultas e buscas;
-- Criar Seeders ou Inicializadores de dados para o usuários e suas movimentações;
-- Criar os métodos baseados em algum método de autênticação.
-- Documentação dos endpoint`s;
+## Subindo uma instância do Mysql
 
-## Conclusão
-Crie um Fork e submeta uma Pull Request ao Github com o seu desafio. Após isso envie um e-mail para [letsrock@owinteractive.com](mailto:letsrock@owinteractive.com), com o assunto [DESAFIO BACK-END] com o link para o seu desafio, sua apresentação e currículo anexado em formato PDF.
+Nesse ponto, é de suma importância que o banco esteja ativo e operando, 
+podendo ser através de migrations e seeders enviados 
+ou através do restore do dump enviado. 
 
-Caso tenha alguma sugestão sobre o teste ela é bem vinda, fique a vontade para envia-la junto ao e-mail.
+Dentro do arquivo ```.env``` encontrará as informações relacionadas
+ao banco de dados, caso utilize alguma informação diferente das que 
+estão lá, é necessário realizar a mudança nesse arquivo. 
+ 
+## Iniciando em modo desenvolvimento
 
-E fique a vontade para usar os programas e ferramentas que se sentir bem, lembrando que aqui somos team [VS Code](https://code.visualstudio.com/) rs.
+Para iniciar em modo desenvolvimento, basta seguir os passos abaixo:
 
-Obrigado por participar e boa sorte 😀
+- Dentro do diretório raiz do projeto, rodar o seguinte comando: 
 
-![Cachorro programando](https://github.com/owInteractive/desafio-backend/raw/master/media/dog.webp "Cachorro programando")
+   ```yarn install```
+
+- O comando acima fará com que todas as dependências necessárias sejam instaladas corretamente. 
+
+- Após instalar todas as dependências, basta rodar o comando abaixo:
+    
+    ```yarn developer```
+
+- O comando acima irá iniciar a aplicação em modo de desenvolvimento e irá transpilar os arquivos .TS para .JS para o seguinte diretório: /dist
+- O comando acima, também será responsável por observar as mudanças nos arquivos .TS e atualizar os arquivos .JS no diretório /dist. 
+
+## Utilização de containers docker (necessário o docker e o compose instalados)
+
+- Dentro do diretório raiz do projeto, rodar o seguinte comando (caso ainda não tenha instalado as dependências): 
+   
+    ```yarn install```
+
+- O comando acima irá realizar as instalações das dependências para desenvolvimento local na máquina host. Em produção, não há necessidade, bastando modificar o Dockerfile para realizar a instalação. É útil rodar o comando para não duplicar a pasta node_modules em desenvolvimento. Já em produção, esse comando pode ser ignorado, pois o próprio docker file fará a instalação da node_modules.
+
+- Após realizar a instalação, rodar o seguinte comando:
+   
+    ```docker compose up```
+
+- O comando acima irá fazer o download das imagens, node e mysql e iniciará os containers com as respectivas imagens e informações do repositório.
+
+- Após realizar as instalações, bem como, iniciar os containers, é necessário realizar as migrations e seeders ou restaurar o dump enviado do mysql. Todo o mapamento das configurações foram realizadas para atender a criação e utilização dos containers.
+
+## Fazendo requisições
+
+Após seguir os passos anteriores, a api estará disponível  na porta 3050
+e o banco de dados disponível em localhost.
+Basta realizar as requisições através do postman. 
+O arquivo postman.json enviado é especialmente útil, pois já tem todas 
+as requisições mapeadas. 
+
+## Pontuações importantes sobre endpoint de relatório de movimentações CSV
+
+O endpoint /movements/reportsMovements é um endpoint onde 
+se espera que seja passado três parâmetros diferentes, sendo eles: 
+
+- All (irá listar todos os dados, independete da data)
+- Last (irá listar todos os dados dos últimos 30 dias)
+- 11/2022 (data composta por mês e ano, irá lista somente as movimentações relacionadas ao período informado).
+
+No postman, para realizar o download do arquivo, é necessário clicar na opção: 
+send and download, presente na seta ao lado do botão Send. Isso 
+fará com que seja solicitado o download do arquivo .csv conforme solicitado 
+na descrição do desafio. 
+
+## Realizando testes 
+
+Para escrever os testes, utilizei o JEST e o super test.
+
+Os testes podem ser encontrados no seguinte diretório: 
+
+```src/tests```
+
+Conforme solicitado no desafio, escrevi 3 testes simples de requisições
+aos endpoints dos usuários: getUsers, getUser e deleteUser.
+
+Para rodar os testes, basta abrir um novo terminal na raiz do projeto e rodar 
+o seguinte comando: 
+
+```yarn test```
+
+
+
+## Agradecimentos
+
+Agradeço pela oportunidade de realizar o teste e me coloco a disposição
+para qualquer dúvida. Fiz o teste com muito carinho e atendendo a 
+todas as solicitações realizadas no escopo do desafio. 
+
+Obrigado e contem comigo!!
+
+## Autor
+
+- [@danielverdan](https://github.com/DanielVerdan)
+
+## 🚀 Sobre mim
+
+Sou um cara apaixonado por tecnologia e que sempre acreditou que a mesma poderia mudar o mundo. O que de fato ficou evidenciado nos últimos anos, visto o turbilhão de informações e avanços tecnológicos que tivemos. 
+Encontrei no desenvolvimento de sistemas a oportunidade de transformar a vida das pessoas através de sistemas que consigam auxilia-las em seus processos diários, de forma fácil e prática. 
+Ao longos dos anos na minha jornada, conheci diversas pessoas que foram responsáveis por moldar meu desenvolvimento na área de tecnologia e pelas quais tenho grande apreço. 
+Sempre fui um grande adepto do desenvolvimento web e procurei me especializar através de cursos, palestras e livros sobre o assunto.
+Hoje possuo vasta experiência em desenvolvimento web, utilizando as mais diversas tecnologias presentes no mercado. 
+
+Me disponho a estar sempre em busca de conhecer coisas novas e ter excelentes relacionamentos.
+Hoje possuo vasta experiência no desenvolvimento web, trabalhando em alta performance com as mais diversas e atuais tecnologias existentes no mercado.  
+
+Acredito que com conhecimento e experiência alinhados, não há nada que não se possa ser feito na área da tecnologia.
+
+"Nada é tão bom que não possa melhorar e nem tão ruim que não possa piorar, os extremos nunca serão alcançados."

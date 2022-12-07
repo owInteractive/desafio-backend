@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  express:
+    build:
+      context: ./
+    ports:
+      - '3050:3050'
+    volumes:
+      - .:/desafio-backend
+      - /desafio-backend/node_modules
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=123456
+      - DB_NAME=desafio-back-end
+    links:
+      - db
+    command:
+      - yarn 
+      - developer
+  db:
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=desafio-back-end
+      - MYSQL_ROOT_PASSWORD=123456
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/libs/mysql
+volumes:
+  db:
+    driver: local
