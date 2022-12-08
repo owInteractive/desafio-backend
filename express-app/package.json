@@ -1,0 +1,24 @@
+{
+  "name": "express-app",
+  "version": "1.0.0",
+  "description": "Desafio Back-End - OW Interactive 21/22",
+  "main": "app.js",
+  "scripts": {
+    "test": "tape ./tests/*.js",
+    "start": "nodemon src/server.js"
+  },
+  "author": "Michael Ortiz",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.26.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.5.2",
+    "supertest": "^6.3.3",
+    "tape": "^5.6.1"
+  }
+}

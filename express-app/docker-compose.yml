@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  express-app:
+    build: .
+    depends_on:
+      - db
+    command: sh -c "echo Waiting to Database per 15 seconds && sleep 15 && npm start"
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/express-app
+
+  db:
+    container_name: 'mysql-express-app'
+    image: mysql:5.7.31
+    command: --default-authentication-plugin=mysql_native_password --sql_mode=NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER --explicit_defaults_for_timestamp
+    restart: always
+    ports:
+      - '3308:3306'
+    environment:
+      - MYSQL_DATABASE=express-app
+      - MYSQL_USER=guest
+      - MYSQL_PASSWORD=C/ZJRuSIqX4SOBz6Vw6JhE+xNKy3D/A4f7uk+hPh2Vg3s1LiLxMuf+na+Xsp9gRBZyexS/RkjNscSOSK
+      - MYSQL_ROOT_PASSWORD=QiLS8XkfFp2ovtsaaYz+7XC+gjKI9R23v4gtr5UX8o2mGB8xeFVNi8FoPTIkJVH90FeFZ4dxMLUQeiAZ
+      - TZ=America/Sao_Paulo

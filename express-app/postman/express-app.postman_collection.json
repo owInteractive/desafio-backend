@@ -1,0 +1,424 @@
+{
+	"info": {
+		"_postman_id": "1813b06c-64e0-4b07-961b-ab2cfda973c5",
+		"name": "express-app",
+		"description": "Olá, seja bem vindo ao express-app.\n\nNos itens posteriores você poderá encontrar exemplos de como estar consumindo os endpoints da aplicação, cada bloco de requisição sempre terá algum comentário extra para auxiliar no entendimento de como o endpoint trabalha.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13997612"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "getUser by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/api/user?userID=8",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "userID",
+									"value": "8"
+								}
+							]
+						},
+						"description": "Get user by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{userName}}\",\n    \"email\": \"{{email}}\",\n    \"birthday\": \"{{birthday}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/api/user",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/api/user",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/api/user?userID={{userID}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "userID",
+									"value": "{{userID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoint para gerenciar usuários/contas do sistema."
+		},
+		{
+			"name": "transaction",
+			"item": [
+				{
+					"name": "getTransactions by USER",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/api/transaction?userID={{userID}}&pageEnd=3&pageStart=0",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"transaction"
+							],
+							"query": [
+								{
+									"key": "userID",
+									"value": "{{userID}}"
+								},
+								{
+									"key": "pageEnd",
+									"value": "3",
+									"description": "Pagina final"
+								},
+								{
+									"key": "pageStart",
+									"value": "0",
+									"description": "Pagina inicial"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createTransaction DÉBITO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userID\": \"{{userID}}\",\n    \"operation_type\": \"DÉBITO\",\n    \"amount\": \"200.5\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/api/transaction",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createTransaction CRÉDITO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userID\": \"{{userID}}\",\n    \"operation_type\": \"CRÉDITO\",\n    \"amount\": \"2500.20\",\n    \"comment\": \"Insert Credit Operation\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/api/transaction",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createTransaction ESTORNO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userID\": \"{{userID}}\",\n    \"operation_type\": \"ESTORNO\",\n    \"amount\": \"5\",\n    \"comment\": \"Insert Chargeback Operation\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/api/transaction",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTransaction by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userID\": \"{{userID}}\",\n    \"transactionID\": {{transactionID}},\n    \"comment\": \"Deleted operation\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/api/transaction",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoint para gerenciar movimentações financeiras nas contas dos usuários do sistema."
+		},
+		{
+			"name": "datasetReport",
+			"item": [
+				{
+					"name": "transactionDetail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/api/report/user/transaction/detail/dataset/csv?userID={{userID}}&lastMonth=true&todo=true&shortDate=12/2022",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"report",
+								"user",
+								"transaction",
+								"detail",
+								"dataset",
+								"csv"
+							],
+							"query": [
+								{
+									"key": "userID",
+									"value": "{{userID}}",
+									"description": "ID do usuário no banco de dados"
+								},
+								{
+									"key": "lastMonth",
+									"value": "true",
+									"description": "Ultimos 30 dias"
+								},
+								{
+									"key": "todo",
+									"value": "true",
+									"description": "Todas as movimentações"
+								},
+								{
+									"key": "shortDate",
+									"value": "12/2022",
+									"description": "Data resumida"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transactionBalance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/api/report/user/transaction/balance/dataset/json?userID={{userID}}",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"api",
+								"report",
+								"user",
+								"transaction",
+								"balance",
+								"dataset",
+								"json"
+							],
+							"query": [
+								{
+									"key": "userID",
+									"value": "{{userID}}",
+									"description": "ID do usuário no banco de dados"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoint para gerenciar a extração de relatório resumido e analítico das transações financeiras nas contas dos usuários do sistema."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "localhost",
+			"type": "default"
+		},
+		{
+			"key": "PORT",
+			"value": "3000",
+			"type": "default"
+		},
+		{
+			"key": "PROTOCOL",
+			"value": "HTTP",
+			"type": "default"
+		},
+		{
+			"key": "userID",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "userName",
+			"value": "Michael Ortiz",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "michael.ortiz@gmail.com",
+			"type": "string"
+		},
+		{
+			"key": "birthday",
+			"value": "1994-02-27",
+			"type": "string"
+		},
+		{
+			"key": "transactionID",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
