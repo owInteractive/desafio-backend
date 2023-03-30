@@ -1,0 +1,346 @@
+{
+	"info": {
+		"_postman_id": "22bfc127-1cc9-4950-832e-d2724d0b7e7a",
+		"name": "ow-request",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22017969"
+	},
+	"item": [
+		{
+			"name": "Request-user",
+			"item": [
+				{
+					"name": "get-all-user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}?action=get-all-user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "get-all-user"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"João\",\r\n    \"user_email\": \"vitorjoao39207@gmail.com\",\r\n    \"user_birthday\": \"24-012-2003\",\r\n    \"initial_balance\": \"\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}?action=insert-user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "teste",
+									"disabled": true
+								},
+								{
+									"key": "action",
+									"value": "insert-user"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}?action=get-user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "get-user"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"user_name\": \"Naomi\",\r\n    \"user_email\": \"naomi@gmail.com\",\r\n    \"user_birthday\": \"07-03-2004\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}?action=update-user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "update-user"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}?action=delete-user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "delete-user"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Request-Finance",
+			"item": [
+				{
+					"name": "insert-finance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"operation_type\": 2,\r\n    \"operation_value\": \"4000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}?action=insert-finance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "insert-finance"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-finance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}?action=get-finance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "get-finance"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-finance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"finance_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}?action=delete-finance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "delete-finance"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sum-finance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}?action=sum-finance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "sum-finance"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Others",
+			"item": [
+				{
+					"name": "update-initial-balance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"initial_balance\": \"10,00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}?action=update-initial-balance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "update-initial-balance"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-csv",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}?action=create-csv",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "create-csv"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

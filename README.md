@@ -1,94 +1,390 @@
-![Logo OW Interactive](https://github.com/owInteractive/desafio-backend/raw/master/media/logo.jpg "OW Interactive")
+# Teste Ow - Backend
+Olá seja bem vindo ao repositorio do teste!
 
-# Desafio Back-End - OW Interactive 21/22
+## Instalação do projeto
+Primeiro faça clone ou baixe o projeto e coloque a pasta do projeto dentro da seu  localhost. 
+- Se estiver usando XAMPP como no meu caso, localhost é a pasta htdocs. 
+- Pegue o script do banco que esta junto do projeto e importe para o seu gerenciador de banco de dados
+- Caso seu banco tenha alguma senha, informa a senha no arquivo banco.php, linha 7 na pasta db-classes.
 
-## Sobre a OW Interactive
-Fazemos parte do universo digital, focada em criar e desenvolver experiências interativas, integrando planejamento, criatividade e tecnologia.
+## Uso Geral 
+- TODAS as requisições vão ter uma base URL, que é o caminho de onde esta localizada sua pasta. Exemplo: ``localhost/ow/index.php``
+- TODAS as requisições recebem um parametro chamado ``action``, nesse parametro você especifica qual tipo de ação você quer fazer.
 
-Conheça mais sobre nós em: [OW Interactive - Quem somos](http://www.owinteractive.com/quem-somos/).
+### Exemplo:
 
-## Sobre a Vaga
-Esse desafio é destinado todos os níveis e não é exigido que você consiga realizar esse desafio por completo.
+```
+localhost/ow/index.php?action=get-all-user
+```
 
-Sua avaliação será dada pelas etapas que conseguir entregar.
+### Os valores possiveis para action são:
+```
+insert-user - Inserir um usario
+get-all-user - Pegar todos os usuarios
+get-user - Pegar um unico usuario 
+update-user - Alterar as informações de um usario
+delete-user - Deletar um usuario
 
-Para saber mais sobre as vagas acesse: [OW Interactive - Vagas](http://www.owinteractive.com/vagas/).
+insert-finance - Inserir uma movimentação financeira a um usuario
+get-finance - Pegar um movimentação financeira de um usuario
+delete-finance - Deletar uma movimentação financeira de um usuario
+sum-finance - Somar toda a movimentação financeira e o saldo inicial do usuario
 
-Caso você tenha caido aqui por curiosidade sinta-se a vontade para enviar o desafio e aplicar para alguma vaga de backend.
+update-inicial-balance - Alterar o saldo inicial de um usuario
+create-csv - Cria um arquivo CSV com toda a movimentação financeira do usuario
+```
 
-## Pré-requisitos
-- Lógica de programação;
-- Conhecimentos sobre Banco de dados;
-- Conhecimentos sobre REST, HTTP e API's;
-- Conhecimentos sobre Git;
+<!-- INSERT USER -->
+## Insert-User
+- Nessa request você tem que passar como corpo da requisição, as seguintes informações 
+    - user_name - Nome do usuairo
+    - user_email - Email do usuario
+    - user_birthday - Data de nascimento do usuario
+    - initial_balance - Saldo inicial do usuario
 
-## Requisitos Obrigatórios
-- Utilizar a linguagem [PHP](https://www.php.net/) ou [NodeJS](https://nodejs.org)
-<br/> OBS: Caso seja enviado em PHP e sem docker enviar o projeto para que rode no PHP 8+
-- Utilizar MySQL (ou MariaDB) como base de dados.
-- Código bem documentado, legível e limpo;
-- Fazer uma API simples e objetiva em REST, com o retorno em JSON;
-- Adicionar ao README instruções claras para rodar o projeto, caso não conseguirmos rodar o projeto será desconsiderado o desafio;
-- Deve ser usado [Postman](https://www.php.net/), [Insomnia](https://insomnia.rest/), [Swagger](https://swagger.io/) e etc.Para montar o exemplos da API e adicione ao repósitorio o arquivo gerado pelo programa e especificar qual o arquivo e programa devem ser usados, caso não seja enviado será desconsiderado o desafio;
-- Em qualquer caso de erro ou  não encontrada a API deve retorna uma resposta condizente com o problema apresentado, por exemplo um retorno 500 ou 404;
 
-## Diferenciais
-- Utilizar o [Laravel (PHP)](https://laravel.com/docs/7.x), [Adonis/JS (Node)](https://adonisjs.com/docs/4.1/installation), [Nest JS (Node)](https://nestjs.com/) ou TypeScript;
-- Utilizar o [Docker](https://www.docker.com/get-started) para conteinerização da aplicação;
-- Pensar em desempenho e escalabilidade, quando for uma quantidade muito grande de dados como o sistema se comportaria;
-- Criar testes (Apenas um exemplo, algo bem simples como validação do login ou consumo de um endpoint com ou sem autenticação, no README adicionar qual o comando utilizado para rodar o teste); 
-- Utilizar apenas as ferramentas do framework caso use um, evitando criar dependência de outros pacotes ou bibliotecas;
 
-## Desafio
+Exemplo
+ ```
+{
+    "user_name": "João Vitor",
+    "user_email": "vitorjoao39207@gmail.com",
+    "user_birthday": "24-12-2003",
+    "initial_balance": "10,00"
+}
+ ```
 
-### Etapa 1 - Cadastrar Usuários / Endpoint Dos Usuários
-Nessa etapa daremos algumas premissas que devem ser seguidas.
+Resposta
+ ```
+{
+    "usuario inserido"
+}
+ ```
 
-- Criar um endpoint onde é cadastrado um usuário.
-  - Esses usuários devem ter obrigátoriamente os seguintes dados modelados, caso você ache necessário outros campos fique a vontade.
-    - **name** | string (Nome)
-    - **email** | string (E-mail)
-    - **birthday** | date (Data de aniversário)
-    - **created_at** | datetime (Criado Em)
-    - **updated_at** | datetime (Atualizado Em)
-- Criar um endpoint para listagem desses usuários, ordernados por ordem de cadastro decrescente (mais novo para mais antigo);
-- Criar um endpoint para listar um único usuário através do seu id;
-- Criar um endpoint para excluir um usuário através do seu id.
 
-### Etapa 2 - Cadastrar Movimentações / Endpoint De Movimentações
-Nessa etapa você precisará criar a modelagem e lógica para implementar as funcionalidades abaixo:
+- Validações:
+    - user_name 
+        - Não pode ser vazio
+    - user_email 
+        - Não pode ser vazio
+    - user_birthday
+         - Não pode ser vazio 
+         - Não pode criar cadastro caso tenho menos de 18 anos de idade.
+    - initial_balance 
+        - Sem validações
+        
 
-- Criar um endpoint ou endpoint`s onde é possível associar uma operação de débito, crédito ou estorno para o usuário;
-- Criar um endpoint onde seja possível visualizar toda a movimentação (páginada) do usuários mais as suas informações pessoais;
-- Criar um endpoint onde seja possível excluir uma movimentação relacionada a um usuário;
-- Criar um endpoint onde é retornado um arquivo no formato (csv) com 3 tipos de filtros para as movimentações:
-  - Últimos 30 dias;
-  - Passando o mês e ano por exemplo: 06/20;
-  - Todo as movimentações;
+<!-- GET ALL USER -->
 
-### Etapa 3 - Nova Funcionalidades
-Nessa etapa serão itens onde veremos como você pensou e como chegou ao resultado final.
+## Get-All-User
+Nessa request não é necessario passar nada do corpo da requisição. Apenas passe como valor do parametro action ``get-all-user``
 
-- Adicionar dentro do usuário um campo para saldo inicial, e criar um endpoint para alterar esse valor;
-- Criar um endpoint com a soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário;
-- No endpoint que exclui um usuário, adicionar a funcionalidade que agora não será mais possível excluir um usuário que tenha qualquer tipo de movimentação ou saldo;
-- No endpoint que cadastra usuário, adicionar a funcionalidade que apenas maiores de 18 anos podem criar uma conta;
-- No endpoint que exporta o arquivo CSV criar um cabeçalho com os dados do cliente e o seu saldo atual;
+### Resposta
+ ```
+{
+    "id": 1,
+    "user_name": "João",
+    "user_email": "vitorjoao39207@gmail.com",
+    "user_birthday": "24-12-2003",
+    "created_at": "28-03-2023",
+    "updated_at": "",
+    "initial_balance": "10,00"
+},
+{
+    "id": 2,
+    "user_name": "Leticia",
+    "user_email": "leticia@gmail.com",
+    "user_birthday": "01-01-2004",
+    "created_at": "28-03-2023",
+    "updated_at": "29-03-2023",
+    "initial_balance": "0"
+}
+ ```
 
-### Etapa 4 - Diferenciais
-- Criar validações com base na Request;
-- Utilizar cache para otimizar as consultas e buscas;
-- Criar Seeders ou Inicializadores de dados para o usuários e suas movimentações;
-- Criar os métodos baseados em algum método de autênticação.
-- Documentação dos endpoint`s;
+<!-- GET USER -->
+## Get-User
+- Nessa request você tem que passar como corpo da requisição, as seguintes informações 
+    - id - id do usuario que deseja consultar
 
-## Conclusão
-Crie um Fork e submeta uma Pull Request ao Github com o seu desafio. Após isso envie um e-mail para [letsrock@owinteractive.com](mailto:letsrock@owinteractive.com), com o assunto [DESAFIO BACK-END] com o link para o seu desafio, sua apresentação e currículo anexado em formato PDF.
+ ```
+{
 
-Caso tenha alguma sugestão sobre o teste ela é bem vinda, fique a vontade para envia-la junto ao e-mail.
+    "id": 1
 
-E fique a vontade para usar os programas e ferramentas que se sentir bem, lembrando que aqui somos team [VS Code](https://code.visualstudio.com/) rs.
+}
+ ```
+ Resposta
+ ```
+{
+    "id": 1,
+    "user_name": "João",
+    "user_email": "vitorjoao39207@gmail.com",
+    "user_birthday": "24-12-2003",
+    "created_at": "28-03-2023",
+    "updated_at": "",
+    "initial_balance": "10,00"
+}
+ ```
 
-Obrigado por participar e boa sorte 😀
+- Validações:
+    - id
+        - Não pode ser vazio
+        
+        
+<!-- UPDATE USER -->
+## Update-user
+Especifique o id do usuario que você quer editar, junto com as informações que deseja editar.
 
-![Cachorro programando](https://github.com/owInteractive/desafio-backend/raw/master/media/dog.webp "Cachorro programando")
+- Nessa request você tem que passar como corpo da requisição, as seguintes informações 
+    - id - id do usuario que sera alterado
+    - user_name - Nome do usuairo
+    - user_email - Email do usuario
+    - user_birthday - Data de nascimento do usuario
+
+ ```
+{
+    "id": 1,
+    "user_name": "Leticia Silva",
+    "user_email": "letiicasilva@gmail.com",
+    "user_birthday": "01-01-2004"
+}
+ ```
+ Resposta
+ ```
+{
+    "Usuario editado com sucesso!"
+}
+ ```
+- Validações:
+    - id
+        - id do usuario não pode ser vazio
+    - user_name 
+        - Não pode ser vazio
+    - user_email 
+        - Não pode ser vazio
+    - user_birthday
+        - Não pode ser vazio 
+
+<!-- DELETE USER -->
+
+## Delete-user
+- Nessa request você tem que passar como corpo da requisição, as seguintes informações 
+    - id - id do usuario que sera apagado
+
+ ```
+{
+     "id": 13
+}
+ ```
+  Resposta
+ ```
+{
+    "Usuario apagado com sucesso!"
+
+}
+ ```
+
+ - Validações:
+    - id
+        - id do usuario não pode ser vazio
+
+
+
+
+<!-- INSERT USER -->
+## insert-finance
+- Nessa request você tem que passar como corpo da requisição, as seguintes informações 
+    - user_id - id do usuario que recebera uma movimentação financeira
+    - operation_type - Tipo de operação desejada. Digite o numero da operação que deseja
+        - 1 Debito
+        - 2 Credito
+        - 3 Extorno
+    - operation_value - Valor da operação
+
+Exemplo
+ ```
+{
+    "user_id": 2,
+    "operation_type": 2,
+    "operation_value": "4000"
+}
+ ```
+
+Resposta
+ ```
+{
+    "Operação Inserida"
+}
+ ```
+
+
+- Validações:
+    - user_id
+        - Não pode ser vazio
+    - operation_type 
+        - Não pode ser vazio
+    - operation_value 
+        - Sem validação
+  
+
+## get-finance
+- Nessa request você tem que passar como corpo da requisição, as seguintes informações 
+    - user_id - id do usuario que você deseja pegar as movimentações financeiras
+   
+Exemplo
+ ```
+{
+    "user_id": 2,
+}
+ ```
+
+Resposta
+ ```
+{
+    {
+    "user": {
+        "id": 1,
+        "user_name": "João",
+        "user_email": "vitorjoao39207@gmail.com",
+        "user_birthday": "24-12-2003",
+        "created_at": "28-03-2023",
+        "updated_at": "",
+        "initial_balance": "10,00"
+    },
+    "Finance": [
+        {
+            "id": 7,
+            "operation_name": "Debito",
+            "operation_value": "12,50",
+            "user_id": 1,
+            "finance_create_at": ""
+        },
+        {
+            "id": 8,
+            "operation_name": "Debito",
+            "operation_value": "10,50",
+            "user_id": 1,
+            "finance_create_at": ""
+        },
+        {
+            "id": 9,
+            "operation_name": "Debito",
+            "operation_value": "10,50",
+            "user_id": 1,
+            "finance_create_at": ""
+        }
+    ]
+}
+}
+ ```
+
+- Validações:
+    - user_id
+        - Não pode ser vazio
+
+        
+<!-- INSERT USER -->
+## delete-finance
+- Nessa request você tem que passar como corpo da requisição, as seguintes informações 
+    - finance_id - id da financia que você deseja apagar
+  
+
+Exemplo
+ ```
+{
+    "finance_id": 16
+}
+ ```
+
+Resposta
+ ```
+{
+    "Movimentação apagada com sucesso!"
+}
+ ```
+
+
+- Validações:
+    - finance_id
+        - Não pode ser vazio
+ 
+<!-- INSERT USER -->
+## sum-finance
+- Nessa request você tem que passar como corpo da requisição, as seguintes informações 
+    - user_id - id do usuario que sera somado as financias é o saldo inicial
+  
+
+Exemplo
+ ```
+{
+    "user_id": 2
+}
+ ```
+
+Resposta
+ ```
+{
+  "A soma de todas as moviementações foi de: 4,000.00"
+}
+ ```
+
+
+- Validações:
+    - user_id
+        - Não pode ser vazio
+ 
+<!-- INSERT USER -->
+## update-initial-balance
+- Nessa request você tem que passar como corpo da requisição, as seguintes informações 
+    - user_id - id do usuario que sera somado as financias é o saldo inicial
+  
+
+Exemplo
+ ```
+{
+    "user_id": 2,
+    "initial_balance": ""
+}
+ ```
+
+Resposta
+ ```
+{
+  "Saldo inicial editado com sucesso"
+}
+ ```
+
+
+- Validações:
+    - user_id
+        - Não pode ser vazio
+    - initial_balance
+        - Sem validação
+
+
+## create-csv
+- Nessa request você tem que passar como corpo da requisição, as seguintes informações 
+    - user_id - id do usuario você deseja que seja criado o arquivos csv 
+
+Exemplo
+ ```
+{
+    "user_id": 2
+}
+ ```
+
+Resposta
+ ```
+{
+    7;Debito;12,50;1;
+    8;Debito;10,50;1;
+    9;Debito;10,50;1;
+}
+ ```
+
+
+- Validações:
+    - user_id
+        - Não pode ser vazio
+    
+
