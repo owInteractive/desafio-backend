@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\MovimentacaoController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::resources([
-    'users' => UserController::class
+    'users' => UserController::class,
+    'movimentacoes' => MovimentacaoController::class,
 ]);
 
 /*
@@ -19,6 +21,6 @@ Route::resources([
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

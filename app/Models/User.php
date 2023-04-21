@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -21,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'birthday',
+        'saldo_inicial',
     ];
 
     /**
@@ -41,4 +43,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get movimentacoes
+     */
+    public function movimentacoes(): HasMany
+    {
+        return $this->hasMany(Movimentacao::class);
+    }
+    public function soma_movimentacoes()
+    {
+        $soma=0;
+        if($this->movimentacoes()){
+            foreach ($this->movimentacoes as $key => $movimentacao) {
+                 $soma+=$movimentacao->valor;
+            }
+        }
+        return $soma;
+    }
 }

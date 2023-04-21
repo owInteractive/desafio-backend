@@ -6,18 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    protected $table = 'movimentacoes';
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('movimentacoes', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->required();
-            $table->string('email')->required();
-            $table->string('saldo_inicial')->nullable();
-            $table->date('birthday')->required();
-            $table->rememberToken();
+            $table->foreignId('user_id')->constrained();
+            $table->string('operacao');
+            $table->float('valor');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('movimentacoes');
     }
 };
