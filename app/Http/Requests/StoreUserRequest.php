@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\maiorIdade;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -12,7 +12,7 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -30,7 +30,12 @@ class StoreUserRequest extends FormRequest
                 'max:255',
                 'unique:users'
             ],
-            'birthday'=>'required|date',
+            'saldo_inicial'=>'nullable',
+            'birthday'=>[
+                'required',
+                'date',
+                new maiorIdade
+            ],
         ];
     }
 }

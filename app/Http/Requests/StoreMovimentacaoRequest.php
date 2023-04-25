@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\tipoOperacao;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreMovimentacaoRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreMovimentacaoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +22,24 @@ class StoreMovimentacaoRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        $array = [
+            'operacao'=>[
+                'required',
+                new tipoOperacao,
+            ],
+            'valor'=>'required',
+            'user_id'=>'required',
         ];
+        if($this->method()=='PUT'||$this->method()=='PATCH'){ 
+            $array = [
+                'operacao'=>[
+                    'nullable',
+                    new tipoOperacao,
+                ],
+                'valor'=>'nullable',
+                'user_id'=>'nullable',
+            ];
+        }
+        return $array;
     }
 }

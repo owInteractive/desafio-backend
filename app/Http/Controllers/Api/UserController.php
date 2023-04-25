@@ -21,9 +21,33 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    
+    /**
+     * @OA\Get(
+     *     path="/users",
+     *     tags={"users"},
+     *     summary="Get Users",
+     *     description="Lista todos os usuarios.",
+     *     operationId="index",
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     ),
+     * )
+     */
+    public function index($id=null)
     {
-        $users = $this->repository->paginate();
+        $users = ($id) ? User::findOrFail($id)->paginate() : $this->repository->paginate();
+        return UserResource::collection($users);
+    }
+    
+    public function desc()
+    {
+        $users = $this->repository->paginate()->sortBy([['created_at', 'desc']]);
         return UserResource::collection($users);
     }
 
@@ -33,7 +57,6 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $data = $request->validated();
-        // $data['password'] = bcrypt($data['password']);
         $user = $this->repository->create($data);
         return new UserResource($user);
     }
@@ -53,7 +76,6 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, string $id)
     {
         $data = $request->validated();
-        // $data['password'] = bcrypt($data['password']);
         $user = $this->repository->findOrFail($id);
         $user->update($data);
         return new UserResource($user);
@@ -65,7 +87,7 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = $this->repository->findOrFail($id);
-        if($user->movimentacoes||$user->saldo_inicial) return response()->json([],500);
+        if(!$user->movimentacoes->isEmpty()||$user->saldo_inicial) return response()->json([],500);
         $user->delete();
         return response()->json([],Response::HTTP_NO_CONTENT);
     }
@@ -75,7 +97,7 @@ class UserController extends Controller
         $user = $this->repository->findOrFail($id);
         $array = [];
         $array[$user->name]=[
-            'soma_movimentacoes'=>$user->soma_movimentacoes,
+            'soma_movimentacoes'=>$user->soma_movimentacoes(),
             'saldo_inicial'=>$user->saldo_inicial,
         ];
         return response()->json($array);

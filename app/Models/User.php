@@ -49,13 +49,13 @@ class User extends Authenticatable
      */
     public function movimentacoes(): HasMany
     {
-        return $this->hasMany(Movimentacao::class);
+        return $this->hasMany(Movimentacao::class,'user_id');
     }
     public function soma_movimentacoes()
     {
         $soma=0;
-        if($this->movimentacoes()){
-            foreach ($this->movimentacoes as $key => $movimentacao) {
+        if($this->movimentacoes){
+            foreach ($this->movimentacoes as $movimentacao) {
                  $soma+=$movimentacao->valor;
             }
         }

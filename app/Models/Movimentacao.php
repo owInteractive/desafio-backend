@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Movimentacao extends Model
 {
@@ -14,13 +14,17 @@ class Movimentacao extends Model
      *
      * @var array<int, string>
      */
+    protected $table = 'movimentacoes';
+
     protected $fillable = [
         'operacao',
         'user_id',
         'valor',
     ];
-    public function usuario(): HasOne
+
+
+    public function usuario(): BelongsTo
     {
-        return $this->HasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 }

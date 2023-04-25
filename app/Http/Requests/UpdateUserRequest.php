@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\maiorIdade;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -12,7 +13,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -30,7 +31,12 @@ class UpdateUserRequest extends FormRequest
                 'max:255',
                 Rule::unique('users')->ignore($this->id)
             ],
-            'birthday'=>'nullable|date',
+            'birthday'=>[
+                'nullable',
+                'date',
+                new maiorIdade
+            ],
+            'saldo_inicial'=>'nullable',
         ];
     }
 }

@@ -14,9 +14,7 @@ class MovimentacaoController extends Controller
     public function __construct(
         protected Movimentacao $repository
     )
-    {
-        
-    }
+    {}
     /**
      * Display a listing of the resource.
      */

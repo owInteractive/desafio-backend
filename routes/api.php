@@ -9,6 +9,10 @@ Route::resources([
     'users' => UserController::class,
     'movimentacoes' => MovimentacaoController::class,
 ]);
+Route::get('users_desc', 'App\Http\Controllers\Api\UserController@desc')->name('users.desc');
+// Route::get('users', 'App\Http\Controllers\Api\UserController@index')->name('users.perfil');
+Route::get('users/{id}', 'App\Http\Controllers\Api\UserController@index')->name('users.index');
+Route::get('usermovimentacao/{id}', 'App\Http\Controllers\Api\UserController@usermovimentacao')->name('users.usermovimentacao');
 
 /*
 |--------------------------------------------------------------------------

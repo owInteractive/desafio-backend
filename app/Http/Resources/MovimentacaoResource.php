@@ -14,11 +14,12 @@ class MovimentacaoResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
-    {
+    { 
         return [
-            'id_usuario'=>UserResource::collection($this->usuario),
+            'id'=>$this->id,
             'valor'=>$this->valor,
             'operacao'=>$this->operacao,
+            'usuario'=>new UserResource(User::find($this->user_id)),
         ];
     }
 }
