@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exports\MovimentacoesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMovimentacaoRequest;
 use App\Http\Resources\MovimentacaoResource;
 use App\Models\Movimentacao;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Traits\ResponseTrait;
 
 class MovimentacaoController extends Controller
 {
@@ -15,6 +18,7 @@ class MovimentacaoController extends Controller
         protected Movimentacao $repository
     )
     {}
+    use ResponseTrait;
     /**
      * Display a listing of the resource.
      */
@@ -29,9 +33,14 @@ class MovimentacaoController extends Controller
      */
     public function store(StoreMovimentacaoRequest $request)
     {
-        $data = $request->validated();
-        $entity = $this->repository->create($data);
-        return new MovimentacaoResource($entity);
+        try {
+            $data = $request->validated();
+            $entity = $this->repository->create($data);
+            $entity = new MovimentacaoResource($entity);
+            return $this->responseSuccess($entity,'Movimentação criada com sucesso');
+        } catch (\Exception $e) {
+            return $this->responseError([],$e->getMessage());
+        }
     }
 
     /**
@@ -61,5 +70,10 @@ class MovimentacaoController extends Controller
     {
         $this->repository->findOrFail($id)->delete();
         return response()->json([],Response::HTTP_NO_CONTENT);
+    }
+
+    public function export() 
+    {   
+        return Excel::download(new MovimentacoesExport, 'movimentacoes.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 }

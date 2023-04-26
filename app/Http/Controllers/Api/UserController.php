@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Movimentacao;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+use App\Traits\ResponseTrait;
 class UserController extends Controller
 {
     public function __construct(
@@ -18,6 +20,7 @@ class UserController extends Controller
     {
         
     }
+    use ResponseTrait;
     /**
      * Display a listing of the resource.
      */
@@ -37,18 +40,27 @@ class UserController extends Controller
      *         response=400,
      *         description="Invalid status value"
      *     ),
+     *     @OA\Parameter(
+     *         name="perPage",
+     *         in="query",
+     *         description="Contagem por pagina",
+     *         required=true,
+     *         explode=true,
+     *         @OA\Schema(
+     *             default="1",
+     *             type="integer",
+     *         )
+     *     ),
      * )
      */
     public function index($id=null)
     {
-        $users = ($id) ? User::findOrFail($id)->paginate() : $this->repository->paginate();
-        return UserResource::collection($users);
+        return UserResource::collection($this->repository->paginate(50));
     }
     
     public function desc()
     {
-        $users = $this->repository->paginate()->sortBy([['created_at', 'desc']]);
-        return UserResource::collection($users);
+        return UserResource::collection($this->repository->paginate(50)->sortBy([['created_at', 'desc']]));
     }
 
     /**
@@ -56,9 +68,13 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $data = $request->validated();
-        $user = $this->repository->create($data);
-        return new UserResource($user);
+        try {
+            $data = $request->validated();
+            $user = $this->repository->create($data);
+            return $this->responseSuccess(new UserResource($user),'Usuario criado com sucesso');
+        } catch (\Exception $e) {
+            return $this->responseError([],$e->getMessage());
+        }
     }
 
     /**
@@ -75,10 +91,14 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, string $id)
     {
-        $data = $request->validated();
-        $user = $this->repository->findOrFail($id);
-        $user->update($data);
-        return new UserResource($user);
+        try {
+            $data = $request->validated();
+            $user = $this->repository->findOrFail($id);
+            $user->update($data);
+            return $this->responseSuccess(new UserResource($user),'Registro atualizado com sucesso');
+        } catch (\Exception $e) {
+            return $this->responseError([],$e->getMessage());
+        }
     }
 
     /**
@@ -86,20 +106,28 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = $this->repository->findOrFail($id);
-        if(!$user->movimentacoes->isEmpty()||$user->saldo_inicial) return response()->json([],500);
-        $user->delete();
-        return response()->json([],Response::HTTP_NO_CONTENT);
+        try {
+            $user = $this->repository->findOrFail($id);
+            if(!$user->movimentacoes->isEmpty()||$user->saldo_inicial) return response()->json([],500);
+            $user->delete();
+            return response()->json([],Response::HTTP_NO_CONTENT);
+        } catch (\Exception $e) {
+            return $this->responseError([],$e->getMessage());
+        }
     }
 
     
     public function usermovimentacao(string $id){
-        $user = $this->repository->findOrFail($id);
-        $array = [];
-        $array[$user->name]=[
-            'soma_movimentacoes'=>$user->soma_movimentacoes(),
-            'saldo_inicial'=>$user->saldo_inicial,
-        ];
-        return response()->json($array);
+        try {
+            $user = $this->repository->findOrFail($id);
+            $array = [];
+            $array[$user->name]=[
+                'soma_movimentacoes'=>$user->soma_movimentacoes(),
+                'saldo_inicial'=>$user->saldo_inicial,
+            ];
+            return response()->json($array);
+        } catch (\Exception $e) {
+            return $this->responseError([],$e->getMessage());
+        }
     }
 }
