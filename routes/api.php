@@ -9,11 +9,10 @@ Route::resources([
     'users' => UserController::class,
     'movimentacoes' => MovimentacaoController::class,
 ]);
-Route::get('/movimentacoes_export', [MovimentacaoController::class, 'export']);
+Route::post('/movimentacoes_export', [MovimentacaoController::class, 'export']);
 Route::get('/users_desc', 'App\Http\Controllers\Api\UserController@desc')->name('users.desc');
 // Route::get('users', 'App\Http\Controllers\Api\UserController@index')->name('users.perfil');
-Route::get('/users/{id}', 'App\Http\Controllers\Api\UserController@index')->name('users.index');
-Route::get('/usermovimentacao/{id}', 'App\Http\Controllers\Api\UserController@usermovimentacao')->name('users.usermovimentacao');
+Route::get('/somamovimentacao/{id}', 'App\Http\Controllers\Api\UserController@somamovimentacao')->name('users.somamovimentacao');
 
 /*
 |--------------------------------------------------------------------------

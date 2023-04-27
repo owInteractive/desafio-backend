@@ -1,7 +1,4 @@
 
-# Setup Docker Para Projetos Laravel (8, 9 ou 10)
-[Assine a Academy, e Seja VIP!](https://academy.especializati.com.br)
-
 ### Passo a passo
 
 Crie o Arquivo .env
@@ -63,3 +60,7 @@ php artisan db:seed
 
 Acessar o projeto
 [http://localhost:8989](http://localhost:8989)
+
+Para acessar a documentação dos endpoints por Swagger, acessar:
+[http://localhost:8989/api/documentation](http://localhost:8989/api/documentation)
+
