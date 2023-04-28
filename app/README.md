@@ -1,66 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Desafio Back-End - OW Interactive 21/22
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Informações Gerais
 
-## About Laravel
+- Desenvolvido com PHP 8.1
+- Laravel Framework 10.8
+- MySQL 8.0;
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Instalando a Aplicação
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- A aplicação esta configurada para rodar pelo docker.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Clone o projeto
+	- git clone git@github.com:wesleysilva059/desafio-backend-21-22.git
 
-## Learning Laravel
+- Após o download, acesse o projeto
+	- cd desafio-backend-21-22/app
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Subir os containers do Docker e acessar a aplicação dentro do container
+    - docker compose up -d
+    - docker compose exec app bash
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Instale as dependencias do projeto
+	- composer install
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Intale as tabelas e informações inicias, utilizando **migration** e **seeds**
+	- php artisan migrate
+	- php artisan db:seed
 
-## Laravel Sponsors
+- Para a autenticação no sistema, utilizei o Laravel Sanctum, portanto todas as rotas estão sobre esse middleware, use o usuario criado na seeder
+	- email administrador@admin.com
+	- senha password
+    - usar a rota /api/login e obter o bearertoken necessario a execução das rotas.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Iniciando a aplicação
 
-### Premium Partners
+- A aplicação estará disponivel na seguinte url
+    - http://localost:8000
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- Agora com nossa aplicação funcionando, iremos executar a limpeza de cache e o autoload de nossa aplicação
+	- php artisan cache:clear
+	- composer dump-autoload
 
-## Contributing
+## Documentação das rotas da API
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- php artisan route:list
 
-## Code of Conduct
+- O Sistema usado para testes das rotas foi o Postman e o arquivo Json das rotas se encontra neste repositorio ou pelo link https://github.com/wesleysilva059/desafio-backend/blob/master/Insomnia_2020-09-09.json
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+> Obs:
 
-## Security Vulnerabilities
+- As informações 
+- Os posts e put de dados, foram feitos na tab `body`, na opção `x-www-form-urlencoded`;
+- A url usada foi a `http://127.0.0.1:8000` criada pelo comando `php artisan serve`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+| Method | URI                                          
+|--------|----------------------------------------------
+|POST    | api/login                                   
+|POST    | api/logout                
+|GET     | api/users/list                                
+|POST    | api/users/store                           
+|DELETE  | api/users/destroy/{id}       
+|GET     | api/users/show/{id}                  
+|PUT     | api/users/save-opening-balance/{id}                     
+|POST    | api/transactions/store                
+|GET     | api/transactions/transactions/{id}/{paginate}                             
+|GET     | api/transactions/export/{id}                                
+|DELETE  | api/transactions/destroy/{id}                                
+|GET     | api/users                                    
+ 
