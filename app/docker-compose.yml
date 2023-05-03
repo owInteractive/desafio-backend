@@ -1,0 +1,68 @@
+version: "3.7"
+
+services:
+    # image project
+    app:
+        container_name: desafio-app
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: wesleysilva059/php8.1-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        depends_on: 
+            - redis
+            - nginx
+            - mysql
+        networks: 
+            laravel-10:
+                ipv4_address: 10.7.0.4
+    
+    # nginx
+    nginx:
+        container_name: desafio-nginx
+        image: nginx:alpine
+        restart: unless-stopped
+        ports: 
+            - "8000:80"
+        volumes: 
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks: 
+            laravel-10:
+                ipv4_address: 10.7.0.5
+
+    # db mysql
+    mysql:
+        container_name: desafio-mysql
+        image: 'mysql/mysql-server:8.0'
+        restart: unless-stopped
+        environment: 
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+        volumes: 
+            - ./.docker/mysql/dbdata:/var/lib/mysql
+        ports: 
+            - "3388:3306"
+        networks: 
+            laravel-10:
+                ipv4_address: 10.7.0.6
+
+    # redis
+    redis:
+        container_name: desafio-redis
+        image: redis:latest
+        networks: 
+            laravel-10:
+                ipv4_address: 10.7.0.8
+
+networks: 
+    laravel-10:
+        driver: bridge
+        ipam:
+            config:
+            - subnet: 10.7.0.0/16
