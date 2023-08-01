@@ -37,7 +37,7 @@ services:
             MYSQL_PASSWORD: ${DB_PASSWORD}
             MYSQL_USER: ${DB_USERNAME}
         volumes:
-            - ./.docker/mysql/dbdata:/var/lib/mysql
+            - ~/mysql:/var/lib/mysql
         ports:
             - "3388:3306"
         networks:
