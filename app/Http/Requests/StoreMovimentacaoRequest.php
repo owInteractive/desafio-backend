@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Requests;
+
+use App\Rules\tipoOperacao;
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreMovimentacaoRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     */
+    public function rules(): array
+    {
+        $array = [
+            'operacao'=>[
+                'required',
+                new tipoOperacao,
+            ],
+            'valor'=>'required',
+            'user_id'=>'required',
+        ];
+        if($this->method()=='PUT'||$this->method()=='PATCH'){ 
+            $array = [
+                'operacao'=>[
+                    'nullable',
+                    new tipoOperacao,
+                ],
+                'valor'=>'nullable',
+                'user_id'=>'nullable',
+            ];
+        }
+        return $array;
+    }
+}

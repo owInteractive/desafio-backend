@@ -1,0 +1,326 @@
+openapi: 3.0.0
+info:
+  title: 'Desafio back-end PHP - API REST'
+  description: 'Documentação da API REST desenvolvida para o desafio de back-end proposto pela OW Interactive.'
+  contact:
+    email: iurycleber13@gmail.com
+  license:
+    name: 'Apache 2.0'
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+  version: 1.0.0
+paths:
+  /api/movimentacoes:
+    get:
+      tags:
+        - Movimentações
+      summary: 'Listar movimentações'
+      description: 'Lista todos as movimentações.'
+      operationId: listMovimentacao
+      responses:
+        200:
+          description: 'successful operation'
+        400:
+          description: 'Invalid status value'
+    post:
+      tags:
+        - Movimentações
+      summary: 'Cadastrar Movimentação'
+      description: 'Retorna dados salvos'
+      operationId: storeMovimentacao
+      requestBody:
+        description: 'Cadastre a movimentação do usuario'
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - operacao
+                - valor
+                - user_id
+              properties:
+                operacao:
+                  type: string
+                  format: text
+                  example: DEBITO
+                valor:
+                  type: integer
+                  format: num
+                  example: '200'
+                user_id:
+                  type: integer
+                  format: num
+                  example: '1'
+              type: object
+      responses:
+        200:
+          description: 'successful operation'
+          content:
+            application/json:
+              schema: []
+        201:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema: []
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema: []
+        401:
+          description: Unauthenticated
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: []
+        422:
+          description: 'Error: Unprocessable Entity'
+  '/api/movimentacoes/{id}':
+    delete:
+      tags:
+        - Movimentações
+      summary: 'Deleta uma movimentação'
+      operationId: deleteMovimentacao
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id do registro para deletar'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        400:
+          description: 'Invalid ID supplied'
+        404:
+          description: 'Movimentacao not found'
+  /api/movimentacoes_export:
+    post:
+      tags:
+        - Movimentações
+      summary: 'Exporta CSV com lista de movimentações.'
+      description: 'Lista todos as movimentações em CSV.'
+      operationId: exportMovimentacao
+      requestBody:
+        description: 'Listar as movimentações a partir do filtros. Os filtros que podem ser utilizados são: ultimos_30dias, passando mês/ano, ex: 04/2023 '
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                filtro:
+                  type: string
+                  format: text
+                  example: ultimos_30dias
+              type: object
+      responses:
+        200:
+          description: 'successful operation'
+        400:
+          description: 'Invalid status value'
+  /api/users:
+    get:
+      tags:
+        - users
+      summary: 'Get Users'
+      description: 'Lista todos os usuarios.'
+      operationId: index
+      responses:
+        200:
+          description: 'successful operation'
+        400:
+          description: 'Invalid status value'
+    post:
+      tags:
+        - users
+      summary: 'Cadastrar Usuario'
+      description: 'Retorna dados salvos'
+      operationId: store
+      requestBody:
+        description: 'Cadastre os dados do usuario'
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+                - email
+                - birthday
+              properties:
+                name:
+                  type: string
+                  format: text
+                  example: Fulano
+                email:
+                  type: email
+                  format: num
+                  example: fulano@gmail.com
+                birthday:
+                  type: string
+                  format: text
+                  example: '1999-08-13'
+              type: object
+      responses:
+        200:
+          description: 'successful operation'
+          content:
+            application/json:
+              schema: []
+        201:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema: []
+        400:
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema: []
+        401:
+          description: Unauthenticated
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema: []
+        422:
+          description: 'Error: Unprocessable Entity'
+  /api/users_desc:
+    get:
+      tags:
+        - users
+      summary: 'Lista usuarios em ordem decrescente'
+      description: 'Lista todos os usuarios em ordem decrescente.'
+      operationId: desc
+      responses:
+        200:
+          description: 'successful operation'
+        400:
+          description: 'Invalid status value'
+  '/api/user/{id}':
+    get:
+      tags:
+        - users
+      summary: 'Find user by ID'
+      description: 'Returns a single user'
+      operationId: show
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of user to return'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          content:
+            application/json:
+              schema: []
+        400:
+          description: 'Invalid ID supplier'
+          content:
+            application/json:
+              schema: []
+        404:
+          description: 'User not found'
+          content:
+            application/json:
+              schema: []
+  '/api/users/{id}':
+    put:
+      tags:
+        - users
+      summary: 'Aualiza saldo inicial de usuario.'
+      operationId: update
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID do usuario'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: 'Input data format'
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                saldo_inicial:
+                  description: 'Atualizar saldo inicial'
+                  type: number
+                  format: float
+              type: object
+      responses:
+        405:
+          description: 'Invalid input'
+          content:
+            application/json:
+              schema: []
+        200:
+          description: 'successful operation'
+          content:
+            application/json:
+              schema: []
+        400:
+          description: 'Invalid ID supplier'
+          content:
+            application/json:
+              schema: []
+    delete:
+      tags:
+        - users
+      summary: 'Deletes a User'
+      operationId: deleteUser
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'User id to delete'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        400:
+          description: 'Invalid ID supplied'
+        404:
+          description: 'User not found'
+  '/api/somamovimentacao/{id}':
+    get:
+      tags:
+        - users
+      summary: 'Movimentações do usuario'
+      description: 'Retorna soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário'
+      operationId: somamovimentacao
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of user to return'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          content:
+            application/json:
+              schema: []
+        400:
+          description: 'Invalid ID supplier'
+          content:
+            application/json:
+              schema: []
+        404:
+          description: 'User not found'
+          content:
+            application/json:
+              schema: []
