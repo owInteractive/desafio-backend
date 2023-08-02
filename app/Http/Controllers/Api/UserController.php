@@ -10,6 +10,7 @@ use App\Models\Movimentacao;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Repositories\UserRepository;
 
 use App\Traits\ResponseTrait;
 use Exception;
@@ -17,7 +18,7 @@ use Exception;
 class UserController extends Controller
 {
     public function __construct(
-        protected User $repository
+        protected UserRepository $repository
     )
     {
         
@@ -30,7 +31,7 @@ class UserController extends Controller
     /**
      * @OA\Get(
      *     path="/api/users",
-     *     tags={"users"},
+     *     tags={"Usuarios"},
      *     summary="Get Users",
      *     description="Lista todos os usuarios.",
      *     operationId="index",
@@ -46,13 +47,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        return UserResource::collection($this->repository->paginate(50));
+        return UserResource::collection($this->repository->getAll());
     }
     
     /**
      * @OA\Get(
      *     path="/api/users_desc",
-     *     tags={"users"},
+     *     tags={"Usuarios"},
      *     summary="Lista usuarios em ordem decrescente",
      *     description="Lista todos os usuarios em ordem decrescente.",
      *     operationId="desc",
@@ -68,14 +69,14 @@ class UserController extends Controller
      */
     public function desc()
     {
-        return UserResource::collection($this->repository->paginate(50)->sortBy([['created_at', 'desc']]));
+        return UserResource::collection($this->repository->desc());
     }
 
     /**
      * @OA\Post(
      *      path="/api/users",
      *      operationId="store",
-     *      tags={"users"},
+     *      tags={"Usuarios"},
      *      summary="Cadastrar Usuario",
      *      description="Retorna dados salvos",
      * @OA\RequestBody(
@@ -126,8 +127,8 @@ class UserController extends Controller
     
     /**
      * @OA\Get(
-     *     path="/api/user/{id}",
-     *     tags={"users"},
+     *     path="/api/users/{id}",
+     *     tags={"Usuarios"},
      *     summary="Find user by ID",
      *     description="Returns a single user",
      *     operationId="show",
@@ -162,15 +163,19 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $user = $this->repository->findOrFail($id);
-        return new UserResource($user);
+        try {
+            $user = $this->repository->getById($id);
+            return new UserResource($user);
+        } catch (\Exception $e) {
+            return $this->responseError([],$e->getMessage());
+        }
     }
 
     
     /**
      * @OA\Put(
      *     path="/api/users/{id}",
-     *     tags={"users"},
+     *     tags={"Usuarios"},
      *     summary="Aualiza saldo inicial de usuario.",
      *     operationId="update",
      *     @OA\Parameter(
@@ -218,7 +223,7 @@ class UserController extends Controller
     {
         try {
             $data = $request->validated();
-            $user = $this->repository->findOrFail($id);
+            $user = $this->repository->getById($id);
             $user->update($data);
             return $this->responseSuccess(new UserResource($user),'Registro atualizado com sucesso');
         } catch (\Exception $e) {
@@ -230,7 +235,7 @@ class UserController extends Controller
     /**
      * @OA\Delete(
      *     path="/api/users/{id}",
-     *     tags={"users"},
+     *     tags={"Usuarios"},
      *     summary="Deletes a User",
      *     operationId="deleteUser",
      *     @OA\Parameter(
@@ -256,7 +261,7 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         try {
-            $user = $this->repository->findOrFail($id);
+            $user = $this->repository->getById($id);
             if(!$user->movimentacoes->isEmpty()||$user->saldo_inicial) throw new Exception('Não é possível excluir usuário que tenha qualquer tipo de movimentação ou saldo');
             $user->delete();
             return response()->json([],Response::HTTP_NO_CONTENT);
@@ -269,7 +274,7 @@ class UserController extends Controller
     /**
      * @OA\Get(
      *     path="/api/somamovimentacao/{id}",
-     *     tags={"users"},
+     *     tags={"Usuarios"},
      *     summary="Movimentações do usuario",
      *     description="Retorna soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário",
      *     operationId="somamovimentacao",
@@ -304,7 +309,7 @@ class UserController extends Controller
      */
     public function somamovimentacao(string $id){
         try {
-            $user = $this->repository->findOrFail($id);
+            $user = $this->repository->getById($id);
             $array = [];
             $array[$user->name]=[
                 'soma_movimentacoes'=>$user->soma_movimentacoes(),
