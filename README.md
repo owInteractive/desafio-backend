@@ -43,7 +43,11 @@ docker-compose exec app bash
 
 Instalar as dependências do projeto
 ```sh
-composer install
+composer install --ignore-platform-req=ext-zip
+```
+Migrar banco
+```sh
+php artisan migrate
 ```
 
 
