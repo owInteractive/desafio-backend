@@ -9,7 +9,7 @@ use Illuminate\Contracts\Pagination\Paginator;
 class UserRepository implements CrudInterface
 {
     
-    public function getAll(int $perPage = 10):Paginator
+    public function getAll(?int $perPage = 50):Paginator
     {
         return User::paginate($perPage);
     }
@@ -20,5 +20,9 @@ class UserRepository implements CrudInterface
     public function create(array $data):User
     {
         return User::create($data);
+    }
+    public function desc()
+    {
+        return User::paginate(50)->sortBy([['created_at', 'desc']]);
     }
 }

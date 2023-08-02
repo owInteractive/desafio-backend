@@ -180,7 +180,7 @@
         "/api/users": {
             "get": {
                 "tags": [
-                    "users"
+                    "Usuarios"
                 ],
                 "summary": "Get Users",
                 "description": "Lista todos os usuarios.",
@@ -196,7 +196,7 @@
             },
             "post": {
                 "tags": [
-                    "users"
+                    "Usuarios"
                 ],
                 "summary": "Cadastrar Usuario",
                 "description": "Retorna dados salvos",
@@ -279,7 +279,7 @@
         "/api/users_desc": {
             "get": {
                 "tags": [
-                    "users"
+                    "Usuarios"
                 ],
                 "summary": "Lista usuarios em ordem decrescente",
                 "description": "Lista todos os usuarios em ordem decrescente.",
@@ -294,10 +294,10 @@
                 }
             }
         },
-        "/api/user/{id}": {
+        "/api/users/{id}": {
             "get": {
                 "tags": [
-                    "users"
+                    "Usuarios"
                 ],
                 "summary": "Find user by ID",
                 "description": "Returns a single user",
@@ -340,12 +340,10 @@
                         }
                     }
                 }
-            }
-        },
-        "/api/users/{id}": {
+            },
             "put": {
                 "tags": [
-                    "users"
+                    "Usuarios"
                 ],
                 "summary": "Aualiza saldo inicial de usuario.",
                 "operationId": "update",
@@ -407,7 +405,7 @@
             },
             "delete": {
                 "tags": [
-                    "users"
+                    "Usuarios"
                 ],
                 "summary": "Deletes a User",
                 "operationId": "deleteUser",
@@ -436,7 +434,7 @@
         "/api/somamovimentacao/{id}": {
             "get": {
                 "tags": [
-                    "users"
+                    "Usuarios"
                 ],
                 "summary": "Movimentações do usuario",
                 "description": "Retorna soma de todas as movimentações (débito, crédito e estorno) mais o saldo inicial do usuário",
